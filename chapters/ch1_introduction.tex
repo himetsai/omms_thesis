@@ -1,2 +1,17 @@
 \section{Introduction}
 \label{sec:ch1}
+
+\begin{theorem}
+  \label{thm:ramsey-density}
+
+  If $G$ is a graph on $n$ vertices with less than $dn^2$ edges, then $G$ contains a homogeneous set of size greater than $\frac{c}{d\log(1/d)} \log n$.
+\end{theorem}
+
+\begin{corollary}
+  \label{cor:ramsey-density}
+  For any $C$-Ramsey graph, there exists $\delta = \delta(C) \in (0, 1/2)$ such that the edge density of $G$ lies in the interval $[\delta, 1-\delta]$.
+\end{corollary}
+
+\begin{proof}
+  Apply Theorem \ref{thm:ramsey-density} to $G$ and its complement. 
+\end{proof}

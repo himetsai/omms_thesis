@@ -87,24 +87,6 @@
 \usepackage{csquotes}         % smart quotes via \enquote{...}
 \usepackage{todonotes}        % \todo{...} margin notes while drafting
 
-% ─── Texcount directives (word-count markers) ─────────────────────────────────
-%TC:ignore
-%  (Environments and macros added below will be excluded from word count.)
-%TC:endignore
-
-% Exclude display-math, theorem environments from Texcount word count:
-%TC:envir equation 0 0
-%TC:envir align 0 0
-%TC:envir align* 0 0
-%TC:envir gather 0 0
-%TC:envir multline 0 0
-%TC:envir theorem 0 0
-%TC:envir lemma 0 0
-%TC:envir proposition 0 0
-%TC:envir corollary 0 0
-%TC:envir proof 0 0
-%TC:envir definition 0 0
-
 % ─── Custom commands ──────────────────────────────────────────────────────────
 % Standard sets
 \newcommand{\R}{\mathbb{R}}
@@ -128,17 +110,12 @@
 
 % Ramsey theory
 \newcommand{\Ram}[2]{R(#1,#2)}           % Ramsey number R(s,t)
-\newcommand{\Cram}{C\text{-Ramsey}}      % C-Ramsey shorthand
 
 % Probabilistic / analytic
 \newcommand{\ind}{\mathbbm{1}}           % indicator function
 \newcommand{\Var}{\operatorname{Var}}
 \newcommand{\Cov}{\operatorname{Cov}}
 \newcommand{\Lip}{\operatorname{Lip}}
-
-% Asymptotics
-\newcommand{\Om}[1]{\Omega\!\left(#1\right)}
-\newcommand{\Th}[1]{\Theta\!\left(#1\right)}
 
 % ─── Headers & footers ────────────────────────────────────────────────────────
 \usepackage{fancyhdr}
@@ -206,21 +183,16 @@
 \end{titlepage}
 
 % ─── Abstract ─────────────────────────────────────────────────────────────────
-%TC:ignore
+
 \begin{abstract}
   \noindent
-  Replace this paragraph with a concise summary (100–200 words) of the
-  dissertation: the problem studied, the methods used, and the principal
-  results obtained.
+  Yap yap yap.
 \end{abstract}
-%TC:endignore
 
 \clearpage
 
 % ─── Table of contents ────────────────────────────────────────────────────────
-%TC:ignore
 \tableofcontents
-%TC:endignore
 
 \clearpage
 

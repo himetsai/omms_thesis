@@ -1,15 +1,56 @@
 \section{Subgraphs with Many Degrees}
 \label{sec:ch2}
 
-\begin{definition}[$(c,\delta)$-diversity]
-  \label{def:diversity}
-\end{definition}
+In this chapter, we present the following theorem of Bukh and Sudakov.
 
-\begin{theorem}[Bukh--Sudakov 2007 {\cite{}}]
+\begin{theorem}[Bukh--Sudakov {\cite{BUKH2007612}}]
   \label{thm:bs2007}
-  Every $C$-Ramsey graph on $n$ vertices induces a subgraph on $\Om{n}$
-  vertices with $\Om{n}$ distinct degrees.
+  Every Ramsey graph on $n$ vertices induces a subgraph on $\Omega(n)$ vertices with $\Omega(\sqrt{n})$ distinct degrees.
 \end{theorem}
 
+Not only is this result interesting on its own right, but its proof also introduces a crucial characteristic of Ramsey graphs: 
+
+\begin{definition}
+  \label{def:diversity}
+
+  An $n$-vertex graph $G$ is \textit{$(c, \delta)$-diverse} if for $x \in V(G)$, we have $|N(x) \Delta N(y)| < cn$ for at most $n^{\delta}$ vertices $y \in V(G)$.
+\end{definition}
+
+The notion of diversity captures the idea that the neighbourhoods of most pairs of vertices differ significantly, which serves as a cornerstone of the argument in the following chapter. The proof of Theorem \ref{thm:bs2007} proceeds by showing that every Ramsey graph contains a diverse subgraph of linear size, followed by a probabilistic argument that diversity furnishes many distinct degrees.
+
+\begin{lemma}
+  \label{lemma:diverse-subgraph}
+
+  For $\delta \in (0, 1)$, there exists $c = c(C, \delta) > 0$ such that every $C$-Ramsey graph $G$ on $n$ vertices contains a $(c, \delta)$-diverse subgraph on $\Omega(n)$ vertices.
+\end{lemma}
+
 \begin{proof}
+  Suppose not. Let $K = \lceil \gamma C \log (C + 1) \rceil$ for some sufficiently large constant $\gamma = \gamma(\delta)$, $m = 8^{-K}n$, and $c = 1/K$. We inductively construct a sequence of disjoint vertex sets $S_1, S_2, \ldots, S_K$ of size $m^\delta$, such that for all $S_i$ one of the following conditions holds:
+  \begin{enumerate}[]
+    \item[(i)] $d(S_i, S_j) < 8c$ for $j > i$
+    \item[(ii)] $d(S_i, S_j) > 1 - 8c$ for $j > i$
+  \end{enumerate}
+  Alongside, we also construct a sequence of induced subgraphs $G = G_0 \subset G_1 \subset \cdots \subset G_K$, such that $|G_i| \geq |G_{i - 1}|/8$ and $S_i \subseteq V(G_{i - 1})$ for all $i$.
+
+  Suppose $G_1, \ldots, G_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. By induction, $|G_{i - 1}| \geq 8^{1 - i}|G| \geq m$. Note that $G_{i - 1}$ is not $(c, \delta)$-diverse by assumption, so there exist vertex $x \in V(G_{i - 1})$ and set $S_i \subseteq G_{i - 1}$ of size $m^{\delta}$ such that $|N_{G_{i - 1}}(x) \Delta N_{G_{i - 1}}(y)| < c|G_{i - 1}|$ for $y \in S_i$. Let $T_i = V(G_{i - 1}) \setminus S_i$. Since $m^\delta \leq m/2$ for large enough $n$, we have $|T_i| \geq |G_{i - 1}|/2$. 
+  
+  Suppose $|\overline{N}_{T_i}(x)| \geq |T_i|/2$. Then for $y \in S_i$,
+  \[
+    d(y, \overline{N}_{T_i}(x)) = \frac{|N_{T_i}(y) \cap \overline{N}_{T_i}(x)|}{|N_{T_i}(x)|} < \frac{c|G_{i - 1}|}{|T_i|/2} \leq 4c.
+  \]
+  Partition $\overline{N}_{T_i}(x)$ into $V_i \sqcup W_i$, where $V_i = \{v \in \overline{N}_{T_i}(x) : d(v, S_i) < 8c\}$. Notice
+  \[
+    8c|W_i| \leq \sum_{v \in W_i} d(v, S_i) \leq \frac{e(\overline{N}_{T_i}(x), S_i)}{|S_i|} = \frac{|\overline{N}_{T_i}(x)|}{|S_i|}\sum_{v \in S_i} d(y, \overline{N}_{T_i}(x)) \leq 4c|\overline{N}_{T_i}(x)|,
+  \]
+  so $|W_i| \leq |\overline{N}_{T_i}(x)|/2$. But then $|V_i| \geq |\overline{N}_{T_i}(x)|/2 \geq |T_i|/4 \geq |G_{i - 1}|/8$. Set $G_i = G[V_i]$. Since $d(S_i, U) < 8c$ for all $U \subseteq V_i$, condition (i) holds. In the case that $|N_{T_i}(x)| < |T_i|/2$, setting $V_i = \{v \in \overline{N}_{T_i}(x) : d(v, S_i) > 1 - 8c\}$ yields the analogous result for condition (ii) by the same argument. This completes the induction.
+
+  We may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $m^{\delta}$ and $c = 1/K$,
+  \[
+    d(S) \leq \frac{\binom{m^{\delta}}{2}}{\binom{rm^{\delta}}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 8c \leq \frac{10}{K}.\frac{1}{r}
+  \]
+  Thus Theorem \ref{thm:ramsey-density} yields a homogeneous set $A$ in $S$ with $|A| \geq \frac{\nu K}{10\log(K/10)} \log |S|$, for some $\nu = \nu(C)$. Note that $|A|$ is also a homogeneous set in $G$. But then 
+  \[
+    \log |S| \geq \frac{1}{\delta} \log m = \frac{1}{\delta}\log n - \frac{K\log 8}{\delta}.
+  \]
+  Pick $\gamma > \nu K/10\delta\log(K/10)$ and we have $|A| > C\log n$ for large enough $n$, contradiction.
 \end{proof}
