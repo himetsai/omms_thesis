@@ -45,10 +45,10 @@
 \newtheorem{corollary}[theorem]{Corollary}
 
 \theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{remark}[theorem]{Remark}
-\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{assumption}[definition]{Assumption}
 
 % ─── Graphics & floats ────────────────────────────────────────────────────────
 \usepackage{graphicx}
@@ -94,7 +94,7 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\E}{\mathbb{E}}
-\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\prob}{\mathbb{P}}
 
 % Delimiters
 \newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
@@ -175,9 +175,8 @@
     \vfill
 
     {\small
-      Submitted in partial fulfilment of the requirements for the degree of
-      Master in Mathematical Sciences (OMMS).\\[0.6em]
-      Word count: \textbf{[INSERT TEXCOUNT WORD COUNT HERE]}
+      Submitted in partial fulfilment of the requirements for the degree of Master in Mathematical Sciences (OMMS).\\[0.6em]
+      Word count: 
     }
   \end{center}
 \end{titlepage}
@@ -186,7 +185,7 @@
 
 \begin{abstract}
   \noindent
-  Yap yap yap.
+  In this dissertation, we investigate the ``random-like'' features of Ramsey graphs, with an emphasis on the existence of induced subgraphs of many different sizes. 
 \end{abstract}
 
 \clearpage
