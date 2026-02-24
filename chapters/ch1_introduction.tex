@@ -1,11 +1,23 @@
 \section{Introduction}
 \label{sec:ch1}
 
+\begin{definition}
+  \label{def:hom}
+
+  Let $G$ be a graph. A set $S \subseteq V(G)$ is \textit{homogeneous} if it induces a clique or an independent set in $G$.
+\end{definition}
+
 \begin{theorem}[Erdős--Szemerédi \cite{erdos1972ramsey}]
   \label{thm:ramsey-density}
 
-  If $G$ is a graph on $n$ vertices with less than $dn^2$ edges, then $G$ contains a homogeneous set of size greater than $\frac{c}{d\log(1/d)} \log n$.
+  Let $G$ be a graph on $n$ vertices with less than $dn^2$ edges. Then $G$ contains a homogeneous set of size greater than $\frac{c}{d\log(1/d)} \log n$. 
 \end{theorem}
+
+\begin{proof}
+  Note that there exists $m \geq n/2$ vertices $v_1, v_2, \ldots, v_m$ with $\deg(v_i) \leq 2dn$. Let $H$ be the graph induced by these vertices. Rearranging 
+  
+  Let $k$ be the size of the largest independent set in $H$ 
+\end{proof}
 
 \begin{corollary}
   \label{cor:ramsey-density}

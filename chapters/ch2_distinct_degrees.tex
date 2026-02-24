@@ -60,15 +60,39 @@ The proof of Theorem \ref{thm:bs2007} proceeds by showing that every Ramsey grap
 \begin{lemma}
   \label{lemma:diversity-degrees}
 
-  Let $G$ be a $(c, \delta)$-diverse graph on $n$ vertices. Then for $n/4 \leq m \leq 3n/4$, there is a subgraph on $m$ vertices containing vertices of $\Omega(\sqrt{n})$ distinct degrees.
+  Let $\delta \in (0, 1/2)$ and let $G$ be a $(c, \delta)$-diverse graph on $n$ vertices for large enough $n$. Then for $n/4 \leq m \leq 3n/4$, there is a subgraph on $m$ vertices containing vertices of $\sqrt{cn}/320$ distinct degrees.
 \end{lemma}
 
 \begin{proof}
   Fix $m$ as above. Let $U$ be chosen uniformly at random among all subsets of $V(G)$ of size $m$. Let $H = G[U]$. It suffices to show that with positive probability, $H$ contains $\Omega(\sqrt{n})$ vertices of distinct degrees.
 
-  For distinct $x, y \in V(G)$, define $\mathbbm{1}_{xy}$ to be the indicator for the event that $x, y \in V(H)$ and $\deg_H(x) \neq \deg_H(y)$. Then $\E[\mathbbm{1}_{xy}] \leq \prob[\deg_U(x) = \deg_U(y)]$. Write
+  For distinct $x, y \in V(G)$, define $\mathbbm{1}_{xy}$ to be the indicator for the event that $x, y \in V(H)$ and $\deg_H(x) \neq \deg_H(y)$. Then $\E[\mathbbm{1}_{xy}] \leq \prob[\deg_U(x) = \deg_U(y)]$. We may write
   \[
     \prob[\deg_U(x) = \deg_U(y)] = \prob\left[|(N_G(x) \setminus N_G(y)) \cap U| = |(N_G(y) \setminus N_G(x)) \cap U|\right].
   \]
-  Put $D = N_G(x) \Delta N_G(y)$ and $k = |D \cap U|$. Suppose $|D| \geq cn$ and let $A$ be the event that $k < |D|/8$ or $k > 7|D|/8$. 
+  Put $D = N_G(x) \Delta N_G(y)$, and $k = |D \cap U|$. Suppose $|D| \geq cn$. Fix an ordering on $D$ and let $X_i$ be the number of the first $i$ vertices in $D \cap U$. Then $X_0, X_1, \ldots, X_{|D|} = k$ is a martingale with $|X_{i + 1} - X_i| \leq 1$ for all $i$. Since $\frac{|D|}{4} \leq \E[k] = \frac{m|D|}{n} \leq \frac{3|D|}{4}$, the Hoeffding-Azuma inequality yields
+  \[
+    \prob\left[k < \frac{|D|}{8} \text{ or } k > \frac{7|D|}{8}\right] \leq \prob\left[\left|k - \E[k]\right| > \frac{|D|}{8}\right] \leq e^{-\Theta(|D|)} = e^{-\Theta(n)} = o(n^{-1/2}).  
+  \]
+  But then
+  \[
+    \prob\left[\deg_U(x) = \deg_U(y) \, \middle| \, \frac{|D|}{8} \leq k \leq \frac{7|D|}{8}\right] = \frac{\binom{|N_G(x) \setminus N_G(y)|}{k/2}\binom{|N_G(y) \setminus N_G(x)|}{k/2}}{\binom{|D|}{k}}.
+  \]
+  It now follows from Stirling's formula and $k(|D| - k) \geq \frac{7}{64}|D|^2$ that the above probabilitydoes not exceed
+  \[
+    \frac{\binom{|D|/2}{k/2}^2}{\binom{|D|}{k}} = (1 + o(1))\sqrt{\frac{2|D|}{\pi k(|D| - k)}} \leq \frac{3}{\sqrt{|D|}} \leq \frac{3}{\sqrt{cn}}. 
+  \]
+  Thus if $|N_G(x) \Delta N_G(y)| \geq cn$ then $\E[\mathbbm{1}_{xy}] \leq 3/\sqrt{cn} + o(n^{-1/2}) \leq 4/\sqrt{cn}$.
+
+  Let $I = \sum_{x, y \in V(G)} \mathbbm{1}_{xy}$. By definition of a $(c, \delta)$-diverse graph, we have $\E[\mathbbm{1}_{xy}] \leq 4/\sqrt{cn}$ for all but at most $n^{1 + \delta} < n^{3/2}$ pairs $x, y \in V(G)$. Thus,
+  \[
+    \E[I] \leq n^{1 + \delta} + \frac{4}{\sqrt{cn}} \cdot n^2 \leq \frac{5}{\sqrt{c}}n^{3/2},
+  \]
+  and so there is a choice for $U$ such that $I \leq 5n^{3/2}/\sqrt{c}$. Now let $r$ be the number of vertices of distinct degrees in $H$. Let $n_k$ be the number of vertices in $H$ with degree $k$ and note that $\sum_{k} n_k = m$. By Jensen's inequality
+  \[
+    5n^{3/2}/\sqrt{c} \geq I = \sum_{k} \binom{n_k}{2} \geq r\binom{\frac{1}{r}\sum_{k} n_k}{2} \geq \frac{m^2}{4r} \geq \frac{n^2}{64r}.
+  \]
+  Rearranging yields the desired result.
 \end{proof}
+
+Theorem \ref{thm:bs2007} now follows immediately from Lemmas \ref{lemma:diverse-subgraph} and \ref{lemma:diversity-degrees}.
