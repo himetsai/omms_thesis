@@ -47,8 +47,9 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \newtheorem{example}[definition]{Example}
-\newtheorem{remark}[definition]{Remark}
 \newtheorem{assumption}[definition]{Assumption}
+
+\newtheorem{remark}[definition]{Remark}
 
 % ─── Graphics & floats ────────────────────────────────────────────────────────
 \usepackage{graphicx}
@@ -85,7 +86,7 @@
 \usepackage{parskip}          % space between paragraphs instead of indent
 \usepackage{enumitem}         % customisable lists
 \usepackage{csquotes}         % smart quotes via \enquote{...}
-\usepackage{todonotes}        % \todo{...} margin notes while drafting
+\newcommand{\TODO}[1]{\textcolor{red}{#1}}
 
 % ─── Custom commands ──────────────────────────────────────────────────────────
 % Standard sets

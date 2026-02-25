@@ -1,11 +1,65 @@
 \section{Introduction}
 \label{sec:ch1}
 
+Classical Ramsey Theory asks for the minimum number of vertices required to guarantee the existence of a clique or an independent set in a graph. We refer these maxima as \textit{Ramsey numbers}.
+
+\begin{definition}
+  \label{def:ramsey-number}
+  The \textit{Ramsey number} $R(s, t)$ is the minimum number $N$ such that any graph on $N$ vertices contains a clique of size $s$ or an independent set of size $t$.
+\end{definition}
+
+The cornerstone of Ramsey theory due to Erdős and Szekeres gives the following upper bound on $R(s, t)$:
+
+\begin{theorem}[Erdős--Szekeres \cite{erdos1935some}]
+  \label{thm:erdos-szekeres}
+  For $s, t \geq 2$,
+  \[
+    R(s, t) \leq \binom{s + t - 2}{s - 1}.
+  \]
+\end{theorem}
+
+Following the fact that $\binom{2t - 2}{t - 1} < 2^{2t}$, we can see $R(t, t) < 4^{t}$. In other words, any graph on $n$ vertices contains a clique or independent set of size $\frac{1}{2}\log n$. A central difficulty in Ramsey Theory is the construction for lower bounds for Ramsey numbers. A rather basic result which already gives the best known exponents is the famous random graph construction due to Erdős, marking one of the first application of the probabilistic method in combinatorics. Before stating the result, we first define the \textit{Erdős-Rényi random graph}.
+
+\begin{definition}
+  \label{def:random-graph}
+
+  For $n \geq 1$ and $p \in [0, 1]$, the \textit{random graph} $G_{n, p}$ is the graph on $n$ vertices in which each of the $\binom{n}{2}$ edges is present independently with probability $p$.
+\end{definition}
+
+\textit{Remark: For constant $p$, the random graph $G_{n, p}$ is dense in the sense that it has $\Theta(n^2)$ many edges almost surely.}
+
+\begin{theorem}[Erdős \cite{erdos1972ramsey}]
+  For $n \geq 3$,
+  \[
+    \sqrt{2}^t < R(t, t) < 4^t.
+  \]
+\end{theorem}
+
+\begin{proof}
+  The upper bound follows from Theorem \ref{thm:erdos-szekeres}. For lower bound, set $N = \lfloor \sqrt{2}^t \rfloor$ and consider the random graph $G_{N, 1/2}$. The expected number of cliques of size $t$ is
+  \[
+    \binom{N}{t} \cdot 2^{-\binom{t}{2}} < \frac{N^t}{t!}2^{-\binom{t}{2}} \leq \frac{\sqrt{2}^{t^2}}{t!}2^{-\binom{t}{2}} = \frac{\sqrt{2}^t}{t!} \leq \frac{\sqrt{8}}{6} < \frac{1}{2}.
+  \]
+  Similarly, the expected number of independent sets of size $t$ is less than $1/2$. It now follows that there exists a graph on $N$ vertices containing neither a clique nor an independent set of size $t$.
+\end{proof}
+
+In particular, there exists a graph on $n$ vertices containing neither a clique nor an independent set of size $2\log n$, showing that the $\frac{1}{2}\log n$ bound we obtained earlier could not be substantially improved. The search for explicit constructions with small clique and independent set is a major open problem in Ramsey Theory. \TODO{maybe survey.} Despite decades of intensive research, all know constructions still heavily rely on some randomness. This thus motivates the question of whether graphs with only logarithmically small cliques and independent sets inherently resemble dense random graphs like $G_{n, 1/2}$; we refer such graphs as \textit{Ramsey graphs}.
+
+\begin{definition}
+  \label{def:ramsey-graph}
+
+  Let $C > 0$ be a constant. A \textit{$C$-Ramsey graph} is a graph with no clique or independent set of size greater than $C\log n$.
+\end{definition}
+
+It is useful to also define a short hand for cliques and independent sets.
+
 \begin{definition}
   \label{def:hom}
 
-  Let $G$ be a graph. A set $S \subseteq V(G)$ is \textit{homogeneous} if it induces a clique or an independent set in $G$.
+  A set $S \subseteq V(G)$ is \textit{homogeneous} if it induces a clique or an independent set in a graph $G$.
 \end{definition}
+
+The first result that cemented the connection between Ramsey graphs and dense random graphs is due to Erdős and Szemerédi.
 
 \begin{theorem}[Erdős--Szemerédi \cite{erdos1972ramsey}]
   \label{thm:ramsey-density}
@@ -14,9 +68,7 @@
 \end{theorem}
 
 \begin{proof}
-  Note that there exists $m \geq n/2$ vertices $v_1, v_2, \ldots, v_m$ with $\deg(v_i) \leq 2dn$. Let $H$ be the graph induced by these vertices. Rearranging 
-  
-  Let $k$ be the size of the largest independent set in $H$ 
+  Note that there exists a set $S \subseteq V(G)$ of size $m \geq n/2$ such that $\deg(v) \leq 2dn$ for all $v \in S$. Let $H = G[S]$. Let $I$ be the largest independent set in $H$ and let $k = |I|$. Since $\deg(v) \leq 2dn \leq 4dm$, we have $\sum_{v \in I} \deg(v) \leq 4dmk$. Set $s = 8dk$. Then there are at most $m/2$ vertices $v \in S \setminus I$ with $\deg_{I}(v) \geq s$. 
 \end{proof}
 
 \begin{corollary}
@@ -27,3 +79,18 @@
 \begin{proof}
   Apply Theorem \ref{thm:ramsey-density} to $G$ and $\overline{G}$. 
 \end{proof}
+
+Due to the rich variety of induced subgraphs in dense random graphs, a popular angle to study the pseudorandom properties of Ramsey graphs is to consider their induced subgraphs. Some notable results is a theorem of Shelah \cite{shelah1997erdhosrenyiconjecture} which asserts that every $n$-vertex Ramsey graph contains $2^{\Omega(n)}$ non-isomorphic induced subgraphs, and a theorem of Prömel and Rödl \cite{PROMEL1999379} states that there exists $\delta = \delta(C) > 0$ such that every $C$-Ramsey graph on $n$ vertices contains an induced copy of all graphs on at most $\delta \log n$ vertices.  
+
+In this dissertation, we will investigate the edge statistics of Ramsey graphs. For a graph $G$, let 
+\[
+  \Phi(G) = \{e(H) : H \text{ is an induced subgraph of } G\}
+\]
+Erdős and Mckay conjectured that for any Ramsey graph $G$ on $n$ vertices, there exists $\delta = \delta(C) > 0$ such that 
+\[
+  \{1, 2, \ldots, \delta n^2\} \subseteq \Phi(G).
+\]
+It was proven for Random graphs by Calkin, Frieze, and Mckay \cite{erdosmckayrandomgraph}, and thus it is interesting to determine whether Ramsey graphs also resemble random graphs in this regard.
+
+
+Another research direction is to consider whether forbidding certain induced subgraphs could force homogeneous sets beyond logarithmic size. Erdős and Hajnal famously conjectured that for any graph $H$, if a graph $G$ does not contain $H$ as an induced subgraph, then $G$ contains a homogeneous set of size $|G|^{\eta}$ for some $\eta = \eta(H) > 0$. 
