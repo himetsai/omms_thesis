@@ -16,7 +16,7 @@ This was originally conjectured by Erdős, Faudree, and Sós \cite{EFS} in light
   An $n$-vertex graph $G$ is \textit{$(c, \delta)$-diverse} if for $x \in V(G)$, we have $|N(x) \Delta N(y)| < cn$ for at most $n^{\delta}$ vertices $y \in V(G)$.
 \end{definition}
 
-The notion of diversity captures the idea that the neighbourhoods of most pairs of vertices differ significantly. In particular, the usefulness of diversity comes from bounding the number of vertices that shares the same degree into some random vertex set $U$, as most pairs of vertices would have fairly uncorrelated neighbourhoods into $U$.
+The notion of diversity captures the idea that the neighbourhoods of most pairs of vertices differ significantly. In particular, the usefulness of diversity comes from bounding the number of vertices that share the same degree into some random vertex set $U$, as most pairs of vertices would have fairly uncorrelated neighbourhoods into $U$.
 
 The proof of Theorem \ref{thm:bs2007} proceeds by showing that every Ramsey graph contains a diverse subgraph of linear size, followed by a probabilistic argument that diversity furnishes many distinct degrees.
 
@@ -32,9 +32,9 @@ The proof of Theorem \ref{thm:bs2007} proceeds by showing that every Ramsey grap
     \item[(i)] $d(S_i, S_j) < 8c$ for $j > i$,
     \item[(ii)] $d(S_i, S_j) > 1 - 8c$ for $j > i$.
   \end{enumerate}
-  Alongside, we also construct a sequence of induced subgraphs $G = G_0 \subset G_1 \subset \cdots \subset G_K$, such that $|G_i| \geq |G_{i - 1}|/8$ and $S_i \subseteq V(G_{i - 1})$ for all $i$.
+  Alongside, we also construct a sequence of induced subgraphs $G = G_0 \supset G_1 \supset \cdots \supset G_K$, such that $|G_i| \geq |G_{i - 1}|/8$ and $S_i \subseteq V(G_{i - 1})$ for all $i$.
 
-  Suppose $G_1, \ldots, G_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. By induction, $|G_{i - 1}| \geq 8^{1 - i}|G| \geq m$. Note that $G_{i - 1}$ is not $(c, \delta)$-diverse by assumption, so there exist vertex $x \in V(G_{i - 1})$ and set $S_i \subseteq G_{i - 1}$ of size $m^{\delta}$ such that $|N_{G_{i - 1}}(x) \Delta N_{G_{i - 1}}(y)| < c|G_{i - 1}|$ for $y \in S_i$. Let $T_i = V(G_{i - 1}) \setminus S_i$. Since $m^\delta \leq m/2$ for large enough $n$, we have $|T_i| \geq |G_{i - 1}|/2$. 
+  Suppose $G_1, \ldots, G_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. By induction, $|G_{i - 1}| \geq 8^{1 - i}|G| \geq m$. Note that $G_{i - 1}$ is not $(c, \delta)$-diverse by assumption, so there exists a vertex $x \in V(G_{i - 1})$ and a set $S_i \subseteq G_{i - 1}$ of size $m^{\delta}$ such that $|N_{G_{i - 1}}(x) \Delta N_{G_{i - 1}}(y)| < c|G_{i - 1}|$ for $y \in S_i$. Let $T_i = V(G_{i - 1}) \setminus S_i$. Since $m^\delta \leq m/2$ for large enough $n$, we have $|T_i| \geq |G_{i - 1}|/2$. 
   
   Suppose $|\overline{N}_{T_i}(x)| \geq |T_i|/2$. Then for $y \in S_i$,
   \[
@@ -42,15 +42,15 @@ The proof of Theorem \ref{thm:bs2007} proceeds by showing that every Ramsey grap
   \]
   Partition $\overline{N}_{T_i}(x)$ into $V_i \sqcup W_i$, where $V_i = \{v \in \overline{N}_{T_i}(x) : d(v, S_i) < 8c\}$. Notice
   \[
-    8c|W_i| \leq \sum_{v \in W_i} d(v, S_i) \leq \frac{e(\overline{N}_{T_i}(x), S_i)}{|S_i|} = \frac{|\overline{N}_{T_i}(x)|}{|S_i|}\sum_{v \in S_i} d(y, \overline{N}_{T_i}(x)) \leq 4c|\overline{N}_{T_i}(x)|,
+    8c|W_i| \leq \sum_{v \in W_i} d(v, S_i) \leq \frac{e(\overline{N}_{T_i}(x), S_i)}{|S_i|} = \frac{|\overline{N}_{T_i}(x)|}{|S_i|}\sum_{y \in S_i} d(y, \overline{N}_{T_i}(x)) \leq 4c|\overline{N}_{T_i}(x)|,
   \]
-  so $|W_i| \leq |\overline{N}_{T_i}(x)|/2$. But then $|V_i| \geq |\overline{N}_{T_i}(x)|/2 \geq |T_i|/4 \geq |G_{i - 1}|/8$. Set $G_i = G[V_i]$. Since $d(S_i, U) < 8c$ for all $U \subseteq V_i$, condition (i) holds for $S_i$. In the case that $|N_{T_i}(x)| < |T_i|/2$, the same argument applies by setting $V_i = \{v \in \overline{N}_{T_i}(x) : d(v, S_i) > 1 - 8c\}$, which yields $|G_i| \geq |G_{i - 1}|/8$ and $S_i$ satisfying condition (ii). This completes the induction.
+  so $|W_i| \leq |\overline{N}_{T_i}(x)|/2$. But then $|V_i| \geq |\overline{N}_{T_i}(x)|/2 \geq |T_i|/4 \geq |G_{i - 1}|/8$. Set $G_i = G[V_i]$. Since $d(S_i, U) < 8c$ for all $U \subseteq V_i$, condition (i) holds for $S_i$. In the case that $|N_{T_i}(x)| \geq |T_i|/2$, the same argument applies by setting $V_i = \{v \in N_{T_i}(x) : d(v, S_i) > 1 - 8c\}$, which yields $|G_i| \geq |G_{i - 1}|/8$ and $S_i$ satisfying condition (ii). This completes the induction.
 
   By working on $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $m^{\delta}$ and $c = 1/K$,
   \[
     d(S) \leq \frac{\binom{m^{\delta}}{2}}{\binom{rm^{\delta}}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 8c \leq \frac{10}{K}.
   \]
-  Thus Theorem \ref{thm:ramsey-density} yields a homogeneous set $A$ in $S$ with $|A| \geq \frac{\nu K}{10\log(K/10)} \log |S|$, for some $\nu = \nu(C)$. Note that $|A|$ is also a homogeneous set in $G$. But then 
+  Thus Theorem \ref{thm:ramsey-density} yields a homogeneous set $A$ in $S$ with $|A| \geq \frac{\nu K}{10\log(K/10)} \log |S|$, for some $\nu = \nu(C)$. Note that $A$ is also a homogeneous set in $G$. But then 
   \[
     \log |S| \geq \frac{1}{\delta} \log m = \frac{1}{\delta}\log n - \frac{K\log 8}{\delta}.
   \]
@@ -66,7 +66,7 @@ The proof of Theorem \ref{thm:bs2007} proceeds by showing that every Ramsey grap
 \begin{proof}
   Fix $m$ as above. Let $U$ be chosen uniformly at random among all subsets of $V(G)$ of size $m$. Let $H = G[U]$. It suffices to show that with positive probability, $H$ contains $\Omega(\sqrt{n})$ vertices of distinct degrees.
 
-  For distinct $x, y \in V(G)$, define $\mathbbm{1}_{xy}$ to be the indicator for the event that $x, y \in V(H)$ and $\deg_H(x) \neq \deg_H(y)$. Then $\E[\mathbbm{1}_{xy}] \leq \prob[\deg_U(x) = \deg_U(y)]$. We may write
+  For distinct $x, y \in V(G)$, define $\mathbbm{1}_{xy}$ to be the indicator for the event that $x, y \in V(H)$ and $\deg_H(x) = \deg_H(y)$. Then $\E[\mathbbm{1}_{xy}] \leq \prob[\deg_U(x) = \deg_U(y)]$. We may write
   \[
     \prob[\deg_U(x) = \deg_U(y)] = \prob\left[|(N_G(x) \setminus N_G(y)) \cap U| = |(N_G(y) \setminus N_G(x)) \cap U|\right].
   \]
@@ -78,7 +78,7 @@ The proof of Theorem \ref{thm:bs2007} proceeds by showing that every Ramsey grap
   \[
     \prob\left[\deg_U(x) = \deg_U(y) \, \middle| \, \frac{|D|}{8} \leq k \leq \frac{7|D|}{8}\right] = \frac{\binom{|N_G(x) \setminus N_G(y)|}{k/2}\binom{|N_G(y) \setminus N_G(x)|}{k/2}}{\binom{|D|}{k}}.
   \]
-  It now follows from Stirling's formula and $k(|D| - k) \geq \frac{7}{64}|D|^2$ that the above probabilitydoes not exceed
+  It now follows from Stirling's formula and $k(|D| - k) \geq \frac{7}{64}|D|^2$ that the above probability does not exceed
   \[
     \frac{\binom{|D|/2}{k/2}^2}{\binom{|D|}{k}} = (1 + o(1))\sqrt{\frac{2|D|}{\pi k(|D| - k)}} \leq \frac{3}{\sqrt{|D|}} \leq \frac{3}{\sqrt{cn}}. 
   \]

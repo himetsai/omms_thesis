@@ -1,7 +1,7 @@
 \section{Introduction}
 \label{sec:ch1}
 
-Classical Ramsey Theory asks for the minimum number of vertices required to guarantee the existence of a clique or an independent set in a graph. We refer these maxima as \textit{Ramsey numbers}.
+Classical Ramsey Theory asks for the minimum number of vertices required to guarantee the existence of a clique or an independent set in a graph. We refer to these maxima as \textit{Ramsey numbers}.
 
 \begin{definition}
   \label{def:ramsey-number}
@@ -18,7 +18,7 @@ The cornerstone of Ramsey theory due to Erdős and Szekeres gives the following 
   \]
 \end{theorem}
 
-Following the fact that $\binom{2t - 2}{t - 1} < 2^{2t}$, we can see $R(t, t) < 4^{t}$. In other words, any graph on $n$ vertices contains a clique or independent set of size $\frac{1}{2}\log n$. A central difficulty in Ramsey Theory is the construction for lower bounds for Ramsey numbers. A rather basic result which already gives the best known exponents is the famous random graph construction due to Erdős, marking one of the first application of the probabilistic method in combinatorics. Before stating the result, we first define the \textit{Erdős-Rényi random graph}.
+Following the fact that $\binom{2t - 2}{t - 1} < 2^{2t}$, we can see $R(t, t) < 4^{t}$. In other words, any graph on $n$ vertices contains a clique or independent set of size $\frac{1}{2}\log n$. A central difficulty in Ramsey Theory is the construction for lower bounds for Ramsey numbers. A rather basic result which already gives the best known exponents is the famous random graph construction due to Erdős, marking one of the first applications of the probabilistic method in combinatorics. Before stating the result, we first define the \textit{Erdős--Rényi random graph}.
 
 \begin{definition}
   \label{def:random-graph}
@@ -43,7 +43,7 @@ Following the fact that $\binom{2t - 2}{t - 1} < 2^{2t}$, we can see $R(t, t) < 
   Similarly, the expected number of independent sets of size $t$ is less than $1/2$. It now follows that there exists a graph on $N$ vertices containing neither a clique nor an independent set of size $t$.
 \end{proof}
 
-In particular, there exists a graph on $n$ vertices containing neither a clique nor an independent set of size $2\log n$, showing that the $\frac{1}{2}\log n$ bound we obtained earlier could not be substantially improved. The search for explicit graph constructions with logarithmically small cliques and independent sets is a major open problem in Ramsey Theory. \TODO{maybe cite survey.} Despite decades of intensive research, all known constructions still rely on some randomness. This thus motivates the question of whether graphs with small cliques and independent sets inherently resemble dense random graphs like $G_{n, 1/2}$; we refer such graphs as \textit{Ramsey graphs}.
+In particular, there exists a graph on $n$ vertices containing neither a clique nor an independent set of size $2\log n$, showing that the $\frac{1}{2}\log n$ bound we obtained earlier could not be substantially improved. The search for explicit graph constructions with logarithmically small cliques and independent sets is a major open problem in Ramsey Theory. \TODO{maybe cite survey.} Despite decades of intensive research, all known constructions still rely on some randomness. This thus motivates the question of whether graphs with small cliques and independent sets inherently resemble dense random graphs like $G_{n, 1/2}$; we refer to such graphs as \textit{Ramsey graphs}.
 
 \begin{definition}
   \label{def:ramsey-graph}
@@ -51,7 +51,7 @@ In particular, there exists a graph on $n$ vertices containing neither a clique 
   Let $C > 0$ be a constant. A \textit{$C$-Ramsey graph} is a graph with no clique or independent set of size greater than $C\log n$.
 \end{definition}
 
-It is useful to also define a short hand for cliques and independent sets.
+It is useful to also define a shorthand for cliques and independent sets.
 
 \begin{definition}
   \label{def:hom}
@@ -94,13 +94,13 @@ It is also interesting to look at the edge statistics of Ramsey graphs. For a gr
 \[
   \Phi(G) = \{e(H) : H \text{ is an induced subgraph of } G\}
 \]
-Erdős and Mckay \cite{EFS} conjectured that for any Ramsey graph $G$ on $n$ vertices, there exists $\delta = \delta(C) > 0$ such that 
+Erdős and McKay \cite{EFS} conjectured that for any Ramsey graph $G$ on $n$ vertices, there exists $\delta = \delta(C) > 0$ such that 
 \[
   \{1, 2, \ldots, \delta n^2\} \subseteq \Phi(G).
 \]
-It was proven for Random graphs by Calkin, Frieze, and Mckay \cite{erdosmckayrandomgraph}, but the conjecture for Ramsey graphs remained open for decades and only started to show significant progress in recent years. In particular, a chain of results were sparked after the work of Narayanan, Sahasrabudhe, and Tomon \cite{narayanan2017ramseygraphsinducesubgraphs} establishing that $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on some ideas from the work of Bukh and Sudakov \cite{BUKH2007612} which showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature that dense random graphs also exhibit. Kwan and Sudakov \cite{kwan2021ramseygraphsinducesubgraphs} later improved the bound to $|\Phi(G)| = \Omega(n^2)$ by refining the argument of Narayanan, Sahasrabudhe, and Tomon. Eventually, Kwan, Sah, Sauermann, and Sawhney \cite{Kwan_2023} closed the conjecture with a fairly involved approach using tools from Fourier analysis, random matrix theory, the theory of Boolean functions. 
+It was proven for Random graphs by Calkin, Frieze, and Mckay \cite{erdosmckayrandomgraph}, but the conjecture for Ramsey graphs remained open for decades and only started to show significant progress in recent years. In particular, a chain of results were sparked after the work of Narayanan, Sahasrabudhe, and Tomon \cite{narayanan2017ramseygraphsinducesubgraphs} establishing that $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on some ideas from the work of Bukh and Sudakov \cite{BUKH2007612} which showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature that dense random graphs also exhibit. Kwan and Sudakov \cite{kwan2021ramseygraphsinducesubgraphs} later improved the bound to $|\Phi(G)| = \Omega(n^2)$ by refining the argument of Narayanan, Sahasrabudhe, and Tomon. Eventually, Kwan, Sah, Sauermann, and Sawhney \cite{Kwan_2023} closed the conjecture with a fairly involved approach using tools from Fourier analysis, random matrix theory, and the theory of Boolean functions. 
 
-This dissertation will start by studying the result of Bukh and Sudakov \cite{BUKH2007612} on large induced subgraphs in Ramsey graphs with many distinct degrees. This work not only tightens the connection between Ramsey graphs and random graphs, but also introduces a key feature of Ramsey graphs that unlocks the subsequent $|\Phi(G)| = \Omega(n^2)$ result by Kwan and Sudakov, which we will present in the following chapter. Lastly, we go through the broad strokes of the proof to the Erdős-Mckay conjecture by Kwan, Sah, Sauermann, and Sawhney \cite{Kwan_2023}, touching on the core ideas of their approach.
+This dissertation will start by studying the result of Bukh and Sudakov \cite{BUKH2007612} on large induced subgraphs in Ramsey graphs with many distinct degrees. This work not only tightens the connection between Ramsey graphs and random graphs, but also introduces a key feature of Ramsey graphs that unlocks the subsequent $|\Phi(G)| = \Omega(n^2)$ result by Kwan and Sudakov, which we will present in the following chapter. Lastly, we go through the broad strokes of the proof to the Erdős--McKay conjecture by Kwan, Sah, Sauermann, and Sawhney \cite{Kwan_2023}, touching on the core ideas of their approach.
 
 % Another research direction is to consider whether forbidding certain induced subgraphs could force homogeneous sets beyond logarithmic size. Erdős and Hajnal famously conjectured that for any graph $H$, if a graph $G$ does not contain $H$ as an induced subgraph, then $G$ contains a homogeneous set of size $|G|^{\eta}$ for some $\eta = \eta(H) > 0$.  
 
