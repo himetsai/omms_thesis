@@ -70,7 +70,7 @@ The proof of Theorem \ref{thm:bs2007} proceeds by showing that every Ramsey grap
   \[
     \prob[\deg_U(x) = \deg_U(y)] = \prob\left[|(N_G(x) \setminus N_G(y)) \cap U| = |(N_G(y) \setminus N_G(x)) \cap U|\right].
   \]
-  Put $D = N_G(x) \Delta N_G(y)$, and $k = |D \cap U|$. Suppose $|D| \geq cn$. Fix an ordering on $D$ and let $X_i$ be the number of the first $i$ vertices in $D \cap U$. Then $X_0, X_1, \ldots, X_{|D|} = k$ is a martingale with $|X_{i + 1} - X_i| \leq 1$ for all $i$. Since $\frac{|D|}{4} \leq \E[k] = \frac{m|D|}{n} \leq \frac{3|D|}{4}$, the Hoeffding-Azuma inequality yields
+  Put $D = N_G(x) \Delta N_G(y)$, and $k = |D \cap U|$. Suppose $|D| \geq cn$. Since $\frac{|D|}{4} \leq \frac{m|D|}{n} \leq \frac{3|D|}{4}$, Proposition \ref{prop:hypergeometric} yields
   \[
     \prob\left[k < \frac{|D|}{8} \text{ or } k > \frac{7|D|}{8}\right] \leq \prob\left[\left|k - \E[k]\right| > \frac{|D|}{8}\right] \leq e^{-\Theta(|D|)} = e^{-\Theta(n)} = o(n^{-1/2}).  
   \]

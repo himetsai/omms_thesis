@@ -68,11 +68,11 @@ The first result that cemented the connection between Ramsey graphs and dense ra
 \end{theorem}
 
 \begin{proof}
-  Note that there exists $m \geq n/2$ vertices in $G$ with degree at most $2dn$. We work over the graph $G'$ induced by these $m$ vertices. Let $I$ be the largest independent set in $G'$ and let $k = |I|$. Note that $\sum_{v \in I} \deg(v) \leq 2dnk \leq 4dmk$. Let $s = 8dk$. Then there are at least $m/2 - k$ vertices $v \in V(G') \setminus I$ with $\deg_{I}(v) \leq s$. Let $J$ be the set of these vertices. We may assume $s = c_1\log n/\log(1/d)$, for some sufficiently small $c_1$, otherwise we are done. Consider the family $\mathcal{F}$ of subsets of $I$ with size less than $s$. Note that
+  Note that there exists $m \geq n/2$ vertices in $G$ with degree at most $2dn$. We work over the graph $G'$ induced by these $m$ vertices. Let $I$ be the largest independent set in $G'$ and let $k = |I|$. Note that $\sum_{v \in I} \deg(v) \leq 2dnk \leq 4dmk$. Let $s = 8dk$. Then there are at least $m/2 - k$ vertices $v \in V(G') \setminus I$ with $\deg_{I}(v) \leq s$. Let $J$ be the set of these vertices. We may assume $s \leq c_1\log n/\log(1/d)$, for some sufficiently small $c_1$, otherwise we are done. Consider the family $\mathcal{F}$ of subsets of $I$ with size less than $s$. Note that
   \[
     |\mathcal{F}| \leq s\binom{k}{s - 1} \leq \frac{s^2}{k}\left(\frac{ek}{s}\right)^s \leq O(\log n) \cdot \left(\frac{e}{8} \cdot \frac{1}{d}\right)^{s} \leq O(\log n) \cdot \left(\frac{1}{d}\right)^{\frac{c_2\log n}{\log(1/d)}} \leq n^{1/3},
   \]
-  where we pick $c_1$ small enough such that $c_2 < 1/3$. But then by the pigeonhole principle, there exists a set $Z \subseteq J$ of size at least $(m/2 - k)/n^{1/3} \geq \sqrt{n}$ and some $Y \in \mathcal{F}$ such that $N_I(z) = Y$ for all $z \in Z$. Let $G'' = G[Z]$. Note that $G''$ does not contain an independent set of size $s$, otherwise exchange it with $Y$ in $I$ creates a larger independent set in $G'$, contradiction. Recall that $\binom{k}{s - 1} \leq n^{1/3} \leq \sqrt{n}$. Thus by Theorem \ref{thm:erdos-szekeres}, $G''$ contains a clique of size at least $t = s - k - 2 = \frac{c}{d\log(1/d)} \log n$ for some constant $c$.
+  where we pick $c_1$ small enough such that $c_2 < 1/3$. But then by the pigeonhole principle, there exists a set $Z \subseteq J$ of size at least $(m/2 - k)/n^{1/3} \geq \sqrt{n}$ and some $Y \in \mathcal{F}$ such that $N_I(z) = Y$ for all $z \in Z$. Let $G'' = G[Z]$. Note that $G''$ does not contain an independent set of size $s$, otherwise exchange it with $Y$ in $I$ creates a larger independent set in $G'$, contradiction. Recall that $\binom{k}{s - 1} \leq n^{1/3} \leq \sqrt{n}$. Thus by Theorem \ref{thm:erdos-szekeres}, $G''$ contains a clique of size at least $t = s - k - 2$. Substituting $s$ with its maximum possible value yields the result.
 \end{proof}
 
 \begin{corollary}
@@ -101,3 +101,32 @@ This dissertation will start by studying the result of Bukh and Sudakov \cite{BU
 % Another research direction is to consider whether forbidding certain induced subgraphs could force homogeneous sets beyond logarithmic size. Erdős and Hajnal famously conjectured that for any graph $H$, if a graph $G$ does not contain $H$ as an induced subgraph, then $G$ contains a homogeneous set of size $|G|^{\eta}$ for some $\eta = \eta(H) > 0$.  
 
 \subsection{Notations and Tools}
+
+\begin{proposition}[Turán's theorem]
+  \label{prop:turan}
+  
+  Every graph $G$ with $n$ vertices and $m$ edges contains an independent set of size at least $n^2/(2m + n)$.
+\end{proposition}
+
+\begin{proposition}[Hoeffding's inequality]
+  \label{prop:azuma-hoeffding}
+  
+  Let $X_1, X_2, \ldots, X_n$ be independent real-valued random variables with $0 \leq X_i \leq 1$ for each $i$, and write $X = \sum_{i = 1}^n X_i$. Then for $t \geq 0$, 
+  \[
+    \prob(|X - \E[X]| \geq t) \leq 2e^{-2t^2/n}.
+  \]
+\end{proposition}
+
+\begin{proposition}
+  \label{prop:hypergeometric}
+  
+  Let $X$ denote the number of successes in $D$ draws, without replacement, from a population of size $N$ which contains $M$ successes. Then $\E[X] = DM/N$ and for $t \geq 0$, 
+  \[
+    \prob(\left|X - \E[X]\right| \geq t) \leq 2e^{-2t^2D}.
+  \]
+\end{proposition}
+
+\begin{proof}
+  
+\end{proof}
+
