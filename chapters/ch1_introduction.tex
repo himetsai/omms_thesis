@@ -82,15 +82,18 @@ The first result that cemented the connection between Ramsey graphs and dense ra
 
 Due to the rich variety of induced subgraphs in dense random graphs, a popular angle to study the pseudorandom properties of Ramsey graphs is to consider their induced subgraphs. Some notable results is a theorem of Shelah \cite{shelah1997erdhosrenyiconjecture} which asserts that every $n$-vertex Ramsey graph contains $2^{\Omega(n)}$ non-isomorphic induced subgraphs, and a theorem of Prömel and Rödl \cite{PROMEL1999379} states that there exists $\delta = \delta(C) > 0$ such that every $C$-Ramsey graph on $n$ vertices contains an induced copy of all graphs on at most $\delta \log n$ vertices.  
 
-In this dissertation, we will investigate the edge statistics of Ramsey graphs. For a graph $G$, let 
+It is also interesting to look at the edge statistics of Ramsey graphs. For a graph $G$, let 
 \[
   \Phi(G) = \{e(H) : H \text{ is an induced subgraph of } G\}
 \]
-Erdős and Mckay conjectured that for any Ramsey graph $G$ on $n$ vertices, there exists $\delta = \delta(C) > 0$ such that 
+Erdős and Mckay \cite{EFS} conjectured that for any Ramsey graph $G$ on $n$ vertices, there exists $\delta = \delta(C) > 0$ such that 
 \[
   \{1, 2, \ldots, \delta n^2\} \subseteq \Phi(G).
 \]
-It was proven for Random graphs by Calkin, Frieze, and Mckay \cite{erdosmckayrandomgraph}, and thus it is interesting to determine whether Ramsey graphs also resemble random graphs in this regard.
+It was proven for Random graphs by Calkin, Frieze, and Mckay \cite{erdosmckayrandomgraph}, but the conjecture for Ramsey graphs remained open for decades and only started to show significant progress in recent years. In particular, a chain of results were sparked after the work of Narayanan, Sahasrabudhe, and Tomon \cite{narayanan2017ramseygraphsinducesubgraphs} establishing that $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on some ideas from the work of Bukh and Sudakov \cite{BUKH2007612} which showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature that dense random graphs also exhibit. Kwan and Sudakov \cite{kwan2021ramseygraphsinducesubgraphs} later improved the bound to $|\Phi(G)| = \Omega(n^2)$ by refining the argument of Narayanan, Sahasrabudhe, and Tomon. Eventually, Kwan, Sah, Sauermann, and Sawhney \cite{Kwan_2023} closed the conjecture with a fairly involved approach using tools from Fourier analysis, random matrix theory, the theory of Boolean functions. 
+
+This dissertation will start by studying the result of Bukh and Sudakov \cite{BUKH2007612} on large induced subgraphs of Ramsey graphs with many distinct degrees. This work not only tighten the connection between Ramsey graphs and dense random graphs, but also introduces a key feature of Ramsey graphs that unlocks the subsequent $|\Phi(G)| \Omega(n^2)$ result by Kwan and Sudakov, which we will present in the following chapter. At the end, we go through the broad strokes of the solution to the Erdős-Mckay conjecture by Kwan, Sah, Sauermann, and Sawhney \cite{Kwan_2023}, touching on the core ideas of the proof.
+
 
 
 Another research direction is to consider whether forbidding certain induced subgraphs could force homogeneous sets beyond logarithmic size. Erdős and Hajnal famously conjectured that for any graph $H$, if a graph $G$ does not contain $H$ as an induced subgraph, then $G$ contains a homogeneous set of size $|G|^{\eta}$ for some $\eta = \eta(H) > 0$. 
