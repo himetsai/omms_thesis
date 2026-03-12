@@ -13,7 +13,7 @@ This was originally conjectured by Erdős, Faudree, and Sós \cite{EFS} in light
 \begin{definition}
   \label{def:diversity}
 
-  An $n$-vertex graph $G$ is \textit{$(c, \delta)$-diverse} if for $x \in V(G)$, we have $|N(x) \Delta N(y)| < cn$ for at most $n^{\delta}$ vertices $y \in V(G)$.
+  An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-diverse} if for $x \in V(G)$, we have $|N(x) \Delta N(y)| < \eps n$ for at most $n^{\delta}$ vertices $y \in V(G)$.
 \end{definition}
 
 The notion of diversity captures the idea that the neighbourhoods of most pairs of vertices differ significantly. In particular, the usefulness of diversity comes from bounding the number of vertices that share the same degree into some random vertex set $U$, as most pairs of vertices would have fairly uncorrelated neighbourhoods into $U$.
@@ -23,44 +23,44 @@ The proof of Theorem \ref{thm:bs2007} proceeds by showing that every Ramsey grap
 \begin{lemma}
   \label{lemma:diverse-subgraph}
 
-  For $\delta \in (0, 1)$, there exists $c = c(C, \delta) > 0$ such that every $C$-Ramsey graph $G$ on $n$ vertices contains a $(c, \delta)$-diverse subgraph on $\Omega(n)$ vertices.
+  For $\delta \in (0, 1)$, there exists $\eps = \eps(C, \delta) > 0$ such that every $C$-Ramsey graph $G$ on $n$ vertices contains an $(\eps, \delta)$-diverse subgraph on $\Omega(n)$ vertices.
 \end{lemma}
 
 \begin{proof}
-  Suppose not. Let $K = \lceil \gamma C \log (C + 1) \rceil$ for some sufficiently large constant $\gamma = \gamma(\delta)$, $m = 8^{-K}n$, and $c = 1/K$. We inductively construct a sequence of disjoint vertex sets $S_1, S_2, \ldots, S_K$ of size $m^\delta$, such that for all $S_i$ one of the following conditions holds:
+  Suppose not. Let $K = K(C)$ be a large constant to be determined. Let $c = 8^{-K}$ and $\eps = 1/K$. We inductively construct a sequence of disjoint vertex sets $S_1, S_2, \ldots, S_K$ of size $(cn)^\delta$, such that for all $S_i$ one of the following conditions holds:
   \begin{enumerate}[]
-    \item[(i)] $d(S_i, S_j) < 8c$ for $j > i$,
-    \item[(ii)] $d(S_i, S_j) > 1 - 8c$ for $j > i$.
+    \item[(i)] $d(S_i, S_j) < 8\eps$ for $j > i$,
+    \item[(ii)] $d(S_i, S_j) > 1 - 8\eps$ for $j > i$.
   \end{enumerate}
   Alongside, we also construct a sequence of induced subgraphs $G = G_0 \supset G_1 \supset \cdots \supset G_K$, such that $|G_i| \geq |G_{i - 1}|/8$ and $S_i \subseteq V(G_{i - 1})$ for all $i$.
 
-  Suppose $G_1, \ldots, G_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. By induction, $|G_{i - 1}| \geq 8^{1 - i}|G| \geq m$. Note that $G_{i - 1}$ is not $(c, \delta)$-diverse by assumption, so there exists a vertex $x \in V(G_{i - 1})$ and a set $S_i \subseteq G_{i - 1}$ of size $m^{\delta}$ such that $|N_{G_{i - 1}}(x) \Delta N_{G_{i - 1}}(y)| < c|G_{i - 1}|$ for $y \in S_i$. Let $T_i = V(G_{i - 1}) \setminus S_i$. Since $m^\delta \leq m/2$ for large enough $n$, we have $|T_i| \geq |G_{i - 1}|/2$. 
+  We first show that this construction suffices. By working with $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $(cn)^{\delta}$ and $\eps = 1/K$,
+  \[
+    d(S) \leq \frac{\binom{(cn)^{\delta}}{2}}{\binom{r(cn)^{\delta}}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 8\eps \leq \frac{10}{K}.
+  \]
+  Thus Theorem \ref{thm:ramsey-density} yields a homogeneous set $A$ in $S$ of size
+  \[
+    |A| \geq \frac{\gamma K}{10\log(K/10)} \log |S| = \frac{\gamma \delta K}{10\log(K/10)} \log cn = \frac{\gamma \delta K}{10\log(K/10)} \log n + o(\log n),
+  \]
+  for some absolute constant $\gamma > 0$ given by the theorem. But then $\frac{\gamma \delta K}{10\log(K/10)} > C$ for sufficiently large $K$, and so $|A| > C\log n$, contradiction.
+  
+  We now construct the sets $S_i$ and $G_i$ inductively. Suppose $G_1, \ldots, G_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. By induction, $|G_{i - 1}| \geq 8^{1 - i}|G| \geq cn$. Note that $G_{i - 1}$ is not $(\eps, \delta)$-diverse by assumption, so there exists a vertex $x \in V(G_{i - 1})$ and a set $S_i \subseteq G_{i - 1}$ of size $(cn)^{\delta}$ such that $|N_{G_{i - 1}}(x) \Delta N_{G_{i - 1}}(y)| < \eps|G_{i - 1}|$ for $y \in S_i$. Let $T_i = V(G_{i - 1}) \setminus S_i$. Since $(cn)^\delta \leq cn/2$ for large enough $n$, we have $|T_i| \geq |G_{i - 1}|/2$. 
   
   Suppose $|\overline{N}_{T_i}(x)| \geq |T_i|/2$. Then for $y \in S_i$,
   \[
-    d(y, \overline{N}_{T_i}(x)) = \frac{|N_{T_i}(y) \cap \overline{N}_{T_i}(x)|}{|N_{T_i}(x)|} < \frac{c|G_{i - 1}|}{|T_i|/2} \leq 4c.
+    d(y, \overline{N}_{T_i}(x)) = \frac{|N_{T_i}(y) \cap \overline{N}_{T_i}(x)|}{|N_{T_i}(x)|} < \frac{\eps|G_{i - 1}|}{|T_i|/2} \leq 4\eps.
   \]
-  Partition $\overline{N}_{T_i}(x)$ into $V_i \sqcup W_i$, where $V_i = \{v \in \overline{N}_{T_i}(x) : d(v, S_i) < 8c\}$. Notice
+  Partition $\overline{N}_{T_i}(x)$ into $V_i \sqcup Z_i$, where $V_i = \{v \in \overline{N}_{T_i}(x) : d(v, S_i) < 8\eps\}$. Notice
   \[
-    8c|W_i| \leq \sum_{v \in W_i} d(v, S_i) \leq \frac{e(\overline{N}_{T_i}(x), S_i)}{|S_i|} = \frac{|\overline{N}_{T_i}(x)|}{|S_i|}\sum_{y \in S_i} d(y, \overline{N}_{T_i}(x)) \leq 4c|\overline{N}_{T_i}(x)|,
+    8\eps|Z_i| \leq \sum_{v \in Z_i} d(v, S_i) \leq \frac{e(\overline{N}_{T_i}(x), S_i)}{|S_i|} = \frac{|\overline{N}_{T_i}(x)|}{|S_i|}\sum_{y \in S_i} d(y, \overline{N}_{T_i}(x)) \leq 4\eps|\overline{N}_{T_i}(x)|,
   \]
-  so $|W_i| \leq |\overline{N}_{T_i}(x)|/2$. But then $|V_i| \geq |\overline{N}_{T_i}(x)|/2 \geq |T_i|/4 \geq |G_{i - 1}|/8$. Set $G_i = G[V_i]$. Since $d(S_i, U) < 8c$ for all $U \subseteq V_i$, condition (i) holds for $S_i$. In the case that $|N_{T_i}(x)| \geq |T_i|/2$, the same argument applies by setting $V_i = \{v \in N_{T_i}(x) : d(v, S_i) > 1 - 8c\}$, which yields $|G_i| \geq |G_{i - 1}|/8$ and $S_i$ satisfying condition (ii). This completes the induction.
-
-  By working on $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $m^{\delta}$ and $c = 1/K$,
-  \[
-    d(S) \leq \frac{\binom{m^{\delta}}{2}}{\binom{rm^{\delta}}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 8c \leq \frac{10}{K}.
-  \]
-  Thus Theorem \ref{thm:ramsey-density} yields a homogeneous set $A$ in $S$ with $|A| \geq \frac{\nu K}{10\log(K/10)} \log |S|$, for some $\nu = \nu(C)$. Note that $A$ is also a homogeneous set in $G$. But then 
-  \[
-    \log |S| \geq \frac{1}{\delta} \log m = \frac{1}{\delta}\log n - \frac{K\log 8}{\delta}.
-  \]
-  Pick $\gamma > \nu K/10\delta\log(K/10)$ and we have $|A| > C\log n$ for large enough $n$, contradiction.
+  so $|W_i| \leq |\overline{N}_{T_i}(x)|/2$. But then $|V_i| \geq |\overline{N}_{T_i}(x)|/2 \geq |T_i|/4 \geq |G_{i - 1}|/8$. Set $G_i = G[V_i]$. Since $d(S_i, U) < 8\eps$ for all $U \subseteq V_i$, condition (i) holds for $S_i$. In the case that $|N_{T_i}(x)| \geq |T_i|/2$, the same argument applies by setting $V_i = \{v \in N_{T_i}(x) : d(v, S_i) > 1 - 8\eps\}$, which yields $|G_i| \geq |G_{i - 1}|/8$ and $S_i$ satisfying condition (ii). This completes the induction.
 \end{proof}
 
 \begin{lemma}
   \label{lemma:diversity-degrees}
 
-  Let $\delta \in (0, 1/2)$ and let $G$ be a $(c, \delta)$-diverse graph on $n$ vertices for large enough $n$. Then for $n/4 \leq m \leq 3n/4$, there is a subgraph on $m$ vertices containing vertices of $\sqrt{cn}/320$ distinct degrees.
+  Let $\delta \in (0, 1/2)$ and let $G$ be an $(\eps, \delta)$-diverse graph on $n$ vertices for large enough $n$. Then for $n/4 \leq m \leq 3n/4$, there is a subgraph on $m$ vertices containing vertices of $\sqrt{\eps n}/320$ distinct degrees.
 \end{lemma}
 
 \begin{proof}
@@ -70,7 +70,7 @@ The proof of Theorem \ref{thm:bs2007} proceeds by showing that every Ramsey grap
   \[
     \prob[\deg_U(x) = \deg_U(y)] = \prob\left[|(N_G(x) \setminus N_G(y)) \cap U| = |(N_G(y) \setminus N_G(x)) \cap U|\right].
   \]
-  Put $D = N_G(x) \Delta N_G(y)$, and $k = |D \cap U|$. Suppose $|D| \geq cn$. Since $\frac{|D|}{4} \leq \frac{m|D|}{n} \leq \frac{3|D|}{4}$, Proposition \ref{prop:hypergeometric} yields
+  Put $D = N_G(x) \Delta N_G(y)$, and $k = |D \cap U|$. Suppose $|D| \geq \eps n$. Since $\frac{|D|}{4} \leq \frac{m|D|}{n} \leq \frac{3|D|}{4}$, Proposition \ref{prop:hypergeometric} yields
   \[
     \prob\left[k < \frac{|D|}{8} \text{ or } k > \frac{7|D|}{8}\right] \leq \prob\left[\left|k - \E[k]\right| > \frac{|D|}{8}\right] \leq e^{-\Theta(|D|)} = e^{-\Theta(n)} = o(n^{-1/2}).  
   \]
@@ -80,17 +80,17 @@ The proof of Theorem \ref{thm:bs2007} proceeds by showing that every Ramsey grap
   \]
   It now follows from Stirling's formula and $k(|D| - k) \geq \frac{7}{64}|D|^2$ that the above probability does not exceed
   \[
-    \frac{\binom{|D|/2}{k/2}^2}{\binom{|D|}{k}} = (1 + o(1))\sqrt{\frac{2|D|}{\pi k(|D| - k)}} \leq \frac{3}{\sqrt{|D|}} \leq \frac{3}{\sqrt{cn}}. 
+    \frac{\binom{|D|/2}{k/2}^2}{\binom{|D|}{k}} = (1 + o(1))\sqrt{\frac{2|D|}{\pi k(|D| - k)}} \leq \frac{3}{\sqrt{|D|}} \leq \frac{3}{\sqrt{\eps n}}. 
   \]
-  Thus if $|N_G(x) \Delta N_G(y)| \geq cn$ then $\E[\mathbbm{1}_{xy}] \leq 3/\sqrt{cn} + o(n^{-1/2}) \leq 4/\sqrt{cn}$.
+  Thus if $|N_G(x) \Delta N_G(y)| \geq \eps n$ then $\E[\mathbbm{1}_{xy}] \leq 3/\sqrt{\eps n} + o(n^{-1/2}) \leq 4/\sqrt{\eps n}$.
 
-  Let $I = \sum_{x, y \in V(G)} \mathbbm{1}_{xy}$. By definition of a $(c, \delta)$-diverse graph, we have $\E[\mathbbm{1}_{xy}] \leq 4/\sqrt{cn}$ for all but at most $n^{1 + \delta} < n^{3/2}$ pairs $x, y \in V(G)$. Thus,
+  Let $I = \sum_{x, y \in V(G)} \mathbbm{1}_{xy}$. By definition of an $(\eps, \delta)$-diverse graph, we have $\E[\mathbbm{1}_{xy}] \leq 4/\sqrt{\eps n}$ for all but at most $n^{1 + \delta} < n^{3/2}$ pairs $x, y \in V(G)$. Thus,
   \[
-    \E[I] \leq n^{1 + \delta} + \frac{4}{\sqrt{cn}} \cdot n^2 \leq \frac{5}{\sqrt{c}}n^{3/2},
+    \E[I] \leq n^{1 + \delta} + \frac{4}{\sqrt{\eps n}} \cdot n^2 \leq \frac{5}{\sqrt{\eps}}n^{3/2},
   \]
-  and so there is a choice for $U$ such that $I \leq 5n^{3/2}/\sqrt{c}$. Now let $r$ be the number of vertices of distinct degrees in $H$. Let $n_k$ be the number of vertices in $H$ with degree $k$ and note that $\sum_{k} n_k = m$. By Jensen's inequality
+  and so there is a choice for $U$ such that $I \leq 5n^{3/2}/\sqrt{\eps}$. Now let $r$ be the number of vertices of distinct degrees in $H$. Let $n_k$ be the number of vertices in $H$ with degree $k$ and note that $\sum_{k} n_k = m$. By Jensen's inequality
   \[
-    5n^{3/2}/\sqrt{c} \geq I = \sum_{k} \binom{n_k}{2} \geq r\binom{\frac{1}{r}\sum_{k} n_k}{2} \geq \frac{m^2}{4r} \geq \frac{n^2}{64r}.
+    5n^{3/2}/\sqrt{\eps} \geq I = \sum_{k} \binom{n_k}{2} \geq r\binom{\frac{1}{r}\sum_{k} n_k}{2} \geq \frac{m^2}{4r} \geq \frac{n^2}{64r}.
   \]
   Rearranging yields the desired result.
 \end{proof}

@@ -1,15 +1,109 @@
 \section{Subgraphs of Quadratically Many Sizes}
 \label{sec:ch3}
 
-% \begin{definition}[$(\delta,\eps)$-rich graph]
-%   \label{def:richness}
-% \end{definition}
+Recall that Erdős and Mckay conjectured that for any Ramsey graph $G$ on $n$ vertices, there exists $\delta = \delta(C) > 0$ such that
+\[
+  \{1, 2, \ldots, \delta n^2\} \subseteq \Phi(G) \coloneqq \{e(H) : H \text{ is an induced subgraph of } G\},
+\] 
+That is to say, for any $1 \leq t \leq \delta n^2$, there exists an induced subgraph of size $t$ in $G$. In \cite{erdosmckayrandomgraph}, the conjecture is proven for random graphs, and thus it is interesting to see if Ramsey graphs also resemble random graphs in this regard. The conjecture was widely open for decades. An early major result was due to Alon, Krivelevich and Sudakov in 2003 \cite{AlonKrivelevichSudakov2003}, where they proved the conjecture with $n^{\delta}$ in place of $\delta n^2$, but little progress was made afterwards. Note that Erdős and McKay's conjecture implies that $|\Phi(G)| = \Omega(n^2)$, which is best possible asymptotically as $|\Phi(G)| \leq \binom{n}{2}$. Thus a natural relaxation of the conjecture is to ask if Ramsey graphs really have quadratically many distinct sizes of induced subgraphs. In 2017, Narayanan, Sahasrabudhe, and Tomon \cite{narayanan2017ramseygraphsinducesubgraphs} proved a near optimal bound of $|\Phi(G)| = n^{2 - o(1)}$, whose strategy was built upon the notion of diversity mentioned in Chapter \ref{sec:ch2}. The desired quadratic bound was achieved by Kwan and Sudakov a few years later by refining the strategy of Narayanan, Sahasrabudhe, and Tomon.
 
-% \begin{theorem}[Kwan--Sudakov 2020 {\cite{}}]
-%   \label{thm:ks2020}
-%   Every $C$-Ramsey graph on $n$ vertices contains induced subgraphs of
-%   $\Omega(n^2)$ distinct sizes.
-% \end{theorem}
+\begin{theorem}[Kwan--Sudakov {\cite{kwan2021ramseygraphsinducesubgraphs}}]
+  \label{thm:ks2020}
+  Every $C$-Ramsey graph on $n$ vertices contains induced subgraphs of $\Omega(n^2)$ distinct sizes.
+\end{theorem}
 
-% \begin{proof}
-% \end{proof}
+Observe that if a graph $G$ has $k$ distinct degrees, then the induced subgraphs $G - \{v\}$ for $v \in V(G)$ have at least $k$ different sizes. Thus Theorem \ref{thm:bs2007} provides a simple bound of $|\Phi(G)| = \Omega(\sqrt{n})$ for any Ramsey graph $G$. Two straightforward ideas may be used to improve this construction: we can apply our observation to many different induced subgraphs, and, instead of deleting only one vertex, we may add and remove various combinations of vertices to obtain many more distinct sizes.
+
+We will build upon the notion of diversity from Chapter \ref{sec:ch2}. Recall that a graph $G$ is $(\eps, \delta)$-diverse if for $x \in V(G)$, we have $|N(x) \Delta N(y)| < \eps n$ for at most $n^{\delta}$ vertices $y \in V(G)$. As in the proof of Theorem \ref{thm:bs2007}, the significance of diversity is that in a diverse graph, for most pairs of vertices their degrees into some random vertex set $U$ are fairly uncorrelated. In addition, we also introduce the notion of diversity for pairs of vertices. For a pair of vertices $\mathbf{v} = \{v_1, v_2\}$, let $N(\mathbf{v})$ be the multiset union of $N(v_1)$ and $N(v_2)$, and let $d(\mathbf{v}) \coloneqq |N(\mathbf{v})| = d(v_1) + d(v_2)$.
+
+\begin{definition}
+  An $n$-vertex graph $G$ is \textit{$(\eps, \delta, \alpha)_2$-diverse} if for each pair of vertices $\mathbf{x} = \{x_1, x_2\}$ in $G$ with $|N(x_1) \Delta N(x_2)| \geq \alpha n$, there are at most $n^{\delta}$ disjoint pairs of vertices $\mathbf{y} = \{y_1, y_2\}$ with $\mathbf{x} \cap \mathbf{y} = \emptyset$, such that $|N(\mathbf{x}) \Delta N(\mathbf{y})| < \eps n$.
+\end{definition}
+
+We introduce a condition slightly stronger than diversity, which would be convenient for our proof.
+
+\begin{definition}
+  \label{def:richness}
+  An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-rich} if, for $W \subseteq V(G)$ with $|W| \geq \delta n$, we have $|N(v) \cap W| \geq \eps|W|$ and $|\overline{N(v)} \cap W| \geq \eps|W|$ for all but at most $n^{\delta}$ vertices $v \in V(G)$.
+\end{definition}
+
+\begin{lemma}
+  Let an $n$-vertex graph $G$ be $(\eps, \delta)$-rich, with $\delta \leq 1/2$. Then
+  \begin{enumerate}
+    \item $G$ is $(\eps/2, \delta)$-diverse,
+    \item $G$ is $(\alpha \eps/2, \delta, \alpha)_2$-diverse for any $\alpha \geq 2\delta$,
+    \item $G$ has at most $n^{1 + \delta}$ pairs of vertices $x_1, x_2 \in V(G)$ with $|N(x_1) \Delta \overline{N(x_2)}| < (\eps/2)n$.
+  \end{enumerate}
+\end{lemma} 
+
+\begin{proof}
+  We prove each statement in order.
+  \begin{enumerate}
+    \item Note that for each $x \in V(G)$, either $|N(x)| \geq n/2$ or $|\overline{N(x)}| \geq n/2$. If $|N(x)| \geq n/2$, then richness implies that
+    \[
+      |\overline{N(y)} \cap N(x)| \geq \eps |N(x)| \geq \eps n/2
+    \]
+    for at most $n^{\delta}$ vertices $y \in V(G)$. Similarly, if $|\overline{N(x)}| \geq n/2$, then
+    \[
+      |N(y) \cap \overline{N(x)}| \geq \eps |\overline{N(x)}| \geq \eps n/2
+    \]
+    for at most $n^{\delta}$ vertices $y \in V(G)$. But then in either case,
+    \[
+      |N(x) \Delta N(y)| = |\overline{N(y)} \cap N(x)|  + |N(y) \cap \overline{N(x)}| \geq \eps n/2.
+    \]
+
+    \item Suppose not. Then there exists a pair $\mathbf{x} = \{x_1, x_2\}$ with $|N(x_1) \Delta \overline{N(x_2)}| \geq \alpha n$ and a set $Y$ of $n^{\delta}$ pairs such that $|N(\mathbf{x}) \Delta N(\mathbf{y})| < \alpha \eps n /2$ for all $\mathbf{y} \in Y$. Since
+    \[
+      |N(x_1) \Delta \overline{N(x_2)}| = |N(x_1) \cap N(x_2)|  + |\overline{N(x_1)} \cap \overline{N(x_2)}| \geq \alpha n,
+    \]
+    we have $|N(x_1) \cap N(x_2)| \geq (\alpha/2)n \geq \delta n$ or $|\overline{N(x_1)} \cap \overline{N(x_2)}| \geq (\alpha/2)n \geq \delta n$. Assume without loss of generality that the former case holds. Then for each vertex $y$ in any $\mathbf{y} \in Y$, 
+    \[
+      \left|\overline{N(y)} \cap (N(x_1) \cap N(x_2))\right| \leq |N(\mathbf{x}) \Delta N(\mathbf{y})| < \alpha \eps n /2 \leq \eps |N(x_1) \cap N(x_2)|.
+    \]
+    But then the set of all such $y$ now contradicts the $(\eps, \delta)$-rich condition.
+
+    \item We show that for each choice of $x_1 \in V(G)$, there are at most $n^{\delta}$ vertices $x_2 \in V(G)$ with $|N(x_1) \Delta \overline{N(x_2)}| < (\eps/2)n$. Since either $|N(x_1)| \geq n/2$ or $|\overline{N(x_1)}| \geq n/2$, we assume without loss of generality that $|N(x_1)| \geq n/2$. By $(\eps, \delta)$-richness, there are at most $n^{\delta}$ vertices $x_2$ with $|N(x_2) \cap N(x_1)| < \eps n/2$. For all other choices of $x_2$, 
+    \[
+      |N(x_1) \Delta \overline{N(x_2)}| \geq |N(x_1) \cap N(x_2)|  \geq (\eps/2) n.
+    \]
+    The result now follows from the fact that there are only $n$ choices of $x_1$.
+  \end{enumerate}
+
+
+  
+\end{proof}
+
+We also show the parallel result of Lemma \ref{lemma:diverse-subgraph} that every $C$-Ramsey graph contains an $(\eps, \delta)$-rich subgraph of linear size, following a similar line of argument.
+
+\begin{lemma}
+  For any $C > 0$ and $\delta \in (0, 1)$, there exists $\eps = \eps(C, \delta) > 0$ and $c = c(C, \delta) > 0$ such that every $C$-Ramsey graph $G$ on $n$-vertex contains an $(\eps, \delta)$-rich subgraph on $\Omega(n)$ vertices.
+\end{lemma}
+
+\begin{proof}
+  Let $K = K(C)$ be a large constant to be determined. Let $c \leq (\delta/4)^K$, and $\eps = 1/K$. Suppose for contradiction that any vertex subset of size at least $cn$ fails to induce an $(\eps, \delta)$-rich subgraph. We will inductively construct a sequence of disjoint vertex sets $S_1, \ldots, S_K$ of size $(cn)^\delta$, such that for all $S_i$ one of the following conditions holds:
+  \begin{enumerate}
+    \item[(i)] $d(S_i, S_j) < 4\eps$ for $j > i$,
+    \item[(ii)] $d(S_i, S_j) > 1 - 4\eps$ for $j > i$.
+  \end{enumerate}
+  Alongside, we also construct a sequence of induced subgraphs $G = G_0 \subset G_1 \subset \cdots \subset G_K$, such that $|V(G_i)| \geq (\delta/4)|V(G_{i - 1})|$ and $S_i \subseteq V(G_{i - 1})$ for all $i$.
+
+  We first show that this construction suffices. By working with $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $(cn)^{\delta}$ and $\eps = 1/K$,
+  \[
+    d(S) \leq \frac{\binom{(cn)^{\delta}}{2}}{\binom{r(cn)^{\delta}}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 4\eps \leq \frac{6}{K}.
+  \]
+  Note that $|S| \geq (cn)^{\delta}$, and so Theorem \ref{thm:ramsey-density} yields a homogeneous set $A$ in $S$ of size 
+  \[
+    |A| \geq \frac{\gamma K}{6 \log (K/6)} \log |S| \geq \frac{\gamma\delta K}{6 \log (K/6)} \log cn = \frac{\gamma\delta K}{6 \log (K/6)} \log n + o(\log n)
+  \]
+  where $\gamma > 0$ is an absolute constant given by the theorem. But then $\frac{\gamma\delta K}{6 \log (K/6)} > C$ for sufficiently large $K$, and so $|A| > C \log n$, contradiction.
+
+  We now construct the sets $S_i$ and $G_i$ inductively. Suppose $G_1, \ldots, G_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. Since $|V(G_{i - 1})| \geq (\delta/4)^{i - 1}n \geq cn$ and $G_{i - 1}$ is not $(\eps, \delta)$-rich by assumption, there exist $W_i, Y_i \subseteq V(G_{i - 1})$ with $|W_i| \geq \delta |V(G_{i - 1})|$ and $|Y_i| \geq (cn)^{\delta}$, such that for each $y \in Y_i$ we have $|N_{G_{i - 1}}(y) \cap W_i| < \eps |W_i|$ or $|\overline{N_{G_{i - 1}}(y)} \cap W_i| < \eps |W_i|$. Assume without loss of generality that $|N_{G_{i - 1}}(y) \cap W_i| < \eps |W_i|$ for half the vertices $y \in Y_i$, and let $S_i$ be the corresponding subset of $Y_i$. Put $T_i = W_i \setminus S_i$ and note that $|T_i| \geq |W_i|/2$. Partition $T_i$ into $V_i \sqcup Z_i$ where $V_i = \{v \in T_i : d(v, S_i) \leq 4 \eps\}$, and let $G[V_i]$. We need to show that $|V_i| \geq (\delta/4)|V(G_{i - 1})|$. Observe that for all $y \in S_i$,
+  \[
+    d(y, T_i) = \frac{d_{T_i}(y)}{|T_i|} < \frac{\eps |W_i|}{|W_i|/2} = 2\eps.
+  \]
+  But then
+  \[
+  4\eps|Z_i| < \sum_{v \in Z_i} d(v, S_i) \leq \frac{e(T_i, S_i)}{|S_i|} = \frac{|T_i|}{|S_i|}\sum_{y \in S_i} d(y, T_i) \leq 2\eps|T_i|,
+  \]
+  so $|Z_i| < |T_i| / 2$. It now follows that $|V_i| \geq |T_i|/2 \geq |W_i|/4 \geq (\delta/4)|V(G_{i - 1})|$. Since $d(S_i, U) < 4\eps$ for all $U \subseteq V_i$, condition (i) holds for $S_i$. In the case that $|\overline{N_{G_{i - 1}}(x_1)} \cap W_i| < \eps|W_i|$, set $V_i = \{v \in T_i : d(v, S_i) > 1 - 4\eps\}$, which yields $|V_i| \geq (\delta/4)|G_{i - 1}|$ and $S_i$ satisfying condition (ii). This completes the induction.
+\end{proof}
