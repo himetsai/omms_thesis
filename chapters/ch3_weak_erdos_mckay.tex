@@ -73,7 +73,7 @@ We introduce a condition slightly stronger than diversity, which would be conven
   
 \end{proof}
 
-We also show the parallel result of Lemma \ref{lemma:diverse-subgraph} that every $C$-Ramsey graph contains an $(\eps, \delta)$-rich subgraph of linear size, following a similar line of argument.
+We also show the parallel result of Lemma \ref{lemma:diverse-subgraph} that every $C$-Ramsey graph contains an $(\eps, \delta)$-rich subgraph of linear size, following the same line of argument.
 
 \begin{lemma}
   For any $C > 0$ and $\delta \in (0, 1)$, there exists $\eps = \eps(C, \delta) > 0$ and $c = c(C, \delta) > 0$ such that every $C$-Ramsey graph $G$ on $n$-vertex contains an $(\eps, \delta)$-rich subgraph on $\Omega(n)$ vertices.
@@ -91,11 +91,11 @@ We also show the parallel result of Lemma \ref{lemma:diverse-subgraph} that ever
   \[
     d(S) \leq \frac{\binom{(cn)^{\delta}}{2}}{\binom{r(cn)^{\delta}}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 4\eps \leq \frac{6}{K}.
   \]
-  Note that $|S| \geq (cn)^{\delta}$, and so Theorem \ref{thm:ramsey-density} yields a homogeneous set $A$ in $S$ of size 
+  Note that $|S| \geq (cn)^{\delta}$, and so Theorem \ref{thm:ramsey-density} yields a constant $\gamma > 0$ and a homogeneous set $A$ in $S$ of size 
   \[
-    |A| \geq \frac{\gamma K}{6 \log (K/6)} \log |S| \geq \frac{\gamma\delta K}{6 \log (K/6)} \log cn = \frac{\gamma\delta K}{6 \log (K/6)} \log n + o(\log n)
+    |A| \geq \frac{\gamma K}{6 \log (K/6)} \log |S| \geq \frac{\gamma\delta K}{6 \log (K/6)} \log cn = \frac{\gamma\delta K}{6 \log (K/6)} \log n + o(\log n),
   \]
-  where $\gamma > 0$ is an absolute constant given by the theorem. But then $\frac{\gamma\delta K}{6 \log (K/6)} > C$ for sufficiently large $K$, and so $|A| > C \log n$, contradiction.
+  as $n \to \infty$. But then $\frac{\gamma\delta K}{6 \log (K/6)} > C$ for sufficiently large $K$, and so $|A| > C \log n$, contradiction.
 
   We now construct the sets $S_i$ and $G_i$ inductively. Suppose $G_1, \ldots, G_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. Since $|V(G_{i - 1})| \geq (\delta/4)^{i - 1}n \geq cn$ and $G_{i - 1}$ is not $(\eps, \delta)$-rich by assumption, there exist $W_i, Y_i \subseteq V(G_{i - 1})$ with $|W_i| \geq \delta |V(G_{i - 1})|$ and $|Y_i| \geq (cn)^{\delta}$, such that for each $y \in Y_i$ we have $|N_{G_{i - 1}}(y) \cap W_i| < \eps |W_i|$ or $|\overline{N_{G_{i - 1}}(y)} \cap W_i| < \eps |W_i|$. Assume without loss of generality that $|N_{G_{i - 1}}(y) \cap W_i| < \eps |W_i|$ for half the vertices $y \in Y_i$, and let $S_i$ be the corresponding subset of $Y_i$. Put $T_i = W_i \setminus S_i$ and note that $|T_i| \geq |W_i|/2$. Partition $T_i$ into $V_i \sqcup Z_i$ where $V_i = \{v \in T_i : d(v, S_i) \leq 4 \eps\}$, and let $G[V_i]$. We need to show that $|V_i| \geq (\delta/4)|V(G_{i - 1})|$. Observe that for all $y \in S_i$,
   \[
@@ -107,3 +107,23 @@ We also show the parallel result of Lemma \ref{lemma:diverse-subgraph} that ever
   \]
   so $|Z_i| < |T_i| / 2$. It now follows that $|V_i| \geq |T_i|/2 \geq |W_i|/4 \geq (\delta/4)|V(G_{i - 1})|$. Since $d(S_i, U) < 4\eps$ for all $U \subseteq V_i$, condition (i) holds for $S_i$. In the case that $|\overline{N_{G_{i - 1}}(x_1)} \cap W_i| < \eps|W_i|$, set $V_i = \{v \in T_i : d(v, S_i) > 1 - 4\eps\}$, which yields $|V_i| \geq (\delta/4)|G_{i - 1}|$ and $S_i$ satisfying condition (ii). This completes the induction.
 \end{proof}
+
+As mentioned in the start of the chapter, we fill find many induced subgraphs $G[U]$ whose edge counts are well-separated from each other. More specifically, Theorem \ref{thm:ks2020} will be an immediate consequence of the following lemma, which we will dedicate the rest of this chapter to prove.
+
+\begin{lemma}
+  \label{lemma:well-separated-edge-counts}
+
+  Let $C > 0$. Then there exists $c = c(C) > 0$, such that for any $C$-Ramsey graph $G$ on $n$ vertices and any $m$ satisfying $cn^2 \leq m \leq 2cn^2$, there are disjoint subsets $U, W \subseteq V(G)$ with $|e(U) - m| = O(n^{3/2})$ and $|W| = O(\sqrt{n})$ such that 
+  \[
+    |\{e(U \cup Z) : Z \subseteq W\}| = \Omega(n^{3/2}).
+  \]
+\end{lemma}
+
+We first quickly show how this implies Theorem \ref{thm:ks2020}.
+
+\textbf{Proof of Theorem \ref{thm:ks2020}.} Note that for any $U, W$ given by Lemma \ref{lemma:well-separated-edge-counts},  
+\[
+  |e(U \cup W) - e(U)| = O(n^{3/2}),
+\]
+as $|W| = O(\sqrt{n})$ and each $w \in W$ has at most $n$ neighbours in $U \cup W$. But then the $\Omega(n^{3/2})$ values of $e(U \cup Z)$ for $Z \subseteq W$ are contained in an interval of length $O(n^{3/2})$ centered at $e(U)$. Partition the interval between $cn^2$ and $2cn^2$ into $\frac{c}{k}\sqrt{n}$ subintervals of length $kn^{3/2}$, for some large enough constant $k$ to be determined. Now apply Lemma \ref{lemma:diversity-degrees} to a suitable choice of $m$ in each subinterval so that the obtained values of $e(U \cup Z)$ for $Z \subseteq W$ lie in the same subinterval as $m$, which is allowed for sufficiently large $k$. Since we applied Lemma \ref{lemma:diversity-degrees} to $\Omega(\sqrt{n})$ disjoint subintervals, we obtain $\Omega(n^2)$ distinct sizes of induced subgraphs. \qed
+
