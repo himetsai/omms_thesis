@@ -9,7 +9,6 @@ Classical Ramsey Theory asks for the minimum number of vertices required to guar
 \end{definition}
 
 The existence of these numbers was proven by Ramsey \cite{ramsey1930} in 1930, but their quantitative behaviors remain largely unknown despite decades of intensive research. In particular, it is known that $R(3, 3) = 6$ and $R(4, 4) = 18$, but the exact values of $R(5, 5)$ and beyond are yet to be determined. The cornerstone of Ramsey Theory due to Erdős and Szekeres in 1935 gives the following upper bound on $R(s, t)$:
-
 \begin{theorem}[Erdős--Szekeres \cite{erdos1935some}]
   \label{thm:erdos-szekeres}
   For $s, t \geq 2$,
@@ -17,7 +16,6 @@ The existence of these numbers was proven by Ramsey \cite{ramsey1930} in 1930, b
     R(s, t) \leq \binom{s + t - 2}{s - 1}.
   \]
 \end{theorem}
-
 Following the fact that $\binom{2t - 2}{t - 1} < 2^{2t}$, we can see $R(t, t) < 4^{t}$. Very little progress had been made on this bound until the recent breakthrough of Campos, Griffiths, Morris, and Sahasrabudhe ~\cite{campos2025exponentialimprovementdiagonalramsey}, who gave the first exponential improvement since the result of Erdős and Szekeres. On the other hand, the lower bound of ramsey numbers has been even more challenging to determine. A rather basic result which already gives the best known exponents is the famous random graph construction due to Erdős in 1947, marking one of the first applications of the probabilistic method in combinatorics. Before stating the result, we first define the \textit{Erdős--Rényi random graph}.
 
 \begin{definition}
@@ -155,9 +153,9 @@ We call $e(G)$ the \textit{size} of a graph $G$. We omit all floor and ceiling s
   
 \end{proof}
 
-\subsection{Hypergeometric Anticoncentration}\label{sec:collisions}
+\subsection{The Anticoncentration Principle}\label{sec:anticoncentration}
 
-In this section, we introduce a key probabilistic mechanism which serves as a unifying thread throughout the dissertation. Throughout this dissertation we will repeatedly sample a random vertex set $U\subseteq V(G)$ and study the induced subgraph $G[U]$. A natural question in this setting is how likely is it that two vertices $x$ and $y$ have the same degree in $G[U]$?
+In this section, we introduce a key probabilistic mechanism which serves as a unifying thread throughout the dissertation. In the following chapters, we will repeatedly sample a random vertex set $U\subseteq V(G)$ and study the induced subgraph $G[U]$. A natural question in this setting is how likely is it that two vertices $x$ and $y$ have the same degree in $G[U]$?
 
 Observe that $\deg_U(x)-\deg_U(y)$ counts only vertices in the symmetric difference $D = N_G(x)\Delta N_G(y)$. Writing
 $A=N(x)\setminus N(y)$ and $B=N(y)\setminus N(x)$, we have
@@ -166,85 +164,8 @@ $A=N(x)\setminus N(y)$ and $B=N(y)\setminus N(x)$, we have
 \end{equation}
 $x$ and $y$ have the same degree in $G[U]$ precisely when $|U\cap A|=|U\cap B|$.
 
-To build intuition, suppose first that $U$ is formed by including each vertex independently with probability $p$. Then each vertex $v \in A$ independently contributes $+1$ to the difference $|U\cap A| - |U\cap B|$ with probability $p$, while each vertex $v \in B$ independently contributes $-1$ to the difference with probability $p$. The difference is thus a sum of $|D| = |A| + |B|$ independent bounded random variables. When $|D|$ is large, say $|D| \geq \eps n$, this sum has standard deviation $\Theta(\sqrt{n})$. Since $|U\cap A|-|U\cap B|$ is integer-valued, the probability that it equals any particular integer should be at most $O(1/\sqrt{n})$, by the local central limit theorem.
+Suppose first that $U$ is formed by including each vertex independently with probability $p$. Then each vertex $v \in A$ independently contributes $+1$ to the difference $|U\cap A| - |U\cap B|$ with probability $p$, while each vertex $v \in B$ independently contributes $-1$ to the difference with probability $p$. The difference is thus a sum of $|D| = |A| + |B|$ independent bounded random variables. When $|D|$ is large, say $|D| \geq \eps n$, this sum has standard deviation $\Theta(\sqrt{n})$. Since $|U\cap A|-|U\cap B|$ is integer-valued, we can show the probability that it equals any particular integer should be at most $O(1/\sqrt{n})$ via the one-dimensional Erdős-Littlewood-Offord theorem. Thus we conclude that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$. We will formalize this with greater detail in Chapter~\ref{sec:ch3}.
 
-Some of the proofs in this dissertation use this independent sampling model, while others sample $U$ as a uniformly random subset of a fixed size $m$. Fixed-size sampling introduces dependencies between the vertices of $U$, and so the difference $|U\cap A| - |U\cap B|$ is no longer a sum of independent random variables, but instead follows a hypergeometric distribution. The following proposition shows that the $O(1/\sqrt{n})$ bound still holds in this case.
+If instead $U$ is a uniformly random subset of a fixed size~$m$, the vertices of $U$ are no longer independent. Nevertheless, conditioning on $k=|U\cap D|$, we may observe that, given~$k$, the split of these $k$ elements between $A$ and $B$ follows a hypergeometric distribution. Stirling's approximation applied to the hypergeometric mode probability then yields the same $O(1/\sqrt{n})$ bound. We will carry out this calculation in detail in Chapter~\ref{sec:ch2}.
 
-\begin{proposition}\label{prop:hyp-anti}
-  For any $\delta>0$ there exists a constant $c = c(\delta) > 0$ such that the
-  following holds. Let $A$ and $B$ be disjoint subsets of
-  $[n]$ with $|A|+|B|\ge\delta n$, and let $U$ be a
-  uniformly random $k$-element subset of $[n]$ with
-  $\delta n\le k\le(1-\delta)n$.  Then
-  \[
-    \max_{r\in\mathbb{Z}}\prob\bigl[|U\cap B|-|U\cap A|=r\bigr]
-    \;\le\;\frac{c}{\sqrt{n}}.
-  \]
-\end{proposition}
-
-\begin{proof}
-  Write $a=|A|$, $b=|B|$, and $s=a+b\ge\delta n$. Let $X_a=|U\cap A|$, $X_b=|U\cap B|$, and $X=X_a+X_b=|U\cap(A\cup B)|$. By Proposition~\ref{prop:hypergeometric},
-  \[
-    \prob \left[|X-\E[X]| > \frac{\delta s}{10}\right] \leq 2\exp(-\delta^3 n/50) = o(1/\sqrt{n})
-  \]
-  It therefore suffices to bound the point
-  probability conditional on $X$ lying in the ``bulk'' interval $\mathcal{I}:=[\E[X]-\delta s/10,\E[X]+\delta s/10]$. Since $\E[X]=ks/n\in[\delta s,\,(1-\delta)s]$, any $\ell\in\mathcal{I}$ satisfies $\frac{9\delta}{10}s\le\ell \le(1-\frac{9\delta}{10})s$.
- 
-  Conditional on $X=\ell$, the pair $(X_a,X_b)$ records how the $\ell$ sampled elements of $A\cup B$ are distributed between $A$ and $B$. Its conditional distribution is $X_a\sim\mathrm{Hyp}(s,\,a,\,\ell)$, and we need $X_b-X_a=\ell-2X_a$ to equal some target~$r$. So
-  \[
-    \prob[X_b-X_a=r\mid X=\ell] = \prob[X_a=\frac{\ell-r}{2}] = \frac{\binom{a}{\frac{\ell-r}{2}}\binom{b}{\frac{\ell+r}{2}}}{\binom{s}{\ell}},
-  \]
-  whenever $(\ell\pm r)/2$ are non-negative integers, and zero otherwise. The ratio $\binom{a}{j}\binom{b}{\ell-j}/\binom{s}{\ell}$ is maximised over $j$ at $j^*=\lfloor(a+1)(\ell+1)/(s+2)\rfloor$ (the mode of the $\mathrm{Hyp}(s,a,\ell)$ distribution). By Stirling's approximation
-  $m!=\sqrt{2\pi m}\,(m/e)^m\,(1+O(1/m))$, a standard calculation
-  yields
-  \begin{equation}\label{eq:stirling-mode}
-    \frac{\binom{a}{j^*}\binom{b}{\ell-j^*}}{\binom{s}{\ell}} = (1+O(1/s))\sqrt{\frac{s}{2\pi p_a (1-p_a) \ell (s-\ell)}},
-  \end{equation}
-  where $p_a=a/s$. Since $\ell\in\mathcal{I}$ and $a,b\ge 1$, we
-  have $p_a(1-p_a)\ge\min(a,b)/s$ and $\ell(s-\ell)\ge c s^2$,
-  so the right-hand side is $O(1/\sqrt{s})=O(1/\sqrt{n})$.
-  Adding the negligible tail contribution yields the desired bound.
-\end{proof}
-
-% \begin{remark}[The Stirling ratio as a local central limit theorem]
-%   \label{rem:local-clt}
-%   The bound~\eqref{eq:stirling-mode} is the local CLT in disguise.
-%   The hypergeometric distribution $\mathrm{Hyp}(s,a,\ell)$ has mean
-%   $\mu=\ell a/s$ and variance
-%   \[
-%     \sigma^2
-%     \;=\;\frac{\ell\,a\,b\,(s-\ell)}{s^2(s-1)}
-%     \;=\;\Theta_\delta(s).
-%   \]
-%   Just as in the independent case, the local CLT for the
-%   hypergeometric (see~\cite{Feller}, Chapter~II) gives
-%   \[
-%     \Pr[X_a=j]\;=\;\frac{1}{\sigma}\,
-%     \varphi\!\left(\frac{j-\mu}{\sigma}\right)+O(1/\sigma^2)
-%   \]
-%   uniformly over integers $j$ with $|j-\mu|\le C\sigma$.  At the mode
-%   $j^*\approx\mu$, this evaluates to
-%   $\approx 1/(\sigma\sqrt{2\pi})$, which is exactly~\eqref{eq:stirling-mode}.
-%   The Stirling calculation in the proof above therefore establishes
-%   this local CLT directly, via combinatorial identities rather than
-%   the Fourier-analytic method used in the general theory.
- 
-%   This explains why the $O(1/\sqrt{N})$ bound is so robust.  It
-%   depends only on the standard deviation being $\Theta(\sqrt{N})$ and
-%   the random variable taking integer values, not on the fine
-%   arithmetic of $|A|$ and~$|B|$, and not on whether the sampling is
-%   independent or fixed-size.
-% \end{remark}
-
-We will apply Proposition~\ref{prop:hyp-anti} repeatedly throughout
-this dissertation.  In Chapter~\ref{sec:ch2}, the sets $A$ and $B$ will
-be the two halves of the symmetric difference $N(x)\Delta N(y)$ as
-in \eqref{eq:deg-diff}, and the proposition will bound the
-probability that two vertices share a degree in a random induced
-subgraph.  In Chapter~\ref{sec:ch3}, the same mechanism controls
-collision probabilities for linear statistics of random partition
-layers.  The resolution of the Erdős--McKay conjecture in
-Chapter \ref{sec:ch4} requires a substantially more powerful approach
-via Fourier analysis, but the underlying principle remains:
-when an integer-valued random variable has standard deviation
-$\Theta(\sqrt{n})$, its point probabilities are $O(1/\sqrt{n})$.
+In particular, the $O(1/\sqrt{n})$ bound depends only on $|D|$ being $\Theta(n)$ and the standard deviation of $\deg_U(x)-\deg_U(y)$ being $\Theta(\sqrt{n})$, not on the sampling method of $U$ or the exact values of $|A|$ and $|B|$. The theorems in the following chapters will rely on this principle. In Chapter~\ref{sec:ch2}, it bounds the probability that two vertices share a degree in a random induced subgraph, which leads to $\Omega(\sqrt{n})$ distinct degrees. In Chapter~\ref{sec:ch3}, the same principle bounds the probability that two vertices have equal degree in a random induced subgraph, which is a key step in producing $\Omega(n^2)$ distinct subgraph sizes. The resolution of the Erd\H{o}s--McKay conjecture in Chapter~\ref{sec:ch4} requires a substantially more powerful approach via Fourier analysis, but the underlying idea remains: when an integer-valued random variable has large standard deviation, its point probabilities are small.
