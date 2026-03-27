@@ -89,16 +89,50 @@ As mentioned above, it remains to show that every Ramsey graph contains a divers
   for some absolute constant $\gamma > 0$ given by the theorem. But then $\frac{\gamma \delta K}{10\log(K/10)} > C$ for sufficiently large $K$, and so $|A| > C\log n$, contradiction.
   
   We now construct the sets $S_i$ and $G_i$ inductively. Suppose $G_1, \ldots, G_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. By induction, $|G_{i - 1}| \geq 8^{1 - i}|G| \geq cn$. Note that $G_{i - 1}$ is not $(\eps, \delta)$-diverse by assumption, so there exists a vertex $x \in V(G_{i - 1})$ and a set $S_i \subseteq G_{i - 1}$ of size $(cn)^{\delta}$ such that $|N_{G_{i - 1}}(x) \Delta N_{G_{i - 1}}(y)| < \eps|G_{i - 1}|$ for $y \in S_i$. Let $T_i = V(G_{i - 1}) \setminus S_i$. Since $(cn)^\delta \leq cn/2$ for large enough $n$, we have $|T_i| \geq |G_{i - 1}|/2$. 
-  
-  Suppose $|\overline{N}_{T_i}(x)| \geq |T_i|/2$. Then for $y \in S_i$,
+
+  We consider two cases. In the first case, suppose $|\overline{N_{T_i}}(x)| \geq |T_i|/2$. For $y \in S_i$,
   \[
-    d(y, \overline{N}_{T_i}(x)) = \frac{|N_{T_i}(y) \cap \overline{N}_{T_i}(x)|}{|N_{T_i}(x)|} < \frac{\eps|G_{i - 1}|}{|T_i|/2} \leq 4\eps.
+    |N_{T_i}(y) \cap \overline{N}_{T_i}(x)| \leq |N_{T_i}(x) \Delta N_{T_i}(y)| < \eps|V(G_{i - 1})|,
   \]
-  Partition $\overline{N}_{T_i}(x)$ into $V_i \sqcup Z_i$, where $V_i = \{v \in \overline{N}_{T_i}(x) : d(v, S_i) < 8\eps\}$. Notice
+  and so
   \[
-    8\eps|Z_i| \leq \sum_{v \in Z_i} d(v, S_i) \leq \frac{e(\overline{N}_{T_i}(x), S_i)}{|S_i|} = \frac{|\overline{N}_{T_i}(x)|}{|S_i|}\sum_{y \in S_i} d(y, \overline{N}_{T_i}(x)) \leq 4\eps|\overline{N}_{T_i}(x)|,
+    d(y, \overline{N}_{T_i}(x)) = \frac{|N_{T_i}(y) \cap \overline{N}_{T_i}(x)|}{|N_{T_i}(x)|} < \frac{\eps|V(G_{i - 1})|}{|T_i|/2} \leq 4\eps.
   \]
-  so $|W_i| \leq |\overline{N}_{T_i}(x)|/2$. But then $|V_i| \geq |\overline{N}_{T_i}(x)|/2 \geq |T_i|/4 \geq |G_{i - 1}|/8$. Set $G_i = G[V_i]$. Since $d(S_i, U) < 8\eps$ for all $U \subseteq V_i$, condition (i) holds for $S_i$. In the case that $|N_{T_i}(x)| \geq |T_i|/2$, the same argument applies by setting $V_i = \{v \in N_{T_i}(x) : d(v, S_i) > 1 - 8\eps\}$, which yields $|G_i| \geq |G_{i - 1}|/8$ and $S_i$ satisfying condition (ii). This completes the induction.
+  Partition $\overline{N}_{T_i}(x)$ into $V_i \sqcup Z_i$, where $V_i = \{v \in \overline{N}_{T_i}(x) : d(v, S_i) < 8\eps\}$. We double count $e(\overline{N}_{T_i}(x), S_i)/|S_i|$. Since $d(v, S_i) \geq 8\eps$ for $v \in Z_i$,
+  \[
+    \frac{e(\overline{N}_{T_i}(x), S_i)}{|S_i|} = \sum_{v \in \overline{N}_{T_i}(x)} \frac{e(v, S_i)}{|S_i|} = \sum_{v \in \overline{N}_{T_i}(x)} d(v, S_i) \geq \sum_{v \in Z_i} d(v, S_i) \geq 8\eps|Z_i|.
+  \]
+  On the other hand, since we showed $d(y, \overline{N}_{T_i}(x)) < 4\eps$ for $y \in S_i$,
+  \[
+    \frac{e(\overline{N}_{T_i}(x), S_i)}{|S_i|} = \frac{1}{|S_i|} \sum_{y \in S_i} e(y, \overline{N}_{T_i}(x)) = \frac{|\overline{N}_{T_i}(x)|}{|S_i|}\sum_{y \in S_i} d(y, \overline{N}_{T_i}(x)) \leq 4\eps|\overline{N}_{T_i}(x)|.
+  \]
+  Combining both inequalities yields $|Z_i| \leq |\overline{N}_{T_i}(x)|/2$. It follows that
+  \[
+    |V_i| \geq \frac{|\overline{N}_{T_i}(x)|}{2} \geq \frac{|T_i|}{4} \geq \frac{|V(G_{i - 1})|}{8}.
+  \]
+  Recall that $d(S_i, U) < 8\eps$ for all $U \subseteq V_i$. Setting $G_i = G[V_i]$ thus satisfy $|V(G_i)| \geq |V(G_{i - 1})|/8$ and condition (i) for $S_i$.
+
+  The case for $|N_{T_i}(x)| \geq |T_i|/2$ follows the same argument. Since any vertex in $N_{T_i}(x)$ that is not a neighbor of $y$ lies in $N_{T_i}(x) \setminus N_{T_i}(y) \subseteq N_{T_i}(x) \Delta N_{T_i}(y)$, we have
+  \[
+    |N_{T_i}(x) \cap N_{T_i}(y)| \geq |N_{T_i}(x)| - |N_{T_i}(x) \Delta N_{T_i}(y)| < |N_{T_i}(x)| - \eps|V(G_{i - 1})|,
+  \]
+  and so
+  \[
+    d(y, N_{T_i}(x)) = \frac{|N_{T_i}(y) \cap N_{T_i}(x)|}{|N_{T_i}(x)|} > \frac{|N_{T_i}(x)| \! - \! \eps|V(G_{i - 1})|}{|N_{T_i}(x)|} \geq 1 - \frac{\eps|V(G_{i - 1})|}{|T_i|/2} \geq 1 - 4\eps.
+  \]
+  Partition $N_{T_i}(x)$ into $V_i \sqcup Z_i$, where $V_i = \{v \in N_{T_i}(x) : d(v, S_i) > 1 - 8\eps\}$. Then for $v \in Z_i$, we have $1 - d(v, S_i) \geq 8\eps$, so
+  \[
+    8\eps|Z_i| \leq \sum_{v \in Z_i} (1 - d(v, S_i)) \leq \sum_{v \in N_{T_i}(x)} (1 - d(v, S_i)).
+  \]
+  On the other hand, since we showed $d(y, N_{T_i}(x)) > 1 - 4\eps$ for $y \in S_i$.
+  \[
+    \frac{e(N_{T_i}(x), S_i)}{|S_i|} = \frac{|N_{T_i}(x)|}{|S_i|}\sum_{y \in S_i} d(y, N_{T_i}(x)) \geq (1 - 4\eps)|N_{T_i}(x)|,
+  \]
+  But then
+  \[
+    \sum_{v \in N_{T_i}(x)} (1 - d(v, S_i)) = |N_{T_i}(x)| - \sum_{v \in N_{T_i}(x)} d(v, S_i) \geq 4\eps|N_{T_i}(x)|.
+  \]
+  Combining both inequalities on $\sum (1 - d(v, S_i))$ yields $|Z_i| \leq |N_{T_i}(x)|/2$, and so $|V_i| \geq \geq |V(G_{i - 1})|/8$. Note that $d(S_i, U) > 1 - 8\eps$ for all $U \subseteq V_i$. Setting $G_i = G[V_i]$ thus satisfies $|V(G_i)| \geq |V(G_{i - 1})|/8$ and condition (ii) for $S_i$. This completes the induction.
 \end{proof}
 
 Theorem \ref{thm:bs2007} follows immediately from Lemmas \ref{lemma:diversity-degrees} and \ref{lemma:diverse-subgraph}.
