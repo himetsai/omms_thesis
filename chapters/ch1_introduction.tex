@@ -121,7 +121,7 @@ This dissertation will start by studying the result of Bukh and Sudakov~\cite{BU
 
 % Another research direction is to consider whether forbidding certain induced subgraphs could force homogeneous sets beyond logarithmic size. Erdős and Hajnal famously conjectured that for any graph $H$, if a graph $G$ does not contain $H$ as an induced subgraph, then $G$ contains a homogeneous set of size $|G|^{\eta}$ for some $\eta = \eta(H) > 0$.  
 
-\subsection{Notations and Tools}
+\subsection{Notations and tools}
 
 We call $e(G)$ the \textit{size} of a graph $G$. We omit all floor and ceiling signs when they are not crucial for simplicity.
 
@@ -153,9 +153,9 @@ We call $e(G)$ the \textit{size} of a graph $G$. We omit all floor and ceiling s
   
 \end{proof}
 
-\subsection{The Anticoncentration Principle}\label{sec:anticoncentration}
+\subsection{The anticoncentration principle}\label{sec:anticoncentration}
 
-Before diving into the core results, we introduce a key probabilistic mechanism which serves as a unifying thread throughout the dissertation. In the following chapters, we will repeatedly sample a random vertex set $U\subseteq V(G)$ and study the induced subgraph $G[U]$. One natural question to ask in this setting is how likely are two vertices $x$ and $y$ to have the same degree in $G[U]$?
+Before diving into the core results, we introduce a key probabilistic mechanism which serves as a unifying thread throughout the dissertation. In the following chapters, we will repeatedly sample a random vertex set $U\subseteq V(G)$ and study the induced subgraph $G[U]$. One natural question to ask in this setting is how likely are two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?
 
 Observe that $\deg_U(x)-\deg_U(y)$ counts only vertices in the symmetric difference $D = N_G(x)\Delta N_G(y)$. Writing
 $A=N(x)\setminus N(y)$ and $B=N(y)\setminus N(x)$, we have
