@@ -153,6 +153,19 @@ We call $e(G)$ the \textit{size} of a graph $G$. We omit all floor and ceiling s
   
 \end{proof}
 
+\begin{definition}[Littlewood-Offord type random variable]
+  \label{def:littlewood-offord-type}
+  A random variable $X$ is of \textit{$(n, p)$-Littlewood-Offord type} if it is of the form $X = a_1 \xi_1 + a_2 \xi_2 + \cdots + a_n \xi_n + C$, where $a_1, a_2, \ldots, a_n \in \Z \setminus \{0\}$ and $C \in \Z$ are fixed and $\xi_1, \xi_2, \ldots, \xi_n$ are independent Bernoulli random variables with parameter $p$.
+\end{definition}
+
+\begin{proposition}[Littlewood-Offord theorem]
+  \label{prop:littlewood-offord}
+  Let $p > 0$ be constant and $X$ be a random variable of $(n, p)$-Littlewood-Offord type. Then for any $t \in \Z$, 
+  \[
+    \prob[X = t] = O(1/\sqrt{n}).
+  \]
+\end{proposition}
+
 \subsection{The anticoncentration principle}\label{sec:anticoncentration}
 
 Before diving into the core results, we introduce a key probabilistic mechanism which serves as a unifying thread throughout the dissertation. In the following chapters, we will repeatedly sample a random vertex set $U\subseteq V(G)$ and study the induced subgraph $G[U]$. One natural question to ask in this setting is how likely are two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?

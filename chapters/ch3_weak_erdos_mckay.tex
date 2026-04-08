@@ -364,11 +364,49 @@ Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_
       &= M\sqrt{n} \cdot \exp(-\Omega(M^2)) + \sum_{t = M\sqrt{n}}^{\infty} \exp(-\Omega(t^2/n)) \\
       &= \sqrt{n} \cdot \exp(-\Omega(M^2)),
     \end{align*}
-    uniformly over $M$. It now follows from Markov's inequality that
+    uniformly over $M$. It now follows from Markov's inequality that, for large enough $M$,
     \[
-     \prob\left[\sum_{\substack{i \,:\, |\Delta_{k,i}| \ge M\sqrt{n}}} |\Delta_{k,i}| > \beta n\right] \leq \frac{\sum_{i = 1}^{|\mathbf{S}|} \E\left[|\Delta_{k, i}| \cdot \mathbbm{1}_{|\Delta_{k, i}| \geq M\sqrt{n}}\right]}{\beta n} \leq \frac{e^{-\Omega(M^2)}}{\beta} < 0.99,
+     \prob\left[\sum_{\substack{i \,:\, |\Delta_{k,i}| \ge M\sqrt{n}}} |\Delta_{k,i}| > \beta n\right] \leq \frac{\sum_{i = 1}^{|\mathbf{S}|} \E\left[|\Delta_{k, i}| \cdot \mathbbm{1}_{|\Delta_{k, i}| \geq M\sqrt{n}}\right]}{\beta n} \leq \frac{e^{-\Omega(M^2)}}{\beta} < 0.99.
     \]
-    for large enough $M$.
+    \item[1.] For each $\mathbf{x}, \mathbf{y} \in \binom{\mathbf{X}}{2}$, the difference
+    \[
+      d_{U}(\mathbf{x}) - d_{U}(\mathbf{y}) = \sum_{u \in N_U(\mathbf{x})} \mathbbm{1}_{u \in U} - \sum_{u \in N_U(\mathbf{y})} \mathbbm{1}_{u \in U} = \sum_{u \in N_U(\mathbf{x}) \Delta N_U(\mathbf{y})} a_u \mathbbm{1}_{u \in U}
+    \]
+    with $a_u \in \{1, -1\}$. Thus for each $k, i$, the random variable $d_{U_{k, i}}(\mathbf{x}) - d_{U_{k, i}}(\mathbf{y})$ is of $(|N_U(\mathbf{x}) \Delta N_U(\mathbf{y})|, 1/2)$-Littlewood-Offord type, as it is simply translation of $d_{U}(\mathbf{x}) - d_{U}(\mathbf{y})$ by some deterministic value. It follows from Property~4 of Lemma~\ref{lem:construction} and Littlewood-Offord theorem (Proposition~\ref{prop:littlewood-offord}) that 
+    \[
+      \prob[d_{U_{k, i}}(\mathbf{x}) = d_{U_{k, i}}(\mathbf{y})] = O(1/\sqrt{n}).
+    \]
+    Let $H_{k, i}$ be the graph on $\mathbf{X}$ with edges $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{X}}{2}$ such that $d_{U_{k, i}}(\mathbf{x}) = d_{U_{k, i}}(\mathbf{y})$, so we have $\E[e(H_{k, i})] = |\mathbf{X}|^2 \cdot O(1/\sqrt{n}) = O(\sqrt{n})$. By Markov's inequality, for large enough $n$,
+    \[
+      \prob[e(H_{k, i}) = O(\sqrt{n})] \geq 1 - \frac{\E[e(H_{k, i})]}{\omega(\sqrt{n})} \geq 1 - \frac{\beta}{400M},
+    \]
+    in which case Turán's theorem (Proposition~\ref{prop:turan}) yields an independent set $\mathbf{Y}_{k, i}$ of size $n/(2O(\sqrt{n}) + \sqrt{n}) = 2\gamma \sqrt{n}$, for some constant $\gamma = \gamma(\beta, M) > 0$. In particular, $d_{U_{k, i}}(\mathbf{x})$ is distinct for $\mathbf{x} \in \mathbf{Y}_{k, i}$. The expected proportion of values of $i$ for which this fails to occur is $\beta/400M$, and by Markov's inequality again, it fails only for $\beta/2M$ proportion of values of $i$ with probability at least $1 - (\beta/400M)/(\beta/2M) = 0.995$, in which case put $\mathcal{I}_k$ as the set of $i$ that succeeds.
+
+    By Property~2 of Lemma~\ref{lem:construction} we have $\E[d_U(\mathbf{x})] = d/2 + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{X}$. Since $d_U(\mathbf{x})$ follows a binomial distribution with parameters $O(n)$ and $1/2$, we also have $\Var(d_U(\mathbf{x})) = O(n)$. Note that by triangle inequality, 
+    \[
+      |d_U(\mathbf{x}) - d/2| \leq |d_U(\mathbf{x}) - \E[d_U(\mathbf{x})]| + O(\sqrt{n}),
+    \]
+    and so for sufficiently large $Q$, Chebyshev's inequality yields
+    \[
+      \prob\left[|d_U(\mathbf{x}) - d/2| > Q\sqrt{n}\right] \leq \frac{\Var(d_U(\mathbf{x}))}{Q^2 n} = \frac{O(1)}{Q^2} < \frac{\gamma}{200}.
+    \]
+    Let $\mathbf{Y}$ be the set of all $\mathbf{x} \in \mathbf{X}$ such that $|d_U(\mathbf{x}) - d/2| \leq Q\sqrt{n}$. Then each $\mathbf{x} \in \mathbf{X}$ is not present in $\mathbf{Y}$ with probability less than $\gamma/200$. By Markov's inequality,
+    \[
+      \prob\left[|\mathbf{Y}| \geq (1 - \gamma)|\mathbf{X}|\right] = 1 - \prob\left[|\mathbf{X} \setminus \mathbf{Y}| \geq \gamma|\mathbf{X}|\right] \geq 1 - \frac{\gamma|\mathbf{X}|}{200\gamma |\mathbf{X}|} = 0.995.
+    \]
+    In other words, with probability at least $0.995$, there exists large enough constant $Q$ and a set $\mathbf{Y} \subseteq \mathbf{X}$ of size at least $(1 - \gamma)|\mathbf{X}|$ whose elements all lie in the interval $[d/2 - Q\sqrt{n},\; d/2 + Q\sqrt{n}]$.
+
+    By the union bound, both above events occur with probability at least $0.99$, in which case we take $\mathbf{X}_{k, i} = \mathbf{Y}_{k, i} \cap \mathbf{Y}$ for $i \in \mathcal{I}_k$. Since $|\mathbf{Y}_{k, i}| \geq 2\gamma \sqrt{n}$ and $|\mathbf{Y}| \geq (1 - \gamma)|\mathbf{X}|$, we have $|\mathbf{X}_{k, i}| \geq \gamma \sqrt{n}$. This proves Property~1.
+
+    \item[2.] Since
+    \[
+      e_{k, i} = e(\mathbf{Z}_{k, i}) + e(U, \mathbf{Z}_{k, i}) = e(\mathbf{Z}_{k, i}) + \sum_{u \in U_0} \mathbbm{1}_{u \in U} \cdot d_{\mathbf{Z}_{k, i}}(u),
+    \]
+    the random variable $e_{k, i}$ is of $(O(n), 1/2)$-Littlewood-Offord type with coefficients $d_{\mathbf{Z}_{k, i}}(u) = O(\sqrt{n})$. It follows that $\Var(e_{k, 0}) = O(n^2)$ and by Chebyshev's inequality,
+    \[
+      \prob\left[|e_{k, 0} - \E[e_{k, 0}]| \leq Qn\right] \geq 1 - \frac{\Var(e_{k, 0})}{Q^2 n^2} = 0.99,
+    \]
+    for large enough $Q$ (note that enlarging $Q$ does not fail Property~1).
   \end{enumerate}
 \end{proof}
 
