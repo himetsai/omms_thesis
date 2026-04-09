@@ -178,7 +178,7 @@ combines the structural tools developed in Section~3.1 with the anticoncentratio
 
 \begin{lemma}
 \label{lem:construction}
-For any $C > 0$ there exists $c = c(C) > 0$ such that the following holds. For any $C$-Ramsey graph $G$ on $n$ vertices and any $m$ satisfying $cn^2 \le m \le 2cn^2$, there is a vertex set $U_0 \subseteq V(G)$ with $|e(U_0) - 4m| = O(n^{3/2})$ and sets $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$ of size $\Theta(\sqrt{n})$ such that
+For any $C > 0$ there exists $c = c(C) > 0$ such that the following holds. For any $C$-Ramsey graph $G$ on $n$ vertices and any $m$ satisfying $cn^2 \le m \le 2cn^2$, there is a vertex set $U_0 \subseteq V(G)$ with $|e(U_0) - 4m| = O(n^{3/2})$, a constant $c' = c'(C) > 0$, and sets $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$ of size $c'\sqrt{n}$ such that
 \begin{enumerate}
     \item either $U_0, \mathbf{S}, \mathbf{T}, \mathbf{X} \subseteq V(G)$ are disjoint sets of
         vertices, or $\mathbf{S}, \mathbf{T}, \mathbf{X} \subseteq \binom{V(G)}{2}$ are sets of
@@ -188,7 +188,7 @@ For any $C > 0$ there exists $c = c(C) > 0$ such that the following holds. For a
         $d_{U_0}(\mathbf{x}) = d + O(\sqrt{n})$ for each
         $\mathbf{x} \in \mathbf{S} \cup \mathbf{T} \cup \mathbf{X}$,
     \item $\min_{\mathbf{x} \in \mathbf{T}} d_{U_0}(\mathbf{x}) -
-        \max_{\mathbf{x} \in \mathbf{S}} d_{U_0}(\mathbf{x}) \geq 8c'\sqrt{n}$ for some constant $c' > 0$,
+        \max_{\mathbf{x} \in \mathbf{S}} d_{U_0}(\mathbf{x}) \geq 8c'\sqrt{n}$,
     \item for each $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{X}}{2}$, we
         have $|N_{U_0}(\mathbf{x}) \Delta N_{U_0}(\mathbf{y})|
         = \Omega(n)$.
@@ -273,7 +273,7 @@ By Corollary~1.4 and the Ramsey property, $e(G) \ge 800cn^2$ for some constant $
   \end{enumerate}
 \end{proof}
 
-Fix an outcome of $U_0$ for which all five events hold. Let $\mathbf{A}' = \mathbf{Q} \cap \mathbf{R}$, and note that $|\mathbf{A}'| \geq |\mathbf{A}|/3 = \Omega(\sqrt{n})$. It remains to obtain $\mathbf{S}$, $\mathbf{T}$, and $\mathbf{X}$ from $\mathbf{A}'$ that satisfy Properties~2--4. Consider the graph on $\mathbf{A}'$ where $\mathbf{x}$ and $\mathbf{y}$ are adjacent if and only if $d_{U_0}(\mathbf{x}) = d_{U_0}(\mathbf{y})$. By Turán Theorem (Proposition~\ref{prop:turan}), there is an independent set $\mathbf{W} \subseteq \mathbf{A}'$ of size $\Omega(\sqrt{n})$, and note that $\mathbf{W}$ has distinct degrees into $U_0$. Partition $\mathbf{W}$ into three equal parts by the degree $d_{U_0}(\mathbf{x})$ into $U_0$, and let $\mathbf{T}$ be the top third, $\mathbf{S}$ be the bottom third, and $\mathbf{X}$ be the middle third. Since $\mathbf{W}$ has distinct degrees and $|\mathbf{X}| = \Omega(\sqrt{n})$, Property~3 holds. Since $\mathbf{X} \subseteq \mathbf{A}$, Property~4 holds. This completes the proof.
+Fix an outcome of $U_0$ for which all five events hold. Let $\mathbf{A}' = \mathbf{Q} \cap \mathbf{R}$, and note that $|\mathbf{A}'| \geq |\mathbf{A}|/3 = \Omega(\sqrt{n})$. It remains to obtain $\mathbf{S}$, $\mathbf{T}$, and $\mathbf{X}$ from $\mathbf{A}'$ that satisfy Properties~2--4. Consider the graph on $\mathbf{A}'$ where $\mathbf{x}$ and $\mathbf{y}$ are adjacent if and only if $d_{U_0}(\mathbf{x}) = d_{U_0}(\mathbf{y})$. By Turán Theorem (Proposition~\ref{prop:turan}), there is an independent set $\mathbf{W} \subseteq \mathbf{A}'$ of size $\Omega(\sqrt{n})$, and note that $\mathbf{W}$ has distinct degrees into $U_0$. Partition $\mathbf{W}$ into three equal parts by the degree $d_{U_0}(\mathbf{x})$ into $U_0$, and let $\mathbf{T}$ be the top third, $\mathbf{S}$ be the bottom third, and $\mathbf{X}$ be the middle third. Since $\mathbf{W}$ has distinct degrees and $|\mathbf{X}| = \Omega(\sqrt{n})$, we may find constant $c'$ that satisfies Property~3. Since $\mathbf{X} \subseteq \mathbf{A}$, Property~4 holds. Trimming the sizes of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ to $c'\sqrt{n}$ completes the proof.
 \end{proof}
 
 
@@ -292,7 +292,11 @@ contrast to the hypergeometric case used in Lemma~2.2.
 \subsection{The double-exposure argument}
 \label{sec:double-exposure}
 
-Given $\mathbf{S}, \mathbf{T}$ from Lemma~\ref{lem:construction}, define $\mathbf{Z}_{k, i} \subseteq \mathbf{S} \sqcup \mathbf{T}$ by taking $k - i$ elements from $\mathbf{S}$ and $i$ elements from $\mathbf{T}$. By Property 2 and 3 of Lemma~\ref{lem:construction}, the values of $e(U_0, \mathbf{Z}_{k, i}) \coloneqq \sum_{\mathbf{z} \in \mathbf{Z}_{k, i}} d_{U_0}(\mathbf{z})$ are evenly spaced by $\Theta(\sqrt{n})$ as $(k, i)$ vary lexicographically, which already forms $\Omega(n)$ distinct values of $e(U_0 \cup \mathbf{Z}_{k, i})$. What remains is to fill the $\Theta(\sqrt{n})$ gaps between each $e(U_0 \cup \mathbf{Z}_{k, i})$ with $\mathbf{X}$ via the \textit{double-exposure} technique while maintaining the nice gap struture of the subsets $\mathbf{Z}_{k, i}$. More specifically, we sample $U$ from $U_0$ such that the values $e(U \cup \mathbf{Z}_{k, i} \cup \{\mathbf{x}\})$ are distinct as $\mathbf{Z}_{k, i} \subseteq \mathbf{S} \sqcup \mathbf{T}$ and $\mathbf{x} \in \mathbf{X}$ vary. Define $U_{k,i} \coloneqq U \cup \mathbf{Z}_{k,i}$ and $e_{k, i} \coloneqq e(U_{k, i}) - e(U) = e(\mathbf{Z}_{k,0}) + e(\mathbf{Z}_{k,0}, U)$. There are four things we need to ensure: 
+Given $\mathbf{S}, \mathbf{T}, c'$ from Lemma~\ref{lem:construction}, fix an ordering on $\mathbf{S}$ and $\mathbf{T}$ and define
+\[
+  \mathcal{P} \coloneqq \{(k, i) : c'\sqrt{n} \leq k \leq 2c'\sqrt{n} \text{ and } 0 \leq i \leq c'\sqrt{n}\}.
+\]
+For $(k, i) \in \mathcal{P}$, define $\mathbf{Z}_{k, i} \subseteq \mathbf{S} \sqcup \mathbf{T}$ by taking the first $k - i$ elements from $\mathbf{S}$ and the first $i$ elements from $\mathbf{T}$. By Property 2 and 3 of Lemma~\ref{lem:construction}, the values of $e(U_0, \mathbf{Z}_{k, i}) \coloneqq \sum_{\mathbf{z} \in \mathbf{Z}_{k, i}} d_{U_0}(\mathbf{z})$ are evenly spaced by $\Theta(\sqrt{n})$ as $(k, i)$ vary lexicographically, which already forms $\Omega(n)$ distinct values of $e(U_0 \cup \mathbf{Z}_{k, i})$. What remains is to fill the $\Theta(\sqrt{n})$ gaps between each $e(U_0 \cup \mathbf{Z}_{k, i})$ with $\mathbf{X}$ via the \textit{double-exposure} technique while maintaining the nice gap struture of the subsets $\mathbf{Z}_{k, i}$. More specifically, we sample $U$ from $U_0$ such that the values $e(U \cup \mathbf{Z}_{k, i} \cup \{\mathbf{x}\})$ are distinct as $\mathbf{Z}_{k, i} \subseteq \mathbf{S} \sqcup \mathbf{T}$ and $\mathbf{x} \in \mathbf{X}$ vary. Define $U_{k,i} \coloneqq U \cup \mathbf{Z}_{k,i}$ and $e_{k, i} \coloneqq e(U_{k, i}) - e(U) = e(\mathbf{Z}_{k,0}) + e(\mathbf{Z}_{k,0}, U)$. There are four things we need to ensure: 
 \begin{enumerate}
   \item \emph{Degree distinctness in $\mathbf{X}$.} For most pairs $(k, i)$, the elements of $\mathbf{X}$ should have $\Omega(\sqrt{n})$ pairwise distinct degrees into $U_{k,i}$, all lying in an interval of length $O(\sqrt{n})$. This is the payoff of double-exposure.
   \item \emph{Concentration of the edge count.} The value $e_{k,0}$ should concentrate around its expectation within $O(n)$, so that the $\Theta(n)$ spacing between $e_{k, 0}$ and $e_{k + 1, 0}$ are perserved.
@@ -303,7 +307,7 @@ Write $\Delta_{k, i} \coloneqq e_{k, i} - e_{k, i - 1}$ and we have the followin
 
 \begin{lemma}
 \label{lem:double-exposure}
-Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_0$, and $c'$ be obtained from Lemma~\ref{lem:construction}. Let $U$ be a random subset of $U_0$ where each vertex is present with probability $1/2$, and let $U_{k, i}, e_{k, i}, \Delta_{k, i}$ be defined as above. Then there exist positive constants $M, \beta, Q > 0$ depending on $C$, such that $Q \ge 3\beta$ and for each $c'\sqrt{n} \le k \le 2c'\sqrt{n}$ the following hold:
+Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_0, c', d$ be obtained from Lemma~\ref{lem:construction}. Let $U$ be a random subset of $U_0$ where each vertex is present with probability $1/2$, and let $U_{k, i}, e_{k, i}, \Delta_{k, i}$ be defined as above. Then there exist positive constants $M, \beta, Q > 0$ depending on $C$, such that $Q \ge 3\beta$ and for each $c'\sqrt{n} \le k \le 2c'\sqrt{n}$ the following hold:
 \begin{enumerate}
     \item With probability at least $0.99$, there is a set $\mathcal{I}_k$ of $(1 - \beta/(2M)) \cdot c'\sqrt{n}$ values with the following property: for each $i \in \mathcal{I}_k$, there exists $\mathbf{X}_{k, i} \subseteq \mathbf{X}$ of size $\Omega(\sqrt{n})$, such that the values $d_{U_{k,i}}(\mathbf{x})$ for
         $\mathbf{x} \in \mathbf{X}_{k,i}$ are distinct and all lie in the interval $[d/2 - Q\sqrt{n},\; d/2 + Q\sqrt{n}]$.
@@ -406,30 +410,45 @@ Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_
     \[
       \prob\left[|e_{k, 0} - \E[e_{k, 0}]| \leq Qn\right] \geq 1 - \frac{\Var(e_{k, 0})}{Q^2 n^2} = 0.99,
     \]
-    for large enough $Q$ (note that enlarging $Q$ does not fail Property~1).
+    for large enough $Q$. We end this proof by noting that enlarging $Q$ does not fail Property~1.
   \end{enumerate}
 \end{proof}
 
-\begin{remark}
-The double-exposure is essential because the set $\mathbf{X}$ needs to provide
-$\Theta(\sqrt{n})$ distinct degrees into $U_{k,i} = U \cup Z_{k,i}$,
-where $Z_{k,i}$ is \emph{deterministic} (chosen based on $U_0$).
-If $U = U_0$, the degrees $d_{U_0}(\mathbf{x})$ for
-$\mathbf{x} \in \mathbf{X}$ are already fixed by the construction, and while
-they have pairwise distinct values by property~(3), there is no reason
-the degrees $d_{U_0 \cup Z_{k,i}}(\mathbf{x})$ should remain
-distinct after adding $Z_{k,i}$. The random subsampling
-$U \subseteq U_0$ introduces fresh randomness that acts independently
-on the large symmetric differences
-$N_{U_0}(\mathbf{x}) \Delta N_{U_0}(\mathbf{y})$, keeping the
-degree differences anticoncentrated even in the presence of the
-deterministic set $Z_{k,i}$.
+\subsection{Proof of the main lemma}
 
-This is the point where the argument of Narayanan, Sahasrabudhe, and
-Tomon \cite{NST} encounters an inherent obstacle. In their approach,
-$U$ is fixed before the augmentation stage, so the distinctness of
-degrees into $U \cup Z$ must be deduced from the distinctness of
-degrees into $U$ together with the structure of $Z$. Preserving the
-degree separation through the augmentation incurs a logarithmic loss,
-limiting the result to $|\Phi(G)| = n^{2-o(1)}$.
-\end{remark}
+We now assemble Lemma~\ref{lem:construction} and Lemma~\ref{lem:double-exposure} to prove the main lemma.
+
+Apply Lemma~\ref{lem:construction} to obtain $U_0, \mathbf{S}, \mathbf{T}, \mathbf{X}, c', d$, and define $\mathcal{P}, U, \mathbf{Z}_{k, i}, U_{k, i}$ as in Section~\ref{sec:double-exposure}. Note that $U$ is the only source of randomness. We prove the main lemma with $W$ being the set of all vertices in $\mathbf{S}, \mathbf{T}, \mathbf{X}$.
+
+Recall that $k$ ranges over the interval between $c'\sqrt{n}$ and $2c'\sqrt{n}$. For each $k$, union bound shows that all four properties of Lemma~\ref{lem:double-exposure} hold with probability at least $0.4$. Let $\mathcal{K}$ be the set of all such $k$. Then $\E\left[c'\sqrt{n} - |\mathcal{K}|\right] \leq 0.6 \, c'\sqrt{n}$, and Markov's inequality yields
+\[
+  \prob\left[|\mathcal{K}| \geq 0.2 \, c'\sqrt{n}\right] = 1 - \prob\left[c'\sqrt{n} - |\mathcal{K}| \geq 0.8 \, c'\sqrt{n}\right] \geq 1 - \frac{\E\left[c'\sqrt{n} - |\mathcal{K}|\right]}{0.8 \, c'\sqrt{n}} \geq 0.25.
+\]
+We now show that $e(U)$ is close to $m$ with high probability. Note that $|m - \E[e(U)]| = O(n^{3/2})$, as $\E[e(U)] = e(U_0)/4$ and $|e(U_0) - 4m| = O(n^{3/2})$ from Lemma~\ref{lem:construction}. Since the presence of edges in $G[U]$ are dependent only if they share a vertex, there are $O(n^3)$ dependent pairs of edges in $G[U]$. Thus we have $\Var(e(U)) \leq O(n^3) + \E[e(U)] = O(n^3)$. Since $|e(U) - m| \leq |e(U) - \E[e(U)]| + |\E[e(U)] - m|$, Chebyshev's inequality yields
+\[
+  \prob\left[|e(U) - m| = O(n^{3/2})\right] \geq \prob\left[|e(U) - \E[e(U)]| = O(n^{3/2})\right] \geq 1 - \frac{\Var(e(U))}{\omega(n^{3})} \geq 0.9,
+\]
+for large enough $n$. Fix an outcome $U$ satisfying both events above, which hold together with probability at least $0.25 + 0.9 - 1 = 0.15$. Let $Q, \beta, M, \mathcal{I}_k$ be given by Lemma~\ref{lem:double-exposure}. 
+
+For each $k$, we have 
+\[
+  \E[e_{k, 0}] - \E[e_{k - 1, 0}] = \frac{1}{2}[e(\mathbf{Z}_{k, 0}, U_0) - e(\mathbf{Z}_{k - 1, 0}, U_0)] + O(\sqrt{n}) = \Theta(n),
+\]
+as $\E[d_U(\mathbf{x})] = d_{U_0}(\mathbf{x})/2 = \Theta(n)$ for $\mathbf{x} \in \mathbf{S}$. We find a subset from $\mathcal{K}$ whose realized values $e_{k, 0}$ are well-separated by a linear gap. Specifically, let $\mathcal{K}' \subseteq \mathcal{K}$ contain every $q$th element of $\mathcal{K}$, for sufficiently large $q$ such that the values of $\E[e_{k, 0}]$ are separated by at least $4Qn$ for $k \in \mathcal{K}'$. Then, $|\mathcal{K}'| = \Theta(\sqrt{n})$ and Property~2 of Lemma~\ref{lem:double-exposure} ensures that the values of $e_{k, 0}$ are separated by at least $2Qn$ for $k \in \mathcal{K}'$. 
+
+We move on to partition the linear gaps between the values of $e_{k, 0} : k \in \mathcal{K}'$ into square-root sized gaps. Let $k \in \mathcal{K}'$. By Property~3 of Lemma~\ref{lem:double-exposure}, we have $e_{k, c'\sqrt{n}} - e_{k, 0} \geq 3\beta n$. Consider the range of integers between $e_{k, 0}$ and $e_{k, 0} + 3\beta n$. Within this range, we take $2\beta\sqrt{n}/M$ intervals of length $M\sqrt{n}$, each separated by a distance of $M\sqrt{n}/2 = \Omega(\sqrt{n})$. By Property~4 of Lemma~\ref{lem:double-exposure}, at most $\beta \sqrt{n} / M$ of these intervals contain no value of $e_{k, i}$. Consider the $\beta\sqrt{n}/M$ intervals that do contain a value of $e_{k, i}$ and pick a representative $e_{k, i}$ from each such interval. Let $\mathcal{I}'_k$ be the set of indices $i$ corresponding to these representatives, and let $\mathcal{I}_k'' = \mathcal{I}_k \cap \mathcal{I}'_k$. Then 
+\[
+  |\mathcal{I}_k''| = |\mathcal{I}'_k| + |\mathcal{I}'_k| - |\mathcal{I}'_k \cup \mathcal{I}_k| \geq \beta\sqrt{n}/M - \beta c' \sqrt{n}/2M = \Omega(\sqrt{n})
+\]
+and the values of $e_{k, i}$ are separated by $\Omega(\sqrt{n})$ for $i \in \mathcal{I}_k''$. Recall that $Q \geq 3\beta$, and so by construction $|e_{k, i} - e_{k, 0}| \leq 3\beta n \leq Qn$ for $i \in \mathcal{I}_k''$. In particular, amongst choices of $k \in \mathcal{K}'$ and $\mathcal{I}_k''$, we already have $\Omega(n)$ distinct values of $e(U_{k, i})$ that are separated by $\Omega(\sqrt{n})$. It remains to fill the square-root sized gaps between these values. 
+
+In increasing order of these $e(U_{k, i})$, let $\mathcal{P}' \subseteq \{(k, i) : k \in \mathcal{K}', i \in \mathcal{I}_k''\}$ be the corresponding index set of every $q$th of these values. We enlarge $q$ so that the values $e(U_{k, i})$ from $\mathcal{P}'$ are separated by at least $2Qn$. For each $(k, i) \in \mathcal{P}'$ we have $i \in \mathcal{I}_k$, so Property~1 of Lemma~\ref{lem:double-exposure} furnishes a set $\mathbf{X}_{k, i}$ such that the values $d_{U_{k, i}}(\mathbf{x})$ are distinct for $\mathbf{x} \in \mathbf{X}_{k, i}$ while lying in a fixed interval of length $2Qn$ centered at $d/2$, where $d$ is independent of $k$ and $i$. In particular, for each $(k, i) \in \mathcal{P}'$, the set
+\[
+  \{e(U_{k, i} \cup \mathbf{x}_{k, i}) : \mathbf{x}_{k, i} \in \mathbf{X}_{k, i}\}
+\]
+lie in an interval of length $2Qn$ centered at $e(U_{k, i}) + d/2$, and so these sets do not overlap among different $(k, i) \in \mathcal{P}'$. 
+
+Therefore, 
+\[
+  |\{e(U \cup Z) : Z \subseteq W\}| \geq |\{e(U_{k, i} \cup \mathbf{x}_{k, i}) : (k, i) \in \mathcal{P}', \, \mathbf{x}_{k, i} \in \mathbf{X}_{k, i}\}| = \Omega(n^{3/2}).
+\]
