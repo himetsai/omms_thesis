@@ -235,80 +235,95 @@ The lemma says that the adjacency matrix of a Ramsey graph is at Frobenius dista
 
 Lemma~\ref{lem:robust-rank} is the only place in the first stage where the Ramsey hypothesis is used directly, and its proof is the most combinatorial component in this stage. The argument proceeds by discretising the entries of the approximating matrix $B$ to a finite alphabet, observing that a low-rank block forces a small number of distinct row patterns, and applying Ramsey's theorem on an auxiliary graph to extract a monochromatic structure that contradicts the $C$-Ramsey assumption on $G$.
 
-To sum it up, applying ingredients~1, ~3, and ~2 in sequence yields the desired bound in \eqref{eq:conditional-target}.
+To sum it up, applying ingredients~1, ~3, and ~2 in sequence yields the interval estimate in \eqref{eq:conditional-target}.
 
 
 \subsection{Switching for pointwise control}
 \label{sec:switching}
 
-The Fourier-analytic machinery of Pillar~I delivers the interval estimate of Theorem~\ref{thm:interval-estimate}. The remaining gap is a factor of $2B + 1$, since in principle $\Pr[X = x]$ could be zero even when $\Pr[\,|X - x| \le B\,] = \Theta(n^{-3/2})$, with all the mass concentrated on some other integer in the window $[x - B, x + B]$. The role of Pillar~II is to rule this out, by showing that the probability mass cannot be too unevenly distributed inside the window. This is achieved by a switching argument.
-
-\subsubsection*{The switching identity}
-
-For $y \in U$ and $z \notin U$, the \emph{switch} of the ordered pair $(y, z)$ replaces $U$ by $U' = (U \setminus \{y\}) \cup \{z\}$. Under this operation $X = e(G[U])$ changes by
-\[
-e(G[U']) - e(G[U]) \;=\; \deg_{U \setminus \{y\}}(z) \;-\; \deg_{U \setminus \{z\}}(y),
-\]
-which is an integer depending on $U$ and on the pair $(y, z)$. We denote this integer by $\ell(y, z; U)$.
-
-Fix a set $T \subseteq V(G)^2$ of \emph{admissible} switching pairs, to be specified below. Assume $T$ is symmetric, in the sense that $(y, z) \in T$ if and only if $(z, y) \in T$. For each integer $\ell$, let $Y_\ell$ be the random variable
-\[
-Y_\ell \;=\; \#\bigl\{\,(y, z) \in T \;:\; y \in U,\ z \notin U,\ \ell(y, z; U) = \ell\,\bigr\}
-\]
-counting the number of admissible switches that change $X$ by exactly $\ell$. The fundamental identity is
+The first stage delivers the interval estimate 
 \begin{equation}
-\label{eq:switching-identity}
-\mathbb{E}\!\left[\,Y_\ell \cdot \mathbf{1}_{X = x}\,\right] \;=\; \mathbb{E}\!\left[\,Y_{-\ell} \cdot \mathbf{1}_{X = x + \ell}\,\right]
+  \label{eq:interval-estimate}
+  \prob[|X - x| \le B] = \Theta(n^{-3/2}),
 \end{equation}
-for all integers $x$ and $\ell$. To see why, note that both sides count, in two different ways, the cardinality of the set
+but leaves open the worst case where all of this mass sits on a single integer $x' \ne x$ inside the window $[x - B, x + B]$. We now upgrade the interval estimate to a pointwise bound by showing that the mass cannot be too unevenly distributed across the window via a \textit{switching argument} between different possibilities of the set $U$. In particular, \eqref{eq:interval-estimate} already implies an upper bound on $\prob[X = x]$, so it remains to show a lower bound.
+
+For $y \in U$ and $z \notin U$, the \emph{switch} $(y, z)$ replaces $U$ by $U' = (U \setminus \{y\}) \cup \{z\}$. This operation shifts $X$ by
 \[
-\bigl\{\,(U, (y, z)) \;:\; (y, z) \in T,\ y \in U,\ z \notin U,\ X(U) = x,\ X(U') = x + \ell\,\bigr\}
+  s(y, z; U) \coloneqq e(G[U']) - e(G[U]) = \deg_{U \setminus \{y\}}(z) - \deg_{U}(y).
 \]
-weighted by $\Pr[U] = 2^{-n}$. The left-hand side enumerates this set by indexing on $U$. The right-hand side enumerates it by indexing instead on the post-switch outcome $U'$, observing that $(z, y) \in T$ since $T$ is symmetric, that $y \notin U'$ and $z \in U'$, and that the reverse switch changes $X$ from $x + \ell$ to $x$, that is, by $-\ell$. Since $|U| = |U'|$ and each is sampled from the same uniform measure on subsets of $V(G)$, the two enumerations carry the same weight, and the identity holds.
-
-The identity \eqref{eq:switching-identity} converts a question about the rare event $\{X = x\}$ into a question about a weighted version of the rare event $\{X = x + \ell\}$, with the weighting carried by the variables $Y_\ell$. To extract a usable comparison between $\Pr[X = x]$ and $\Pr[X = x + \ell]$ from this, we need moment estimates on the $Y_\ell$, and we obtain those by Cauchy–Schwarz.
-
-\subsubsection*{The Cauchy–Schwarz argument}
-
-Fix $x$ within $O(n^{3/2})$ of the mean. The goal is to show $\Pr[X = x] = \Omega_C(n^{-3/2})$. We start from the trivial inequality, valid for any non-negative random variable $Y$ and any event $A$,
+Fix a set $T \subseteq V(G)^2$ of candidate ordered pairs, to be specified later, and let
+\[
+  Y_\ell \coloneqq \#\bigl\{(y, z) \in T : y \in U,\ z \notin U,\ s(y, z; U) = \ell\bigr\}
+\]
+count candidate switches at $U$ that shift $X$ by exactly $\ell$. Notice that each candidate switch with $y \in U, z \in U$, and $s(y, z; U) = \ell$ pairs $U$ with the set $U' = (U \setminus \{y\}) \cup \{z\}$, and the switch $(z, y)$ from $U'$ recovers $U$ and shifts $X$ by $-\ell$. In particular, pairing $(U, (y, z))$ with $(U', (z, y))$ in this way is a bijection. Since the uniform measure on $\{0,1\}^n$ assigns the same probability $2^{-n}$ to every $U$, the bijection gives the symmetry identity
 \begin{equation}
-\label{eq:CS-baby}
-\Pr[A] \;=\; \mathbb{E}[\mathbf{1}_A] \;\ge\; \frac{(\mathbb{E}[\,Y \cdot \mathbf{1}_A\,])^2}{\mathbb{E}[\,Y^2 \cdot \mathbf{1}_A\,]},
+  \label{eq:switching-identity}
+  \E\bigl[Y_\ell \cdot \mathbbm{1}_{X = x}\bigr] = \E\bigl[Y_{-\ell} \cdot \mathbbm{1}_{X = x + \ell}\bigr],
 \end{equation}
-which is Cauchy–Schwarz applied to the pair $(Y \mathbf{1}_A, \mathbf{1}_A)$. Take $A = \{X = x\}$ and $Y = Y_\ell$ for some $\ell$ to be chosen, and use \eqref{eq:switching-identity} on the numerator,
+for any integer $x$ and $\ell$. By Cauchy-Schwarz inequality,
+\[
+  \bigl(\E\bigl[Y_{\ell} \cdot \mathbbm{1}_{X = x}\bigr]\bigr)^2 \leq \E\bigl[(Y_\ell^2 \cdot \mathbbm{1}_{X = x})^2\bigr] \cdot \E\bigl[(\mathbbm{1}_{X = x})^2\bigr].
+\]
+Rearranging and applying \eqref{eq:switching-identity} yields
 \begin{equation}
-\label{eq:CS-main}
-\Pr[X = x] \;\ge\; \frac{(\mathbb{E}[\,Y_\ell \cdot \mathbf{1}_{X = x}\,])^2}{\mathbb{E}[\,Y_\ell^2 \cdot \mathbf{1}_{X = x}\,]} \;=\; \frac{(\mathbb{E}[\,Y_{-\ell} \cdot \mathbf{1}_{X = x + \ell}\,])^2}{\mathbb{E}[\,Y_\ell^2 \cdot \mathbf{1}_{X = x}\,]}.
+  \label{eq:CS-main}
+  \prob[X = x] \geq \frac{\bigl(\E\bigl[Y_{-\ell} \cdot \mathbbm{1}_{X = x + \ell}\bigr]\bigr)^2}{\E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{X = x}\bigr]}.
 \end{equation}
-The plan is now visible. We need a lower bound on the numerator and a matching upper bound on the denominator, such that the ratio is $\Omega(n^{-3/2})$. Both the numerator and the denominator are expectations restricted to the constant-length event $\{|X - x| \le B\}$ once we sum over $\ell \in \{-B, \dots, B\}$, which is exactly the event controlled by the interval estimate of Theorem~\ref{thm:interval-estimate}.
-
-The required moment estimates take the form
+The goal now is to find $\ell$ and the candidate set $T$ so that
 \begin{align}
-\label{eq:moment-1}
-\mathbb{E}\!\bigl[\,Y_\ell \cdot \mathbf{1}_{|X - x| \le B}\,\bigr] \;&\gtrsim_C\; \frac{|T|}{\sqrt n}\cdot n^{-3/2}, \\
-\label{eq:moment-2}
-\mathbb{E}\!\bigl[\,Y_\ell^2 \cdot \mathbf{1}_{|X - x| \le B}\,\bigr] \;&\lesssim_C\; \left(\frac{|T|}{\sqrt n}\right)^{\!2} \cdot n^{-3/2},
+  \label{eq:moment-1}
+  \E\bigl[Y_\ell \cdot \mathbbm{1}_{|X - x| \le B}\bigr] &\gtrsim \frac{|T|}{\sqrt n} \cdot n^{-3/2}, \\
+  \label{eq:moment-2}
+  \E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{|X - x| \le B}\bigr] &\lesssim \left(\frac{|T|}{\sqrt n}\right)^2 \cdot n^{-3/2}.
 \end{align}
-holding for some $\ell \in \{-B, \dots, B\}$. Given \eqref{eq:moment-1} and \eqref{eq:moment-2}, the ratio in \eqref{eq:CS-main} is $\Omega(n^{-3/2})$ as desired, and Theorem~\ref{thm:KSSS} follows. (The actual KSSS proof iterates Cauchy–Schwarz once more on a higher-order moment $\mathbb{E}[Y_{-B}\,Y_{-B+1}\,\cdots\,Y_B \cdot \mathbf{1}_{|X-x| \le B}]$ to handle the averaging over $\ell$ more efficiently, but the conceptual core is the comparison \eqref{eq:CS-main}.)
-
-It remains to explain where \eqref{eq:moment-1} and \eqref{eq:moment-2} come from. This is the role of the admissible switching set.
-
-\subsubsection*{The admissible switching set}
-
-The admissible set $T$ is constructed in Lemma~13.1 of \cite{KSSS} as the set of ordered pairs $(y, z)$ drawn from a special vertex subset $S \subseteq S_0 \subseteq V(G)$ that satisfies three conditions. We list each condition together with the role it plays in the moment estimates.
-
-\paragraph{Condition 1 (large symmetric difference).} For all pairs $(y, z) \in S^2$ with $y \ne z$,
+The two factors have concrete meanings. The factor $n^{-3/2}$ is
+$\prob[|X - x| \leq B]$, supplied by the interval estimate
+\eqref{eq:interval-estimate}. The factor $|T|/\sqrt n$ represents $\E[Y_\ell]$,
+which we now compute. For any pair $(y, z) \in T$,
+$\prob[y \in U, z \notin U] = 1/4$. Conditional on this event, setting
+$R_w = 2\mathbbm{1}_{w \in U} - 1$ and
+$a_w = 2\mathbbm{1}_{w \in N(z) \setminus N(y)} - 1$,
+\begin{align*}
+  s(y, z; U)
+  &= \deg_{U \setminus \{y\}}(z) - \deg_{U}(y) \\
+  &= \sum_{w \in N(z),\, w \neq y} \mathbbm{1}_{w \in U}
+     - \sum_{w \in N(y)} \mathbbm{1}_{w \in U} \\
+  &= \frac{\deg(z) - \deg(y)}{2}
+     + \frac{1}{2}\sum_{w \in N(y) \triangle N(z)} a_w R_w
+\end{align*}
+is a sum of $|N(y) \triangle N(z)|$ independent $\pm\mathrm{Bernoulli}(1/2)$
+contributions plus the deterministic shift $(\deg(z) - \deg(y))/2$. Therefore, if we can find $T$ such that $\deg(z) - \deg(y) = \Theta(\sqrt{n})$ and $|N(y) \triangle N(z)| = \Theta(n)$ for all $(y, z) \in T$, then a local CLT gives 
 \[
-|(N(y) \setminus N(z)) \cap S_0| \;\ge\; \tfrac{\rho}{2}|S_0| \quad \text{and} \quad |(N(z) \setminus N(y)) \cap S_0| \;\ge\; \tfrac{\rho}{2}|S_0|.
+  \prob[s(y, z; U) = \ell \mid y \in U, z \notin U] = \Theta(1/\sqrt n)
 \]
-This is a consequence of the induced subgraph $G[S_0]$ being $(\delta, \rho)$-rich in the sense of Definition~\ref{def:richness} from Chapter~\ref{ch:KS}. The role of Condition~1 is to make the second moment estimate \eqref{eq:moment-2} go through. The second moment $\mathbb{E}[Y_\ell^2 \cdot \mathbf{1}_{|X-x| \le B}]$ expands as a sum over pairs of pairs $((y_1, z_1), (y_2, z_2)) \in T^2$ of the joint probability that both switches contribute to the event. For most such pairs of pairs, the symmetric difference of the four neighbourhoods $(N(y_i) \cup N(z_i)) \cap S_0$ is large, which means the two switching events have many ``free'' coordinates of $U$ between them, and the joint event factors approximately into a product. This near-independence is what keeps the second moment of $Y_\ell$ comparable to the square of its first moment, which is exactly the form needed for Cauchy–Schwarz to be effective.
+for all $\ell$ in an $O(\sqrt n)$ window around the mean, which yields
+\[
+  \E[Y_\ell] = \frac{1}{4}\sum_{(y, z) \in T} \prob[s(y, z; U) = \ell \mid y \in U, z \notin U] = \Theta(|T|/\sqrt n).
+\]
+It remains to construct such a set $T$. Just as in Chapter~\ref{sec:ch3}, we can use the richness of Ramsey graphs to ensure $|N(y) \triangle N(z)| = \Theta(n)$. In particular, we apply Lemma~\ref{lem:richness-extraction} with parameter $\eps = \eps(C) > 0$ and a sufficiently small $\delta < \eps$ to obtain a linear size vertex subset $S_0$ that induces an $(\eps, \delta)$-rich subgraph. Applying richness twice then shows that, for all but $O(|S_0|^{1 + \delta})$ ordered pairs $(y, z) \in S_0^2$,
+\begin{equation}
+  \label{eq:switching-richness}
+  |(N(y) \setminus N(z)) \cap S_0| \geq \eps^2 |S_0|, \qquad  |(N(z) \setminus N(y)) \cap S_0| \geq \eps^2 |S_0|.
+\end{equation}
+More specifically, by richness all but at most $|S_0|^\delta$ vertices $z \in S_0$ satisfy $|N(z) \cap S_0| \geq \eps|S_0|$. Since $|N(z) \cap S_0| \geq \eps|S_0| \geq \delta|S_0|$, applying richness a second time with set $N(z) \cap S_0$ gives
+\[
+  |(N(z) \setminus N(y)) \cap S_0| = |\overline{N(y)} \cap (N(z) \cap S_0)| \geq \eps \cdot |N(z) \cap S_0| \geq \eps^2 |S_0|
+\]
+for all but a further $|S_0|^\delta$ choices of $y \in S_0$. The bound for $N(y) \setminus N(z)$ follows symmetrically. Combining both bounds in \eqref{eq:switching-richness} implies $|N(y) \triangle N(z)| = \Theta(n)$ for all but $O(n^{1 + \delta})$ ordered pairs $(y, z) \in S_0^2$. Now partitioning the degree sequence into $\sqrt n$ intervals and taking $S$ to be the largest bin of vertices from $S_0$ satisfies the $\deg(z) - \deg(y) = \Theta(\sqrt{n})$ condition. Define $T$ as the set of ordered pairs $(y, z) \in S^2$ with $y \neq z$ that satisfy~\eqref{eq:switching-richness}. The first moment estimate~\eqref{eq:moment-1} now follows. 
 
-\paragraph{Condition 2 (size).} The set $S$ has size $|S| \ge n^{0.48}$, so that $|T| = |S|(|S| - 1) \ge n^{0.96}$. This is established by an application of dependent random choice to the complement of $G[S_0]$. The complement is also Ramsey, hence has average degree $\Theta(|S_0|)$, which is exactly the input dependent random choice needs to produce a large structured subset. The role of Condition~2 is to make $|T|$ polynomially large, so that the right-hand side of \eqref{eq:moment-1} is large enough to be useful.
+The second moment bound~\eqref{eq:moment-2} is more involved. Write $A_{y, z} = \{y \in U,\, z \notin U,\, s(y, z; U) = \ell\}$ and expanding $Y_\ell^2$ gives
+\[
+  \E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{|X - x| \le B}\bigr]
+  = \sum_{(y_1, z_1), (y_2, z_2) \in T}
+     \prob\bigl[A_{y_1, z_1} \cap A_{y_2, z_2} \cap \{|X - x| \le B\}\bigr].
+\]
+We would like bound this from above by $\prob[A_{y_1, z_1}] \cdot \prob[A_{y_2, z_2}] \cdot \prob[|X - x| \le B]$. This is achieved via \eqref{eq:switching-richness} and the \textit{dependent random choice} technique -- see~\cite[Lemmas~13.1, 13.4, 13.9]{Kwan_2023} for the details.
 
-\paragraph{Condition 3 (degree alignment).} For all $y, z \in S$, $|\deg(y) - \deg(z)| \le 2\sqrt n$. This is established by partitioning $[0, n]$ into $\Theta(\sqrt n)$ sub-intervals of length $\Theta(\sqrt n)$ and applying pigeonhole to retain the largest part. The role of Condition~3 is to constrain the support of $\ell(y, z; U)$. For any $(y, z) \in T$, the deterministic part of $\ell(y, z; U)$ is at most $\sqrt n$ in absolute value, and the random part has standard deviation $\Theta(\sqrt n)$, so $\ell$ takes integer values in a window of length $O(\sqrt n)$ around $0$. By averaging over the $O(\sqrt n)$ values of $\ell$ in this window, there exists some $\ell$ for which $\mathbb{E}[Y_\ell \cdot \mathbf{1}_{|X - x| \le B}] \gtrsim |T| / \sqrt n \cdot n^{-3/2}$, where the second factor is the interval estimate from Theorem~\ref{thm:interval-estimate}. This is exactly \eqref{eq:moment-1}.
+\textit{Remark.} The inequality \eqref{eq:CS-main} is stated with the indicator $\mathbbm{1}_{X = x}$, while \eqref{eq:moment-1} and \eqref{eq:moment-2} are stated for the wider event $\{|X - x| \le B\}$. To bridge the two, Cauchy--Schwarz is applied in \cite{Kwan_2023} a second time to the higher-order moment $\E[Y_{-B} Y_{-B + 1} \cdots Y_B \cdot \mathbbm{1}_{|X - x| \le B}]$, which averages over the choice of $\ell$. We do not pursue this iteration here, as the conceptual core remains the comparison \eqref{eq:CS-main}.
 
 \subsubsection*{Closing the circle}
 
-It is no coincidence that Condition~1 is the same symmetric difference condition that powered the collision graph argument in Chapter~\ref{ch:KS}. The role of richness here is structurally identical to its role there. In Chapter~\ref{ch:KS}, richness was used to lower-bound the symmetric difference $|N(x) \triangle N(y)|$ for most pairs $(x, y)$, which made the degree difference $\deg_U(x) - \deg_U(y)$ a sum of many independent Rademacher contributions and forced its small-ball probability to be $O(1/\sqrt n)$. This was the engine of the collision graph argument. Here, the same large symmetric difference is what controls the second moment of $Y_\ell$, by ensuring that joint switching events are sufficiently independent. In both cases the mechanism is the same. A large symmetric difference $(N(y) \setminus N(z)) \cap S_0$ provides a large pool of independent random Rademacher contributions to a quantity we wish to anticoncentrate.
+The same large-symmetric-difference condition that powered the collision graph argument in Chapter~\ref{sec:ch3} drives the second-moment estimate here. There, richness lower-bounded $|N(x) \triangle N(y)|$ for every pair in the rich subgraph and forced the small-ball probability of the linear quantity $\deg_U(x) - \deg_U(y)$ to be $O(1/\sqrt n)$ by treating it as a sum of independent Bernoulli contributions indexed by $N(x) \triangle N(y)$. Here, the same large symmetric difference forces near-independence of two switching events by giving the four neighbourhoods $N(y_i), N(z_i)$ a large pool of $U$-coordinates over which to vary independently. In both cases a large symmetric difference supplies a large pool of independent coin flips to a quantity we wish to anticoncentrate.
 
-This is the sense in which the proof of Theorem~\ref{thm:KSSS} closes the circle of the thesis. The chapters trace a single anticoncentration principle through three increasingly delicate settings. In Chapter~\ref{ch:BS} the principle controls a degree difference and produces $\Omega(\sqrt n)$ distinct degrees. In Chapter~\ref{ch:KS} it controls degree collisions across many pairs and produces $\Omega(n^2)$ distinct subgraph sizes. In the present chapter it appears in two distinct guises. The forward Littlewood–Offord direction reappears in the switching argument as the mechanism behind Condition~1 above. The inverse Littlewood–Offord direction enters Pillar~I as the additively structured dichotomy of Section~\ref{sec:fourier-walsh}. The Ramsey hypothesis manifests itself at every layer of the proof, through the Erdős–Szemerédi density bound, through richness, through the robust rank of the adjacency matrix, and through the availability of large structured switching sets via dependent random choice.
+This is the sense in which Theorem~\ref{thm:ksss} closes the circle of the thesis. A single anticoncentration principle threads three increasingly delicate arguments. Chapter~\ref{sec:ch2} controls a single degree difference and produces $\Omega(\sqrt n)$ distinct degrees. Chapter~\ref{sec:ch3} controls degree collisions across many pairs and produces $\Omega(n^2)$ distinct subgraph sizes. The present chapter splits the principle into two complementary roles. The forward Littlewood--Offord direction reappears in the switching argument as the engine of~(P1), and the inverse Littlewood--Offord direction enters as the structured-versus-unstructured dichotomy of Section~\ref{sec:fourier-walsh}. The Ramsey hypothesis enters at every layer, through the Erd\H{o}s--Szemer\'edi density bound, through richness, through the robust rank of the adjacency matrix, and through the availability of large structured switching sets via dependent random choice.
