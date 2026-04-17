@@ -8,15 +8,15 @@ Classical Ramsey Theory asks for the minimum number of vertices required to guar
   The \textit{Ramsey number} $R(s, t)$ is the minimum number $N$ such that any graph on $N$ vertices contains a clique of size $s$ or an independent set of size $t$.
 \end{definition}
 
-The existence of these numbers was proven by Ramsey \cite{ramsey1930} in 1930, but their quantitative behaviors remain largely unknown despite decades of intensive research. In particular, it is known that $R(3, 3) = 6$ and $R(4, 4) = 18$, but the exact values of $R(5, 5)$ and beyond are yet to be determined. The cornerstone of Ramsey Theory due to Erdős and Szekeres in 1935 gives the following upper bound on $R(s, t)$:
-\begin{theorem}[Erdős--Szekeres \cite{erdos1935some}]
+The existence of these numbers was proven by Ramsey~\cite{ramsey1930} in 1930, but their quantitative behaviors remain largely unknown despite decades of intensive research. In particular, it is known that $R(3, 3) = 6$ and $R(4, 4) = 18$, but the exact values of $R(5, 5)$ and beyond are yet to be determined. The cornerstone of Ramsey Theory due to Erdős and Szekeres in 1935 gives the following upper bound on $R(s, t)$:
+\begin{theorem}[Erdős-Szekeres~\cite{erdos1935some}]
   \label{thm:erdos-szekeres}
   For $s, t \geq 2$,
   \[
     R(s, t) \leq \binom{s + t - 2}{s - 1}.
   \]
 \end{theorem}
-Following the fact that $\binom{2t - 2}{t - 1} < 2^{2t}$, we can see $R(t, t) < 4^{t}$. Very little progress had been made on this bound until the recent breakthrough of Campos, Griffiths, Morris, and Sahasrabudhe ~\cite{campos2025exponentialimprovementdiagonalramsey}, who gave the first exponential improvement since the result of Erdős and Szekeres. On the other hand, the lower bound of ramsey numbers has been even more challenging to determine. A rather basic result which already gives the best known exponents is the famous random graph construction due to Erdős in 1947, marking one of the first applications of the probabilistic method in combinatorics. Before stating the result, we first define the \textit{Erdős--Rényi random graph}.
+Following the fact that $\binom{2t - 2}{t - 1} < 2^{2t}$, we can see $R(t, t) < 4^{t}$. Very little progress had been made on this bound until the recent breakthrough of Campos, Griffiths, Morris, and Sahasrabudhe~\cite{campos2025exponentialimprovementdiagonalramsey}, giving the first exponential improvement since the result of Erdős and Szekeres. On the other hand, the lower bound of Ramsey numbers has been even harder to determine. A rather basic result which already gives the best known exponents is the famous random graph construction due to Erdős in 1947, marking one of the first applications of the probabilistic method in combinatorics. Before stating the result, we define the \textit{Erdős-Rényi random graph}.
 
 \begin{definition}
   \label{def:random-graph}
@@ -42,17 +42,9 @@ Following the fact that $\binom{2t - 2}{t - 1} < 2^{2t}$, we can see $R(t, t) < 
   Similarly, the expected number of independent sets of size $t$ is less than $1/2$. It now follows that there exists a graph on $N$ vertices containing neither a clique nor an independent set of size $t$.
 \end{proof}
 
-The above strategy may be optimized to give a lower bound of $\frac{{t}}{e\sqrt{2}}\sqrt{2}^t$, which has been astonishingly resilient to improvement. The only noteworthy improvement since 1947 is achieved in 1977 by Spencer~\cite{Spencer1975RamseysT}, who used the Lovász local lemma to raise the bound to $(1 - o(1))\frac{t\sqrt{2}}{e}\sqrt{2}^t$, an improvement by a factor of 2. For further background on Ramsey theory, see Conlon, Fox, and Sudakov~\cite{conlon2015recentdevelopmentsgraphramsey}.
+The above strategy may be optimized to give a lower bound of $\frac{{t}}{e\sqrt{2}}\sqrt{2}^t$, which has been astonishingly resilient to improvement. The only noteworthy improvement since 1947 is achieved in 1977 by Spencer~\cite{Spencer1975RamseysT} using the Lovász local lemma to raise the bound to $(1 - o(1))\frac{t\sqrt{2}}{e}\sqrt{2}^t$, an improvement by a factor of 2. For further background on Ramsey theory, see Conlon, Fox, and Sudakov~\cite{conlon2015recentdevelopmentsgraphramsey}.
 
-From Theorem~\ref{thm:diagonal-ramsey}, we can see that any graph on $n$ vertices contains a clique or independent set of size at least $\frac{1}{2}\log_2 n$, whereas there exists a graph on $n$ vertices containing neither a clique nor an independent set of size $2\log_2 n$. Apart from determining the bounds of Ramsey numbers, the search for explicit graph constructions with logarithmically small cliques and independent sets has also been a major open problem in Ramsey Theory. Despite decades of intensive research, all known constructions still rely on some randomness. This thus motivates the question of whether graphs with small cliques and independent sets inherently resemble dense random graphs like $G_{n, 1/2}$; we refer to such graphs as \textit{Ramsey graphs}.
-
-\begin{definition}
-  \label{def:ramsey-graph}
-
-  Let $C > 0$ be a constant. A \textit{$C$-Ramsey graph} is a graph with no clique or independent set of size greater than $C\log n$.
-\end{definition}
-
-It is useful to also define a shorthand for cliques and independent sets.
+We define a shorthand for cliques and independent sets.
 
 \begin{definition}
   \label{def:hom}
@@ -60,9 +52,19 @@ It is useful to also define a shorthand for cliques and independent sets.
   A set $S \subseteq V(G)$ is \textit{homogeneous} in a graph $G$ if it induces a clique or an independent set in $G$. We denote the size of the largest homogeneous set in $G$ by $\hom(G)$.
 \end{definition}
 
-The belief that Ramsey graphs and random graphs are intimately related is supported a number of theorems showing that certain ``richness'' properties of random graphs also hold for Ramsey graphs. The first result that cemented this connection is due to Erdős and Szemerédi, showing that Ramsey graphs are also dense.
+Thus, Theorem~\ref{thm:diagonal-ramsey} may be restated as
+\[
+  \frac{1}{2}\log_2 n < \hom(G) < 2\log_2 n,
+\]
+for any graph $G$ on $n$ vertices. Apart from determining the bounds of Ramsey numbers, the search for explicit graph constructions with $\hom(G) = O(\log n)$ has also been a major open problem in Ramsey Theory. We refer to such graphs as \textit{Ramsey graphs}.
+\begin{definition}
+  \label{def:ramsey-graph}
 
-\begin{theorem}[Erdős--Szemerédi~\cite{erdos1972ramsey}]
+  Let $C > 0$ be a constant. A \textit{$C$-Ramsey graph} is a graph with no homogeneous set of size greater than $C\log n$.
+\end{definition}
+Despite decades of intensive research, all known constructions of Ramsey graphs still rely on some randomness. Thus it is believed that Ramsey graphs inherently resemble dense random graphs like $G_{n, 1/2}$, and there are a number of theorems showing that certain ``richness'' properties of random graphs also hold for Ramsey graphs. The first result that cemented this connection is due to Erdős and Szemerédi, showing that Ramsey graphs are also dense.
+
+\begin{theorem}[Erdős-Szemerédi~\cite{erdos1972ramsey}]
   \label{thm:ramsey-density}
 
   Let $G$ be a graph on $n$ vertices with edge density $d \leq 1/2$. Then $G$ contains a homogeneous set of size greater than $K = \frac{c}{d\log(1/d)} \log n$, for some constant $c > 0$ and sufficiently large $n$.
@@ -96,9 +98,9 @@ The belief that Ramsey graphs and random graphs are intimately related is suppor
   contradiction.
 \end{proof}
 
-Recall that the Erdős--Szemerédi theorem gives the bound $\hom(G) \geq \frac{1}{2} \log_2 n$, regardless of the edge density. Theorem~\ref{thm:ramsey-density} improves this when the density is small. For example, if $d = 1/n^{\eps}$ for some $\eps > 0$, then $\hom(G) = \Omega\left(\frac{n^{\eps}}{\log n^{\eps}} \log n\right)$, vastly larger than $\frac{1}{2}\log_2 n$. Intuitively, a sparse graph should contain a large independent set, and the theorem makes this notion precise. 
+Recall that the Erdős-Szemerédi theorem gives $\hom(G) \geq \frac{1}{2} \log_2 n$, regardless of the edge density. Theorem~\ref{thm:ramsey-density} improves this when the density is small. For example, if $d = 1/n^{\eps}$ for some $\eps > 0$, then $\hom(G) = \Omega\left(\frac{n^{\eps}}{\log n^{\eps}} \log n\right)$, vastly larger than $\frac{1}{2}\log_2 n$. Intuitively, a sparse graph should contain a large independent set, and the theorem makes this notion precise. 
 
-If $G$ is $C$-Ramsey, then applying Theorem~\ref{thm:ramsey-density} to whichever $G$ or $\overline{G}$ has density $d \leq 1/2$ yields $c/(d\log(1/d)) \leq C$, forcing $d$ to be bounded away from $0$. By the same argument applied to $\overline{G}$ forces $d$ to be bounded away from $1$. We thus have the following corollary.
+If $G$ is $C$-Ramsey, then applying Theorem~\ref{thm:ramsey-density} to whichever $G$ or $\overline{G}$ has density $d \leq 1/2$ yields $c/(d\log(1/d)) \leq C$, forcing $d$ to be bounded away from $0$. By the same argument applied to $\overline{G}$ forces $d$ to be bounded away from $1$. This gives the following corollary.
 
 \begin{corollary}
   \label{cor:ramsey-density}
@@ -107,7 +109,7 @@ If $G$ is $C$-Ramsey, then applying Theorem~\ref{thm:ramsey-density} to whicheve
 
 Due to the rich variety of induced subgraphs in dense random graphs, a popular angle to study the pseudorandom properties of Ramsey graphs is to consider their induced subgraphs. Some notable results are a theorem of Shelah~\cite{shelah1997erdhosrenyiconjecture} which asserts that every $n$-vertex Ramsey graph contains $2^{\Omega(n)}$ non-isomorphic induced subgraphs, and a theorem of Prömel and Rödl~\cite{PROMEL1999379} which shows the existence of $\delta = \delta(C) > 0$ such that every $C$-Ramsey graph on $n$ vertices contains an induced copy of all graphs on at most $\delta \log n$ vertices. 
 
-It is also interesting to look at the edge statistics of Ramsey graphs. For a graph $G$, let 
+It is also interesting to look at the edge statistics of induced subgraphs in Ramsey graphs. For a graph $G$, let 
 \[
   \Phi(G) \coloneqq \{e(H) : H \text{ is an induced subgraph of } G\}
 \]
@@ -115,9 +117,9 @@ Erdős and McKay~\cite{EFS} conjectured that for any Ramsey graph $G$ on $n$ ver
 \[
   \{1, 2, \ldots, \delta n^2\} \subseteq \Phi(G).
 \]
-It was proven for Random graphs by Calkin, Frieze, and Mckay~\cite{erdosmckayrandomgraph}, but the conjecture for Ramsey graphs remained open for decades and only started to show significant progress in recent years. In particular, a chain of results were sparked after the work of Narayanan, Sahasrabudhe, and Tomon~\cite{narayanan2017ramseygraphsinducesubgraphs} establishing that $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on some ideas from the work of Bukh and Sudakov~\cite{BUKH2007612} which showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature that dense random graphs also exhibit. Kwan and Sudakov~\cite{kwan2021ramseygraphsinducesubgraphs} later improved the bound to $|\Phi(G)| = \Omega(n^2)$ by refining the argument of Narayanan, Sahasrabudhe, and Tomon. Eventually, Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023} closed the conjecture with a fairly involved approach using tools from Fourier analysis, random matrix theory, and the theory of Boolean functions. 
+It was proven for Random graphs by Calkin, Frieze, and Mckay~\cite{erdosmckayrandomgraph}, but the conjecture for Ramsey graphs remained open for decades and only started to show significant progress in recent years. In particular, a chain of results were sparked after the work of Narayanan, Sahasrabudhe, and Tomon~\cite{narayanan2017ramseygraphsinducesubgraphs} establishing that $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on some ideas from the work of Bukh and Sudakov~\cite{BUKH2007612} which showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature that dense random graphs also exhibit. Kwan and Sudakov~\cite{kwan2021ramseygraphsinducesubgraphs} later improved the bound to $|\Phi(G)| = \Omega(n^2)$ by refining the argument of Narayanan, Sahasrabudhe, and Tomon. Eventually, Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023} closed the conjecture via Fourier-analytic techniques on graph polynomials.
 
-This dissertation will start by studying the result of Bukh and Sudakov~\cite{BUKH2007612} on large induced subgraphs in Ramsey graphs with many distinct degrees. This work not only tightens the connection between Ramsey graphs and random graphs, but also introduces a key feature of Ramsey graphs that unlocks the subsequent $|\Phi(G)| = \Omega(n^2)$ result by Kwan and Sudakov, which we will present in the following chapter. Lastly, we go through the broad strokes of the proof to the Erdős--McKay conjecture by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}, touching on the core ideas of their approach.
+This dissertation will start by studying the result of Bukh and Sudakov~\cite{BUKH2007612} on large induced subgraphs in Ramsey graphs with many distinct degrees. This work not only tightens the connection between Ramsey graphs and random graphs, but also builds the foundation for the subsequent $|\Phi(G)| = \Omega(n^2)$ result by Kwan and Sudakov, which we will present in the following chapter. Lastly, we go through the broad strokes of the proof to the Erdős-McKay conjecture by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}, touching on the core ideas of their approach.
 
 % Another research direction is to consider whether forbidding certain induced subgraphs could force homogeneous sets beyond logarithmic size. Erdős and Hajnal famously conjectured that for any graph $H$, if a graph $G$ does not contain $H$ as an induced subgraph, then $G$ contains a homogeneous set of size $|G|^{\eta}$ for some $\eta = \eta(H) > 0$.  
 
@@ -181,4 +183,4 @@ Suppose first that $U$ is formed by including each vertex independently with pro
 
 If instead $U$ is a uniformly random subset of a fixed size~$m$, the vertices of $U$ are no longer independent. Nevertheless, conditioning on $k=|U\cap D|$, we may observe that, given~$k$, the split of these $k$ elements between $A$ and $B$ follows a hypergeometric distribution. With the same assumption that $|D|$ is large, Stirling's approximation applied to the hypergeometric probability then yields the same $O(1/\sqrt{n})$ bound. We will carry out this calculation in detail in Chapter~\ref{sec:ch2}.
 
-An intuition to the bound $O(1/\sqrt{n})$ is that, in either sampling method, the difference $\deg_U(x)-\deg_U(y)$ is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$. In the independent case, this follows from the central limit theorem applied to a sum of independent bounded random variables. In the fixed-size case, it follows from the normal approximation to the hypergeometric distribution. Since the probability density function $\phi(x)$ of a normal distribution with standard deviation $\sigma$ is at most $1/(\sigma\sqrt{2\pi})$ for all $x$, the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sigma) = O(1/\sqrt{n})$. The theorems in the following chapters will rely on this principle. In Chapter~\ref{sec:ch2}, it bounds the probability that two vertices share a degree in a random induced subgraph, which leads to $\Omega(\sqrt{n})$ distinct degrees. In Chapter~\ref{sec:ch3}, the same principle bounds the probability that two vertices have equal degree in a random induced subgraph, which is a key step in producing $\Omega(n^2)$ distinct subgraph sizes. The resolution of the Erd\H{o}s--McKay conjecture in Chapter~\ref{sec:ch4} requires a substantially more powerful approach via Fourier analysis, but the underlying idea remains: when a random variable is approximately normal with large standard deviation, its point probabilities are small.
+An intuition to the bound $O(1/\sqrt{n})$ is that, in either sampling method, the difference $\deg_U(x)-\deg_U(y)$ is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$. In the independent case, this follows from the central limit theorem applied to a sum of independent bounded random variables. In the fixed-size case, it follows from the normal approximation to the hypergeometric distribution. Since the probability density function $\phi(x)$ of a normal distribution with standard deviation $\sigma$ is at most $1/(\sigma\sqrt{2\pi})$ for all $x$, the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sigma) = O(1/\sqrt{n})$. The theorems in the following chapters will rely on this principle. In Chapter~\ref{sec:ch2}, it bounds the probability that two vertices share a degree in a random induced subgraph, which leads to $\Omega(\sqrt{n})$ distinct degrees. In Chapter~\ref{sec:ch3}, the same principle bounds the probability that two vertices have equal degree in a random induced subgraph, which is a key step in producing $\Omega(n^2)$ distinct subgraph sizes. The resolution of the Erd\H{o}s-McKay conjecture in Chapter~\ref{sec:ch4} requires a substantially more powerful approach via Fourier analysis, but the underlying idea remains: when a random variable is approximately normal with large standard deviation, its point probabilities are small.

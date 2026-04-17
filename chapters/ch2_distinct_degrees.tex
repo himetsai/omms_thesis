@@ -8,7 +8,11 @@ In this chapter, we present the following result of Bukh and Sudakov.
   Every Ramsey graph on $n$ vertices induces a subgraph on $\Omega(n)$ vertices with $\Omega(\sqrt{n})$ distinct degrees.
 \end{theorem}
 
-This was originally conjectured by Erdős, Faudree, and Sós \cite{EFS} in light of the observation that the random graph $G_{n, 1/2}$ exhibits such a property almost surely, but the $\Omega(\sqrt{n})$ bound is in fact not optimal for both Ramsey graphs and $G_{n, 1/2}$. In particular, an upper bound of $O(n^{2/3})$ is noted in \cite{BUKH2007612}, which was later proved to be the correct order for Ramsey graphs by Jenssen, Keevash, Long, and Yepremyan \cite{jenssen2019distinctdegreesinducedsubgraphs} via a continuous relaxation approach. The corresponding order for $G_{n, 1/2}$ was also matched in an unpublished work of Conlon, Morris, Samotij, and Saxton \cite{conlon2019distinctdegrees}, further reinforcing the case that Ramsey graphs resemble random graphs in various respects. We will, however, focus on the original result of Bukh and Sudakov, as it introduces a key characteristic of Ramsey graphs that will be insightful in the following chapter.
+This was originally conjectured by Erdős, Faudree, and Sós \cite{EFS} in light of the observation that the random graph $G_{n, 1/2}$ exhibits such a property almost surely.
+
+% , but the $\Omega(\sqrt{n})$ bound is in fact not optimal for both Ramsey graphs and $G_{n, 1/2}$. 
+
+% In particular, an upper bound of $O(n^{2/3})$ is noted in \cite{BUKH2007612}, which was later proved to be the correct order for Ramsey graphs by Jenssen, Keevash, Long, and Yepremyan \cite{jenssen2019distinctdegreesinducedsubgraphs} via a continuous relaxation approach. The corresponding order for $G_{n, 1/2}$ was also matched in an unpublished work of Conlon, Morris, Samotij, and Saxton \cite{conlon2019distinctdegrees}, further reinforcing the case that Ramsey graphs resemble random graphs in various respects. We will, however, focus on the original result of Bukh and Sudakov, as it introduces a key characteristic of Ramsey graphs that will be insightful in the following chapter.
 
 \begin{definition}
   \label{def:diversity}
@@ -62,77 +66,98 @@ The notion of diversity captures the idea that the neighbourhoods of most pairs 
 \]
 where inequality follows from AM-GM. When $k$ is not the tail end of the distribution, we have $\sigma = \Theta(\sqrt{D}) = \Theta(\sqrt{n})$, and the Stirling bound in \eqref{eq:prob-deg-diff} is asymptotically $1/(\sigma\sqrt{2\pi})$ as $n \to \infty$, which is exactly the maximum density of a normal distribution with standard deviation $\sigma$. This confirms the intuition from Section~\ref{sec:anticoncentration} that the degree difference is approximately normally distributed so its point probabilities are $O(1/\sigma) = O(1/\sqrt{n})$.
 
-As mentioned above, it remains to show that every Ramsey graph contains a diverse subgraph of linear size. 
+It remains to show that every Ramsey graph contains a diverse subgraph of linear size. Instead of directly proving this, we prove the same statement on a strengthening of diversity called \textit{richness}.
+
+\begin{definition}
+  \label{def:richness}
+  An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-rich} if, for $W \subseteq V(G)$ with $|W| \geq \delta n$, we have $|N(v) \cap W| \geq \eps|W|$ and $|\overline{N(v)} \cap W| \geq \eps|W|$ for all but at most $n^{\delta}$ vertices $v \in V(G)$.
+\end{definition}
+
+The key property of richness is that it ensures the intersection of vertex neighbourhoods with arbitrary large vertex sets are not extremely large or small, mirroring randomness. The following lemma shows why richness is a natural strengthening of diversity.
 
 \begin{lemma}
-  \label{lemma:diverse-subgraph}
-
-  For $\delta \in (0, 1)$, there exists $\eps = \eps(C, \delta) > 0$ such that every $C$-Ramsey graph $G$ on $n$ vertices contains an $(\eps, \delta)$-diverse subgraph on $\Omega(n)$ vertices.
+  \label{lemma:richness-implies-diversity}
+  Let an $n$-vertex graph $G$ be $(\eps, \delta)$-rich, with $\delta \leq 1/2$. Then $G$ is $(\eps/2, \delta)$-diverse.
 \end{lemma}
 
 \begin{proof}
-  Suppose not. Let $K = K(C)$ be a large constant to be determined. Let $c = 8^{-K}$ and $\eps = 1/K$. We inductively construct a sequence of disjoint vertex sets $S_1, S_2, \ldots, S_K$ of size $(cn)^\delta$, such that for all $S_i$ one of the following conditions holds:
-  \begin{enumerate}[]
-    \item[(i)] $d(S_i, S_j) < 8\eps$ for $j > i$,
-    \item[(ii)] $d(S_i, S_j) > 1 - 8\eps$ for $j > i$.
-  \end{enumerate}
-  Alongside, we also construct a sequence of induced subgraphs $G = G_0 \supset G_1 \supset \cdots \supset G_K$, such that $|G_i| \geq |G_{i - 1}|/8$ and $S_i \subseteq V(G_{i - 1})$ for all $i$.
-
-  We first show that this construction suffices. By working with $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $(cn)^{\delta}$ and $\eps = 1/K$,
+  Note that for each $x \in V(G)$, either $|N(x)| \geq n/2$ or $|\overline{N(x)}| \geq n/2$. If $|N(x)| \geq n/2$, then richness implies that
   \[
-    d(S) \leq \frac{\binom{(cn)^{\delta}}{2}}{\binom{r(cn)^{\delta}}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 8\eps \leq \frac{10}{K}.
+    |\overline{N(y)} \cap N(x)| \geq \eps |N(x)| \geq \eps n/2
   \]
-  Thus Theorem \ref{thm:ramsey-density} yields a homogeneous set $A$ in $S$ of size
+  for at most $n^{\delta}$ vertices $y \in V(G)$. Similarly, if $|\overline{N(x)}| \geq n/2$, then
+  \[
+    |N(y) \cap \overline{N(x)}| \geq \eps |\overline{N(x)}| \geq \eps n/2
+  \]
+  for at most $n^{\delta}$ vertices $y \in V(G)$. But then in either case,
+  \[
+    |N(x) \Delta N(y)| = |\overline{N(y)} \cap N(x)|  + |N(y) \cap \overline{N(x)}| \geq \eps n/2.
+  \]
+\end{proof}
+
+We now show that every Ramsey graph contains a rich subgraph of linear size.
+
+\begin{lemma}
+  \label{lemma:rich-subgraph}
+
+  For $\delta \in (0, 1)$, there exists $\eps = \eps(C, \delta) > 0$ such that every $C$-Ramsey graph $G$ on $n$ vertices contains an $(\eps, \delta)$-rich subgraph on $\Omega(n)$ vertices.
+\end{lemma}
+
+\begin{proof}
+  Suppose not. Let $K = K(C)$ be a large constant to be determined. Let $c = 4^{-K}$ and $\eps = 1/K$. We inductively construct a sequence of disjoint vertex sets $S_1, S_2, \ldots, S_K$ of size $s = (cn)^\delta/2$, such that for all $S_i$ one of the following conditions holds:
+  \begin{enumerate}
+    \item[(i)] $d(S_i, S_j) < 4\eps$ for $j > i$,
+    \item[(ii)] $d(S_i, S_j) > 1 - 4\eps$ for $j > i$.
+  \end{enumerate}
+  Alongside, we also construct a sequence of induced subgraphs $G = G[U_0] \supset G[U_1] \supset \cdots \supset G[U_K]$, such that $|U_i| \geq (\delta/4)|U_{i - 1}|$ and $S_i \subseteq U_{i - 1}$ for all $i$.
+
+  We first show that this construction gives the lemma. By working with $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $s$ and $\eps = 1/K$,
+  \[
+    d(S) = \frac{\sum_{k = 1}^r e(S_{i_k})}{\binom{|S|}{2}} + \frac{\sum_{k < l} e(S_{i_k}, S_{i_l})}{\binom{|S|}{2}} \leq \frac{r\binom{s}{2}}{\binom{rs}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 4\eps \leq \frac{6}{K}.
+  \]
+  The Erdős--Szemerédi theorem (Theorem \ref{thm:ramsey-density}) now yields a homogeneous set $A \subseteq S$ of size
   \[
     |A| \geq \frac{\gamma K}{10\log(K/10)} \log |S| = \frac{\gamma \delta K}{10\log(K/10)} \log cn = \frac{\gamma \delta K}{10\log(K/10)} \log n + o(\log n),
   \]
-  for some absolute constant $\gamma > 0$ given by the theorem. But then $\frac{\gamma \delta K}{10\log(K/10)} > C$ for sufficiently large $K$, and so $|A| > C\log n$, contradiction.
-  
-  We now construct the sets $S_i$ and $G_i$ inductively. Suppose $G_1, \ldots, G_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. By induction, $|G_{i - 1}| \geq 8^{1 - i}|G| \geq cn$. Note that $G_{i - 1}$ is not $(\eps, \delta)$-diverse by assumption, so there exists a vertex $x \in V(G_{i - 1})$ and a set $S_i \subseteq G_{i - 1}$ of size $(cn)^{\delta}$ such that $|N_{G_{i - 1}}(x) \Delta N_{G_{i - 1}}(y)| < \eps|G_{i - 1}|$ for $y \in S_i$. Let $T_i = V(G_{i - 1}) \setminus S_i$. Since $(cn)^\delta \leq cn/2$ for large enough $n$, we have $|T_i| \geq |G_{i - 1}|/2$. 
+  for some absolute constant $\gamma > 0$ given by the theorem. Take $K$ to be large enough so that $\frac{\gamma \delta K}{10\log(K/10)} > C$. Then $|A| > C\log n$, contradiction.
 
-  We consider two cases. In the first case, suppose $|\overline{N_{T_i}}(x)| \geq |T_i|/2$. For $y \in S_i$,
-  \[
-    |N_{T_i}(y) \cap \overline{N}_{T_i}(x)| \leq |N_{T_i}(x) \Delta N_{T_i}(y)| < \eps|V(G_{i - 1})|,
-  \]
-  and so
-  \[
-    d(y, \overline{N}_{T_i}(x)) = \frac{|N_{T_i}(y) \cap \overline{N}_{T_i}(x)|}{|N_{T_i}(x)|} < \frac{\eps|V(G_{i - 1})|}{|T_i|/2} \leq 4\eps.
-  \]
-  Partition $\overline{N}_{T_i}(x)$ into $V_i \sqcup Z_i$, where $V_i = \{v \in \overline{N}_{T_i}(x) : d(v, S_i) < 8\eps\}$. We double count $e(\overline{N}_{T_i}(x), S_i)/|S_i|$. Since $d(v, S_i) \geq 8\eps$ for $v \in Z_i$,
-  \[
-    \frac{e(\overline{N}_{T_i}(x), S_i)}{|S_i|} = \sum_{v \in \overline{N}_{T_i}(x)} \frac{e(v, S_i)}{|S_i|} = \sum_{v \in \overline{N}_{T_i}(x)} d(v, S_i) \geq \sum_{v \in Z_i} d(v, S_i) \geq 8\eps|Z_i|.
-  \]
-  On the other hand, since we showed $d(y, \overline{N}_{T_i}(x)) < 4\eps$ for $y \in S_i$,
-  \[
-    \frac{e(\overline{N}_{T_i}(x), S_i)}{|S_i|} = \frac{1}{|S_i|} \sum_{y \in S_i} e(y, \overline{N}_{T_i}(x)) = \frac{|\overline{N}_{T_i}(x)|}{|S_i|}\sum_{y \in S_i} d(y, \overline{N}_{T_i}(x)) \leq 4\eps|\overline{N}_{T_i}(x)|.
-  \]
-  Combining both inequalities yields $|Z_i| \leq |\overline{N}_{T_i}(x)|/2$. It follows that
-  \[
-    |V_i| \geq \frac{|\overline{N}_{T_i}(x)|}{2} \geq \frac{|T_i|}{4} \geq \frac{|V(G_{i - 1})|}{8}.
-  \]
-  Recall that $d(S_i, U) < 8\eps$ for all $U \subseteq V_i$. Setting $G_i = G[V_i]$ thus satisfy $|V(G_i)| \geq |V(G_{i - 1})|/8$ and condition (i) for $S_i$.
+  We now construct the sets $S_i$ and $U_i$ inductively. Suppose $U_1, \ldots, U_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. By induction, $|U_{i - 1}| \geq (\delta/4)^{i - 1}|U_0| \geq cn$. Since $G[U_{i - 1}]$ is not $(\eps, \delta)$-rich by assumption, $U_{i - 1}$ contains subsets $W_i, Y_i$ with $|W_i| \geq \delta|U_{i - 1}|$ and $|Y_i| = (cn)^{\delta}$, such that for each $y \in Y_i$ we have $|N_{G_{i - 1}}(y) \cap W_i| < \eps|W_i|$ or $|\overline{N_{G_{i - 1}}(y)} \cap W_i| < \eps|W_i|$. We consider two cases.
 
-  The case for $|N_{T_i}(x)| \geq |T_i|/2$ follows the same argument. Since any vertex in $N_{T_i}(x)$ that is not a neighbor of $y$ lies in $N_{T_i}(x) \setminus N_{T_i}(y) \subseteq N_{T_i}(x) \Delta N_{T_i}(y)$, we have
+  Suppose $|N_{G_{i - 1}}(y) \cap W_i| < \eps|W_i|$ for half the vertices $y \in Y_i$, and let $S_i$ be the corresponding subset of $Y_i$, so $|S_i| = (cn)^{\delta}/2$. Put $T_i = W_i \setminus S_i$ and note that $|T_i| \geq |W_i|/2$, as $|S_i| \leq |W_i|/2$ for large enough $n$. Then for $y \in S_i$,
   \[
-    |N_{T_i}(x) \cap N_{T_i}(y)| \geq |N_{T_i}(x)| - |N_{T_i}(x) \Delta N_{T_i}(y)| < |N_{T_i}(x)| - \eps|V(G_{i - 1})|,
+    d(y, T_i) = \frac{|N_{G_{i - 1}}(y) \cap T_i|}{|T_i|} \leq \frac{|N_{G_{i - 1}}(y) \cap W_i|}{|T_i|} < \frac{\eps |W_i|}{|W_i|/2} = 2\eps.
   \]
-  and so
+  Partition $T_i$ into $U_i \sqcup Z_i$ where $U_i = \{v \in T_i : d(v, S_i) \leq 4 \eps\}$. We show that $|U_i| \geq (\delta/4)|U_{i - 1}|$ by double counting $e(T_i, S_i)/|S_i|$. Since $d(v, S_i) > 4\eps$ for $v \in Z_i$,
   \[
-    d(y, N_{T_i}(x)) = \frac{|N_{T_i}(y) \cap N_{T_i}(x)|}{|N_{T_i}(x)|} > \frac{|N_{T_i}(x)| \! - \! \eps|V(G_{i - 1})|}{|N_{T_i}(x)|} \geq 1 - \frac{\eps|V(G_{i - 1})|}{|T_i|/2} \geq 1 - 4\eps.
+    \frac{e(T_i, S_i)}{|S_i|} = \sum_{v \in T_i} d(v, S_i) \geq \sum_{v \in Z_i} d(v, S_i) > 4\eps|Z_i|.
   \]
-  Partition $N_{T_i}(x)$ into $V_i \sqcup Z_i$, where $V_i = \{v \in N_{T_i}(x) : d(v, S_i) > 1 - 8\eps\}$. Then for $v \in Z_i$, we have $1 - d(v, S_i) \geq 8\eps$, so
+  On the other hand, since $d(y, T_i) < 2\eps$ for $y \in S_i$,
   \[
-    8\eps|Z_i| \leq \sum_{v \in Z_i} (1 - d(v, S_i)) \leq \sum_{v \in N_{T_i}(x)} (1 - d(v, S_i)).
+    \frac{e(T_i, S_i)}{|S_i|} = \frac{1}{|S_i|}\sum_{y \in S_i} e(y, T_i) = \frac{|T_i|}{|S_i|}\sum_{y \in S_i} d(y, T_i) < 2\eps|T_i|.
   \]
-  On the other hand, since we showed $d(y, N_{T_i}(x)) > 1 - 4\eps$ for $y \in S_i$.
+  Combining both inequalities yields $|Z_i| < |T_i|/2$. Therefore
   \[
-    \frac{e(N_{T_i}(x), S_i)}{|S_i|} = \frac{|N_{T_i}(x)|}{|S_i|}\sum_{y \in S_i} d(y, N_{T_i}(x)) \geq (1 - 4\eps)|N_{T_i}(x)|,
+    |U_i| = |T_i| - |Z_i| > \frac{|T_i|}{2} \geq \frac{|W_i|}{4} \geq \frac{\delta}{4}|U_{i - 1}|.
   \]
-  But then
+  For $j > i$, since $S_j \subseteq U_j \subseteq U_i$, we have $d(v, S_i) \leq 4\eps$ for every $v \in S_j$, and averaging gives $d(S_i, S_j) \leq 4\eps$. Thus $S_i$ satisfies condition~(i).
+
+  Otherwise, $|\overline{N_{G_{i - 1}}(y)} \cap W_i| < \eps|W_i|$ for half the vertices $y \in Y_i$. Let $S_i$ be the corresponding subset of $Y_i$ and put $T_i = W_i \setminus S_i$, so again $|T_i| \geq |W_i|/2$ and $|S_i| = (cn)^{\delta}/2$. For $y \in S_i$,
   \[
-    \sum_{v \in N_{T_i}(x)} (1 - d(v, S_i)) = |N_{T_i}(x)| - \sum_{v \in N_{T_i}(x)} d(v, S_i) \geq 4\eps|N_{T_i}(x)|.
+    1 - d(y, T_i) = \frac{|\overline{N_{G_{i - 1}}(y)} \cap T_i|}{|T_i|} \leq \frac{|\overline{N_{G_{i - 1}}(y)} \cap W_i|}{|T_i|} < \frac{\eps |W_i|}{|W_i|/2} = 2\eps,
   \]
-  Combining both inequalities on $\sum (1 - d(v, S_i))$ yields $|Z_i| \leq |N_{T_i}(x)|/2$, and so $|V_i| \geq \geq |V(G_{i - 1})|/8$. Note that $d(S_i, U) > 1 - 8\eps$ for all $U \subseteq V_i$. Setting $G_i = G[V_i]$ thus satisfies $|V(G_i)| \geq |V(G_{i - 1})|/8$ and condition (ii) for $S_i$. This completes the induction.
+  so $d(y, T_i) > 1 - 2\eps$ for every $y \in S_i$. Partition $T_i$ into $U_i \sqcup Z_i$ where $U_i = \{v \in T_i : d(v, S_i) \geq 1 - 4\eps\}$. We double count $|T_i| - e(T_i, S_i)/|S_i| = \sum_{v \in T_i}(1 - d(v, S_i))$. Since $1 - d(v, S_i) > 4\eps$ for $v \in Z_i$,
+  \[
+    |T_i| - \frac{e(T_i, S_i)}{|S_i|} = \sum_{v \in T_i}(1 - d(v, S_i)) \geq \sum_{v \in Z_i}(1 - d(v, S_i)) > 4\eps|Z_i|.
+  \]
+  On the other hand, using $d(y, T_i) > 1 - 2\eps$ for $y \in S_i$,
+  \[
+    |T_i| - \frac{e(T_i, S_i)}{|S_i|} = |T_i| - \frac{|T_i|}{|S_i|}\sum_{y \in S_i} d(y, T_i) < |T_i| - (1 - 2\eps)|T_i| = 2\eps|T_i|.
+  \]
+  Combining both inequalities gives $|Z_i| < |T_i|/2$, hence $|U_i| > |T_i|/2 \geq (\delta/4)|U_{i - 1}|$ as in the other case. For  $j > i$, each $v \in S_j \subseteq U_i$ satisfies $d(v, S_i) \geq 1 - 4\eps$, so $d(S_i, S_j) \geq 1 - 4\eps$. Thus $S_i$ satisfies condition~(ii). This completes the induction.
 \end{proof}
 
-Theorem \ref{thm:bs2007} follows immediately from Lemmas \ref{lemma:diversity-degrees} and \ref{lemma:diverse-subgraph}.
+Theorem \ref{thm:bs2007} now follows immediately by applying Lemmas \ref{lemma:rich-subgraph}, \ref{lemma:richness-implies-diversity}, and \ref{lemma:diversity-degrees} in sequence.
+
+\begin{proof}[Proof of Theorem \ref{thm:bs2007}]
+  Let $G$ be a $C$-Ramsey graph on $n$ vertices, and fix any $\delta \in (0, 1/2)$. By Lemma \ref{lemma:rich-subgraph}, there exists $\eps = \eps(C, \delta) > 0$ and an $(\eps, \delta)$-rich induced subgraph $G[V'] \subseteq G$ with $|V'| \geq c n$ for some $c = c(C, \delta) > 0$. Put $n' = |V'|$. By Lemma \ref{lemma:richness-implies-diversity}, $G[V']$ is $(\eps/2, \delta)$-diverse on $n'$ vertices. Applying Lemma \ref{lemma:diversity-degrees} to $G[V']$ with $m = n'/2$, we obtain an induced subgraph of $G[V']$ on $m \geq cn/2 = \Omega(n)$ vertices containing $\frac{\sqrt{\eps n'/2}}{320} \geq \frac{\sqrt{\eps c n/2}}{320} = \Omega(\sqrt{n})$ vertices of distinct degrees. 
+\end{proof}

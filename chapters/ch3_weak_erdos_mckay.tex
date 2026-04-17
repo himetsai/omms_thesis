@@ -42,9 +42,7 @@ The same collision graph construction now finds us the desired set of $U$ such t
 
 \subsection{Pair diversity and richness}\label{sec:richness}
 
-We now introduce the structural conditions needed for the Kwan--Sudakov argument.
-Recall from Chapter~2 that a graph $G$ is $(\varepsilon, \delta)$-diverse if for each vertex $x$, at most $n^{\delta}$ vertices $y$ have $|N(x) \Delta N(y)| < \varepsilon n$.
-In Chapter~2, diversity was the structural condition that guaranteed $|N(x) \Delta N(y)| = \Omega(n)$ for most pairs, which via anticoncentration gave the $O(1/\sqrt{n})$ collision probability for single vertices. As discussed above, the proof of Theorem~\ref{thm:ks} runs the same anticoncentration mechanism but for pairs of vertices. This requires controlling the symmetric difference $N(\mathbf{x}) \Delta N(\mathbf{y})$ for pairs $\mathbf{x} = \{x_1, x_2\}$, which is what \emph{pair-diversity} provides. 
+We now introduce the structural conditions needed for the Kwan-Sudakov argument. Recall from Chapter~2 that a graph $G$ is $(\varepsilon, \delta)$-diverse if for each vertex $x$, at most $n^{\delta}$ vertices $y$ have $|N(x) \Delta N(y)| < \varepsilon n$. In Chapter~2, diversity was the structural condition that guaranteed $|N(x) \Delta N(y)| = \Omega(n)$ for most pairs, which via anticoncentration gave the $O(1/\sqrt{n})$ collision probability for single vertices. As discussed above, the proof of Theorem~\ref{thm:ks} runs the same anticoncentration mechanism but for pairs of vertices. This requires controlling the symmetric difference $N(\mathbf{x}) \Delta N(\mathbf{y})$ for pairs $\mathbf{x} = \{x_1, x_2\}$, which is what \emph{pair-diversity} provides. 
  
 \begin{definition}\label{def:pair_diverse}
   An $n$-vertex graph $G$ is \textit{$(\eps, \delta, \alpha)_2$-diverse} if for each pair of vertices $\mathbf{x} = \{x_1, x_2\}$ in $G$ with $|N(x_1) \Delta N(x_2)| \geq \alpha n$, there are at most $n^{\delta}$ disjoint pairs of vertices $\mathbf{y} = \{y_1, y_2\}$ with $\mathbf{x} \cap \mathbf{y} = \emptyset$, such that $|N(\mathbf{x}) \Delta N(\mathbf{y})| < \eps n$.
@@ -53,7 +51,6 @@ In Chapter~2, diversity was the structural condition that guaranteed $|N(x) \Del
 We introduce a natural strengthening of diversity that also implies pair-diversity called \textit{richness}.
 
 \begin{definition}
-  \label{def:richness}
   An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-rich} if, for $W \subseteq V(G)$ with $|W| \geq \delta n$, we have $|N(v) \cap W| \geq \eps|W|$ and $|\overline{N(v)} \cap W| \geq \eps|W|$ for all but at most $n^{\delta}$ vertices $v \in V(G)$.
 \end{definition}
 
