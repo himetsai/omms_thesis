@@ -3,12 +3,14 @@
 
 In this chapter, we present the following result of Bukh and Sudakov.
 
-\begin{theorem}[Bukh--Sudakov {\cite{BUKH2007612}}]
+\begin{theorem}[Bukh-Sudakov {\cite{BUKH2007612}}]
   \label{thm:bs2007}
   Every Ramsey graph on $n$ vertices induces a subgraph on $\Omega(n)$ vertices with $\Omega(\sqrt{n})$ distinct degrees.
 \end{theorem}
 
-This was originally conjectured by Erdős, Faudree, and Sós \cite{EFS} in light of the observation that the random graph $G_{n, 1/2}$ exhibits such a property almost surely.
+This was originally conjectured by Erdős, Faudree, and Sós \cite{EFS} in light of the observation that the random graph $G_{n, 1/2}$ exhibits such a property almost surely. In particular, this theorem already has implications for the edge statistics of Ramsey graphs $G$, as the subgraphs $G - \{v\}$ for $v \in V(G)$ have at least $\Omega(\sqrt{n})$ different sizes. This idea lays the foundation for the proof in the next chapter.
+
+To prove Theorem \ref{thm:bs2007}, Bukh and Sudakov introduced the notion of \textit{diversity}, which captures the idea that the neighbourhoods of most pairs of vertices are not too similar.
 
 % , but the $\Omega(\sqrt{n})$ bound is in fact not optimal for both Ramsey graphs and $G_{n, 1/2}$. 
 
@@ -20,18 +22,18 @@ This was originally conjectured by Erdős, Faudree, and Sós \cite{EFS} in light
   An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-diverse} if for $x \in V(G)$, we have $|N(x) \Delta N(y)| \geq \eps n$ for all but at most $n^{\delta}$ vertices $y \in V(G)$.
 \end{definition}
 
-The notion of diversity captures the idea that the neighbourhoods of most pairs of vertices differ significantly. In particular, $(\eps, \delta)$-diversity directly conditions our assumption that $|N(x) \Delta N(y)| = D \geq \eps n$ in the discussion of the anticoncentration principle in Section \ref{sec:anticoncentration}. Hence, following our discussion in Section \ref{sec:anticoncentration}, we see that $(\eps, \delta)$-diversity implies that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$ for all but at most $n^{\delta}$ pairs of vertices $x, y \in V(G)$, from which we use Jensen's inequality to conclude that there are many distinct degrees in a diverse graph. The following lemma formalizes this observation and reduces Theorem \ref{thm:bs2007} to showing every Ramsey graph contains a diverse subgraph of linear size.
+Notice that $(\eps, \delta)$-diversity directly conditions our assumption that $|N(x) \Delta N(y)| = D \geq \eps n$ in the discussion of the anticoncentration principle in Section \ref{sec:anticoncentration}. In particular, we may show in a diverse graph that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$ for all but at most $n^{\delta}$ pairs of vertices $x, y \in V(G)$, from which we use Jensen's inequality to conclude that there are many distinct degrees in a diverse graph. The following lemma formalizes this observation and reduces Theorem \ref{thm:bs2007} to showing every Ramsey graph contains a diverse subgraph of linear size.
 
 \begin{lemma}
-  \label{lemma:diversity-degrees}
+  \label{lem:diversity-degrees}
 
-  Let $\delta \in (0, 1/2)$ and let $G$ be an $(\eps, \delta)$-diverse graph on $n$ vertices for large enough $n$. Then for $n/4 \leq m \leq 3n/4$, there is a subgraph on $m$ vertices containing vertices of $\sqrt{\eps n}/320$ distinct degrees.
+  Let $\delta \in (0, 1/2)$ and let $G$ be an $(\eps, \delta)$-diverse graph on $n$ vertices for large enough $n$. Then for $n/4 \leq m \leq 3n/4$, there is a subgraph on $m$ vertices containing vertices of $\sqrt{\eps n}/10$ distinct degrees.
 \end{lemma}
 
 \begin{proof}
-  Fix $m$ as above. Let $U$ be chosen uniformly at random among all subsets of $V(G)$ of size $m$. Let $H = G[U]$. It suffices to show that with positive probability, $H$ contains $\Omega(\sqrt{n})$ vertices of distinct degrees.
+  Fix $m$ as above. Let $U$ be chosen uniformly at random among all subsets of $V(G)$ of size $m$. It suffices to show that with positive probability, $G[U]$ contains $\Omega(\sqrt{n})$ vertices of distinct degrees.
 
-  For distinct $x, y \in V(G)$, define $\mathbbm{1}_{xy}$ to be the indicator for the event that $x, y \in V(H)$ and $\deg_H(x) = \deg_H(y)$. Then $\E[\mathbbm{1}_{xy}] \leq \prob[\deg_U(x) = \deg_U(y)]$. Put $D = N_G(x) \Delta N_G(y)$, and $k = |D \cap U|$. Write $A = N_G(x) \setminus N_G(y)$ and $B = N_G(y) \setminus N_G(x)$. Then 
+  For distinct $x, y \in V(G)$, define $\mathbbm{1}_{xy}$ to be the indicator for the event that $x, y \in V(H)$ and $\deg_U(x) = \deg_U(y)$. Then $\E[\mathbbm{1}_{xy}] \leq \prob[\deg_U(x) = \deg_U(y)]$. Put $D = N_G(x) \Delta N_G(y)$, and $k = |D \cap U|$. Write $A = N_G(x) \setminus N_G(y)$ and $B = N_G(y) \setminus N_G(x)$. Then 
   \[
     \prob[\deg_U(x) = \deg_U(y)] = \prob\left[|A \cap U| = |B \cap U|\right].
   \]
@@ -49,15 +51,15 @@ The notion of diversity captures the idea that the neighbourhoods of most pairs 
   \end{equation}
   Thus if $|N_G(x) \Delta N_G(y)| \geq \eps n$ then $\E[\mathbbm{1}_{xy}] \leq 3/\sqrt{\eps n} + o(n^{-1/2}) \leq 4/\sqrt{\eps n}$.
 
-  Let $I = \sum_{x, y \in V(G)} \mathbbm{1}_{xy}$. By definition of an $(\eps, \delta)$-diverse graph, we have $\E[\mathbbm{1}_{xy}] \leq 4/\sqrt{\eps n}$ for all but at most $n^{1 + \delta} < n^{3/2}$ pairs $x, y \in V(G)$. Thus,
+  Now consider the degree collision graph $H$ on $U$, where $x, y \in U$ are adjacent if and only if $\deg_U(x) = \deg_U(y)$. Since $G$ is $(\eps, \delta)$-diverse, $\E[\mathbbm{1}_{xy}] \leq 4/\sqrt{\eps n}$ for all but at most $n^{1 + \delta} < n^{3/2}$ pairs $x, y \in V(G)$. Thus the expected number of edges in $H$ is
   \[
-    \E[I] \leq n^{1 + \delta} + \frac{4}{\sqrt{\eps n}} \cdot n^2 \leq \frac{5}{\sqrt{\eps}}n^{3/2},
-  \]
-  and so there is a choice for $U$ such that $I \leq 5n^{3/2}/\sqrt{\eps}$. Now let $r$ be the number of vertices of distinct degrees in $H$. Let $n_k$ be the number of vertices in $H$ with degree $k$ and note that $\sum_{k} n_k = m$. By Jensen's inequality
+    \E[e(H)] = \sum_{x, y \in V(G)} \E[\mathbbm{1}_{xy}] \leq n^{1 + \delta} + \frac{4}{\sqrt{\eps n}} \cdot n^2 \leq \frac{5}{\sqrt{\eps}}n^{3/2}.
+  \] 
+  It now follows from Turan's Theorem (Proposition \ref{prop:turan}) that $H$ contains an independent set $I \subseteq U$ of size at least 
   \[
-    5n^{3/2}/\sqrt{\eps} \geq I = \sum_{k} \binom{n_k}{2} \geq r\binom{\frac{1}{r}\sum_{k} n_k}{2} \geq \frac{m^2}{4r} \geq \frac{n^2}{64r}.
+    |I| \geq \frac{n^2}{2\E[e(H)] + n} \leq \frac{\sqrt{\eps n}}{10}.
   \]
-  Rearranging yields the lemma.
+  In particular, each vertex in $I$ has a distinct degree in $G[U]$.
 \end{proof}
 
 \textit{Remark.} The hypergeometric distribution $\mathrm{Hyp}(|D|, |A|, k)$ has variance 
@@ -73,10 +75,10 @@ It remains to show that every Ramsey graph contains a diverse subgraph of linear
   An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-rich} if, for $W \subseteq V(G)$ with $|W| \geq \delta n$, we have $|N(v) \cap W| \geq \eps|W|$ and $|\overline{N(v)} \cap W| \geq \eps|W|$ for all but at most $n^{\delta}$ vertices $v \in V(G)$.
 \end{definition}
 
-The key property of richness is that it ensures the intersection of vertex neighbourhoods with arbitrary large vertex sets are not extremely large or small, mirroring randomness. The following lemma shows why richness is a natural strengthening of diversity.
+The key property of richness is that it ensures the intersection of vertex neighbourhoods with arbitrary large vertex sets are not extremely large or small. In particular, when $W$ is the neighborhood of another vertex, richness ensures both sides of the symmetric difference $|N(x) \Delta N(y)|$ are large, rather than merely the symmetric difference itself being large. This is why richness is a stronger condition than diversity.
 
 \begin{lemma}
-  \label{lemma:richness-implies-diversity}
+  \label{lem:richness-implies-diversity}
   Let an $n$-vertex graph $G$ be $(\eps, \delta)$-rich, with $\delta \leq 1/2$. Then $G$ is $(\eps/2, \delta)$-diverse.
 \end{lemma}
 
@@ -98,7 +100,7 @@ The key property of richness is that it ensures the intersection of vertex neigh
 We now show that every Ramsey graph contains a rich subgraph of linear size.
 
 \begin{lemma}
-  \label{lemma:rich-subgraph}
+  \label{lem:rich-subgraph}
 
   For $\delta \in (0, 1)$, there exists $\eps = \eps(C, \delta) > 0$ such that every $C$-Ramsey graph $G$ on $n$ vertices contains an $(\eps, \delta)$-rich subgraph on $\Omega(n)$ vertices.
 \end{lemma}
@@ -111,7 +113,7 @@ We now show that every Ramsey graph contains a rich subgraph of linear size.
   \end{enumerate}
   Alongside, we also construct a sequence of induced subgraphs $G = G[U_0] \supset G[U_1] \supset \cdots \supset G[U_K]$, such that $|U_i| \geq (\delta/4)|U_{i - 1}|$ and $S_i \subseteq U_{i - 1}$ for all $i$.
 
-  We first show that this construction gives the lemma. By working with $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $s$ and $\eps = 1/K$,
+  We first show how this construction gives the lemma. By working with $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $s$ and $\eps = 1/K$,
   \[
     d(S) = \frac{\sum_{k = 1}^r e(S_{i_k})}{\binom{|S|}{2}} + \frac{\sum_{k < l} e(S_{i_k}, S_{i_l})}{\binom{|S|}{2}} \leq \frac{r\binom{s}{2}}{\binom{rs}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 4\eps \leq \frac{6}{K}.
   \]
@@ -156,8 +158,6 @@ We now show that every Ramsey graph contains a rich subgraph of linear size.
   Combining both inequalities gives $|Z_i| < |T_i|/2$, hence $|U_i| > |T_i|/2 \geq (\delta/4)|U_{i - 1}|$ as in the other case. For  $j > i$, each $v \in S_j \subseteq U_i$ satisfies $d(v, S_i) \geq 1 - 4\eps$, so $d(S_i, S_j) \geq 1 - 4\eps$. Thus $S_i$ satisfies condition~(ii). This completes the induction.
 \end{proof}
 
-Theorem \ref{thm:bs2007} now follows immediately by applying Lemmas \ref{lemma:rich-subgraph}, \ref{lemma:richness-implies-diversity}, and \ref{lemma:diversity-degrees} in sequence.
+Theorem \ref{thm:bs2007} now follows by a simple application of Lemmas \ref{lem:rich-subgraph}, \ref{lem:richness-implies-diversity}, and \ref{lem:diversity-degrees} in sequence.
 
-\begin{proof}[Proof of Theorem \ref{thm:bs2007}]
-  Let $G$ be a $C$-Ramsey graph on $n$ vertices, and fix any $\delta \in (0, 1/2)$. By Lemma \ref{lemma:rich-subgraph}, there exists $\eps = \eps(C, \delta) > 0$ and an $(\eps, \delta)$-rich induced subgraph $G[V'] \subseteq G$ with $|V'| \geq c n$ for some $c = c(C, \delta) > 0$. Put $n' = |V'|$. By Lemma \ref{lemma:richness-implies-diversity}, $G[V']$ is $(\eps/2, \delta)$-diverse on $n'$ vertices. Applying Lemma \ref{lemma:diversity-degrees} to $G[V']$ with $m = n'/2$, we obtain an induced subgraph of $G[V']$ on $m \geq cn/2 = \Omega(n)$ vertices containing $\frac{\sqrt{\eps n'/2}}{320} \geq \frac{\sqrt{\eps c n/2}}{320} = \Omega(\sqrt{n})$ vertices of distinct degrees. 
-\end{proof}
+\paragraph{Proof of Theorem \ref{thm:bs2007}.} Let $G$ be a $C$-Ramsey graph on $n$ vertices, and fix any $\delta \in (0, 1/2)$. By Lemma \ref{lemma:rich-subgraph}, there exists $\eps = \eps(C, \delta) > 0$ and an $(\eps, \delta)$-rich induced subgraph $G[V'] \subseteq G$ with $|V'| \geq c n$ for some $c = c(C, \delta) > 0$. Put $n' = |V'|$. By Lemma \ref{lemma:richness-implies-diversity}, $G[V']$ is $(\eps/2, \delta)$-diverse on $n'$ vertices. Applying Lemma \ref{lemma:diversity-degrees} to $G[V']$ with $m = n'/2$, we obtain an induced subgraph of $G[V']$ on $m \geq cn/2 = \Omega(n)$ vertices containing $\frac{\sqrt{\eps n'/2}}{10} \geq \frac{\sqrt{\eps c n/2}}{10} = \Omega(\sqrt{n})$ vertices of distinct degrees. \

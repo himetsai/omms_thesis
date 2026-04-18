@@ -1,146 +1,98 @@
 \section{Subgraphs of Quadratically Many Sizes}
 \label{sec:ch3}
 
-Recall Erdős and Mckay conjectured that for any Ramsey graph $G$ on $n$ vertices, there exists $\delta = \delta(C) > 0$ such that
+Recall that Erdős and Mckay conjectured that for any Ramsey graph $G$ on $n$ vertices, there exists $\delta = \delta(C) > 0$ such that
 \[
   \{1, 2, \ldots, \delta n^2\} \subseteq \Phi(G) \coloneqq \{e(H) : H \text{ is an induced subgraph of } G\},
 \] 
-That is, for any $1 \leq t \leq \delta n^2$, there exists an induced subgraph with exactly $t$ edges. In \cite{erdosmckayrandomgraph}, the conjecture was proven for random graphs, and so it is natural to ask whether Ramsey graphs also exhibit this property. The conjecture was widely open for decades. An early major result was due to Alon, Krivelevich and Sudakov in 2003 \cite{AlonKrivelevichSudakov2003} which proved the conjecture with $n^{\delta}$ in place of $\delta n^2$, but little progress was made afterwards. Note that Erdős and McKay's conjecture implies that $|\Phi(G)| = \Omega(n^2)$, which is best possible asymptotically as $|\Phi(G)| \leq \binom{n}{2}$. Thus a natural relaxation of the conjecture is to ask whether Ramsey graphs have quadratically many distinct sizes of induced subgraphs. 
+That is, for any $1 \leq t \leq \delta n^2$, there exists an induced subgraph with exactly $t$ edges. 
+% In \cite{erdosmckayrandomgraph}, the conjecture was proven for random graphs, and so it is natural to ask whether Ramsey graphs also exhibit this property. 
+The conjecture was widely open for decades. In 2003, Alon, Krivelevich and Sudakov \cite{AlonKrivelevichSudakov2003} proved the conjecture with $n^{\delta}$ in place of $\delta n^2$, but little progress was made afterwards. 
+\begin{theorem}[Alon, Krivelevich and Sudakov {\cite{AlonKrivelevichSudakov2003}}]
+  \label{thm:alks2003}
+  For any $C > 0$, there exists $\delta = \delta(C) > 0$ such that
+  \[
+  \{1, 2, \ldots, n^{\delta}\} \subseteq \Phi(G).
+  \]
+\end{theorem}
+Since the conjecture implies $|\Phi(G)| = \Omega(n^2)$ and the triavial upper bound gives $|\Phi(G)| \leq \binom{n}{2}$, a natural relaxation of the conjecture is to ask whether $\Phi(G)$ indeed has quadratic size asymptotically. In 2017, Narayanan, Sahasrabudhe, and Tomon \cite{narayanan2017ramseygraphsinducesubgraphs} proved a near optimal bound of $|\Phi(G)| = n^{2 - o(1)}$ by building on the notion of diversity from Chapter~\ref{sec:ch2}. The desired quadratic bound was achieved by Kwan and Sudakov \cite{kwan2021ramseygraphsinducesubgraphs} a few years later, and this chapter is dedicated to presenting their proof.
 
-In 2017, Narayanan, Sahasrabudhe, and Tomon \cite{narayanan2017ramseygraphsinducesubgraphs} proved a near optimal bound of $|\Phi(G)| = n^{2 - o(1)}$ by building on the notion of diversity from Chapter~\ref{sec:ch2}. The desired quadratic bound was achieved by Kwan and Sudakov \cite{kwan2021ramseygraphsinducesubgraphs} a few years later, and this chapter is dedicated to presenting their proof.
-
-\begin{theorem}[Kwan--Sudakov {\cite{kwan2021ramseygraphsinducesubgraphs}}]
+\begin{theorem}[Kwan and Sudakov {\cite{kwan2021ramseygraphsinducesubgraphs}}]
   \label{thm:ks}
-  Every $C$-Ramsey graph on $n$ vertices contains induced subgraphs of $\Omega(n^2)$ distinct sizes.
+  For any $C > 0$, 
+  \[
+    |\Phi(G)| = \Theta(n^2).
+  \]
 \end{theorem}
 
-Bukh and Sudakov observed that if a graph $G$ has $k$ distinct degrees, then the induced subgraphs $G - \{v\}$ for $v \in V(G)$ have at least $k$ different sizes. Thus Theorem \ref{thm:bs2007} provides a simple bound of $|\Phi(G)| = \Omega(\sqrt{n})$ for any Ramsey graph $G$. Two ideas may be used to improve this construction. First, we can apply the observation to many different induced subgraphs rather than merely $G$ itself. Second, instead of deleting only one vertex, we may add and remove various combinations of vertices to obtain many more distinct sizes. These ideas form the backbone of both the result of Narayanan, Sahasrabudhe, and Tomon and the proof of Theorem~\ref{thm:ks}. We outline their shared strategy before describing what separates them.
+Recall that Theorem \ref{thm:bs2007} provides a bound of $|\Phi(G)| = \Omega(\sqrt{n})$ for any Ramsey graph $G$ by removing a single vertex to construct each subgraph. Two ideas may be used to improve this construction. First, we can apply the same idea to many different induced subgraphs rather than merely $G$ itself. Second, instead of deleting only one vertex, we may add and remove various combinations of vertices to produce many more distinct sizes. 
 
-The basic approach, introduced in \cite{narayanan2017ramseygraphsinducesubgraphs} and inherited by \cite{kwan2021ramseygraphsinducesubgraphs}, proceeds in two stages. In the first stage, we pick a target $m$ and find two disjoint vertex sets $U$ and $W$, such that $U$ is a linear-sized random set with $e(U) \approx m$, and $W$ is a small set of size $O(\sqrt{n})$ which will be used to augment $U$. In particular, $W$ is selected from a candidate set $W_0 \subseteq V(G) \setminus U$ whose degrees all lie in a narrow interval centered around some $d = \Theta(n)$. In the second stage, we show that the subsets $Z \subseteq W$ produce $\Omega(n^{3/2})$ distinct values of $e(U \cup Z)$. Since $|W| = O(\sqrt{n})$ and each vertex $w \in W$ has at most $n$ neighbours in $U \cup W$, we have $|e(U \cup W) - e(U)| = O(n^{3/2})$, which implies that all $\Omega(n^{3/2})$ values lie in an interval of length $O(n^{3/2})$ centred at $e(U)$. Applying this to $\Omega(\sqrt{n})$ well-separated targets $m$ yields the full $\Omega(n^2)$ count.
+Specifically, we pick a target $m$ and find two disjoint vertex sets $U$ and $W$, where $U$ is a linear-sized random set with $e(U) \approx m$ and $W$ is an augmenting set of size $O(\sqrt{n})$ selected from a candidate set $W_0 \subseteq V(G) \setminus U$ whose degrees are of linear order and all lie in a narrow interval. We then show that the subsets $Z \subseteq W$ produce $\Omega(n^{3/2})$ distinct values of $e(U \cup Z)$ that all lie in an interval of length $O(n^{3/2})$ centred at $e(U)$. Applying this to $\Omega(\sqrt{n})$ well-separated targets $m$ yields the full $\Omega(n^2)$ count.
 
-Kwan and Sudakov implement the second stage as follows. The augment set $W$ is composed of three disjoint parts $S$, $T$, $X$ of size $\Theta(\sqrt{n})$, each with their own role. Each element in $S$, $T$, and $X$ has $\Theta(n)$ edges into $U$, and the degrees from $S$ into $U$ are uniformly smaller than those from $T$ by a gap of $\Omega(\sqrt{n})$. By varying the number $k$ of elements of $S$ included in $Z$, we shift $e(U \cup Z)$ at the coarsest scale, where each additional element changes the edge count by $\Theta(n)$. By exchanging an element of $S$ in $Z$ with an element of $T$, we shift the edge count by $\Theta(\sqrt{n})$, as the two elements have the same number of edges into $U$ up to a difference of $\Theta(\sqrt{n})$. Together, these two operations generate $\Theta(n)$ distinct values of $e(U \cup Z)$, roughly evenly spaced at intervals of $\Theta(\sqrt{n})$. To fill in the remaining $\Theta(\sqrt{n})$ gap between consecutive values, we include exactly one element of $X$ in $Z$. The key requirement is that, for each choice of $Z \cap (S \cup T)$, the elements of $X$ have $\Theta(\sqrt{n})$ distinct degrees into $U \cup Z$, contributing $\Theta(\sqrt{n})$ further distinct values. In total, we obtain $\Theta(n^{3/2})$ distinct values of $e(U \cup Z)$.
+Kwan and Sudakov construct $W$ as three disjoint parts $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, each of size $\Theta(\sqrt{n})$, that act at complementary scales. Every element has $\Theta(n)$ edges into $U$, and the degrees from $\mathbf{S}$ into $U$ are uniformly smaller than those from $\mathbf{T}$ by a gap of $\Omega(\sqrt{n})$. Varying the number $k$ of elements of $\mathbf{S}$ included in $Z$ shifts $e(U \cup Z)$ at the coarsest scale $\Theta(n)$. Exchanging elements of $\mathbf{S}$ for elements of $\mathbf{T}$ shifts it by $\Theta(\sqrt{n})$. The elements of $\mathbf{X}$ fill the remaining $\Theta(\sqrt{n})$ gap by contributing $\Theta(\sqrt{n})$ distinct degrees into $U \cup Z$ for each choice of $Z$. Hence the different combinations of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ yield $\Omega(n^{3/2})$ distinct values of $e(U \cup Z)$.
 
-Achieving this last requirement that $X$ provides $\Theta(\sqrt{n})$ distinct degrees into $U \cup Z$ is the main technical challenge. It is here that the proofs of Narayanan, Sahasrabudhe, and Tomon and of Kwan and Sudakov diverge. In \cite{narayanan2017ramseygraphsinducesubgraphs}, the second stage is handled differently. Narayanan, Sahasrabudhe, and Tomon reduced the problem to a weighted-graph question on $G[W]$ by assgining weight $\omega(w) = d_U(w) - d$ to each vertex, and a recursive probabilistic argument shows that the weighted Ramsey graph $G[W]$ has $|W|^{3-o(1)}$ distinct weighted subgraph sizes. This approach already yields $|\Phi(G)| = n^{2-o(1)}$, but the $n^{o(1)}$ loss turns out to be inherent to the use of diversity.
-
-As discussed in Section~\ref{sec:anticoncentration}, given a uniformly random set $U$ and vertices $x, y \in V(G)$, we have
-\[
-  \prob[d_U(x) = d_U(y)] = O(1/\sqrt{n})
-\]
-whenever $|N(x) \Delta N(y)| = \Omega(n)$. We form a ``degree-collision'' graph $H$ on the candidate set $W_0$ by joining $x$ and $y$ whenever $d_U(x) = d_U(y)$, and note that every independent set in $H$ corresponds to a set of vertices with distinct degrees into $U$. Recall that the structural condition guaranteeing $|N(x) \Delta N(y)| = \Omega(n)$ is $(\varepsilon, \delta)$-diversity, which ensures this for all but at most $n^{\delta}$ exceptional vertices $y$ per vertex $x$. The expected number of edges in $H$ is thus
+Achieving the last requirement that $\mathbf{X}$ provides $\Theta(\sqrt{n})$ distinct degrees into $U \cup Z$ for each choice of $Z$ is the main technical challenge, as vertex diversity defined in Chapter~\ref{sec:ch2} does not produce enough distinct degrees in this case. In particular, by the anticoncentration principle from Section~\ref{sec:anticoncentration}, we have $\prob[d_U(x) = d_U(y)] = O(1/\sqrt{n})$ for all but at most $n^{\delta}$ pairs $x, y \in V(G)$ in an $(\eps, \delta)$-diverse graph. Following the same construction as in the proof of Lemma \ref{lemma:diversity-degrees}, the collision graph $H$ on the candidate set $W_0$ has expected number of edges
 \[
   \E[e(H)] = O(|W_0|^2/\sqrt{n} + |W_0| \cdot n^{\delta}),
 \]
-where the first term accounts for diverse pairs, each contributing $O(1/\sqrt{n})$, and the second term accounts for pairs involving an exceptional vertex, each contributing at most $1$. By Tur\'{a}n's theorem (Proposition~\ref{prop:turan}), $H$ contains an independent set of size at least $|W_0|^2/(2\E[e(H)] + |W_0|)$. For this to yield $\Omega(\sqrt{n})$ vertices with distinct degrees, the first term must dominate the second, requiring $|W_0| = \Omega(n^{1/2+\delta})$. But $W_0$ is constructed via the pigeonhole principle as a set of vertices whose degrees lie in an interval of length $O(\sqrt{n})$, and since there are $n$ vertices and $O(\sqrt{n})$ such intervals, we can only guarantee $|W_0| = \Theta(\sqrt{n})$. The collision bound then gives an independent set of size $\Omega(n^{1/2-\delta})$. Since Lemma~\ref{lemma:diversity-degrees} allows $\delta$ to be taken arbitrarily small, this yields $|\Phi(G)| = n^{2-o(1)}$, which does not reach the targeted bound $\Omega(n^2)$.
+which yields an independent set $I \subseteq W_0$ of size 
+\[
+  |I| = \frac{|W_0|^2}{2\E[e(H)] + |W_0|} = \Omega\left(\sqrt{n} \cdot \frac{|W_0|}{|W_0| + n^{1/2 + \delta}}\right).
+\]
+by Tur\'{a}n's theorem (Proposition~\ref{prop:turan}). Thus for $|I|$ to reach $\Omega(\sqrt{n})$, we need $|W_0| = \Omega(n^{1/2 + \delta})$. Unfortunately, $W_0$ is extracted by pigeonholing $n$ vertices into $O(\sqrt{n})$ degree intervals of length $O(\sqrt{n})$, so at best we have $|W_0| = \Theta(\sqrt{n})$, yielding only $|I| = \Omega(n^{1/2 - \delta})$.
 
-The innovation from Kwan and Sudakov is to allow $S$, $T$, $X$ to be sets of disjoint \emph{pairs} of vertices rather than single vertices, treating each pair as a single unit. We write a variable in bold (e.g. $\mathbf{x}$) to indicate that it may refer to either a vertex or a pair, and similarly for sets of such objects (e.g. $\mathbf{S}$, $\mathbf{X}$). When $\mathbf{x} = \{x_1, x_2\}$ is a pair, we write $d(\mathbf{x}) = d(x_1) + d(x_2)$ and define $N(\mathbf{x})$ as the multiset union of $N(x_1)$ and $N(x_2)$. There are $\binom{n}{2} = \Theta(n^2)$ vertex pairs in $G$, but only $O(n)$ possible values of the pair-degree $d(\{v_1, v_2\}) = d(v_1) + d(v_2)$ for $\{v_1, v_2\} \in \binom{V(G)}{2}$. By the pigeonhole principle, some pair-degree value is shared by at least $\Theta(n)$ disjoint pairs. This is far larger than $n^{1/2+\delta}$ for any small $\delta > 0$, and so the $n^{\delta}$ exceptional-pair term becomes negligible in the collision count. The price is that we need the symmetric difference $|N(\mathbf{x}) \Delta N(\mathbf{y})|$ to be $\Omega(n)$ not just for most pairs of vertices, but for most pairs of \emph{pairs}. This is a stronger structural requirement than diversity, motivating the notion of richness which we will introduce in the next section.
+To overcome this obstacle, Kwan and Sudakov's relaxes the canditate set $W_0$ to also contain disjoint \textit{pairs}. Write $\mathbf{x}$ in bold denote an object that is either a single vertex or a pair of vertices, and similarly for sets of such objects. For $\mathbf{x} = \{x_1, x_2\}$, set $N(\mathbf{x}) \coloneqq N(x_1) \cup N(x_2)$ as a multiset union and $d(\mathbf{x}) \coloneqq |N(\mathbf{x})| = d(x_1) + d(x_2)$ as the pair-degree, and note that there are $\binom{n}{2} = \Theta(n^2)$ pairs but the pair-degrees take only $O(n)$ values. Pigeonhole now yields
+$\Theta(n)$ disjoint pairs sharing a common pair-degree, vastly exceeding the $n^{1/2 + \delta}$ threshold. The price is that we need the symmetric difference $|N(\mathbf{x}) \Delta N(\mathbf{y})|$ to be $\Omega(n)$ not just for most pairs of vertices, but for most pairs of \emph{pairs}. We call this property \textit{pair-diversity}.
 
-Slightly abusing the notation, we write $U \cup \mathbf{Z}$ as a shorthand for $U \cup \bigcup_{\mathbf{z} \in \mathbf{Z}} \mathbf{z}$ whenever we are taking the union of a vertex set $U$ and a possiple set of pairs $\mathbf{Z}$. Beyond showing $|\mathbf{X}| = \Omega(\sqrt{n})$, we also have to ensure $\mathbf{X}$ actually provides $\Theta(\sqrt{n})$ distinct degrees into $U \cup \mathbf{Z}$ for each choice of augmenting set $\mathbf{Z} \subseteq \mathbf{S} \cup \mathbf{T}$. Notice that the current construction of $\mathbf{X}$ only ensures distinct degrees $d_U(\mathbf{x})$ into $U$ instead of $d_{U \cup Z}(\mathbf{x})$. If $U$ were sampled once and directly constructed $\mathbf{S}, \mathbf{T}, \mathbf{X}$ based on $U$, then the $d_U(\mathbf{x})$ would be fixed numbers given the outcome of $U$. However, there is no guarantee that $d_{U \cup Z}(\mathbf{x}) = d_{U}(\mathbf{x}) + d_{Z}(\mathbf{x})$ would remain distinct, as the addition of $d_{Z}(\mathbf{x})$ could cancel out the uniqueness of $d_{U}(\mathbf{x})$. Kwan and Sudakov overcome this with a \textit{double-exposure} technique. They perform two rounds of sampling. In the first round, they sampled the random set $U_0$ and construct $\mathbf{S}, \mathbf{T}, \mathbf{X}$ relative to $U_0$. In the second round, they sampled $U$ from $U_0$ by independently keeping each vertex with probability $1/2$. After the first sampling, the construction guarantees $|N_{U_0}(\mathbf{x}) \Delta N_{U_0}(\mathbf{y})| = \Omega(n)$ for all $x, y \in \mathbf{X}$, and the augmenting sets $\mathbf{Z} \subseteq \mathbf{S} \cup \mathbf{T}$ are fully determined by $U_0$. In the second round of sampling, the difference $d_U(\mathbf{x}) - d_U(\mathbf{y})$ becomes a sum of $\Omega(n)$ independent Bernoulli terms, and Littlewood-Offord yields $\prob[d_U(\mathbf{x}) - d_U(\mathbf{y}) = t] = O(1/\sqrt{n})$ for every integer $t$. In particular, since $t_{xy} = d_Z(\mathbf{y}) - d_Z(\mathbf{x})$ is a fixed integer for each $\mathbf{x}, \mathbf{y}$, we may bound for the collision probability
+\begin{definition}\label{def:pair_diverse}
+  An $n$-vertex graph $G$ is \textit{$(\eps, \delta, \alpha)_2$-diverse} if for each pair of vertices $\mathbf{x} = \{x_1, x_2\}$ in $G$ with $|N(x_1) \Delta N(x_2)| \geq \alpha n$, there are at most $n^{\delta}$ disjoint pairs of vertices $\mathbf{y} = \{y_1, y_2\}$ with $\mathbf{x} \cap \mathbf{y} = \emptyset$, such that $|N(\mathbf{x}) \Delta N(\mathbf{y})| < \eps n$.
+\end{definition}
+
+It turns out that richness not only implies diversity, but also pair-diversity.
+
+\begin{lemma}
+  Let an $n$-vertex graph $G$ be $(\eps, \delta)$-rich, with $\delta \leq 1/2$. Then $G$ is $(\eps, \delta, \alpha)_2$-diverse for any $\alpha \geq 2\delta$.
+\end{lemma}
+
+\begin{proof}
+  Suppose not. Then there exists a pair $\mathbf{x} = \{x_1, x_2\}$ with $|N(x_1) \Delta \overline{N(x_2)}| \geq \alpha n$ and a set $Y$ of $n^{\delta}$ pairs such that $|N(\mathbf{x}) \Delta N(\mathbf{y})| < \alpha \eps n /2$ for all $\mathbf{y} \in Y$. Since
+  \[
+    |N(x_1) \Delta \overline{N(x_2)}| = |N(x_1) \cap N(x_2)|  + |\overline{N(x_1)} \cap \overline{N(x_2)}| \geq \alpha n,
+  \]
+  we have $|N(x_1) \cap N(x_2)| \geq (\alpha/2)n \geq \delta n$ or $|\overline{N(x_1)} \cap \overline{N(x_2)}| \geq (\alpha/2)n \geq \delta n$. Assume without loss of generality that the former case holds. Then for each vertex $y$ in any $\mathbf{y} \in Y$, 
+  \[
+    \left|\overline{N(y)} \cap (N(x_1) \cap N(x_2))\right| \leq |N(\mathbf{x}) \Delta N(\mathbf{y})| < \alpha \eps n /2 \leq \eps |N(x_1) \cap N(x_2)|.
+  \]
+  But then the set of all such $y$ now contradicts the $(\eps, \delta)$-rich condition.
+\end{proof}
+
+We also introduce a reversed notion of diversity.
+
+\begin{lemma}
+  Let an $n$-vertex graph $G$ be $(\eps, \delta)$-rich. Then $G$ has at most $n^{1 + \delta}$ pairs of vertices $x_1, x_2 \in V(G)$ with $|N(x_1) \Delta \overline{N(x_2)}| < (\eps/2)n$.
+\end{lemma}
+
+\begin{proof}
+  We show that for each choice of $x_1 \in V(G)$, there are at most $n^{\delta}$ vertices $x_2 \in V(G)$ with $|N(x_1) \Delta \overline{N(x_2)}| < (\eps/2)n$. Since either $|N(x_1)| \geq n/2$ or $|\overline{N(x_1)}| \geq n/2$, we assume without loss of generality that $|N(x_1)| \geq n/2$. By $(\eps, \delta)$-richness, there are at most $n^{\delta}$ vertices $x_2$ with $|N(x_2) \cap N(x_1)| < \eps n/2$. For all other choices of $x_2$, 
+  \[
+    |N(x_1) \Delta \overline{N(x_2)}| \geq |N(x_1) \cap N(x_2)|  \geq (\eps/2) n.
+  \]
+  The result now follows from the fact that there are only $n$ choices of $x_1$.
+\end{proof}
+
+\textit{Remark:} In contrast to diversity, this lemma gives an upper bound on the symmetric difference between the neighbourhoods of two vertices. Specifically, since $|N(x_1) \Delta N(x_2)| + |N(x_1) \Delta \overline{N(x_2)}| = n - 2$ for any two vertices $x_1, x_2$,
+\[
+  |N(x_1) \Delta N(x_2)| \leq (1 - \eps/2)n
+\]  
+for most pairs of vertices $x_1, x_2$. 
+
+One last thing we need is to ensure $\mathbf{X}$ actually provides $\Theta(\sqrt{n})$ distinct degrees into $U \cup \mathbf{Z} \coloneqq U \cup \bigcup_{\mathbf{z} \in \mathbf{Z}} \mathbf{z}$ for each choice of augmenting set $\mathbf{Z} \subseteq \mathbf{S} \cup \mathbf{T}$. Notice that the current construction of $\mathbf{X}$ only ensures distinct degrees $d_U(\mathbf{x})$ into $U$ instead of $d_{U \cup Z}(\mathbf{x})$. If $U$ were sampled once and directly constructed $\mathbf{S}, \mathbf{T}, \mathbf{X}$ based on $U$, then the $d_U(\mathbf{x})$ would be fixed numbers given the outcome of $U$. However, there is no guarantee that $d_{U \cup Z}(\mathbf{x}) = d_{U}(\mathbf{x}) + d_{Z}(\mathbf{x})$ would remain distinct, as the addition of $d_{Z}(\mathbf{x})$ could cancel out the uniqueness of $d_{U}(\mathbf{x})$. Kwan and Sudakov overcome this with a \textit{double-exposure} technique. They perform two rounds of sampling. In the first round, they sampled the random set $U_0$ and construct $\mathbf{S}, \mathbf{T}, \mathbf{X}$ relative to $U_0$. In the second round, they sampled $U$ from $U_0$ by independently keeping each vertex with probability $1/2$. After the first sampling, the construction guarantees $|N_{U_0}(\mathbf{x}) \Delta N_{U_0}(\mathbf{y})| = \Omega(n)$ for all $x, y \in \mathbf{X}$, and the augmenting sets $\mathbf{Z} \subseteq \mathbf{S} \cup \mathbf{T}$ are fully determined by $U_0$. In the second round of sampling, the difference $d_U(\mathbf{x}) - d_U(\mathbf{y})$ becomes a sum of $\Omega(n)$ independent Bernoulli terms, and Littlewood-Offord yields $\prob[d_U(\mathbf{x}) - d_U(\mathbf{y}) = t] = O(1/\sqrt{n})$ for every integer $t$. In particular, since $t_{xy} = d_Z(\mathbf{y}) - d_Z(\mathbf{x})$ is a fixed integer for each $\mathbf{x}, \mathbf{y}$, we may bound for the collision probability
 \[
   \prob[d_{U \cup Z}(\mathbf{x}) = d_{U \cup Z}(\mathbf{y})] = \prob[d_{U}(\mathbf{x}) - d_{U}(\mathbf{y}) = t_{xy}] = O(1/\sqrt{n}).
 \]
 The same collision graph construction now finds us the desired set of $U$ such that $d_{U \cup Z}(\mathbf{x})$ is distinct for $\mathbf{x} \in \mathbf{X}$.
 
-\subsection{Pair diversity and richness}\label{sec:richness}
-
-We now introduce the structural conditions needed for the Kwan-Sudakov argument. Recall from Chapter~2 that a graph $G$ is $(\varepsilon, \delta)$-diverse if for each vertex $x$, at most $n^{\delta}$ vertices $y$ have $|N(x) \Delta N(y)| < \varepsilon n$. In Chapter~2, diversity was the structural condition that guaranteed $|N(x) \Delta N(y)| = \Omega(n)$ for most pairs, which via anticoncentration gave the $O(1/\sqrt{n})$ collision probability for single vertices. As discussed above, the proof of Theorem~\ref{thm:ks} runs the same anticoncentration mechanism but for pairs of vertices. This requires controlling the symmetric difference $N(\mathbf{x}) \Delta N(\mathbf{y})$ for pairs $\mathbf{x} = \{x_1, x_2\}$, which is what \emph{pair-diversity} provides. 
- 
-\begin{definition}\label{def:pair_diverse}
-  An $n$-vertex graph $G$ is \textit{$(\eps, \delta, \alpha)_2$-diverse} if for each pair of vertices $\mathbf{x} = \{x_1, x_2\}$ in $G$ with $|N(x_1) \Delta N(x_2)| \geq \alpha n$, there are at most $n^{\delta}$ disjoint pairs of vertices $\mathbf{y} = \{y_1, y_2\}$ with $\mathbf{x} \cap \mathbf{y} = \emptyset$, such that $|N(\mathbf{x}) \Delta N(\mathbf{y})| < \eps n$.
-\end{definition}
-
-We introduce a natural strengthening of diversity that also implies pair-diversity called \textit{richness}.
-
-\begin{definition}
-  An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-rich} if, for $W \subseteq V(G)$ with $|W| \geq \delta n$, we have $|N(v) \cap W| \geq \eps|W|$ and $|\overline{N(v)} \cap W| \geq \eps|W|$ for all but at most $n^{\delta}$ vertices $v \in V(G)$.
-\end{definition}
-
-The key property of richness is that it controls the interaction of vertex neighbourhoods with arbitrary large vertex sets, rather than just with individual neighbourhoods. Diversity ensures that a large symmetric difference between two single-vertex neighbourhoods, whereas richness extends this property to pairs, as controlling the intersection of neighbourhoods with arbitrary large sets allows us to handle sets like $N(x_1) \cap \overline{N(x_2)}$ that arise when decomposing the pair-symmetric difference. The following lemma formalizes this idea.
-
-\begin{lemma}\label{lem:richness-implies}
-  Let an $n$-vertex graph $G$ be $(\eps, \delta)$-rich, with $\delta \leq 1/2$. Then
-  \begin{enumerate}
-    \item $G$ is $(\eps/2, \delta)$-diverse,
-    \item $G$ is $(\alpha \eps/2, \delta, \alpha)_2$-diverse for any $\alpha \geq 2\delta$,
-    \item $G$ has at most $n^{1 + \delta}$ pairs of vertices $x_1, x_2 \in V(G)$ with $|N(x_1) \Delta \overline{N(x_2)}| < (\eps/2)n$.
-  \end{enumerate}
-\end{lemma} 
-
-\begin{proof}
-  We prove each statement in order.
-  \begin{enumerate}
-    \item Note that for each $x \in V(G)$, either $|N(x)| \geq n/2$ or $|\overline{N(x)}| \geq n/2$. If $|N(x)| \geq n/2$, then richness implies that
-    \[
-      |\overline{N(y)} \cap N(x)| \geq \eps |N(x)| \geq \eps n/2
-    \]
-    for at most $n^{\delta}$ vertices $y \in V(G)$. Similarly, if $|\overline{N(x)}| \geq n/2$, then
-    \[
-      |N(y) \cap \overline{N(x)}| \geq \eps |\overline{N(x)}| \geq \eps n/2
-    \]
-    for at most $n^{\delta}$ vertices $y \in V(G)$. But then in either case,
-    \[
-      |N(x) \Delta N(y)| = |\overline{N(y)} \cap N(x)|  + |N(y) \cap \overline{N(x)}| \geq \eps n/2.
-    \]
-
-    \item Suppose not. Then there exists a pair $\mathbf{x} = \{x_1, x_2\}$ with $|N(x_1) \Delta \overline{N(x_2)}| \geq \alpha n$ and a set $Y$ of $n^{\delta}$ pairs such that $|N(\mathbf{x}) \Delta N(\mathbf{y})| < \alpha \eps n /2$ for all $\mathbf{y} \in Y$. Since
-    \[
-      |N(x_1) \Delta \overline{N(x_2)}| = |N(x_1) \cap N(x_2)|  + |\overline{N(x_1)} \cap \overline{N(x_2)}| \geq \alpha n,
-    \]
-    we have $|N(x_1) \cap N(x_2)| \geq (\alpha/2)n \geq \delta n$ or $|\overline{N(x_1)} \cap \overline{N(x_2)}| \geq (\alpha/2)n \geq \delta n$. Assume without loss of generality that the former case holds. Then for each vertex $y$ in any $\mathbf{y} \in Y$, 
-    \[
-      \left|\overline{N(y)} \cap (N(x_1) \cap N(x_2))\right| \leq |N(\mathbf{x}) \Delta N(\mathbf{y})| < \alpha \eps n /2 \leq \eps |N(x_1) \cap N(x_2)|.
-    \]
-    But then the set of all such $y$ now contradicts the $(\eps, \delta)$-rich condition.
-
-    \item We show that for each choice of $x_1 \in V(G)$, there are at most $n^{\delta}$ vertices $x_2 \in V(G)$ with $|N(x_1) \Delta \overline{N(x_2)}| < (\eps/2)n$. Since either $|N(x_1)| \geq n/2$ or $|\overline{N(x_1)}| \geq n/2$, we assume without loss of generality that $|N(x_1)| \geq n/2$. By $(\eps, \delta)$-richness, there are at most $n^{\delta}$ vertices $x_2$ with $|N(x_2) \cap N(x_1)| < \eps n/2$. For all other choices of $x_2$, 
-    \[
-      |N(x_1) \Delta \overline{N(x_2)}| \geq |N(x_1) \cap N(x_2)|  \geq (\eps/2) n.
-    \]
-    The result now follows from the fact that there are only $n$ choices of $x_1$.
-  \end{enumerate}  
-\end{proof}
-
-\textit{Remark:} Note that part 3 of the lemma is the reversed notion of diversity. Since $|N(x_1) \Delta N(x_2)| + |N(x_1) \Delta \overline{N(x_2)}| = n - 2$ for any two vertices $x_1, x_2$, combining part 1 and 3 of the lemma yields a two-sided bound
-\[
-  (\eps/2)n \leq |N(x_1) \Delta N(x_2)| \leq (1 - \eps/2)n,
-\]  
-for most pairs of vertices $x_1, x_2$. In particular, $d(x_1) + d(x_2) = \Theta(n)$.
-
-We also show the parallel result of Lemma \ref{lemma:diverse-subgraph} that every $C$-Ramsey graph contains an $(\eps, \delta)$-rich subgraph of linear size, following the same line of argument.
-
-\begin{lemma}\label{lem:richness-extraction}
-  For any $C > 0$ and $\delta \in (0, 1)$, there exists $\eps = \eps(C, \delta) > 0$ and $c = c(C, \delta) > 0$ such that every $C$-Ramsey graph $G$ on $n$-vertex contains an $(\eps, \delta)$-rich subgraph on $\Omega(n)$ vertices.
-\end{lemma}
-
-\begin{proof}
-  Let $K = K(C)$ be a large constant to be determined. Let $c \leq (\delta/4)^K$, and $\eps = 1/K$. Suppose for contradiction that any vertex subset of size at least $cn$ fails to induce an $(\eps, \delta)$-rich subgraph. We will inductively construct a sequence of disjoint vertex sets $S_1, \ldots, S_K$ of size $(cn)^\delta$, such that for all $S_i$ one of the following conditions holds:
-  \begin{enumerate}
-    \item[(i)] $d(S_i, S_j) < 4\eps$ for $j > i$,
-    \item[(ii)] $d(S_i, S_j) > 1 - 4\eps$ for $j > i$.
-  \end{enumerate}
-  Alongside, we also construct a sequence of induced subgraphs $G = G_0 \subset G_1 \subset \cdots \subset G_K$, such that $|V(G_i)| \geq (\delta/4)|V(G_{i - 1})|$ and $S_i \subseteq V(G_{i - 1})$ for all $i$.
-
-  We first show that this construction suffices. By working with $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $(cn)^{\delta}$ and $\eps = 1/K$,
-  \[
-    d(S) \leq \frac{\binom{(cn)^{\delta}}{2}}{\binom{r(cn)^{\delta}}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 4\eps \leq \frac{6}{K}.
-  \]
-  Note that $|S| \geq (cn)^{\delta}$, and so Theorem \ref{thm:ramsey-density} yields a constant $\gamma > 0$ and a homogeneous set $A$ in $S$ of size 
-  \[
-    |A| \geq \frac{\gamma K}{6 \log (K/6)} \log |S| \geq \frac{\gamma\delta K}{6 \log (K/6)} \log cn = \frac{\gamma\delta K}{6 \log (K/6)} \log n + o(\log n),
-  \]
-  as $n \to \infty$. But then $\frac{\gamma\delta K}{6 \log (K/6)} > C$ for sufficiently large $K$, and so $|A| > C \log n$, contradiction.
-
-  We now construct the sets $S_i$ and $G_i$ inductively. Suppose $G_1, \ldots, G_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. Since $|V(G_{i - 1})| \geq (\delta/4)^{i - 1}n \geq cn$ and $G_{i - 1}$ is not $(\eps, \delta)$-rich by assumption, there exist $W_i, Y_i \subseteq V(G_{i - 1})$ with $|W_i| \geq \delta |V(G_{i - 1})|$ and $|Y_i| \geq (cn)^{\delta}$, such that for each $y \in Y_i$ we have $|N_{G_{i - 1}}(y) \cap W_i| < \eps |W_i|$ or $|\overline{N_{G_{i - 1}}(y)} \cap W_i| < \eps |W_i|$. Assume without loss of generality that $|N_{G_{i - 1}}(y) \cap W_i| < \eps |W_i|$ for half the vertices $y \in Y_i$, and let $S_i$ be the corresponding subset of $Y_i$. Put $T_i = W_i \setminus S_i$ and note that $|T_i| \geq |W_i|/2$. Partition $T_i$ into $V_i \sqcup Z_i$ where $V_i = \{v \in T_i : d(v, S_i) \leq 4 \eps\}$, and let $G[V_i]$. We need to show that $|V_i| \geq (\delta/4)|V(G_{i - 1})|$. Observe that for all $y \in S_i$,
-  \[
-    d(y, T_i) = \frac{d_{T_i}(y)}{|T_i|} < \frac{\eps |W_i|}{|W_i|/2} = 2\eps.
-  \]
-  But then
-  \[
-  4\eps|Z_i| < \sum_{v \in Z_i} d(v, S_i) \leq \frac{e(T_i, S_i)}{|S_i|} = \frac{|T_i|}{|S_i|}\sum_{y \in S_i} d(y, T_i) \leq 2\eps|T_i|,
-  \]
-  so $|Z_i| < |T_i| / 2$. It now follows that $|V_i| \geq |T_i|/2 \geq |W_i|/4 \geq (\delta/4)|V(G_{i - 1})|$. Since $d(S_i, U) < 4\eps$ for all $U \subseteq V_i$, condition (i) holds for $S_i$. In the case that $|\overline{N_{G_{i - 1}}(x_1)} \cap W_i| < \eps|W_i|$, set $V_i = \{v \in T_i : d(v, S_i) > 1 - 4\eps\}$, which yields $|V_i| \geq (\delta/4)|G_{i - 1}|$ and $S_i$ satisfying condition (ii). This completes the induction.
-\end{proof}
-
-\subsection{The main lemma and the construction}
+\subsection{The main lemma}
 
 As outlined above, we will find many induced subgraphs $G[U]$ whose edge counts are well-separated from each other, and show that each can be augmented in $\Omega(n^{3/2})$ ways. Theorem \ref{thm:ks} will be an immediate consequence of the following lemma, which we will dedicate the rest of this chapter to prove.
 
@@ -155,7 +107,7 @@ As outlined above, we will find many induced subgraphs $G[U]$ whose edge counts 
 
 We first show how this implies Theorem \ref{thm:ks}.
 
-\textbf{Proof of Theorem \ref{thm:ks}.} Note that for any $U, W$ given by Lemma \ref{lemma:well-separated-edge-counts},  
+\paragraph{Proof of Theorem \ref{thm:ks}.} Note that for any $U, W$ given by Lemma \ref{lemma:well-separated-edge-counts},  
 \[
   |e(U \cup W) - e(U)| = O(n^{3/2}),
 \]
@@ -165,13 +117,11 @@ as $|W| = O(\sqrt{n})$ and each $w \in W$ has at most $n$ neighbours in $U \cup 
 % Section 3.3: The construction
 % ============================================================
 
-\subsection{The construction}
+\subsection{The construction of augmenting sets}
 \label{sec:construction}
 
 We now prove the key construction that produces the sets $U_0, \mathbf{S}, \mathbf{T}, \mathbf{X}$
-with the properties needed for Lemma~\ref{lemma:well-separated-edge-counts}. The following
-lemma is due to Kwan and Sudakov \cite[Lemma~7]{kwan2021ramseygraphsinducesubgraphs}, and its proof
-combines the structural tools developed in Section~3.1 with the anticoncentration mechanism from Section~1.2.
+with the properties needed for Lemma~\ref{lemma:well-separated-edge-counts}.
 
 \begin{lemma}
 \label{lem:construction}
@@ -192,20 +142,13 @@ For any $C > 0$ there exists $c = c(C) > 0$ such that the following holds. For a
 \end{enumerate}
 \end{lemma}
 
-The four properties correspond to the four roles played by $\mathbf{S}$, $\mathbf{T}$,
-$\mathbf{X}$ in the counting argument of Section~3.4. Property~2 ensures
-that each element contributes $\Theta(n)$ edges to any subgraph
-containing $U_0$, so that adding or removing a single element shifts
-the edge count by $\Theta(n)$. Property~3 guarantees that swapping an element of $\mathbf{S}$ for an element of $\mathbf{T}$ shifts the edge count by
-$\Theta(\sqrt{n})$. Property~4 is the
-anticoncentration condition on $\mathbf{X}$, which ensures that elements of $\mathbf{X}$ are likely to have many distinct degrees into $U \cup Z$ after the
-double-exposure step. 
+Property~2 ensures that each element contributes $\Theta(n)$ edges to any subgraph containing $U_0$, so that adding or removing a single element shifts the edge count by $\Theta(n)$. Property~3 guarantees that swapping an element of $\mathbf{S}$ for an element of $\mathbf{T}$ shifts the edge count by $\Theta(\sqrt{n})$. Property~4 is the anticoncentration condition on $\mathbf{X}$ that sets up the double-exposure step. 
 
-The proof will start with reducing to a rich subgraph of linear size using Lemma~\ref{lem:richness-extraction} and using the pigeonhole principle to obtain a large candidate set $\mathbf{W}_0$ of vertices or pairs with similar degrees, satisfying Property~1 and Property~2. We will then sample $U_0$ at random and verify that all desired properties hold simultaneously with positive probability.
+The proof will start with reducing to a rich subgraph of linear size using Lemma~\ref{lem:rich-subgraph} and using the pigeonhole principle to obtain a large candidate set $\mathbf{W}_0$ of vertices or pairs with similar degrees, satisfying Property~1 and Property~2. We will then sample $U_0$ at random and verify that all desired properties hold simultaneously with positive probability.
 
 \begin{proof}[Proof of Lemma~\ref{lem:construction}]
 
-Let $\varepsilon = \varepsilon(C)$ be given by Lemma~\ref{lem:richness-extraction} and set $\delta = \varepsilon/4$. By Lemma~\ref{lem:richness-extraction}, $G$ contains an $(\varepsilon, \delta)$-rich induced subgraph $G[V']$ on $\Omega(n)$ vertices. Since $\log |V'| \ge \frac{1}{2}\log n$, the graph $G[V']$ is $2C$-Ramsey, so by adjusting constants it suffices to work inside $G[V']$. In particular, we may assume $G$ itself is $(\varepsilon, \delta)$-rich.
+Let $\varepsilon = \varepsilon(C)$ be given by Lemma~\ref{lem:rich-subgraph} and set $\delta = \varepsilon/4$. By Lemma~\ref{lem:rich-subgraph}, $G$ contains an $(\varepsilon, \delta)$-rich induced subgraph $G[V']$ on $\Omega(n)$ vertices. Since $\log |V'| \ge \frac{1}{2}\log n$, the graph $G[V']$ is $2C$-Ramsey, so by adjusting constants it suffices to work inside $G[V']$. In particular, we may assume $G$ itself is $(\varepsilon, \delta)$-rich.
 
 By Lemma~\ref{lem:richness-implies} with $\alpha = \varepsilon/2$,
 this richness assumption furnishes the following three properties:
@@ -447,5 +390,6 @@ lie in an interval of length $2Qn$ centered at $e(U_{k, i}) + d/2$, and so these
 
 Therefore, 
 \[
-  |\{e(U \cup Z) : Z \subseteq W\}| \geq |\{e(U_{k, i} \cup \mathbf{x}_{k, i}) : (k, i) \in \mathcal{P}', \, \mathbf{x}_{k, i} \in \mathbf{X}_{k, i}\}| = \Omega(n^{3/2}).
+  |\{e(U \cup Z) : Z \subseteq W\}| \geq |\{e(U_{k, i} \cup \mathbf{x}_{k, i}) : (k, i) \in \mathcal{P}', \, \mathbf{x}_{k, i} \in \mathbf{X}_{k, i}\}| = \Omega(n^{3/2}). 
 \]
+\qed

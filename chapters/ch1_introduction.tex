@@ -52,7 +52,7 @@ We define a shorthand for cliques and independent sets.
   A set $S \subseteq V(G)$ is \textit{homogeneous} in a graph $G$ if it induces a clique or an independent set in $G$. We denote the size of the largest homogeneous set in $G$ by $\hom(G)$.
 \end{definition}
 
-Thus, Theorem~\ref{thm:diagonal-ramsey} may be restated as
+Theorem~\ref{thm:diagonal-ramsey} may therefore be restated as
 \[
   \frac{1}{2}\log_2 n < \hom(G) < 2\log_2 n,
 \]
@@ -98,7 +98,7 @@ Despite decades of intensive research, all known constructions of Ramsey graphs 
   contradiction.
 \end{proof}
 
-Recall that the Erdős-Szemerédi theorem gives $\hom(G) \geq \frac{1}{2} \log_2 n$, regardless of the edge density. Theorem~\ref{thm:ramsey-density} improves this when the density is small. For example, if $d = 1/n^{\eps}$ for some $\eps > 0$, then $\hom(G) = \Omega\left(\frac{n^{\eps}}{\log n^{\eps}} \log n\right)$, vastly larger than $\frac{1}{2}\log_2 n$. Intuitively, a sparse graph should contain a large independent set, and the theorem makes this notion precise. 
+Recall that the Erdős-Szekeres theorem (Theorem \ref{thm:erdos-szekeres}) gives $\hom(G) \geq \frac{1}{2} \log_2 n$, regardless of the edge density. Theorem~\ref{thm:ramsey-density} improves this when the density is small. For example, if $d = 1/n^{\eps}$ for some $\eps > 0$, then $\hom(G) = \Omega\left(\frac{n^{\eps}}{\log n^{\eps}} \log n\right)$, vastly larger than $\frac{1}{2}\log_2 n$. Intuitively, a sparse graph should contain a large independent set, and the theorem makes this notion precise. 
 
 If $G$ is $C$-Ramsey, then applying Theorem~\ref{thm:ramsey-density} to whichever $G$ or $\overline{G}$ has density $d \leq 1/2$ yields $c/(d\log(1/d)) \leq C$, forcing $d$ to be bounded away from $0$. By the same argument applied to $\overline{G}$ forces $d$ to be bounded away from $1$. This gives the following corollary.
 
@@ -119,9 +119,26 @@ Erdős and McKay~\cite{EFS} conjectured that for any Ramsey graph $G$ on $n$ ver
 \]
 It was proven for Random graphs by Calkin, Frieze, and Mckay~\cite{erdosmckayrandomgraph}, but the conjecture for Ramsey graphs remained open for decades and only started to show significant progress in recent years. In particular, a chain of results were sparked after the work of Narayanan, Sahasrabudhe, and Tomon~\cite{narayanan2017ramseygraphsinducesubgraphs} establishing that $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on some ideas from the work of Bukh and Sudakov~\cite{BUKH2007612} which showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature that dense random graphs also exhibit. Kwan and Sudakov~\cite{kwan2021ramseygraphsinducesubgraphs} later improved the bound to $|\Phi(G)| = \Omega(n^2)$ by refining the argument of Narayanan, Sahasrabudhe, and Tomon. Eventually, Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023} closed the conjecture via Fourier-analytic techniques on graph polynomials.
 
-This dissertation will start by studying the result of Bukh and Sudakov~\cite{BUKH2007612} on large induced subgraphs in Ramsey graphs with many distinct degrees. This work not only tightens the connection between Ramsey graphs and random graphs, but also builds the foundation for the subsequent $|\Phi(G)| = \Omega(n^2)$ result by Kwan and Sudakov, which we will present in the following chapter. Lastly, we go through the broad strokes of the proof to the Erdős-McKay conjecture by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}, touching on the core ideas of their approach.
+This dissertation will start by studying the result of Bukh and Sudakov~\cite{BUKH2007612} on large induced subgraphs in Ramsey graphs with many distinct degrees. This work not only tightens the connection between Ramsey graphs and random graphs, but also builds the foundation for the subsequent $|\Phi(G)| = \Omega(n^2)$ result by Kwan and Sudakov which we will present in the following chapter. Lastly, we go through the broad strokes of the proof to the Erdős-McKay conjecture by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}, touching on the core ideas of their approach.
 
 % Another research direction is to consider whether forbidding certain induced subgraphs could force homogeneous sets beyond logarithmic size. Erdős and Hajnal famously conjectured that for any graph $H$, if a graph $G$ does not contain $H$ as an induced subgraph, then $G$ contains a homogeneous set of size $|G|^{\eta}$ for some $\eta = \eta(H) > 0$.  
+
+\subsection{The anticoncentration principle}\label{sec:anticoncentration}
+
+The core results of this dissertation surrounds a key probabilistic mechanism called \textit{anticoncentration}. In the following chapters, we will repeatedly sample a random vertex set $U\subseteq V(G)$ and study the induced subgraph $G[U]$. A natural question to ask in this setting is how likely it is for two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?
+
+Observe that $\deg_U(x)-\deg_U(y)$ counts only vertices in the symmetric difference $D = N_G(x)\Delta N_G(y)$. Write
+$A=N(x)\setminus N(y)$ and $B=N(y)\setminus N(x)$ and we have
+\begin{equation}\label{eq:deg-diff}
+  \deg_U(x)-\deg_U(y) = |U\cap A| - |U\cap B|,
+\end{equation}
+and so $x, y$ have the same degree in $G[U]$ precisely when $|U\cap A|=|U\cap B|$.
+
+Suppose first that $U$ is formed by including each vertex independently with probability $p$. Then each vertex $v \in A$ independently contributes $+1$ to the difference $|U\cap A| - |U\cap B|$ with probability $p$, while each vertex $v \in B$ independently contributes $-1$ to the difference with probability $p$. The difference is thus a sum of $|D| = |A| + |B|$ independent bounded random variables. When $|D|$ is large, say $|D| \geq \eps n$, this sum has standard deviation $\Theta(\sqrt{n})$. Since $|U\cap A|-|U\cap B|$ is integer-valued, we can show the probability that it equals any particular integer is at most $O(1/\sqrt{n})$ via the one-dimensional Erdős-Littlewood-Offord theorem. Thus we conclude that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$. We will formalize this with greater detail in Chapter~\ref{sec:ch3}.
+
+If instead $U$ is a uniformly random subset of a fixed size~$m$, the vertices of $U$ are no longer independent. Nevertheless, conditioning on $k=|U\cap D|$, we may observe that, given~$k$, the split of these $k$ elements between $A$ and $B$ follows a hypergeometric distribution. With the same assumption that $|D|$ is large, Stirling's approximation applied to the hypergeometric probability then yields the same $O(1/\sqrt{n})$ bound. We will carry out this calculation in detail in Chapter~\ref{sec:ch2}.
+
+An intuition to the bound $O(1/\sqrt{n})$ is that, in either sampling method, the difference $\deg_U(x)-\deg_U(y)$ is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$. Since the probability density function $\phi(x)$ of a normal distribution with standard deviation $\sigma$ is at most $1/(\sigma\sqrt{2\pi})$ for all $x$, the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sigma) = O(1/\sqrt{n})$, and this principle is the key to the results in Chapter~\ref{sec:ch2} and Chapter~\ref{sec:ch3}. The resolution of the Erd\H{o}s-McKay conjecture in Chapter~\ref{sec:ch4} requires a substantially more powerful approach via Fourier analysis, but the underlying idea remains: when a random variable is approximately normal with large standard deviation, its point probabilities are small.
 
 \subsection{Notations and tools}
 
@@ -168,19 +185,3 @@ We call $e(G)$ the \textit{size} of a graph $G$. We omit all floor and ceiling s
   \]
 \end{proposition}
 
-\subsection{The anticoncentration principle}\label{sec:anticoncentration}
-
-Before diving into the core results, we introduce a key probabilistic mechanism which serves as a unifying thread throughout the dissertation. In the following chapters, we will repeatedly sample a random vertex set $U\subseteq V(G)$ and study the induced subgraph $G[U]$. One natural question to ask in this setting is how likely are two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?
-
-Observe that $\deg_U(x)-\deg_U(y)$ counts only vertices in the symmetric difference $D = N_G(x)\Delta N_G(y)$. Writing
-$A=N(x)\setminus N(y)$ and $B=N(y)\setminus N(x)$, we have
-\begin{equation}\label{eq:deg-diff}
-  \deg_U(x)-\deg_U(y) = |U\cap A| - |U\cap B|,
-\end{equation}
-$x$ and $y$ have the same degree in $G[U]$ precisely when $|U\cap A|=|U\cap B|$.
-
-Suppose first that $U$ is formed by including each vertex independently with probability $p$. Then each vertex $v \in A$ independently contributes $+1$ to the difference $|U\cap A| - |U\cap B|$ with probability $p$, while each vertex $v \in B$ independently contributes $-1$ to the difference with probability $p$. The difference is thus a sum of $|D| = |A| + |B|$ independent bounded random variables. When $|D|$ is large, say $|D| \geq \eps n$, this sum has standard deviation $\Theta(\sqrt{n})$. Since $|U\cap A|-|U\cap B|$ is integer-valued, we can show the probability that it equals any particular integer is at most $O(1/\sqrt{n})$ via the one-dimensional Erdős-Littlewood-Offord theorem. Thus we conclude that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$. We will formalize this with greater detail in Chapter~\ref{sec:ch3}.
-
-If instead $U$ is a uniformly random subset of a fixed size~$m$, the vertices of $U$ are no longer independent. Nevertheless, conditioning on $k=|U\cap D|$, we may observe that, given~$k$, the split of these $k$ elements between $A$ and $B$ follows a hypergeometric distribution. With the same assumption that $|D|$ is large, Stirling's approximation applied to the hypergeometric probability then yields the same $O(1/\sqrt{n})$ bound. We will carry out this calculation in detail in Chapter~\ref{sec:ch2}.
-
-An intuition to the bound $O(1/\sqrt{n})$ is that, in either sampling method, the difference $\deg_U(x)-\deg_U(y)$ is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$. In the independent case, this follows from the central limit theorem applied to a sum of independent bounded random variables. In the fixed-size case, it follows from the normal approximation to the hypergeometric distribution. Since the probability density function $\phi(x)$ of a normal distribution with standard deviation $\sigma$ is at most $1/(\sigma\sqrt{2\pi})$ for all $x$, the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sigma) = O(1/\sqrt{n})$. The theorems in the following chapters will rely on this principle. In Chapter~\ref{sec:ch2}, it bounds the probability that two vertices share a degree in a random induced subgraph, which leads to $\Omega(\sqrt{n})$ distinct degrees. In Chapter~\ref{sec:ch3}, the same principle bounds the probability that two vertices have equal degree in a random induced subgraph, which is a key step in producing $\Omega(n^2)$ distinct subgraph sizes. The resolution of the Erd\H{o}s-McKay conjecture in Chapter~\ref{sec:ch4} requires a substantially more powerful approach via Fourier analysis, but the underlying idea remains: when a random variable is approximately normal with large standard deviation, its point probabilities are small.
