@@ -1,31 +1,33 @@
-\section{The Erd\H{o}s--McKay Conjecture}
+\section{The Erd\H{o}s-McKay Conjecture}
 \label{sec:ch4}
 
-The results of the previous chapters establish increasingly strong conclusions about the induced subgraph statistics of Ramsey graphs. Chapter~2 showed that every $C$-Ramsey graph on $n$ vertices contains an induced subgraph on $\Omega(n)$ vertices with $\Omega(\sqrt{n})$ distinct degrees, and Chapter~3 improved the count of distinct induced subgraph sizes to $|\Phi(G)| = \Omega(n^2)$.  Both proofs rely on the same anticoncentration principle that, when the symmetric difference $|N(x) \triangle N(y)|$ is large, the degree difference $\deg_U(x) - \deg_U(y)$ is a sum of many weakly dependent bounded random variables, and its point probabilities are $O(1/\sqrt{n})$.
+Both proofs in Chapters~2 and~3 rely on the same anticoncentration principle that, when the symmetric difference $|N(x) \Delta N(y)|$ is large, the degree difference $\deg_U(x) - \deg_U(y)$ is a sum of many weakly dependent bounded random variables, and its point probabilities are $O(1/\sqrt{n})$. The Erd\H{o}s-McKay conjecture asks for a qualitatively stronger result that asserts $\Phi(G)$ to contain every integer in a quadratic-length interval, not merely that it is large. The conjecture was resolved by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}, and this chapter is dedicated to outlining their proof. 
+\begin{theorem}[Erd\H{o}s-McKay conjecture
+  {\cite{Kwan_2023}}]
+  \label{thm:em}
+  Fix $C > 0$. Let $G$ be a $C$-Ramsey graph on $n$ vertices for sufficiently large $n$. Then there exists $\delta = \delta(C) > 0$ such that
+  \[
+    \Phi(G) \supseteq \{1, 2, \ldots, \delta e(G)\}.
+  \]
+\end{theorem}
 
-The Erd\H{o}s--McKay conjecture asks for a qualitatively stronger result than $|\Phi(G)| = \Omega(n^2)$. It asserts that $\Phi(G)$ contains every integer in a quadratic-length interval, not merely that it is large.  The conjecture was resolved by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}, and this chapter is dedicated to outlining their proof. The approach fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself. This requires a substantially richer set of tools, but the underlying principle remains: when a random variable is approximately normal with large standard deviation, its point probabilities are small.
+The approach fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself. This requires a substantially richer set of tools, but the underlying principle remains: when a random variable is approximately normal with large standard deviation, its point probabilities are small.
 
-\subsection{From subgraph sizes to edge-count anticoncentration}
+\subsection{Point probabilities of $e(U)$}
 
-Assume $V(G) = [n]$ and define the \emph{graph polynomial}
-\[
-  f(\xi_1, \ldots, \xi_n) = \sum_{ij \in E(G)} \xi_i \xi_j.
-\]
-Notice that for any $U \subseteq V(G)$, setting $\xi_v = \mathbbm{1}_{v \in U}$ gives $f(\vec{\xi}^{\,(U)}) = e(U)$. The Erd\H{o}s--McKay conjecture is thus equivalent to asking whether the range of this quadratic polynomial on $\{0,1\}^n$ covers every integer in $\{0, \ldots, \delta n^2\}$.
-
-When $U$ is a $p$-random subset, the random variable $e(G[U])$ has mean $p^2 e(G) = \Theta(n^2)$. For the variance, note that
+Let $U$ be a uniformly random vertex subset. The random variable $e(G[U])$ has mean $e(G)/2 = \Theta(n^2)$. For variance, the standard variance identity gives
 \[
   \Var(e(U)) = \sum_{(e, e') \in E(G)^2} \Cov(\mathbbm{1}_{e \subseteq U}, \mathbbm{1}_{e' \subseteq U}).
 \]
-The covariance is zero if $e$ and $e'$ share no vertex and $\Theta(1)$ if $e$ and $e'$ share a vertex. For a fixed vertex $v$, the number of such pairs involving $v$ is $\binom{\deg(v)}{2}$. Since Ramsey graphs have density bounded away from $0$ and $1$ by Theorem~\ref{thm:ramsey-density}, it follows from Jensen's inequality that there are 
+The covariance is zero if $e$ and $e'$ are disjoint and $\Theta(1)$ otherwise, so $\Var(e(U)) = O(n^3)$. For a fixed vertex $v$, the number of pairs of edges sharing $v$ is $\binom{\deg(v)}{2}$. Since Ramsey graphs have density bounded away from $0$ and $1$ by Theorem~\ref{thm:ramsey-density}, Jensen's inequality gives
 \[
-  \sum_v \binom{\deg(v)}{2} \geq n\binom{2e(G)/n}{2} = \Theta(n^3)
+  \Var(e(U)) \geq \sum_v \binom{\deg(v)}{2} \geq n\binom{2e(G)/n}{2} = \Omega(n^3).
 \]
-pairs of edges that share a vertex, giving standard deviation $\sigma(e(U)) = \Theta(n^{3/2})$.
+Thus the standard deviation is $\sigma(e(U)) = \Theta(n^{3/2})$. 
 
-This variance computation reveals the scale at which the next theorem operates. In Chapters~2 and~3, the anticoncentration analysis targeted the degree difference $\deg_U(x) - \deg_U(y)$, a \emph{linear} polynomial of the vector $(\mathbbm{1}_{v \in U})_{v \in V}$ with standard deviation $\Theta(\sqrt{n})$, and the control of $e(U)$ was achieved indirectly through the construction of $\mathbf{S}, \mathbf{T}, \mathbf{X}$. The approach of~\cite{Kwan_2023} instead targets the distribution of $e(U)$ directly as a \textit{quadratic} polynomial with standard deviation $\Theta(n^{3/2})$.
+In Chapters~2 and~3, the anticoncentration analysis targeted the degree difference $\deg_U(x) - \deg_U(y)$ with standard deviation $\Theta(\sqrt{n})$, and the control of $e(U)$ was achieved indirectly through the construction of $\mathbf{S}, \mathbf{T}, \mathbf{X}$. In~\cite{Kwan_2023}, we show directly that the point probabilities of $e(U)$ are all of order $\Theta(1/\sigma(e(U))) = \Theta(n^{-3/2})$ within the bulk of the distribution.
 
-\begin{theorem}[Kwan--Sah--Sauermann--Sawhney
+\begin{theorem}[Kwan-Sah-Sauermann-Sawhney
   {\cite{Kwan_2023}}]
   \label{thm:ksss}
   Fix constant $C > 0$. Let $G$ be a $C$-Ramsey graph on $n$ vertices and let $U$ be a $(1/2)$-random subset of $V(G)$. Then
@@ -43,55 +45,52 @@ This variance computation reveals the scale at which the next theorem operates. 
 \end{theorem}
 
 \noindent
-In other words, the point probabilities of $e(U)$ are all of order $\Theta(1/\sigma)$ within the bulk of the distribution. This theorem is essentially an approximation of the local limit theorem for $e(U)$ up to constant factors. In particular, a true local CLT would give $\prob[e(U) = x] \sim \varphi((x - \mu)/\sigma)/\sigma$, where $\varphi$ is the standard Gaussian density function. 
+This theorem is essentially an approximation of the local limit theorem for $e(U)$ up to constant factors. A true local CLT would give $\prob[e(U) = x] \sim \varphi((x - \mu)/\sigma)/\sigma$, where $\varphi$ is the standard Gaussian density function. 
 
 The Erdős-McKay conjecture follows directly from the lower bound of Theorem~\ref{thm:ksss} combined with an earlier result on small values of $x$ by Alon, Krivelevich, and Sudakov.
 
-\begin{theorem}[Erd\H{o}s--McKay conjecture
-  {\cite{Kwan_2023}}]
-  \label{thm:em}
-  Fix $C > 0$, and let $G$ be a $C$-Ramsey graph on $n$ vertices for sufficiently large $n$. Then there exists $\delta = \delta(C) > 0$ such that for any integer $0 \leq x \leq \delta e(G)$, there exists an induced subgraph with $x$ edges.
-\end{theorem}
-
-\begin{proof}
-  Alon, Krivelevich, and Sudakov~\cite{AlonKrivelevichSudakov2003} proved that there exists
-  $\alpha = \alpha(C) > 0$ such that the theorem holds for all $0 \leq x \leq n^\alpha$. Thus we may assume $x \geq n^\alpha$. Let $m$ be the smallest integer such that $e(\{1, \ldots, m\}) \ge x/4$ and put $G' = G[\{1, \ldots, m\}]$. Then 
-  \[
-    e(G') \geq x/4 \geq e(\{1, \ldots, m-1\}) \geq e(G') - m,
-  \]
-  so $|x - e(G')/4| \leq m/4 \leq m^{3/2}$. Since $m^2 \ge e(G') \ge x/4 \ge n^\alpha$, we have $m \ge n^{\alpha/2}$, making $G'$ a $(2C/\alpha)$-Ramsey graph. Applying Theorem~\ref{thm:ksss} to $G'$ with $A = 1$ gives
-  \[
-    \prob[e(G'[U]) = x] = \Omega(m^{-3/2}) = \Omega(n^{3\alpha/4}) > 0.
-  \]
-  Therefore, there exists $U \subseteq V(G') \subseteq V(G)$ such that $e(G[U)] = e(G'[U]) = x$, for sufficiently large $n$.
-\end{proof}
+\paragraph{Proof of Theorem \ref{thm:em}.} 
+By Theorem \ref{thm:alks2003}, there exists $\alpha = \alpha(C) > 0$ such that the theorem holds for all $0 \leq x \leq n^\alpha$. Thus we may assume $x \geq n^\alpha$. Let $m$ be the smallest integer such that $e(\{1, \ldots, m\}) \ge x/4$ and put $G' = G[\{1, \ldots, m\}]$. Then 
+\[
+  e(G') \geq x/4 \geq e(\{1, \ldots, m-1\}) \geq e(G') - m,
+\]
+so $|x - e(G')/4| \leq m/4 \leq m^{3/2}$. Since $m^2 \ge e(G') \ge x/4 \ge n^\alpha$, we have $m \ge n^{\alpha/2}$, making $G'$ a $(2C/\alpha)$-Ramsey graph. Applying Theorem~\ref{thm:ksss} to $G'$ with $A = 1$ gives
+\[
+  \prob[e(G'[U]) = x] = \Omega(m^{-3/2}) = \Omega(n^{3\alpha/4}) > 0.
+\]
+Therefore, there exists $U \subseteq V(G') \subseteq V(G)$ such that $e(G[U)] = e(G'[U]) = x$, for sufficiently large $n$. \qed
 
 \subsection{Proof overview}
 \label{sec:proof-overview}
 
-The standard way to approach local limit theorems is via Fourier transforms. For a random variable $X$, the \textit{characteristic function} of $X$ is defined as
+The standard way to approach local limit theorems is via Fourier transforms. Assume $V(G) = [n]$ and define the \emph{graph polynomial}
+\[
+  f(\xi_1, \ldots, \xi_n) = \sum_{ij \in E(G)} \xi_i \xi_j.
+\]
+For any $U \subseteq V(G)$, setting $\xi_v = \mathbbm{1}_{v \in U}$ gives $f(\vec{\xi}^{\,(U)}) = e(U)$. The Erd\H{o}s-McKay conjecture is thus equivalent to asking whether the range of this quadratic polynomial on $\{0,1\}^n$ covers every integer in $\{0, \ldots, \delta n^2\}$.
+
+For a random variable $X$, the \textit{characteristic function} of $X$ is defined as
 \[
 \varphi_X(\tau) \coloneqq \mathbb{E} \left[e^{i\tau X}\right] = \int_{-\infty}^{\infty} e^{i\tau X} \cdot \prob[X = x] \, dx, \qquad \tau \in \mathbb{R},
 \]
-and note that $|\varphi_X(\tau)| \leq 1$ for all $\tau$. Thus, applying the Fourier inversion formula yields
+and note that $|\varphi_X(\tau)| \leq 1$ for all $\tau$. Applying the Fourier inversion formula yields
 \begin{equation}
 \label{eq:fourier-inversion}
 \prob[X = x] = \frac{1}{2\pi}\int_{-\pi}^{\pi} e^{-i\tau x}  \varphi_X(\tau) \, d\tau \leq \frac{1}{2\pi}\int_{-\pi}^{\pi} |\varphi_X(\tau)| \, d\tau,
 \end{equation}
-for integers-valued $X$. In particular, any upper bound on the integrated $|\varphi_X(\tau)|$ produces an upper bound on the point probability. For the matching lower bound, we may compare $\varphi_X$ with the characteristic function $\varphi_Z(\tau) = e^{i\tau\mu - \sigma^2\tau^2/2}$ of a Gaussian random variable $Z$ with mean $\mu = \mathbb{E}[X]$ and variance $\sigma^2 = \mathrm{Var}(X)$. The Gaussian density at $x$ is
+for integers-valued $X$. In particular, any upper bound on the integrated $|\varphi_X(\tau)|$ produces an upper bound on the point probability. For the matching lower bound, we compare $\varphi_X$ with the characteristic function $\varphi_Z(\tau) = e^{i\tau\mu - \sigma^2\tau^2/2}$ of a Gaussian $Z \sim \mathcal{N}(\mu, \sigma^2)$, where $\mu = \mathbb{E}[X]$ and $\sigma^2 = \mathrm{Var}(X)$. The Gaussian density at $x$ is
 \[
 \frac{1}{\sigma\sqrt{2\pi}}\,\exp\!\left(-\tfrac{(x-\mu)^2}{2\sigma^2}\right),
 \]
-which is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean. Hence, if $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small, then $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion}. If a true local limit theorem held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$, and we would be done.
+which is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean. Hence, if $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small, then $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion}. If a local central limit theorem held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$ and we are done.
 
-Unfortunately, the actual local limit theorem does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. 
+Unfortunately, an actual local central limit theorem does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. 
 
-The proof of Theorem~\ref{thm:ksss} overcomes this obstacle in two stages. The first stage splits into two cases according to whether the degree sequence of $G$ is additively structured or not. The unstructured case can be handled by a standard Fourier-analytic argument without further intervention. The additively structured case is where $|\varphi_X(\tau)|$ splikes, which we will dedicate most of the effort to handle. The two cases then yield the interval estimate 
+The proof of Theorem~\ref{thm:ksss} overcomes this obstacle in two stages. The first stage splits into two cases according to whether the degree sequence of $G$ is additively structured or not. The unstructured case can be handled by a standard Fourier-analytic argument without further intervention. The additively structured case is where $|\varphi_X(\tau)|$ splikes, which we will dedicate most of the effort to handle. A Fourier-analytic argument on these two cases yield the interval estimate 
 \[
 \prob\left[|X - x| \le B\right] = \Theta(n^{-3/2}),
 \]
-for some constant $B = B(C)$. The second stage then upgrades it to a pointwise estimate by showing that the probability mass cannot be too unevenly distributed inside the interval via a switching argument.
-
+for some constant $B = B(C)$. The second stage upgrades it to a pointwise estimate by showing that the probability mass cannot be too unevenly distributed within the interval via a switching argument.
 
 \subsection{Degree sequence dichotomy}
 \label{sec:fourier-walsh}
