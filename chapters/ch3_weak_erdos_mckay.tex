@@ -216,19 +216,6 @@ By Corollary~1.4 and the Ramsey property, $e(G) \ge 800cn^2$ for some constant $
 Fix an outcome of $U_0$ for which all five events hold. Let $\mathbf{A}' = \mathbf{Q} \cap \mathbf{R}$, and note that $|\mathbf{A}'| \geq |\mathbf{A}|/3 = \Omega(\sqrt{n})$. It remains to obtain $\mathbf{S}$, $\mathbf{T}$, and $\mathbf{X}$ from $\mathbf{A}'$ that satisfy Properties~2--4. Consider the graph on $\mathbf{A}'$ where $\mathbf{x}$ and $\mathbf{y}$ are adjacent if and only if $d_{U_0}(\mathbf{x}) = d_{U_0}(\mathbf{y})$. By Turán Theorem (Proposition~\ref{prop:turan}), there is an independent set $\mathbf{W} \subseteq \mathbf{A}'$ of size $\Omega(\sqrt{n})$, and note that $\mathbf{W}$ has distinct degrees into $U_0$. Partition $\mathbf{W}$ into three equal parts by the degree $d_{U_0}(\mathbf{x})$ into $U_0$, and let $\mathbf{T}$ be the top third, $\mathbf{S}$ be the bottom third, and $\mathbf{X}$ be the middle third. Since $\mathbf{W}$ has distinct degrees and $|\mathbf{X}| = \Omega(\sqrt{n})$, we may find constant $c'$ that satisfies Property~3. Since $\mathbf{X} \subseteq \mathbf{A}$, Property~4 holds. Trimming the sizes of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ to $c'\sqrt{n}$ completes the proof.
 \end{proof}
 
-
-\textit{Remark:} Claim~\ref{claim:few-degree-collisions} is where the
-anticoncentration principle from Section~1.2 enters the proof. For
-each pair $\mathbf{x}, \mathbf{y} \in \mathbf{A}$ with
-$|N(\mathbf{x}) \Delta N(\mathbf{y})| = \Omega(n)$, the
-difference $d_{U_0}(\mathbf{x}) - d_{U_0}(\mathbf{y})$ is a sum of
-$\Omega(n)$ independent bounded random variables (since $U_0$ is
-formed by independent Bernoulli sampling). By the
-Erd\H{o}s--Littlewood--Offord theorem, the probability that this sum
-equals zero is $O(1/\sqrt{n})$. This is the Bernoulli-sampling case
-of the anticoncentration mechanism discussed in Section~1.2, in
-contrast to the hypergeometric case used in Lemma~2.2.
-
 \subsection{Double-exposure}
 \label{sec:double-exposure}
 

@@ -11,15 +11,15 @@ Both proofs in Chapters~2 and~3 rely on the same anticoncentration principle tha
   \]
 \end{theorem}
 
-The approach fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself. This requires a substantially richer set of tools, but the underlying principle remains: when a random variable is approximately normal with large standard deviation, its point probabilities are small.
+The approach to this theorem fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself. This requires a substantially richer set of tools, but the underlying principle remains: when a random variable is approximately normal with large standard deviation, its point probabilities are small.
 
 \subsection{Point probabilities of $e(U)$}
 
-Let $U$ be a uniformly random vertex subset. The random variable $e(G[U])$ has mean $e(G)/2 = \Theta(n^2)$. For variance, the standard variance identity gives
+Assume that $V(G) = [n]$. Let $U$ be a uniformly random vertex subset. The random variable $e(G[U])$ has mean $e(G)/2 = \Theta(n^2)$. For variance, the standard variance identity gives
 \[
   \Var(e(U)) = \sum_{(e, e') \in E(G)^2} \Cov(\mathbbm{1}_{e \subseteq U}, \mathbbm{1}_{e' \subseteq U}).
 \]
-The covariance is zero if $e$ and $e'$ are disjoint and $\Theta(1)$ otherwise, so $\Var(e(U)) = O(n^3)$. For a fixed vertex $v$, the number of pairs of edges sharing $v$ is $\binom{\deg(v)}{2}$. Since Ramsey graphs have density bounded away from $0$ and $1$ by Theorem~\ref{thm:ramsey-density}, Jensen's inequality gives
+The covariance is zero if $e$ and $e'$ are disjoint and $\Theta(1)$ otherwise, so $\Var(e(U)) = O(n^3)$. For a fixed vertex $v$, the number of pairs of edges sharing $v$ is $\binom{\deg(v)}{2}$, and the Erdős-Szemerédi bound (Theorem~\ref{thm:ramsey-density}) with Jensen's inequality gives
 \[
   \Var(e(U)) \geq \sum_v \binom{\deg(v)}{2} \geq n\binom{2e(G)/n}{2} = \Omega(n^3).
 \]
@@ -50,22 +50,24 @@ This theorem is essentially an approximation of the local limit theorem for $e(U
 The Erdős-McKay conjecture follows directly from the lower bound of Theorem~\ref{thm:ksss} combined with an earlier result on small values of $x$ by Alon, Krivelevich, and Sudakov.
 
 \paragraph{Proof of Theorem \ref{thm:em}.} 
-By Theorem \ref{thm:alks2003}, there exists $\alpha = \alpha(C) > 0$ such that the theorem holds for all $0 \leq x \leq n^\alpha$. Thus we may assume $x \geq n^\alpha$. Let $m$ be the smallest integer such that $e(\{1, \ldots, m\}) \ge x/4$ and put $G' = G[\{1, \ldots, m\}]$. Then 
+By Theorem \ref{thm:alks2003}, there exists $\alpha = \alpha(C) > 0$ such that $\Phi(G) \subseteq \{0, 1, \ldots, n^\alpha\}$. Fix integer $x$ between $n^\alpha$ and $e(G)/4$. Let $m$ be the smallest integer such that $e(\{1, \ldots, m\}) \geq 4x$. Put $G' = G[\{1, \ldots, m\}]$ and note that 
 \[
-  e(G') \geq x/4 \geq e(\{1, \ldots, m-1\}) \geq e(G') - m,
+  e(G') \geq 4x \geq e(\{1, \ldots, m-1\}) \geq e(G') - m,
 \]
-so $|x - e(G')/4| \leq m/4 \leq m^{3/2}$. Since $m^2 \ge e(G') \ge x/4 \ge n^\alpha$, we have $m \ge n^{\alpha/2}$, making $G'$ a $(2C/\alpha)$-Ramsey graph. Applying Theorem~\ref{thm:ksss} to $G'$ with $A = 1$ gives
+so $|x - e(G')/4| \leq m/4 \leq m^{3/2}$. Since $m^2 \ge e(G') \geq 4x \geq n^\alpha$, we have $m \ge n^{\alpha/2}$, and so $G'$ is $(2C/\alpha)$-Ramsey. Applying Theorem~\ref{thm:ksss} to $G'$ with $A = 1$ gives
 \[
   \prob[e(G'[U]) = x] = \Omega(m^{-3/2}) = \Omega(n^{3\alpha/4}) > 0.
 \]
-Therefore, there exists $U \subseteq V(G') \subseteq V(G)$ such that $e(G[U)] = e(G'[U]) = x$, for sufficiently large $n$. \qed
+Therefore, there exists $U \subseteq V(G') \subseteq V(G)$ such that $e(G[U)] = e(G'[U]) = x$, for sufficiently large $n$. This completes the theorem. \qed
+
+We will outline the proof of Theorem~\ref{thm:ksss} for the remainder of this chapter.
 
 \subsection{Proof overview}
 \label{sec:proof-overview}
 
-The standard way to approach local limit theorems is via Fourier transforms. Assume $V(G) = [n]$ and define the \emph{graph polynomial}
+The standard way to approach local limit theorems is via Fourier transforms. Define the \emph{graph polynomial} as
 \[
-  f(\xi_1, \ldots, \xi_n) = \sum_{ij \in E(G)} \xi_i \xi_j.
+  f(\xi_1, \ldots, \xi_n) \coloneqq \sum_{ij \in E(G)} \xi_i \xi_j.
 \]
 For any $U \subseteq V(G)$, setting $\xi_v = \mathbbm{1}_{v \in U}$ gives $f(\vec{\xi}^{\,(U)}) = e(U)$. The Erd\H{o}s-McKay conjecture is thus equivalent to asking whether the range of this quadratic polynomial on $\{0,1\}^n$ covers every integer in $\{0, \ldots, \delta n^2\}$.
 
@@ -82,39 +84,40 @@ for integers-valued $X$. In particular, any upper bound on the integrated $|\var
 \[
 \frac{1}{\sigma\sqrt{2\pi}}\,\exp\!\left(-\tfrac{(x-\mu)^2}{2\sigma^2}\right),
 \]
-which is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean. Hence, if $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small, then $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion}. If a local central limit theorem held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$ and we are done.
+which is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean. Hence, if $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small, then $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion}. If a local central limit theorem (CLT) held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$ and we are done.
 
-Unfortunately, an actual local central limit theorem does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. 
+Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. 
 
-The proof of Theorem~\ref{thm:ksss} overcomes this obstacle in two stages. The first stage splits into two cases according to whether the degree sequence of $G$ is additively structured or not. The unstructured case can be handled by a standard Fourier-analytic argument without further intervention. The additively structured case is where $|\varphi_X(\tau)|$ splikes, which we will dedicate most of the effort to handle. A Fourier-analytic argument on these two cases yield the interval estimate 
-\[
+The proof of Theorem~\ref{thm:ksss} overcomes this obstacle in two stages. The first stage splits into two cases according to whether the degree sequence of $G$ is additively structured or not. The \textit{unstructured case} can be handled by a standard Fourier-analytic argument without further intervention. The \textit{additively structured case} is where $|\varphi_X(\tau)|$ splikes, which we will dedicate most of the effort to handle. A Fourier-analytic argument on these two cases yield the interval estimate 
+\begin{equation}
+\label{eq:interval-estimate}
 \prob\left[|X - x| \le B\right] = \Theta(n^{-3/2}),
-\]
-for some constant $B = B(C)$. The second stage upgrades it to a pointwise estimate by showing that the probability mass cannot be too unevenly distributed within the interval via a switching argument.
+\end{equation}
+for some constant $B = B(C)$. The second stage upgrades it to a pointwise estimate by showing that the probability mass cannot be too unevenly distributed within the interval via a \textit{switching argument}.
 
 \subsection{Degree sequence dichotomy}
 \label{sec:fourier-walsh}
 
-We first decompose $X = e(U)$ into a form that separates the linear and quadratic parts of the polynomial. Set $\xi_v = \mathbbm{1}_{v \in U}$ and write $x_v = 2\xi_v - 1 \in \{-1, +1\}$, so that $\xi_v = (1 + x_v)/2$. Substituting into the graph polynomial $e(U) = f(\vec\xi) = \sum_{ij \in E(G)} \xi_i \xi_j$, we get
+We first decompose $e(U)$ into a sum of a linear and quadratic part. Set $\xi_v = \mathbbm{1}_{v \in U}$ and write $x_v = 2\xi_v - 1 \in \{-1, +1\}$, so that $\xi_v = (1 + x_v)/2$. Substituting into the $e(U) = f(\vec\xi) = \sum_{ij \in E(G)} \xi_i \xi_j$ yields
 \begin{equation}\label{eq:decomposition}
   X = \sum_{ij \in E(G)} \frac{(1 + x_i)(1 + x_j)}{4} = \underbrace{\frac{e(G)}{4}}_{\mathbb{E}[X]} + \underbrace{\frac{1}{4}\sum_{v \in V(G)} \deg(v) x_v}_{L} + \underbrace{\frac{1}{4}\sum_{uv \in E(G)} x_u x_v}_{Q},
 \end{equation}
-and we denote the linear term as $L$ and the quadratic term as $Q$. Since $\mathbb{E}[x_v] = 0$ and $\mathbb{E}[x_u x_v] = 0$ for $u \ne v$, we have that $\mathbb{E}[L] = \mathbb{E}[Q] = 0$, the covariance of $L$ and $Q$ is zero, and the constant term $e(G)/4 = \mathbb{E}[X]$. Note that $\mathrm{Var}(L) = \frac{1}{16}\sum_{v}\deg(v)^2$ and the Erdős-Szemerédi density bound (Theorem~\ref{thm:ramsey-density}) gives $e(G) = \Theta(n^2)$, the Jensen's inequality and handshake lemma yield
+and we denote the linear term as $L$ and the quadratic term as $Q$. Since $\mathbb{E}[x_v] = 0$ and $\mathbb{E}[x_u x_v] = 0$ for $u \ne v$, we have that $\mathbb{E}[L] = \mathbb{E}[Q] = 0$, the covariance of $L$ and $Q$ is zero, and the constant term $e(G)/4 = \mathbb{E}[X]$. Note that $\mathrm{Var}(L) = \frac{1}{16}\sum_{v}\deg(v)^2$ and the Erdős-Szemerédi bound gives $e(G) = \Theta(n^2)$, and the Jensen's inequality and handshake lemma yield
 \[
   \Omega(n^3) = \frac{(2e(G))^2}{n} = \frac{1}{n}\left(\sum_{v}\deg(v)\right)^2 \leq \sum_{v}\deg(v)^2 \leq n\sum_{v}\deg(v) = O(n^3),
 \]
-which shows that $\mathrm{Var}(L) = \Theta(n^3)$. On the other hand, it is straightforward to see that $\mathbb{E}[x_u x_v x_{u'} x_{v'}] = 1$ when $\{u, v\} = \{u', v'\}$ and 0 otherwise, so the Erdős-Szemerédi density bound gives
+which shows that $\mathrm{Var}(L) = \Theta(n^3)$. On the other hand, it is straightforward to see that $\mathbb{E}[x_u x_v x_{u'} x_{v'}] = 1$ when $\{u, v\} = \{u', v'\}$ and 0 otherwise, so the Erdős-Szemerédi bound gives
 \[
   \Var(Q) = \mathbb{E}[Q^2] = \frac{1}{16}\sum_{uv, u'v' \in E(G)} \mathbb{E}[x_u x_v x_{u'} x_{v'}] = \frac{e(G)}{16} = \Theta(n^2).
 \]
-Therefore, the linear part $L$ dominates the total variance, and so we expect $L$ to drive the global behaviour of $X$, with $Q$ playing a corrective role. Write $d_v \coloneqq \deg(v)/4$ so that $L = \sum_{v} d_v x_v$. Since the variables $x_v$ are independent,
+Therefore, the linear part $L$ dominates the total variance, so we expect $L$ to drive the global behaviour of $X$, with $Q$ playing a corrective role. Write $d_v \coloneqq \deg(v)/4$ so that $L = \sum_{v} d_v x_v$. Since the variables $x_v$ are independent,
 \begin{equation}
   \label{eq:phi-L}
   \varphi_L(\tau) = \mathbb{E}\left[\exp\left(i\tau\sum_v d_v x_v\right)\right] = \prod_{v \in V(G)} \mathbb{E}\left[\exp(i\tau d_v x_v)\right] = \prod_{v \in V(G)} \cos(\tau d_v). 
 \end{equation}
 The decomposition \eqref{eq:decomposition} thus allows us to bound $X$ by bounding the characteristic function of $L$ which factors well. 
 
-For $y \in \R$, denote $\|y\| \coloneqq \mathrm{dist}(y, \mathbb{Z})$ as the distance from $y$ to the nearest integer and note that $0 \leq \|y\| \leq 1/2$. By Jordan's inequality and $1 - t \leq \exp(-t)$ for $t \geq 0$, 
+For $y \in \R$, denote $\|y\| \coloneqq \mathrm{dist}(y, \mathbb{Z})$ as the distance from $y$ to the nearest integer, and note that $0 \leq \|y\| \leq 1/2$. By Jordan's inequality and $1 - t \leq \exp(-t)$ for $t \geq 0$, 
 \[
   |\cos(\pi y)| = \cos(\pi \|y\|) = \sqrt{1 \!-\! \sin^2(\pi \|y\|)} \leq \sqrt{1 \!-\! 4\|y\|^2} \leq 1 - 2\|y\|^2 \leq \exp(-2\|y\|^2),
 \]
@@ -123,21 +126,19 @@ for $y \in \R$, and so applying to \eqref{eq:phi-L} gives
 \label{eq:phi-L-bound}
 |\varphi_L(\tau)| \leq \exp\left(-2\sum_{v \in V(G)} \left\|\frac{\tau d_v}{\pi}\right\|^2\right).
 \end{equation}
-In particular, the right-hand side decays exponentially in $n$ unless many of the quantities $\tau d_v/\pi$ are simultaneously close to integers.
-
-The quantity $\sum_v \|\tau d_v/\pi\|^2$ appearing in the exponent of \eqref{eq:phi-L-bound} is either large or small, and this dichotomy is the organising principle of the proof of Theorem~\ref{thm:ksss}. Throughout what follows, let $\nu = \nu(C) > 0$ be a small constant and take the relevant frequency window to be $0 < |\tau| \leq \nu$. Either the quantity is large for every $\tau$ in the window, which we call the \emph{unstructured case}, or it fails to be large for some $\tau$ in the window, which we call the \emph{structured case}. We describe the two cases in turn.
+In particular, the right-hand side decays exponentially in $n$ unless many of the quantities $\tau d_v/\pi$ are simultaneously close to integers. We treat these two cases separately. Throughout what follows, let $\nu = \nu(C) > 0$ be a small constant and take the relevant frequency window to be $0 < |\tau| \leq \nu$. 
 
 \paragraph{The unstructured case.} In the case that
 \[
   \sum_{v \in V(G)} \left\|\frac{\tau d_v}{\pi}\right\|^2 = \omega(\log n)
 \]
-for all $\tau$ with $0 < |\tau| \leq \nu$, the bound \eqref{eq:phi-L-bound} gives the polynomial decay $|\varphi_L(\tau)| \leq n^{-\Omega(1)}$ on the window. Since $\Var(Q) = \Theta(n^2)$ is a factor of $n$ smaller than $\Var(L) = \Theta(n^3)$, the quadratic part perturbs $\varphi_X$ only negligibly on the same range. Esseen's inequality applied to the difference $\varphi_X - \varphi_Z$, where $\varphi_Z(\tau) = \exp(i \mu \tau - \sigma^2 \tau^2/2)$ is the Gaussian characteristic function matching the mean and variance of $X$, then delivers the interval estimate of Theorem~\ref{thm:interval-estimate}. This case admits a local central limit theorem at unit scale essentially by the standard Fourier-analytic route, and we will not say more about it.
+for all $\tau$ with $0 < |\tau| \leq \nu$, the bound \eqref{eq:phi-L-bound} gives the superpolynomial decay $|\varphi_L(\tau)| \leq n^{-\omega(1)}$ on the window. Since $\Var(Q) = \Theta(n^2)$ is a factor of $n$ smaller than $\Var(L) = \Theta(n^3)$, the quadratic part perturbs $\varphi_X$ only negligibly on the same range. Esseen's inequality applied to the difference $\varphi_X - \varphi_Z$, where $\varphi_Z(\tau) = \exp(i \mu \tau - \sigma^2 \tau^2/2)$ is the Gaussian characteristic function matching the mean and variance of $X$, then delivers the interval estimate \eqref{eq:interval-estimate}. This case admits a local central limit theorem by the standard Fourier-analytic argument.
 
 \paragraph{The structured case.} Here we consider the opposite case that
 \[
   \sum_{v \in V(G)} \left\|\frac{\tau d_v}{\pi}\right\|^2 = O(\log n),
 \]
-for some $\tau$ with $0 < |\tau| \leq \nu$. This says that for this one frequency, many of the numbers $\tau d_v/\pi$ are simultaneously close to integers, which is a strong arithmetic constraint on the coefficient vector $(d_v)$. Lemma~4.12 of \cite{Kwan_2023} uses this arithmetic constraint to show that for small enough $\gamma > 0$, the vertex set admits a partition
+for some $\tau$ with $0 < |\tau| \leq \nu$. This says that for this one frequency, many of the numbers $\tau d_v/\pi$ are simultaneously close to integers. Lemma~4.12 of \cite{Kwan_2023} uses this condition to show that for small enough $\gamma > 0$, the vertex set admits a partition
 \[
   V(G) = R \sqcup (B_1 \sqcup \cdots \sqcup B_m),
 \]
@@ -145,68 +146,65 @@ with $|R| \leq n^{1-\gamma}$, $|B_j| = \lceil n^{1-2\gamma}\rceil$ for $j \in [m
 \[
   |d_v - \kappa_j| \leq n^{1/2 + 4\gamma},
 \]
-for $j \in [m]$ and $v \in B_j$. In other words, the vertex set thus splits into $m = \Theta(n^{2\gamma})$ many buckets $B_1, \dots, B_m$ each with degrees clustered around $\kappa_j$, together with an exceptional set $R$ of sublinear size. This allows us to write $L$ as
+for $j \in [m]$ and $v \in B_j$. In other words, the vertex set splits into $m = \Theta(n^{2\gamma})$ many buckets $B_1, \dots, B_m$ each with degrees clustered around $\kappa_j$, together with an sublinear sized exceptional set $R$. This allows us to write $L$ as
 \[
- L = \sum_{j = 1}^m \sum_{v \in B_j} d_vx_v + \sum_{v \in R} d_v x_v = \underbrace{\sum_{j = 1}^m \kappa_j \sum_{v \in B_j} x_v}_{L_{\text{main}}} + \underbrace{\sum_{j = 1}^m \sum_{v \in B_j} (d_v - \kappa_j)x_v}_{L_{\text{err}}} + \underbrace{\sum_{v \in R} d_v x_v}_{L_{R}}.
+ L = \sum_{j = 1}^m \sum_{v \in B_j} d_vx_v + \sum_{v \in R} d_v x_v = \underbrace{\sum_{j = 1}^m \kappa_j \sum_{v \in B_j} x_v}_{L_{main}} + \underbrace{\sum_{j = 1}^m \sum_{v \in B_j} (d_v - \kappa_j)x_v}_{L_{err}} + \underbrace{\sum_{v \in R} d_v x_v}_{L_{R}}.
 \]
 Then conditioning on
 \[
   \vec\Delta \coloneqq \left(|U \cap B_1|, \dots, |U \cap B_m|, (x_v)_{v \in R}\right)
 \]
-makes $L_{\text{main}}$ and $L_R$ deterministic and reduces the conditional variance of $L$ to $\Var(L_{\text{err}} \mid \vec\Delta) \leq n^{2 + 8\gamma}$. The effect of conditioning on $\vec\Delta$ can be thought of as conditioning on the approximate value of $L$ which governs the large-scale behaviour of $X$, allowing us to ``zoom in'' to see the smaller-scale behaviour of the distribution. In particular, $U \setminus R$ is conditionally uniform over the product of Boolean slices
+makes $L_{main}$ and $L_R$ deterministic and reduces the conditional variance of $L$ to $\Var(L_{err} \mid \vec\Delta) \leq n^{2 + 8\gamma}$. The effect of conditioning on $\vec\Delta$ can be thought of as conditioning on the approximate value of $L$ which governs the large-scale behaviour of $X$, allowing us to ``zoom in'' to see the smaller-scale behaviour of the distribution. In particular, $U \setminus R$ is conditionally uniform over the product of Boolean slices
 \[
-  \binom{B_1}{\Delta_1} \times \cdots \times \binom{B_m}{\Delta_m},
+  \binom{B_1}{\Delta_1} \times \cdots \times \binom{B_m}{\Delta_m}.
 \]
-and what remains in stage 1 is to evaluate the small-ball probability of $L_{\text{err}} + Q$ on this product of Boolean slices.
+This reduces the interval estimate \eqref{eq:interval-estimate} to evaluating the small-ball probability of $L_{err} + Q$ on this product of Boolean slices.
 
 % \textit{Remark.} The dichotomy above is an instance of the inverse Littlewood--Offord phenomenon. In Chapter~\ref{sec:ch3} the forward direction of Littlewood--Offord controlled the collision probability $\Pr[\deg_U(x) = \deg_U(y)]$ via the large symmetric difference $|N(x) \triangle N(y)|$. Here the forward direction would tell us that $L = \sum_v d_v x_v$ has small-ball probability $O(n^{-3/2})$ provided the coefficient vector $(d_v)$ is generic. The inverse direction, developed by Tao and Vu and by Rudelson and Vershynin, identifies the exceptional case as precisely additive structure, which Lemma~4.12 of \cite{Kwan_2023} in turn converts into the bucket partition we used in the structured case. The formal threshold at which the inverse case kicks in is controlled by the \emph{regularised least common denominator} of $(d_v)$, a notion introduced by Vershynin in random matrix theory, and we do not require the formal definition here.
 
-It is tempting at this point to hope that, after conditioning on $\vec\Delta$, $L_{\text{err}} + Q$ satisfies a local CLT of its own, and that the structured case can be resolved by a second round of the Fourier-analytic strategy applied to $Q$. The following example proves this hope overly optimistic.
+It is tempting at this point to hope that, after conditioning on $\vec\Delta$, $L_{\text{err}} + Q$ satisfies a local CLT of its own, which can be resolved by a second round of the Fourier-analytic argument applied to $Q$. This hope is too optimistic.
 
-Let $G$ be the disjoint union of two independent copies of $G(n/2, 1/2)$, with vertex sets $V_1$ and $V_2$. With high probability $G$ is $C$-Ramsey for some absolute constant $C$, and every vertex has degree approximately $n/4$. This $d_v$ is approximately $n/16$ for all $v$, and so all vertices fall into a single bucket $B_1 = V(G)$. Conditioning on $\vec\Delta$ amounts to conditioning on the size $|U|$, say $|U| = n/2$.
-
-Write $s = |U \cap V_1|$, so that $|U \cap V_2| = n/2 - s$. Given $s$, the distribution of $X = e(G[U])$ is centered around is expectation
+Consider $G$ to be the disjoint union of two independent copies of $G(n/2, 1/2)$, with vertex sets $V_1$ and $V_2$. With high probability $G$ is a Ramsey graph. Every vertex has degree approximately $n/4$, so all vertices fall into a single bucket and $\vec\Delta = |U|$. Conditioning on $|U| = n/2$ and writing $s = |U \cap V_1|$,
 \[
   \E[X\mid s] = \frac{1}{2}\binom{s}{2} + \frac{1}{2}\binom{n/2 - s}{2} = \frac{1}{2}(s - n/4)^2 + \frac{n^2}{32} - \frac{n}{8}.
 \]
-The variable $s$ is hypergeometric with mean $n/4$ and variance approximately $n/16$, so by the hypergeometric CLT, $(s - n/4)/(\sqrt{n}/4) \to Z_1 \sim \mathcal{N}(0, 1)$ in distribution. In particular, $(s - n/4)^2$ contributes a term of order $n$ to $X - \E[X]$ with a scaled limit of $\alpha Z_1^2$ for some constant $\alpha > 0$. The remaining randomness in $X$ comes from the random distribution of the edges in the two copies of $G(n/2, 1/2)$. This is a sum of $\Theta(n^2)$ independent Bernoulli random variables, which also contributes a term of order $n$ has a scaled limit of a Gaussian $\beta Z_2$ for some constant $\beta > 0$. Thus, conditioning on $|U| = n/2$, the normalized $X$ converges to
+The variable $s$ is hypergeometric with mean $n/4$ and variance approximately $n/16$, so by the hypergeometric CLT, $(s - n/4)/(\sqrt{n}/4) \to Z_1 \sim \mathcal{N}(0, 1)$ in distribution. In particular, $(s - n/4)^2$ contributes a term of order $n$ to $X - \E[X]$ with a scaled limit of $\alpha Z_1^2$ for some $\alpha > 0$. The remaining randomness in $X$ comes from the random distribution of the edges in the two copies of $G(n/2, 1/2)$. This is a sum of $\Theta(n^2)$ independent Bernoulli random variables, which also contributes a term of order $n$ and has a scaled limit of a Gaussian $\beta Z_2$ for some $\beta > 0$. Thus, conditioning on $|U| = n/2$, 
 \[
-  \frac{X-\E[X]}{\sigma}\;\stackrel{d}{\longrightarrow}\;\alpha Z_1^2+\beta Z_2,
+  \frac{X-\E[X]}{\sigma}\stackrel{d}{\longrightarrow}\alpha Z_1^2+\beta Z_2,
 \]
-which does not converge to a Gaussian distribution. Therefore, in the structured case, the asymptotic conditional distribution of $X$ need not be Gaussian after the bucket conditioning, but we will show it can always be evaluated at independent Gaussians.
-
+which is not Gaussian. Therefore, the asymptotic conditional distribution of $X$ need not be Gaussian after the bucket conditioning, though we shall see that it can always be evaluated at independent Gaussians.
 
 \subsection{The structured case}
 \label{sec:robust-rank}
 
-The previous section reduced the additively structured case in Stage~1 to a small-ball estimate for $L_{\mathrm{err}} + Q$ on the product of Boolean slices $\binom{B_1}{\Delta_1} \times \cdots \times \binom{B_m}{\Delta_m}$ obtained by conditioning on the bucket statistic $\vec\Delta$. The target at this conditional level is
+The target now is to show
 \begin{equation}
 \label{eq:conditional-target}
   \prob\left[|X - x| \leq B \mid \vec\Delta\right] = O(n^{-1}),
 \end{equation}
-which, after averaging over $\vec\Delta$, yields the interval estimate $\Theta(n^{-3/2})$ of Theorem~\ref{thm:interval-estimate}. The averaging contributes the remaining factor $n^{-1/2}$, reflecting the fact that only a $\Theta(n^{-1/2})$ fraction of $\vec\Delta$ values place $\E[X \mid \vec\Delta]$ within $O(n)$ of $x$. As the chi-squared example at the end of Section~\ref{sec:fourier-walsh} showed, the conditional distribution of $X$ need not be approximately Gaussian, so the Fourier-analytic route of the unstructured case does not close on its own. KSSS bridge this gap by combining three ingredients, which we describe in turn. The proofs occupy Sections~5 through~11 of \cite{Kwan_2023} and we do not reproduce them.
+which, after averaging over $\vec\Delta$, yields the interval estimate $\Theta(n^{-3/2})$ in \eqref{eq:interval-estimate}. The averaging contributes the remaining factor $n^{-1/2}$, reflecting the fact that only a $\Theta(n^{-1/2})$ fraction of $\vec\Delta$ values place $\E[X \mid \vec\Delta]$ within $O(n)$ of $x$. As shown in the previous section, the conditional distribution of $X$ need not be approximately Gaussian, so the standard Fourier-analytic approach does not close on its own. \cite{Kwan_2023} overcomes this by combining the following three ingredients.
 
 \paragraph{Ingredient 1. The Gaussian invariance principle}
 
-We first replace the product of Boolean slices by a Gaussian space. The invariance principle of Mossel, O'Donnell and Oleszkiewicz says that a low-degree polynomial of independent low-influence bounded random variables has a distribution close to that of the same polynomial evaluated at independent standard Gaussians. Applied to $L_{\mathrm{err}} + Q$ in the present setting, it produces a quadratic polynomial
+We first replace the product of Boolean slices by a Gaussian space. The invariance principle of Mossel, O'Donnell and Oleszkiewicz says that a low-degree polynomial of independent low-influence bounded random variables has a distribution close to that of the same polynomial evaluated at independent standard Gaussians. Applied to $L_{err} + Q$ produces a quadratic polynomial
 \begin{equation}
 \label{eq:gaussian-quadratic}
-  f(\vec Z) \;=\; \vec Z^{\top} F\, \vec Z \;+\; \vec f \cdot \vec Z \;+\; f_0, \qquad \vec Z = (Z_1, \dots, Z_n) \sim \mathcal{N}(0, I_n),
+  f(\vec Z) = \vec Z^{\top} F\, \vec Z + \vec f \cdot \vec Z + f_0, \qquad \vec Z = (Z_1, \dots, Z_n) \sim \mathcal{N}(0, I_n),
 \end{equation}
-with a symmetric matrix $F \in \R^{n \times n}$ and a vector $\vec f \in \R^n$ derived from the adjacency matrix of $G$ and the bucket partition, such that the characteristic functions of $L_{\mathrm{err}} + Q$ (given $\vec\Delta$) and of $f(\vec Z)$ are close on the frequency range relevant for small-ball transfer. The matching of characteristic functions is carried out in Lemma~11.1 of \cite{Kwan_2023}. The role of this step is to convert a discrete, dependent domain into a continuous, independent one, which allows us to apply the Carbery--Wright theorem described next.
+with a symmetric matrix $F \in \R^{n \times n}$ and $\vec f \in \R^n$ derived from the adjacency matrix of $G$ and the bucket partition, such that the characteristic functions of $L_{err} + Q$ (given $\vec\Delta$) and of $f(\vec Z)$ are close -- see Lemma~11.1 of \cite{Kwan_2023}. The role of this step is to convert a discrete, dependent domain into a continuous, independent one, allowing us to apply the Carbery-Wright theorem.
 
 \paragraph{Ingredient 2. The sharpened Carbery-Wright theorem}
 
-Given the quadratic polynomial $f(\vec Z)$ from ingredient~1, we now bound $\sup_x \prob[|f(\vec Z) - x| \leq 1]$. In our application $\sigma(f(\vec Z)) = \Theta(n)$, since the invariance principle preserves the variance and the computation in \eqref{eq:decomposition} gave $\Var(Q) = \Theta(n^2)$. The conditional target $O(n^{-1})$ is therefore asking for a small-ball bound of the form $1/\sigma(f(\vec Z))$ at unit scale.
+Given the $f(\vec Z)$ from ingredient~1, we now bound $\sup_x \prob[|f(\vec Z) - x| \leq 1]$. In our application $\sigma(f(\vec Z)) = \Theta(n)$, since the invariance principle preserves the variance and \eqref{eq:decomposition} gave $\Var(Q) = \Theta(n^2)$. The target $O(n^{-1})$ in~\eqref{eq:conditional-target} is therefore asking for a bound of the form $1/\sigma(f(\vec Z))$.
 
 The classical result in this direction is the Carbery-Wright theorem, which states that for quadratic polynomial $f$ in independent standard Gaussians and any $\eps > 0$,
 \begin{equation}
 \label{eq:CW-vanilla}
   \sup_{x \in \R} \prob\left[|f(\vec Z) - x| \leq \eps\right] = O\!\left(\sqrt{\eps / \sigma(f(\vec Z))}\right),
 \end{equation} 
-which is short of our target $O(1/\sigma(f(\vec Z)))$. The square-root exponent in \eqref{eq:CW-vanilla} cannot be improved unconditionally. For example, $f(\vec Z) = Z_1^2$ has $\prob[|Z_1^2| \leq \eps] = \Theta(\sqrt\eps)$, so rank-one forms saturate the bound. However, ruling out rank one is not enough on its own either, as $f(\vec Z) = Z_1^2 - Z_2^2$ has rank-$2$ associated matrix and still satisfies $\prob[|f(\vec Z)| \leq \eps] = \Theta(\eps \log(1/\eps))$, losing a logarithmic factor. It turns out that forcing the associated matrix to have effective rank at least three yields the desired bound.
+which is short of our target $O(1/\sigma(f(\vec Z)))$. The square-root exponent in \eqref{eq:CW-vanilla} cannot be improved in general, but it turns out that forcing the associated matrix $F$ to have effective rank at least three yields the desired bound.
 
-\begin{theorem}[Sharpened Carbery--Wright, {\cite[Theorem~1.6]{Kwan_2023}}]
+\begin{theorem}[Sharpened Carbery-Wright, {\cite[Theorem~1.6]{Kwan_2023}}]
 \label{thm:sharp-CW}
   Let $f(\vec Z) = \vec Z^{\top} F \vec Z + \vec f \cdot \vec Z + f_0$ be a real quadratic polynomial in independent standard Gaussians, with $F$ a nonzero symmetric matrix. Suppose that for some $\eta > 0$,
   \begin{equation}
@@ -219,7 +217,7 @@ which is short of our target $O(1/\sigma(f(\vec Z)))$. The square-root exponent 
   \]
 \end{theorem}
 
-The hypothesis \eqref{eq:robust-rank-2} says that $F$ is a fixed Frobenius-norm proportion away from every matrix of rank at most $2$. In particular, it remains to show \eqref{eq:robust-rank-2} for the specific matrix $F$ arising from the bucket structure, and this is where the Ramsey hypothesis enters.
+The hypothesis \eqref{eq:robust-rank-2} says that $F$ is a fixed Frobenius-norm proportion away from every matrix of rank at most $2$. Thus, it remains to show \eqref{eq:robust-rank-2} for the matrix $F$ arising from the bucket structure, and this is where the Ramsey hypothesis enters.
 
 \paragraph{Ingredient 3. The robust rank lemma}
 
@@ -233,7 +231,7 @@ The hypothesis \eqref{eq:robust-rank-2} says that $F$ is a fixed Frobenius-norm 
 
 The lemma says that the adjacency matrix of a Ramsey graph is at Frobenius distance $\Omega(n)$ from every matrix whose restriction to each bucket block is low rank. In the application of Theorem~\ref{thm:sharp-CW}, the parts $I_j$ are the buckets $B_j$ from Section~\ref{sec:fourier-walsh} (after a minor adjustment to make the sizes equal) and $F$ is a rescaled copy of $A$ restricted away from the exceptional set $R$. A hypothetical rank-$2$ approximation $\widetilde F$ violating \eqref{eq:robust-rank-2} would in particular satisfy $\mathrm{rank}(\widetilde F[B_j \times B_k]) \le 2$ on every bucket block, contradicting Lemma~\ref{lem:robust-rank} with $r = 2$ and $\delta = 2\gamma$. Hence \eqref{eq:robust-rank-2} holds with some $\eta = \eta(C, \gamma) > 0$.
 
-Lemma~\ref{lem:robust-rank} is the only place in the first stage where the Ramsey hypothesis is used directly, and its proof is the most combinatorial component in this stage. The argument proceeds by discretising the entries of the approximating matrix $B$ to a finite alphabet, observing that a low-rank block forces a small number of distinct row patterns, and applying Ramsey's theorem on an auxiliary graph to extract a monochromatic structure that contradicts the $C$-Ramsey assumption on $G$.
+% Lemma~\ref{lem:robust-rank} is the only place in the first stage where the Ramsey hypothesis is used directly, and its proof is the most combinatorial component in this stage. The argument proceeds by discretising the entries of the approximating matrix $B$ to a finite alphabet, observing that a low-rank block forces a small number of distinct row patterns, and applying Ramsey's theorem on an auxiliary graph to extract a monochromatic structure that contradicts the $C$-Ramsey assumption on $G$.
 
 To sum it up, applying ingredients~1, ~3, and ~2 in sequence yields the interval estimate in \eqref{eq:conditional-target}.
 
@@ -242,11 +240,10 @@ To sum it up, applying ingredients~1, ~3, and ~2 in sequence yields the interval
 \label{sec:switching}
 
 The first stage delivers the interval estimate 
-\begin{equation}
-  \label{eq:interval-estimate}
-  \prob[|X - x| \le B] = \Theta(n^{-3/2}),
-\end{equation}
-but leaves open the worst case where all of this mass sits on a single integer $x' \ne x$ inside the window $[x - B, x + B]$. We now upgrade the interval estimate to a pointwise bound by showing that the mass cannot be too unevenly distributed across the window via a \textit{switching argument} between different possibilities of the set $U$. In particular, \eqref{eq:interval-estimate} already implies an upper bound on $\prob[X = x]$, so it remains to show a lower bound.
+\[
+\prob[|X - x| \leq B] = \Theta(n^{-3/2}),
+\]
+but leaves open the worst case where all of this mass sits on a single integer $x' \ne x$ inside the window $[x - B, x + B]$. We rule this out via a \textit{switching argument} between different possibilities of the set $U$, and this upgrade the interval estimate to a pointwise bound. The interval estimate \eqref{eq:interval-estimate} already implies an upper bound on $\prob[X = x]$, so it remains to show a lower bound.
 
 For $y \in U$ and $z \notin U$, the \emph{switch} $(y, z)$ replaces $U$ by $U' = (U \setminus \{y\}) \cup \{z\}$. This operation shifts $X$ by
 \[
@@ -301,26 +298,7 @@ for all $\ell$ in an $O(\sqrt n)$ window around the mean, which yields
 \[
   \E[Y_\ell] = \frac{1}{4}\sum_{(y, z) \in T} \prob[s(y, z; U) = \ell \mid y \in U, z \notin U] = \Theta(|T|/\sqrt n).
 \]
-It remains to construct such a set $T$. Just as in Chapter~\ref{sec:ch3}, we can use the richness of Ramsey graphs to ensure $|N(y) \triangle N(z)| = \Theta(n)$. In particular, we apply Lemma~\ref{lem:richness-extraction} with parameter $\eps = \eps(C) > 0$ and a sufficiently small $\delta < \eps$ to obtain a linear size vertex subset $S_0$ that induces an $(\eps, \delta)$-rich subgraph. Applying richness twice then shows that, for all but $O(|S_0|^{1 + \delta})$ ordered pairs $(y, z) \in S_0^2$,
-\begin{equation}
-  \label{eq:switching-richness}
-  |(N(y) \setminus N(z)) \cap S_0| \geq \eps^2 |S_0|, \qquad  |(N(z) \setminus N(y)) \cap S_0| \geq \eps^2 |S_0|.
-\end{equation}
-More specifically, by richness all but at most $|S_0|^\delta$ vertices $z \in S_0$ satisfy $|N(z) \cap S_0| \geq \eps|S_0|$. Since $|N(z) \cap S_0| \geq \eps|S_0| \geq \delta|S_0|$, applying richness a second time with set $N(z) \cap S_0$ gives
-\[
-  |(N(z) \setminus N(y)) \cap S_0| = |\overline{N(y)} \cap (N(z) \cap S_0)| \geq \eps \cdot |N(z) \cap S_0| \geq \eps^2 |S_0|
-\]
-for all but a further $|S_0|^\delta$ choices of $y \in S_0$. The bound for $N(y) \setminus N(z)$ follows symmetrically. Combining both bounds in \eqref{eq:switching-richness} implies $|N(y) \triangle N(z)| = \Theta(n)$ for all but $O(n^{1 + \delta})$ ordered pairs $(y, z) \in S_0^2$. Now partitioning the degree sequence into $\sqrt n$ intervals and taking $S$ to be the largest bin of vertices from $S_0$ satisfies the $\deg(z) - \deg(y) = \Theta(\sqrt{n})$ condition. Define $T$ as the set of ordered pairs $(y, z) \in S^2$ with $y \neq z$ that satisfy~\eqref{eq:switching-richness}. The first moment estimate~\eqref{eq:moment-1} now follows. 
-
-The second moment bound~\eqref{eq:moment-2} is more involved. Write $A_{y, z} = \{y \in U,\, z \notin U,\, s(y, z; U) = \ell\}$ and expanding $Y_\ell^2$ gives
-\[
-  \E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{|X - x| \le B}\bigr]
-  = \sum_{(y_1, z_1), (y_2, z_2) \in T}
-     \prob\bigl[A_{y_1, z_1} \cap A_{y_2, z_2} \cap \{|X - x| \le B\}\bigr].
-\]
-We would like bound this from above by $\prob[A_{y_1, z_1}] \cdot \prob[A_{y_2, z_2}] \cdot \prob[|X - x| \le B]$. This is achieved via \eqref{eq:switching-richness} and the \textit{dependent random choice} technique -- see~\cite[Lemmas~13.1, 13.4, 13.9]{Kwan_2023} for the details.
-
-\textit{Remark.} The inequality \eqref{eq:CS-main} is stated with the indicator $\mathbbm{1}_{X = x}$, while \eqref{eq:moment-1} and \eqref{eq:moment-2} are stated for the wider event $\{|X - x| \le B\}$. To bridge the two, Cauchy--Schwarz is applied in \cite{Kwan_2023} a second time to the higher-order moment $\E[Y_{-B} Y_{-B + 1} \cdots Y_B \cdot \mathbbm{1}_{|X - x| \le B}]$, which averages over the choice of $\ell$. We do not pursue this iteration here, as the conceptual core remains the comparison \eqref{eq:CS-main}.
+It remains to construct such a set $T$, which is produced by applying richness twice inside a linear-sized $(\eps, \delta)$-rich subgraph $S_0$, together with a pigeonhole partition of the degree sequence into $\deg(z) - \deg(y) = \Theta(\sqrt{n})$. We refer to \cite[Lemma~13.9]{Kwan_2023} for the construction. The second-moment bound \eqref{eq:moment-2} is more involved and follows a \textit{dependent random choice} technique -- see~\cite[Lemmas~13.1, 13.4, 13.9]{Kwan_2023} for details.
 
 \subsubsection*{Closing the circle}
 
