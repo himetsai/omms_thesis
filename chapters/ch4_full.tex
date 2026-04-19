@@ -1,8 +1,8 @@
-\section{The Erd\H{o}s-McKay Conjecture}
+\section{The Erd\H{o}s--McKay Conjecture}
 \label{sec:ch4}
 
-Both proofs in Chapters~2 and~3 rely on the same anticoncentration principle that, when the symmetric difference $|N(x) \Delta N(y)|$ is large, the degree difference $\deg_U(x) - \deg_U(y)$ is a sum of many weakly dependent bounded random variables, and its point probabilities are $O(1/\sqrt{n})$. The Erd\H{o}s-McKay conjecture asks for a qualitatively stronger result that asserts $\Phi(G)$ to contain every integer in a quadratic-length interval, not merely that it is large. The conjecture was resolved by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}, and this chapter is dedicated to outlining their proof. 
-\begin{theorem}[Erd\H{o}s-McKay conjecture
+Both proofs in Chapters~2 and~3 rely on the same anticoncentration principle that, when the symmetric difference $|N(x) \triangle N(y)|$ is large, the degree difference $\deg_U(x) - \deg_U(y)$ is a sum of many weakly dependent bounded random variables, and its point probabilities are $O(1/\sqrt{n})$. The Erd\H{o}s--McKay conjecture asks for a qualitatively stronger result that asserts $\Phi(G)$ to contain every integer in a quadratic-length interval, not merely that it is large. The conjecture was resolved by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}, and this chapter is dedicated to outlining their proof. 
+\begin{theorem}[Erd\H{o}s--McKay conjecture
   {\cite{Kwan_2023}}]
   \label{thm:em}
   Fix $C > 0$. Let $G$ be a $C$-Ramsey graph on $n$ vertices for sufficiently large $n$. Then there exists $\delta = \delta(C) > 0$ such that
@@ -19,7 +19,7 @@ Assume that $V(G) = [n]$. Let $U$ be a uniformly random vertex subset. The rando
 \[
   \Var(e(U)) = \sum_{(e, e') \in E(G)^2} \Cov(\mathbbm{1}_{e \subseteq U}, \mathbbm{1}_{e' \subseteq U}).
 \]
-The covariance is zero if $e$ and $e'$ are disjoint and $\Theta(1)$ otherwise, so $\Var(e(U)) = O(n^3)$. For a fixed vertex $v$, the number of pairs of edges sharing $v$ is $\binom{\deg(v)}{2}$, and the Erdős-Szemerédi bound (Theorem~\ref{thm:ramsey-density}) with Jensen's inequality gives
+The covariance is zero if $e$ and $e'$ are disjoint and $\Theta(1)$ otherwise, so $\Var(e(U)) = O(n^3)$. For a fixed vertex $v$, the number of pairs of edges sharing $v$ is $\binom{\deg(v)}{2}$, and the Erd\H{o}s--Szemer\'{e}di bound (Theorem~\ref{thm:ramsey-density}) with Jensen's inequality gives
 \[
   \Var(e(U)) \geq \sum_v \binom{\deg(v)}{2} \geq n\binom{2e(G)/n}{2} = \Omega(n^3).
 \]
@@ -27,7 +27,7 @@ Thus the standard deviation is $\sigma(e(U)) = \Theta(n^{3/2})$.
 
 In Chapters~2 and~3, the anticoncentration analysis targeted the degree difference $\deg_U(x) - \deg_U(y)$ with standard deviation $\Theta(\sqrt{n})$, and the control of $e(U)$ was achieved indirectly through the construction of $\mathbf{S}, \mathbf{T}, \mathbf{X}$. In~\cite{Kwan_2023}, we show directly that the point probabilities of $e(U)$ are all of order $\Theta(1/\sigma(e(U))) = \Theta(n^{-3/2})$ within the bulk of the distribution.
 
-\begin{theorem}[Kwan-Sah-Sauermann-Sawhney
+\begin{theorem}[Kwan--Sah--Sauermann--Sawhney
   {\cite{Kwan_2023}}]
   \label{thm:ksss}
   Fix constant $C > 0$. Let $G$ be a $C$-Ramsey graph on $n$ vertices and let $U$ be a $(1/2)$-random subset of $V(G)$. Then
@@ -47,14 +47,14 @@ In Chapters~2 and~3, the anticoncentration analysis targeted the degree differen
 \noindent
 This theorem is essentially an approximation of the local limit theorem for $e(U)$ up to constant factors. A true local CLT would give $\prob[e(U) = x] \sim \varphi((x - \mu)/\sigma)/\sigma$, where $\varphi$ is the standard Gaussian density function. 
 
-The Erdős-McKay conjecture follows directly from the lower bound of Theorem~\ref{thm:ksss} combined with an earlier result on small values of $x$ by Alon, Krivelevich, and Sudakov.
+The Erd\H{o}s--McKay conjecture follows directly from the lower bound of Theorem~\ref{thm:ksss} combined with an earlier result on small values of $x$ by Alon, Krivelevich, and Sudakov.
 
 \paragraph{Proof of Theorem \ref{thm:em}.} 
 By Theorem \ref{thm:alks2003}, there exists $\alpha = \alpha(C) > 0$ such that $\Phi(G) \subseteq \{0, 1, \ldots, n^\alpha\}$. Fix integer $x$ between $n^\alpha$ and $e(G)/4$. Let $m$ be the smallest integer such that $e(\{1, \ldots, m\}) \geq 4x$. Put $G' = G[\{1, \ldots, m\}]$ and note that 
 \[
   e(G') \geq 4x \geq e(\{1, \ldots, m-1\}) \geq e(G') - m,
 \]
-so $|x - e(G')/4| \leq m/4 \leq m^{3/2}$. Since $m^2 \ge e(G') \geq 4x \geq n^\alpha$, we have $m \ge n^{\alpha/2}$, and so $G'$ is $(2C/\alpha)$-Ramsey. Applying Theorem~\ref{thm:ksss} to $G'$ with $A = 1$ gives
+so $|x - e(G')/4| \leq m/4 \leq m^{3/2}$. Since $m^2 \geq e(G') \geq 4x \geq n^\alpha$, we have $m \geq n^{\alpha/2}$, so $G'$ is $(2C/\alpha)$-Ramsey. Applying Theorem~\ref{thm:ksss} to $G'$ with $A = 1$ gives
 \[
   \prob[e(G'[U]) = x] = \Omega(m^{-3/2}) = \Omega(n^{3\alpha/4}) > 0.
 \]
@@ -69,7 +69,7 @@ The standard way to approach local limit theorems is via Fourier transforms. Def
 \[
   f(\xi_1, \ldots, \xi_n) \coloneqq \sum_{ij \in E(G)} \xi_i \xi_j.
 \]
-For any $U \subseteq V(G)$, setting $\xi_v = \mathbbm{1}_{v \in U}$ gives $f(\vec{\xi}^{\,(U)}) = e(U)$. The Erd\H{o}s-McKay conjecture is thus equivalent to asking whether the range of this quadratic polynomial on $\{0,1\}^n$ covers every integer in $\{0, \ldots, \delta n^2\}$.
+For any $U \subseteq V(G)$, setting $\xi_v = \mathbbm{1}_{v \in U}$ gives $f(\vec{\xi}^{\,(U)}) = e(U)$. The Erd\H{o}s--McKay conjecture is thus equivalent to asking whether the range of this quadratic polynomial on $\{0,1\}^n$ covers every integer in $\{0, \ldots, \delta n^2\}$.
 
 For a random variable $X$, the \textit{characteristic function} of $X$ is defined as
 \[
@@ -102,11 +102,11 @@ We first decompose $e(U)$ into a sum of a linear and quadratic part. Set $\xi_v 
 \begin{equation}\label{eq:decomposition}
   X = \sum_{ij \in E(G)} \frac{(1 + x_i)(1 + x_j)}{4} = \underbrace{\frac{e(G)}{4}}_{\mathbb{E}[X]} + \underbrace{\frac{1}{4}\sum_{v \in V(G)} \deg(v) x_v}_{L} + \underbrace{\frac{1}{4}\sum_{uv \in E(G)} x_u x_v}_{Q},
 \end{equation}
-and we denote the linear term as $L$ and the quadratic term as $Q$. Since $\mathbb{E}[x_v] = 0$ and $\mathbb{E}[x_u x_v] = 0$ for $u \ne v$, we have that $\mathbb{E}[L] = \mathbb{E}[Q] = 0$, the covariance of $L$ and $Q$ is zero, and the constant term $e(G)/4 = \mathbb{E}[X]$. Note that $\mathrm{Var}(L) = \frac{1}{16}\sum_{v}\deg(v)^2$ and the Erdős-Szemerédi bound gives $e(G) = \Theta(n^2)$, and the Jensen's inequality and handshake lemma yield
+and we denote the linear term as $L$ and the quadratic term as $Q$. Since $\mathbb{E}[x_v] = 0$ and $\mathbb{E}[x_u x_v] = 0$ for $u \ne v$, we have that $\mathbb{E}[L] = \mathbb{E}[Q] = 0$, the covariance of $L$ and $Q$ is zero, and the constant term $e(G)/4 = \mathbb{E}[X]$. Note that $\mathrm{Var}(L) = \frac{1}{16}\sum_{v}\deg(v)^2$ and the Erd\H{o}s--Szemer\'{e}di bound gives $e(G) = \Theta(n^2)$, and the Jensen's inequality and handshake lemma yield
 \[
   \Omega(n^3) = \frac{(2e(G))^2}{n} = \frac{1}{n}\left(\sum_{v}\deg(v)\right)^2 \leq \sum_{v}\deg(v)^2 \leq n\sum_{v}\deg(v) = O(n^3),
 \]
-which shows that $\mathrm{Var}(L) = \Theta(n^3)$. On the other hand, it is straightforward to see that $\mathbb{E}[x_u x_v x_{u'} x_{v'}] = 1$ when $\{u, v\} = \{u', v'\}$ and 0 otherwise, so the Erdős-Szemerédi bound gives
+which shows that $\mathrm{Var}(L) = \Theta(n^3)$. On the other hand, it is straightforward to see that $\mathbb{E}[x_u x_v x_{u'} x_{v'}] = 1$ when $\{u, v\} = \{u', v'\}$ and 0 otherwise, so the Erd\H{o}s--Szemer\'{e}di bound gives
 \[
   \Var(Q) = \mathbb{E}[Q^2] = \frac{1}{16}\sum_{uv, u'v' \in E(G)} \mathbb{E}[x_u x_v x_{u'} x_{v'}] = \frac{e(G)}{16} = \Theta(n^2).
 \]
@@ -121,7 +121,7 @@ For $y \in \R$, denote $\|y\| \coloneqq \mathrm{dist}(y, \mathbb{Z})$ as the dis
 \[
   |\cos(\pi y)| = \cos(\pi \|y\|) = \sqrt{1 \!-\! \sin^2(\pi \|y\|)} \leq \sqrt{1 \!-\! 4\|y\|^2} \leq 1 - 2\|y\|^2 \leq \exp(-2\|y\|^2),
 \]
-for $y \in \R$, and so applying to \eqref{eq:phi-L} gives
+for $y \in \R$, so applying to \eqref{eq:phi-L} gives
 \begin{equation}
 \label{eq:phi-L-bound}
 |\varphi_L(\tau)| \leq \exp\left(-2\sum_{v \in V(G)} \left\|\frac{\tau d_v}{\pi}\right\|^2\right).
@@ -191,20 +191,20 @@ We first replace the product of Boolean slices by a Gaussian space. The invarian
 \label{eq:gaussian-quadratic}
   f(\vec Z) = \vec Z^{\top} F\, \vec Z + \vec f \cdot \vec Z + f_0, \qquad \vec Z = (Z_1, \dots, Z_n) \sim \mathcal{N}(0, I_n),
 \end{equation}
-with a symmetric matrix $F \in \R^{n \times n}$ and $\vec f \in \R^n$ derived from the adjacency matrix of $G$ and the bucket partition, such that the characteristic functions of $L_{err} + Q$ (given $\vec\Delta$) and of $f(\vec Z)$ are close -- see Lemma~11.1 of \cite{Kwan_2023}. The role of this step is to convert a discrete, dependent domain into a continuous, independent one, allowing us to apply the Carbery-Wright theorem.
+with a symmetric matrix $F \in \R^{n \times n}$ and $\vec f \in \R^n$ derived from the adjacency matrix of $G$ and the bucket partition, such that the characteristic functions of $L_{err} + Q$ (given $\vec\Delta$) and of $f(\vec Z)$ are close -- see Lemma~11.1 of \cite{Kwan_2023}. The role of this step is to convert a discrete, dependent domain into a continuous, independent one, allowing us to apply the Carbery--Wright theorem.
 
-\paragraph{Ingredient 2. The sharpened Carbery-Wright theorem}
+\paragraph{Ingredient 2. The sharpened Carbery--Wright theorem}
 
 Given the $f(\vec Z)$ from ingredient~1, we now bound $\sup_x \prob[|f(\vec Z) - x| \leq 1]$. In our application $\sigma(f(\vec Z)) = \Theta(n)$, since the invariance principle preserves the variance and \eqref{eq:decomposition} gave $\Var(Q) = \Theta(n^2)$. The target $O(n^{-1})$ in~\eqref{eq:conditional-target} is therefore asking for a bound of the form $1/\sigma(f(\vec Z))$.
 
-The classical result in this direction is the Carbery-Wright theorem, which states that for quadratic polynomial $f$ in independent standard Gaussians and any $\eps > 0$,
+The classical result in this direction is the Carbery--Wright theorem, which states that for quadratic polynomial $f$ in independent standard Gaussians and any $\eps > 0$,
 \begin{equation}
 \label{eq:CW-vanilla}
   \sup_{x \in \R} \prob\left[|f(\vec Z) - x| \leq \eps\right] = O\!\left(\sqrt{\eps / \sigma(f(\vec Z))}\right),
 \end{equation} 
 which is short of our target $O(1/\sigma(f(\vec Z)))$. The square-root exponent in \eqref{eq:CW-vanilla} cannot be improved in general, but it turns out that forcing the associated matrix $F$ to have effective rank at least three yields the desired bound.
 
-\begin{theorem}[Sharpened Carbery-Wright, {\cite[Theorem~1.6]{Kwan_2023}}]
+\begin{theorem}[Sharpened Carbery--Wright, {\cite[Theorem~1.6]{Kwan_2023}}]
 \label{thm:sharp-CW}
   Let $f(\vec Z) = \vec Z^{\top} F \vec Z + \vec f \cdot \vec Z + f_0$ be a real quadratic polynomial in independent standard Gaussians, with $F$ a nonzero symmetric matrix. Suppose that for some $\eta > 0$,
   \begin{equation}
@@ -217,7 +217,7 @@ which is short of our target $O(1/\sigma(f(\vec Z)))$. The square-root exponent 
   \]
 \end{theorem}
 
-The hypothesis \eqref{eq:robust-rank-2} says that $F$ is a fixed Frobenius-norm proportion away from every matrix of rank at most $2$. Thus, it remains to show \eqref{eq:robust-rank-2} for the matrix $F$ arising from the bucket structure, and this is where the Ramsey hypothesis enters.
+The hypothesis \eqref{eq:robust-rank-2} says that $F$ is a fixed Frobenius-norm proportion away from every matrix of rank $\leq 2$. Thus, it remains to show \eqref{eq:robust-rank-2} for the matrix $F$ arising from the bucket structure, and this is where the Ramsey hypothesis enters.
 
 \paragraph{Ingredient 3. The robust rank lemma}
 
@@ -258,7 +258,7 @@ count candidate switches at $U$ that shift $X$ by exactly $\ell$. Notice that ea
   \label{eq:switching-identity}
   \E\bigl[Y_\ell \cdot \mathbbm{1}_{X = x}\bigr] = \E\bigl[Y_{-\ell} \cdot \mathbbm{1}_{X = x + \ell}\bigr],
 \end{equation}
-for any integer $x$ and $\ell$. By Cauchy-Schwarz inequality,
+for any integer $x$ and $\ell$. By Cauchy--Schwarz inequality,
 \[
   \bigl(\E\bigl[Y_{\ell} \cdot \mathbbm{1}_{X = x}\bigr]\bigr)^2 \leq \E\bigl[(Y_\ell^2 \cdot \mathbbm{1}_{X = x})^2\bigr] \cdot \E\bigl[(\mathbbm{1}_{X = x})^2\bigr].
 \]
