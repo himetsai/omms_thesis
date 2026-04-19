@@ -71,7 +71,7 @@ Despite decades of intensive research, all known constructions of Ramsey graphs 
 \end{theorem}
 
 \begin{proof}
-  Suppose not. Pick $c < 1/32$. Since $G$ contains $d\binom{n}{2}$ edges, there exists $m \geq n/2$ vertices in $G$ with degree at most $dn$, by the pigeonhole principle. We work with the graph $G'$ induced by these $m$ vertices. Let $I$ be the largest independent set in $G'$ and let $k = |I|$. Since $\deg(v) \leq dn$ for all $v \in I$, we have $\sum_{v \in I} \deg(v) \leq dnk \leq 2dmk$. Put $s = 8dk$. Again by the pigeonhole principle, there are at least $m/2 - k$ vertices $v \in V(G') \setminus I$ with $\deg_{I}(v) < s$. Let $J$ be the set of these vertices. Consider the family $\mathcal{F}$ of subsets of $I$ with size less than $s$. Partition $J$ by each vertex's neighbourhood in $I$, and note that each resulting class corresponds to an element of $\mathcal{F}$. By the standard bounds $\binom{x}{r} \leq \left(ex/r\right)^{r}$ and $1 + x \leq e^{x}$,
+  Suppose not. Pick $c < 1/32$. Since $G$ contains $d\binom{n}{2}$ edges, there exists $m \geq n/2$ vertices in $G$ with degree at most $dn$, by the pigeonhole principle. We work with the graph $G'$ induced by these $m$ vertices. Let $I$ be the largest independent set in $G'$ and let $k = |I|$. Since $\deg(v) \leq dn$ for all $v \in I$, we have $\sum_{v \in I} \deg(v) \leq dnk \leq 2dmk$. Put $s = 8dk$. Again by pigeonhole, there are at least $m/2 - k$ vertices $v \in V(G') \setminus I$ with $\deg_{I}(v) < s$. Let $J$ be the set of these vertices. Consider the family $\mathcal{F}$ of subsets of $I$ with size less than $s$. Partition $J$ by each vertex's neighbourhood in $I$, and note that each resulting class corresponds to an element of $\mathcal{F}$. By the standard bounds $\binom{x}{r} \leq \left(ex/r\right)^{r}$ and $1 + x \leq e^{x}$,
   \[
     |\mathcal{F}| \leq s\binom{k}{s - 1} \leq s\left(\frac{ek}{s - 1}\right)^{s - 1} \!\!= s\left(\frac{s}{s - 1}\right)^{s - 1}\left(\frac{ek}{s}\right)^{s - 1} \!\!\leq se\left(\frac{ek}{s}\right)^{s - 1} \!\!= \frac{s^2}{k}\left(\frac{ek}{s}\right)^s.
   \]
@@ -87,7 +87,7 @@ Despite decades of intensive research, all known constructions of Ramsey graphs 
   \[
     \frac{|J|}{|\mathcal{F}|} \geq \frac{m/2 - k}{n^{1/3}} \geq \sqrt{n},
   \]
-  so by the pigeonhole principle, there exists a class of vertices $Z$ in $J$ of size at least $\sqrt{n}$. Let $G'' = G[Z]$. Note that $G''$ does not contain an independent set of size $s$, otherwise exchange it with $Y$ in $I$ creates a larger independent set in $G'$, contradicting the maximality of $I$. Let $t$ be the size of the largest clique in $G''$, and note that $t < K$ by assumption. The Erdős-Szekeres and the standard binomial bounds give
+  so by pigeonhole, there exists a class of vertices $Z$ in $J$ of size at least $\sqrt{n}$. Let $G'' = G[Z]$. Note that $G''$ does not contain an independent set of size $s$, otherwise exchange it with $Y$ in $I$ creates a larger independent set in $G'$, contradicting the maximality of $I$. Let $t$ be the size of the largest clique in $G''$, and note that $t < K$ by assumption. Erdős-Szekeres theorem and the standard binomial bounds give
   \[
     \sqrt{n} \leq |Z| \leq \binom{s + K - 2}{s - 1} \leq \binom{s + K}{s} \leq \binom{8dK + K}{8dK} \leq \left(\frac{e(8d + 1)}{8d}\right)^{s} \leq \left(\frac{2}{d}\right)^s,
   \]

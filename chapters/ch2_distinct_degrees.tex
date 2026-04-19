@@ -41,7 +41,7 @@ Notice that $(\eps, \delta)$-diversity directly conditions our assumption that $
   \[
     \prob\left[k < \frac{|D|}{8} \text{ or } k > \frac{7|D|}{8}\right] \leq \prob\left[\left|k - \E[k]\right| > \frac{|D|}{8}\right] \leq e^{-\Theta(|D|)} = e^{-\Theta(n)} = o(n^{-1/2}).  
   \]
-  On the other hand, recall that $U$ is a uniformly random subset of a fixed size $m$. Since every $k$-subset of $D$ is equally likely to be $U \cap D$ by symmetry, conditioning on $|U \cap D| = k$, the $k$ elements of $U$ that land in $D$ form a uniformly random subset of $D$ of size $k$. It follows that when conditioning on $k$, the event $|A \cap U| = |B \cap U| = k/2$ follows the hypergeometric distribution $\mathrm{Hyp}(|D|, |A|, k)$. Thus,
+  On the other hand, recall that $U$ is a uniformly random subset of a fixed size $m$. Since every $k$-subset of $D$ is equally likely to be $U \cap D$ by symmetry, conditioning on $|U \cap D| = k$, the $k$ elements of $U$ that land in $D$ form a uniformly random subset of $D$ of size $k$. Conditioning on $k$, the event $|A \cap U| = |B \cap U| = k/2$ then follows the hypergeometric distribution $\mathrm{Hyp}(|D|, |A|, k)$. Thus,
   \[
     \prob\left[\deg_U(x) = \deg_U(y) \, \middle| \, \frac{|D|}{8} \leq k \leq \frac{7|D|}{8}\right] = \frac{\binom{|A|}{k/2}\binom{|B|}{k/2}}{\binom{|D|}{k}}.
   \]
@@ -51,7 +51,7 @@ Notice that $(\eps, \delta)$-diversity directly conditions our assumption that $
   \end{equation}
   Thus if $|N_G(x) \Delta N_G(y)| \geq \eps n$ then $\E[\mathbbm{1}_{xy}] \leq 3/\sqrt{\eps n} + o(n^{-1/2}) \leq 4/\sqrt{\eps n}$.
 
-  Now consider the degree collision graph $H$ on $U$, where $x, y \in U$ are adjacent if and only if $\deg_U(x) = \deg_U(y)$. Since $G$ is $(\eps, \delta)$-diverse, $\E[\mathbbm{1}_{xy}] \leq 4/\sqrt{\eps n}$ for all but at most $n^{1 + \delta} < n^{3/2}$ pairs $x, y \in V(G)$. Thus the expected number of edges in $H$ is
+  Now consider the degree collision graph $H$ on $U$, where $x, y \in U$ are adjacent if and only if $\deg_U(x) = \deg_U(y)$. Since $G$ is $(\eps, \delta)$-diverse, $\E[\mathbbm{1}_{xy}] \leq 4/\sqrt{\eps n}$ for all but at most $n^{1 + \delta} < n^{3/2}$ pairs $x, y \in V(G)$. Hence, the expected number of edges in $H$ is
   \[
     \E[e(H)] = \sum_{x, y \in V(G)} \E[\mathbbm{1}_{xy}] \leq n^{1 + \delta} + \frac{4}{\sqrt{\eps n}} \cdot n^2 \leq \frac{5}{\sqrt{\eps}}n^{3/2}.
   \] 
@@ -62,11 +62,11 @@ Notice that $(\eps, \delta)$-diversity directly conditions our assumption that $
   In particular, each vertex in $I$ has a distinct degree in $G[U]$.
 \end{proof}
 
-\textit{Remark.} The hypergeometric distribution $\mathrm{Hyp}(|D|, |A|, k)$ has variance 
-\[
-  \sigma^2 = \frac{k|A||B|(|D| - k)}{|D|^2(D - 1)} \leq \frac{k(|D| - k)}{4(|D| - 1)},
-\]
-where inequality follows from AM-GM. When $k$ is not the tail end of the distribution, we have $\sigma = \Theta(\sqrt{D}) = \Theta(\sqrt{n})$, and the Stirling bound in \eqref{eq:prob-deg-diff} is asymptotically $1/(\sigma\sqrt{2\pi})$ as $n \to \infty$, which is exactly the maximum density of a normal distribution with standard deviation $\sigma$. This confirms the intuition from Section~\ref{sec:anticoncentration} that the degree difference is approximately normally distributed so its point probabilities are $O(1/\sigma) = O(1/\sqrt{n})$.
+% \textit{Remark.} The hypergeometric distribution $\mathrm{Hyp}(|D|, |A|, k)$ has variance 
+% \[
+%   \sigma^2 = \frac{k|A||B|(|D| - k)}{|D|^2(D - 1)} \leq \frac{k(|D| - k)}{4(|D| - 1)},
+% \]
+% where inequality follows from AM-GM. When $k$ is not the tail end of the distribution, we have $\sigma = \Theta(\sqrt{D}) = \Theta(\sqrt{n})$, and the Stirling bound in \eqref{eq:prob-deg-diff} is asymptotically $1/(\sigma\sqrt{2\pi})$ as $n \to \infty$, which is exactly the maximum density of a normal distribution with standard deviation $\sigma$. This confirms the intuition from Section~\ref{sec:anticoncentration} that the degree difference is approximately normally distributed so its point probabilities are $O(1/\sigma) = O(1/\sqrt{n})$.
 
 It remains to show that every Ramsey graph contains a diverse subgraph of linear size. Instead of directly proving this, we prove the same statement on a strengthening of diversity called \textit{richness}.
 
@@ -75,7 +75,7 @@ It remains to show that every Ramsey graph contains a diverse subgraph of linear
   An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-rich} if, for $W \subseteq V(G)$ with $|W| \geq \delta n$, we have $|N(v) \cap W| \geq \eps|W|$ and $|\overline{N(v)} \cap W| \geq \eps|W|$ for all but at most $n^{\delta}$ vertices $v \in V(G)$.
 \end{definition}
 
-The key property of richness is that it ensures the intersection of vertex neighbourhoods with arbitrary large vertex sets are not extremely large or small. In particular, when $W$ is the neighborhood of another vertex, richness ensures both sides of the symmetric difference $|N(x) \Delta N(y)|$ are large, rather than merely the symmetric difference itself being large. This is why richness is a stronger condition than diversity.
+The key property of richness is that it ensures the intersection of vertex neighbourhoods with arbitrary large vertex sets are not extremely large or small. When $W$ is the neighborhood of another vertex, richness ensures both sides of the symmetric difference $|N(x) \Delta N(y)|$ are large, rather than merely the symmetric difference itself being large. This is why richness is a stronger condition than diversity.
 
 \begin{lemma}
   \label{lem:richness-implies-diversity}
