@@ -125,20 +125,16 @@ This dissertation will start by studying the result of Bukh and Sudakov~\cite{BU
 
 \subsection{The anticoncentration behavior}\label{sec:anticoncentration}
 
-The core results of this dissertation concerns the \textit{anticoncentration} behavior exhibited by Ramsey graphs. In general, anticoncentration provides an upper bound on the point probabilities of a random variable. In the following chapters, we will repeatedly sample a random vertex set $U\subseteq V(G)$ and study the induced subgraph $G[U]$. A question to ask in this setting is how likely it is for two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?
+The core results of this dissertation concerns the \textit{anticoncentration} behavior exhibited by Ramsey graphs. In general, anticoncentration provides an upper bound on the point probabilities of a random variable. In the following chapters, we will repeatedly sample a uniformly random subset $U\subseteq V(G)$ and study the induced subgraph $G[U]$. A question to ask in this setting is how likely it is for two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?
 
 Observe that $\deg_U(x)-\deg_U(y)$ counts only vertices in the symmetric difference $D = N_G(x)\triangle N_G(y)$. Write
 $A=N(x)\setminus N(y), B=N(y)\setminus N(x)$. Then
 \begin{equation}\label{eq:deg-diff}
   \deg_U(x)-\deg_U(y) = |U\cap A| - |U\cap B|,
 \end{equation}
-so $x, y$ have the same degree in $G[U]$ precisely when $|U\cap A|=|U\cap B|$. 
+so $x, y$ have the same degree in $G[U]$ precisely when $|U\cap A|=|U\cap B|$. Since each $v \in A$ contributes $+1$ to the difference $|U\cap A| - |U\cap B|$ with probability $1/2$ and each $v \in B$ contributes $-1$ with probability $1/2$, the difference is a sum of $|D| = |A| + |B|$ independent random variables, which has standard deviation $\Theta(\sqrt{n})$ when $|D| \geq \eps n$ is large. The one-dimensional Erd\H{o}s--Littlewood--Offord theorem then shows that the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sqrt{n})$, and thus $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$.
 
-If $U$ is a uniformly random subset of $V(G)$, each $v \in A$ contributes $+1$ to the difference $|U\cap A| - |U\cap B|$ with probability $1/2$ and each $v \in B$ contributes $-1$ with probability $1/2$. The difference is thus a sum of $|D| = |A| + |B|$ independent random variables, which has standard deviation $\Theta(\sqrt{n})$ when $|D| \geq \eps n$ is large. The one-dimensional Erd\H{o}s--Littlewood--Offord theorem then shows that the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sqrt{n})$, and thus $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$.
-
-If $U$ is instead a uniformly random subset of a \textit{fixed size}, $|U \cap A|$ and $|U \cap B|$ follow a hypergeometric distribution when conditioned on $|U \cap D|$. Stirling's approximation applied to the hypergeometric probability then yields the same $O(1/\sqrt{n})$ bound.
-
-An intuition to the $O(1/\sqrt{n})$ bound is that, in either sampling method, $\deg_U(x)-\deg_U(y)$ is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$. Since the probability density function $\phi(x)$ of a normal distribution with standard deviation $\sigma$ is at most $1/(\sigma\sqrt{2\pi})$ for all $x$, the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sigma) = O(1/\sqrt{n})$, and this anticoncentration bound is the key to the results in Chapter~\ref{sec:ch2} and \ref{sec:ch3}. In Chapter~\ref{sec:ch4}, we will instead study the induced edge count $e(U)$ itself, which turns out to vaguely resemble the normal distribution and exhibit an anticoncentration behavior. 
+An intuition to this $O(1/\sqrt{n})$ bound is that, in either sampling method, $\deg_U(x)-\deg_U(y)$ is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$. Since the probability density function $\phi(x)$ of a normal distribution with standard deviation $\sigma$ is at most $1/(\sigma\sqrt{2\pi})$ for all $x$, the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sigma) = O(1/\sqrt{n})$, and this anticoncentration bound is the key to the results in Chapter~\ref{sec:ch2} and \ref{sec:ch3}. In Chapter~\ref{sec:ch4}, we will instead study the induced edge count $e(U)$ itself, which turns out to vaguely resemble the normal distribution and exhibit an anticoncentration behavior. 
 
 \subsection{Notations and tools}
 
@@ -161,19 +157,6 @@ We omit all floor and ceiling signs when they are not crucial for simplicity.
     \prob(|X - \E[X]| \geq t) \leq 2e^{-2t^2/n}.
   \]
 \end{proposition}
-
-\begin{proposition}
-  \label{prop:hypergeometric}
-  
-  Let $X$ denote the number of successes in $D$ draws, without replacement, from a population of size $N$ which contains $M$ successes. Then $\E[X] = DM/N$ and for $t \geq 0$, 
-  \[
-    \prob(\left|X - \E[X]\right| \geq t) \leq 2e^{-2t^2D}.
-  \]
-\end{proposition}
-
-\begin{proof}
-  
-\end{proof}
 
 \begin{definition}[Littlewood--Offord type random variable]
   \label{def:littlewood-offord-type}

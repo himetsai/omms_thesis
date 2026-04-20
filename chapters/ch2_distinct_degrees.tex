@@ -27,37 +27,40 @@ Notice that $(\eps, \delta)$-diversity directly conditions our assumption that $
 \begin{lemma}
   \label{lem:diversity-degrees}
 
-  Let $\delta \in (0, 1/2)$ and let $G$ be an $(\eps, \delta)$-diverse graph on $n$ vertices for large enough $n$. Then for $n/4 \leq m \leq 3n/4$, there is a subgraph on $m$ vertices containing vertices of $\sqrt{\eps n}/10$ distinct degrees.
+  Let $\delta \in (0, 1/2)$ and let $G$ be an $(\eps, \delta)$-diverse graph on $n$ vertices for large enough $n$. Then there is a subgraph on $\geq n/4$ vertices containing vertices of $\sqrt{\eps n}/300$ distinct degrees.
 \end{lemma}
 
 \begin{proof}
-  Fix $m$ as above. Let $U$ be chosen uniformly at random among all subsets of $V(G)$ of size $m$. It suffices to show that with positive probability, $G[U]$ contains $\Omega(\sqrt{n})$ vertices of distinct degrees.
+  Let $U$ be a uniformly random subset of $V(G)$. It suffices to show that with positive probability, $|U| \geq n/4$ and $G[U]$ contains $\sqrt{\eps n}/8$ vertices of distinct degrees. 
 
-  For distinct $x, y \in V(G)$, define $\mathbbm{1}_{xy}$ to be the indicator for the event that $x, y \in V(H)$ and $\deg_U(x) = \deg_U(y)$. Then $\E[\mathbbm{1}_{xy}] \leq \prob[\deg_U(x) = \deg_U(y)]$. Put $D = N_G(x) \triangle N_G(y)$, and $k = |D \cap U|$. Write $A = N_G(x) \setminus N_G(y)$ and $B = N_G(y) \setminus N_G(x)$. Then 
+  For distinct $x, y \in V(G)$, define $\mathbbm{1}_{xy}$ to be the indicator for the event that $x, y \in U$ and $\deg_U(x) = \deg_U(y)$. Then $\E[\mathbbm{1}_{xy}] \leq \prob[\deg_U(x) = \deg_U(y)]$. Put $D = N_G(x) \triangle N_G(y), A = N_G(x) \setminus N_G(y)$, and $B = N_G(y) \setminus N_G(x)$. Then
   \[
-    \prob[\deg_U(x) = \deg_U(y)] = \prob\left[|A \cap U| = |B \cap U|\right].
+    \prob\bigl[\deg_U(x) = \deg_U(y)\bigr] = \prob\bigl[|A \cap U| = |B \cap U|\bigr].
   \]
-  Suppose $|D| \geq \eps n$. Since $\frac{|D|}{4} \leq \frac{m|D|}{n} \leq \frac{3|D|}{4}$, Proposition \ref{prop:hypergeometric} yields
+  Note that $|A \cap U|$ and $|B \cap U|$ are independent and each follow a binomial distribution with parameters $|A|, |B|$, respectively, and $p = 1/2$. Suppose $|D| \geq \eps n$ and assume without loss of generality that $|A| \geq \eps n/2$. Then,
+  \begin{align*}
+    \prob\bigl[|A \cap U| = |B \cap U|\bigr] 
+    &= \sum_{k} \prob\bigl[|A \cap U| = k\bigr] \cdot \prob\bigl[|B \cap U| = k\bigr] \\
+    &\leq \max_{k} \prob\bigl[|A \cap U| = k\bigr] \cdot \sum_{k} \prob\bigl[|B \cap U| = k\bigr] \\
+    &\leq \max_{k} \prob\bigl[|A \cap U| = k\bigr].
+  \end{align*}
+  By Stirling's approximation on binomial coefficients,
   \[
-    \prob\left[k < \frac{|D|}{8} \text{ or } k > \frac{7|D|}{8}\right] \leq \prob\left[\left|k - \E[k]\right| > \frac{|D|}{8}\right] \leq e^{-\Theta(|D|)} = e^{-\Theta(n)} = o(n^{-1/2}).  
+    \prob\bigl[|A \cap U| = k\bigr] \leq \frac{\binom{|A|}{|A|/2}}{2^{|A|}} = (1 + o(1)) \cdot \sqrt{\frac{2}{\pi |A|}} \leq \frac{2}{\sqrt{\eps n}}.
   \]
-  On the other hand, note that every $k$-subset of $D$ is equally likely to be $U \cap D$ by symmetry. Hence, conditioning on $|U \cap D| = k$, the $k$ elements of $U$ that land in $D$ form a uniformly random subset of $D$ of size $k$. Conditioning on $k$, the event $|A \cap U| = |B \cap U| = k/2$ then follows the hypergeometric distribution $\mathrm{Hyp}(|D|, |A|, k)$, so
-  \[
-    \prob\left[\deg_U(x) = \deg_U(y) \, \middle| \, \frac{|D|}{8} \leq k \leq \frac{7|D|}{8}\right] = \frac{\binom{|A|}{k/2}\binom{|B|}{k/2}}{\binom{|D|}{k}}.
-  \]
-  Since $|A| + |B| = |D|$, by the log-concavity of the binomial coefficients we have $\binom{|A|}{k/2}\binom{|B|}{k/2} \leq \binom{|D|/2}{k/2}^2$. It now follows from Stirling's formula and $k(|D| - k) \geq \frac{7}{64}|D|^2$ that the above probability does not exceed
-  \begin{equation}
-    \frac{\binom{|D|/2}{k/2}^2}{\binom{|D|}{k}} = (1 + o(1))\sqrt{\frac{2|D|}{\pi k(|D| - k)}} \leq \frac{3}{\sqrt{|D|}} \leq \frac{3}{\sqrt{\eps n}}. \label{eq:prob-deg-diff}
-  \end{equation}
-  Thus if $|N_G(x) \triangle N_G(y)| \geq \eps n$ then $\E[\mathbbm{1}_{xy}] \leq 3/\sqrt{\eps n} + o(n^{-1/2}) \leq 4/\sqrt{\eps n}$.
+  Thus, $\E[\mathbbm{1}_{xy}] \leq 2/\sqrt{\eps n}$, whenever $|D| \geq \eps n$.
 
-  Now consider the degree collision graph $H$ on $U$, where $x, y \in U$ are adjacent if and only if $\deg_U(x) = \deg_U(y)$. Since $G$ is $(\eps, \delta)$-diverse, $\E[\mathbbm{1}_{xy}] \leq 4/\sqrt{\eps n}$ for all but $\leq n^{1 + \delta} < n^{3/2}$ pairs $x, y \in V(G)$. Hence, the expected number of edges in $H$ is
+  Now consider the degree collision graph $H$ on $U$, where $x, y \in U$ are adjacent if and only if $\deg_U(x) = \deg_U(y)$. Since $G$ is $(\eps, \delta)$-diverse, $\E[\mathbbm{1}_{xy}] \leq 2/\sqrt{\eps n}$ for all but $\leq n^{1 + \delta} < n^{3/2}$ pairs $x, y \in V(G)$. Hence, the expected number of edges in $H$ is
   \[
-    \E[e(H)] = \sum_{x, y \in V(G)} \E[\mathbbm{1}_{xy}] \leq n^{1 + \delta} + \frac{4}{\sqrt{\eps n}} \cdot n^2 \leq \frac{5}{\sqrt{\eps}}n^{3/2}.
+    \E[e(H)] = \sum_{x, y \in V(G)} \E[\mathbbm{1}_{xy}] \leq n^{1 + \delta} + \frac{2}{\sqrt{\eps n}} \cdot n^2 \leq \frac{3}{\sqrt{\eps}}n^{3/2},
   \] 
-  It now follows from Turan's Theorem (Proposition \ref{prop:turan}) that $H$ contains an independent set $I \subseteq U$ of size at least 
+  and Markov's inequality yields 
   \[
-    |I| \geq \frac{n^2}{2\E[e(H)] + n} \leq \frac{\sqrt{\eps n}}{10}.
+    \prob\left[e(H) \leq \frac{6}{\sqrt{\eps}}n^{3/2}\right] \geq 1/2.
+  \]
+  Since $|U| < n/4$ with probability $o(n^{-1})$ by the Chernoff bound, there is a positive probability that $|U| \geq n/4$ and $e(H) \leq \frac{6}{\sqrt{\eps}}n^{3/2}$, in which case Turan's Theorem (Proposition \ref{prop:turan}) gives an independent set $I$ in $H$ of size at least 
+  \[
+    |I| \geq \frac{|U|^2}{2e(H) + |U|} \geq \frac{(n/4)^2}{3 \cdot (6/\sqrt{\eps}) n^{3/2} } \geq \frac{\sqrt{\eps n}}{300}.
   \]
   In particular, each vertex in $I$ has a distinct degree in $G[U]$.
 \end{proof}

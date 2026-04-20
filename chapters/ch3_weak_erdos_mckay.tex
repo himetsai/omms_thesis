@@ -271,7 +271,7 @@ Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_
     \[
       \Delta_{k, i} = \bigl[e(\mathbf{Z}_{k, i}) - e(\mathbf{Z}_{k, i - 1})\bigr] + \sum_{u \in U_0} \mathbbm{1}_{u \in U} \cdot \bigl(d_{\mathbf{Z}_{k, i}}(u) - d_{\mathbf{Z}_{k, i - 1}}(u)\bigr)
     \]
-    is of Littlewood--Offord type and measures the edge count difference of swapping one vertex from $\mathbf{S}$ to $\mathbf{T}$, so by Lemma~\ref{lem:construction} $\E\bigl[\Delta_{k, i}\bigr] = O(\sqrt{n})$ and each $u \in U_0$ contributes at most $|d_{\mathbf{Z}_{k, i}}(u) - d_{\mathbf{Z}_{k, i - 1}}(u)| \leq 2$ to $\Delta_{k, i}$. Thus by Hoeffding's inequality,
+    is of Littlewood--Offord type and measures the edge count difference of swapping one vertex from $\mathbf{S}$ to $\mathbf{T}$, so by Lemma~\ref{lem:construction} $\E\bigl[\Delta_{k, i}\bigr] = O(\sqrt{n})$ and each $u \in U_0$ contributes at most $|d_{\mathbf{Z}_{k, i}}(u) - d_{\mathbf{Z}_{k, i - 1}}(u)| \leq 2$ to $\Delta_{k, i}$. Thus by Hoeffding's inequality (Proposition~\ref{prop:azuma-hoeffding}),
     \[
       \prob[|\Delta_{k, i}| \geq t] \leq 2\exp\left(\frac{2(t - \E[|\Delta_{k, i}|])^2}{4|U_0|}\right) = \exp(-\Omega(t^2/n)).
     \]
