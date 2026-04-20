@@ -1,21 +1,6 @@
-%% Oxford OMMS / Part C Mathematics Dissertation Template
-%% Conforms to the 2025/26 Dissertation Guidance Notes
-%%
-%% Formatting requirements (Section 5 of Guidance Notes):
-%%   - 12pt font, A4 paper
-%%   - Text width 15cm, text height 22.5cm
-%%   - Single-spaced text
-%%   - Title page: title, examination number, degree course, term & year
-%%   - No identifying information (no name, no college)
-%%   - Word limit: 7,500 words (excluding equations, diagrams, tables,
-%%     bibliography, ToC, and code appendices; preface/footnotes/appendices included)
-%%   - Page limit: 50 pages absolute maximum (25–30 typical)
-%%   - Submit both .pdf and .tex (zipped with all source files)
 
 \documentclass[12pt, a4paper]{article}
 
-% ─── Page geometry ────────────────────────────────────────────────────────────
-% A4: 210mm × 297mm.  Required: textwidth=15cm, textheight=22.5cm.
 \usepackage[
   a4paper,
   textwidth  = 150mm,
@@ -24,20 +9,16 @@
   headheight = 14pt,
 ]{geometry}
 
-% ─── Encoding & fonts ─────────────────────────────────────────────────────────
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{lmodern}          % scalable Latin Modern fonts
+\usepackage{lmodern}
 
-% ─── Language ─────────────────────────────────────────────────────────────────
 \usepackage[UKenglish]{babel}
 
-% ─── Mathematics ──────────────────────────────────────────────────────────────
 \usepackage{amsmath, amssymb, amsthm, mathtools}
-\usepackage{bm}               % bold math symbols
-\usepackage{bbm}              % blackboard bold \mathbbm{1}
+\usepackage{bm}
+\usepackage{bbm}
 
-% ─── Theorem environments ─────────────────────────────────────────────────────
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -52,45 +33,36 @@
 
 \newtheorem{remark}[definition]{Remark}
 
-% ─── Graphics & floats ────────────────────────────────────────────────────────
 \usepackage{graphicx}
 \graphicspath{{figures/}}
 \usepackage{float}
 \usepackage{subcaption}
-\usepackage{booktabs}         % publication-quality tables
+\usepackage{booktabs}
 \usepackage{array}
 
-% ─── Colours ──────────────────────────────────────────────────────────────────
 \usepackage[dvipsnames]{xcolor}
 \definecolor{oxfordblue}{RGB}{0, 33, 71}
 
-% ─── Hyperlinks ───────────────────────────────────────────────────────────────
 \usepackage[
   colorlinks = true,
   linkcolor  = oxfordblue,
   citecolor  = oxfordblue,
   urlcolor   = oxfordblue,
   pdftitle   = {Oxford OMMS Dissertation},
-  pdfauthor  = {},            % leave blank — no identifying information
+  pdfauthor  = {},
 ]{hyperref}
-\usepackage{cleveref}         % \cref, \Cref for smart cross-references
+\usepackage{cleveref}
 
-% ─── Bibliography ─────────────────────────────────────────────────────────────
-% Uses natbib with a numerical style (LMS house style).
-% Switch to authoryear for author–year citations: \usepackage[authoryear]{natbib}
 \usepackage[numbers, sort&compress]{natbib}
 \bibliographystyle{plainnat}
 
 
-% ─── Miscellaneous ────────────────────────────────────────────────────────────
-\usepackage{microtype}        % microtypography — improves text appearance
-\usepackage{parskip}          % space between paragraphs instead of indent
-\usepackage{enumitem}         % customisable lists
-\usepackage{csquotes}         % smart quotes via \enquote{...}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{csquotes}
 \newcommand{\TODO}[1]{\textcolor{red}{#1}}
 
-% ─── Custom commands ──────────────────────────────────────────────────────────
-% Standard sets
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -98,46 +70,26 @@
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\prob}{\mathbb{P}}
 
-% Delimiters
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\eps}{\varepsilon}
+     
+\renewcommand{\deg}{\operatorname{deg}}  
 
-% Graph theory
-\newcommand{\clique}[1]{K_{#1}}          % complete graph K_n
-\newcommand{\vx}{V(G)}                   % vertex set
-\newcommand{\edges}{e(G)}                % edge count of G
-\renewcommand{\deg}{\operatorname{deg}}  % vertex degree (override math-mode \deg)
-\newcommand{\exnum}[2]{\operatorname{ex}(#1,#2)}  % extremal number ex(n,H)
-
-% Ramsey theory
-\newcommand{\Ram}[2]{R(#1,#2)}           % Ramsey number R(s,t)
-
-% Probabilistic / analytic
-\newcommand{\ind}{\mathbbm{1}}           % indicator function
 \newcommand{\Var}{\operatorname{Var}}
 \newcommand{\Cov}{\operatorname{Cov}}
-\newcommand{\Lip}{\operatorname{Lip}}
 
-% ─── Headers & footers ────────────────────────────────────────────────────────
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0pt}
 
-% ─── Dissertation metadata ────────────────────────────────────────────────────
-% Edit these four lines only.
 \newcommand{\dissertationtitle}{Induced Subgraphs in Ramsey Graphs}
 \newcommand{\degreecourse}{MSc in Mathematical Sciences}
 \newcommand{\submissionterm}{Trinity Term 2026}
-\newcommand{\examinationnumber}{XXXXXXXX}   % e.g. 12345678 — NOT your name
+\newcommand{\examinationnumber}{XXXXXXXX}
 
-% =============================================================================
 \begin{document}
-% =============================================================================
 
-% ─── Title page ───────────────────────────────────────────────────────────────
 \begin{titlepage}
   \thispagestyle{empty}
   \begin{center}
@@ -147,14 +99,14 @@
 
     \vspace{2cm}
     
-    \IfFileExists{figures/oxford_logo.pdf}{%
-      \includegraphics[width=4cm]{figures/oxford_logo.pdf}%
-    }{%
-      \IfFileExists{figures/oxford_logo.png}{%
-        \includegraphics[width=4cm]{figures/oxford_logo.png}%
-      }{%
-        \framebox[4cm]{\rule{0pt}{3cm}\hfill Oxford Logo\hfill}%
-      }%
+    \IfFileExists{figures/oxford_logo.pdf}{
+      \includegraphics[width=4cm]{figures/oxford_logo.pdf}
+    }{
+      \IfFileExists{figures/oxford_logo.png}{
+        \includegraphics[width=4cm]{figures/oxford_logo.png}
+      }{
+        \framebox[4cm]{\rule{0pt}{3cm}\hfill Oxford Logo\hfill}
+      }
     }
 
     \vspace{2cm}
@@ -182,23 +134,16 @@
   \end{center}
 \end{titlepage}
 
-% ─── Abstract ─────────────────────────────────────────────────────────────────
-
 \begin{abstract}
   \noindent
-  In this dissertation, we investigate the ``random-like'' features of Ramsey graphs, with an emphasis on the existence of induced subgraphs of many different sizes. 
+  We study the ``random-like'' features of Ramsey graphs, focusing on the sizes of their induced subgraphs. 
 \end{abstract}
 
 \clearpage
 
-% ─── Table of contents ────────────────────────────────────────────────────────
 \tableofcontents
 
 \clearpage
-
-% =============================================================================
-% Chapters
-% =============================================================================
 
 \input{chapters/ch1_introduction}
 
@@ -220,21 +165,11 @@
 
 \newpage
 
-% =============================================================================
-% Bibliography
-% =============================================================================
-
 %TC:ignore
 \bibliography{references}
-%TC:endignore
-
-% =============================================================================
-% Appendices  (counted in word limit unless containing only code)
-% =============================================================================
 
 \appendix
 
 \input{appendices/proofs}
 
-% =============================================================================
 \end{document}

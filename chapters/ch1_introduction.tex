@@ -42,7 +42,7 @@ Following the fact that $\binom{2t - 2}{t - 1} < 2^{2t}$, we can see $R(t, t) < 
   Similarly, the expected number of independent sets of size $t$ is less than $1/2$. It now follows that there exists a graph on $N$ vertices containing neither a clique nor an independent set of size $t$.
 \end{proof}
 
-The above strategy may be optimized to give a lower bound of $\frac{{t}}{e\sqrt{2}}\sqrt{2}^t$, which has been astonishingly resilient to improvement. The only noteworthy improvement since 1947 is achieved in 1977 by Spencer~\cite{Spencer1975RamseysT} using the Lov\'{a}sz local lemma to raise the bound to $(1 - o(1))\frac{t\sqrt{2}}{e}\sqrt{2}^t$, an improvement by a factor of 2. For further background on Ramsey theory, see Conlon, Fox, and Sudakov~\cite{conlon2015recentdevelopmentsgraphramsey}.
+% The above strategy may be optimized to give a lower bound of $\frac{{t}}{e\sqrt{2}}\sqrt{2}^t$, which has been astonishingly resilient to improvement. The only noteworthy improvement since 1947 is achieved in 1977 by Spencer~\cite{Spencer1975RamseysT} using the Lov\'{a}sz local lemma to raise the bound to $(1 - o(1))\frac{t\sqrt{2}}{e}\sqrt{2}^t$, an improvement by a factor of 2. For further background on Ramsey theory, see Conlon, Fox, and Sudakov~\cite{conlon2015recentdevelopmentsgraphramsey}.
 
 We define a shorthand for cliques and independent sets.
 
@@ -52,7 +52,7 @@ We define a shorthand for cliques and independent sets.
   A set $S \subseteq V(G)$ is \textit{homogeneous} in a graph $G$ if it induces a clique or an independent set in $G$. We denote the size of the largest homogeneous set in $G$ by $\hom(G)$.
 \end{definition}
 
-Theorem~\ref{thm:diagonal-ramsey} may therefore be restated as
+Therefore, Theorem~\ref{thm:diagonal-ramsey} may be restated as
 \[
   \frac{1}{2}\log_2 n < \hom(G) < 2\log_2 n,
 \]
@@ -79,7 +79,7 @@ Despite decades of intensive research, all known constructions of Ramsey graphs 
   \[
     s < 8dK = \frac{8c\log n}{\log(1/d)} = O(\log n).
   \]
-  Since $s/k = 8d$, it follows that
+  Since $s/k = 8d$, 
   \[
     |\mathcal{F}| \leq \frac{s^2}{k}\left(\frac{ek}{s}\right)^s \leq O(\log n) \cdot \left(\frac{e}{8} \cdot \frac{1}{d}\right)^{s} \leq O(\log n) \cdot \left(\frac{1}{d}\right)^{\frac{8c\log n}{\log(1/d)}} = O(\log n) \cdot n^{8c} < n^{1/3}.
   \]
@@ -119,30 +119,33 @@ Erd\H{o}s and McKay~\cite{EFS} conjectured that for any Ramsey graph $G$ on $n$ 
 \]
 It was proven for Random graphs by Calkin, Frieze, and Mckay~\cite{erdosmckayrandomgraph}, but the conjecture for Ramsey graphs remained open for decades and only started to show significant progress in recent years. In particular, a chain of results were sparked after the work of Narayanan, Sahasrabudhe, and Tomon~\cite{narayanan2017ramseygraphsinducesubgraphs} establishing that $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on some ideas from the work of Bukh and Sudakov~\cite{BUKH2007612} which showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature that dense random graphs also exhibit. Kwan and Sudakov~\cite{kwan2021ramseygraphsinducesubgraphs} later improved the bound to $|\Phi(G)| = \Omega(n^2)$ by refining the argument of Narayanan, Sahasrabudhe, and Tomon. Eventually, Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023} closed the conjecture via Fourier-analytic techniques on graph polynomials.
 
-This dissertation will start by studying the result of Bukh and Sudakov~\cite{BUKH2007612} on large induced subgraphs in Ramsey graphs with many distinct degrees. This work not only tightens the connection between Ramsey graphs and random graphs, but also builds the foundation for the subsequent $|\Phi(G)| = \Omega(n^2)$ result by Kwan and Sudakov which we will present in the following chapter. Lastly, we go through the broad strokes of the proof to the Erd\H{o}s--McKay conjecture by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}, touching on the core ideas of their approach.
+This dissertation will start by studying the result of Bukh and Sudakov~\cite{BUKH2007612} on large induced subgraphs in Ramsey graphs with many distinct degrees. This work not only tightens the connection between Ramsey graphs and random graphs, but also builds the foundation for the subsequent $|\Phi(G)| = \Omega(n^2)$ result by Kwan and Sudakov which we will present in the following chapter. Lastly, we outline the proof of the Erd\H{o}s--McKay conjecture by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}.
 
 % Another research direction is to consider whether forbidding certain induced subgraphs could force homogeneous sets beyond logarithmic size. Erd\H{o}s and Hajnal famously conjectured that for any graph $H$, if a graph $G$ does not contain $H$ as an induced subgraph, then $G$ contains a homogeneous set of size $|G|^{\eta}$ for some $\eta = \eta(H) > 0$.  
 
-\subsection{The anticoncentration principle}\label{sec:anticoncentration}
+\subsection{The anticoncentration behavior}\label{sec:anticoncentration}
 
-The core results of this dissertation surrounds a key probabilistic mechanism called \textit{anticoncentration}. In the following chapters, we will repeatedly sample a random vertex set $U\subseteq V(G)$ and study the induced subgraph $G[U]$. A natural question to ask in this setting is how likely it is for two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?
+The core results of this dissertation concerns the \textit{anticoncentration} behavior exhibited by Ramsey graphs. In general, anticoncentration provides an upper bound on the point probabilities of a random variable. In the following chapters, we will repeatedly sample a random vertex set $U\subseteq V(G)$ and study the induced subgraph $G[U]$. A question to ask in this setting is how likely it is for two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?
 
 Observe that $\deg_U(x)-\deg_U(y)$ counts only vertices in the symmetric difference $D = N_G(x)\triangle N_G(y)$. Write
-$A=N(x)\setminus N(y)$ and $B=N(y)\setminus N(x)$ and we have
+$A=N(x)\setminus N(y), B=N(y)\setminus N(x)$. Then
 \begin{equation}\label{eq:deg-diff}
   \deg_U(x)-\deg_U(y) = |U\cap A| - |U\cap B|,
 \end{equation}
-so $x, y$ have the same degree in $G[U]$ precisely when $|U\cap A|=|U\cap B|$.
+so $x, y$ have the same degree in $G[U]$ precisely when $|U\cap A|=|U\cap B|$. 
 
-Suppose first that $U$ is formed by including each vertex independently with probability $p$. Then each vertex $v \in A$ independently contributes $+1$ to the difference $|U\cap A| - |U\cap B|$ with probability $p$, while each vertex $v \in B$ independently contributes $-1$ to the difference with probability $p$. The difference is thus a sum of $|D| = |A| + |B|$ independent bounded random variables. When $|D|$ is large, say $|D| \geq \eps n$, this sum has standard deviation $\Theta(\sqrt{n})$. Since $|U\cap A|-|U\cap B|$ is integer-valued, we can show the probability that it equals any particular integer is at most $O(1/\sqrt{n})$ via the one-dimensional Erd\H{o}s--Littlewood--Offord theorem. Thus we conclude that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$. We will formalize this with greater detail in Chapter~\ref{sec:ch3}.
+If $U$ is a uniformly random subset of $V(G)$, each $v \in A$ contributes $+1$ to the difference $|U\cap A| - |U\cap B|$ with probability $1/2$ and each $v \in B$ contributes $-1$ with probability $1/2$. The difference is thus a sum of $|D| = |A| + |B|$ independent random variables, which has standard deviation $\Theta(\sqrt{n})$ when $|D| \geq \eps n$ is large. The one-dimensional Erd\H{o}s--Littlewood--Offord theorem then shows that the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sqrt{n})$, and thus $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$.
 
-If instead $U$ is a uniformly random subset of a fixed size~$m$, the vertices of $U$ are no longer independent. Nevertheless, conditioning on $k=|U\cap D|$, we may observe that, given~$k$, the split of these $k$ elements between $A$ and $B$ follows a hypergeometric distribution. With the same assumption that $|D|$ is large, Stirling's approximation applied to the hypergeometric probability then yields the same $O(1/\sqrt{n})$ bound. We will carry out this calculation in detail in Chapter~\ref{sec:ch2}.
+If $U$ is instead a uniformly random subset of a \textit{fixed size}, $|U \cap A|$ and $|U \cap B|$ follow a hypergeometric distribution when conditioned on $|U \cap D|$. Stirling's approximation applied to the hypergeometric probability then yields the same $O(1/\sqrt{n})$ bound.
 
-An intuition to the bound $O(1/\sqrt{n})$ is that, in either sampling method, the difference $\deg_U(x)-\deg_U(y)$ is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$. Since the probability density function $\phi(x)$ of a normal distribution with standard deviation $\sigma$ is at most $1/(\sigma\sqrt{2\pi})$ for all $x$, the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sigma) = O(1/\sqrt{n})$, and this principle is the key to the results in Chapter~\ref{sec:ch2} and Chapter~\ref{sec:ch3}. The resolution of the Erd\H{o}s--McKay conjecture in Chapter~\ref{sec:ch4} requires a substantially more powerful approach via Fourier analysis, but the underlying idea remains: when a random variable is approximately normal with large standard deviation, its point probabilities are small.
+An intuition to the $O(1/\sqrt{n})$ bound is that, in either sampling method, $\deg_U(x)-\deg_U(y)$ is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$. Since the probability density function $\phi(x)$ of a normal distribution with standard deviation $\sigma$ is at most $1/(\sigma\sqrt{2\pi})$ for all $x$, the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sigma) = O(1/\sqrt{n})$, and this anticoncentration bound is the key to the results in Chapter~\ref{sec:ch2} and \ref{sec:ch3}. In Chapter~\ref{sec:ch4}, we will instead study the induced edge count $e(U)$ itself, which turns out to vaguely resemble the normal distribution and exhibit an anticoncentration behavior. 
 
 \subsection{Notations and tools}
 
-We call $e(G)$ the \textit{size} of a graph $G$. We omit all floor and ceiling signs when they are not crucial for simplicity.
+Let $G = (V, E)$ be a graph. We call $e(G) \coloneqq |E(G)|$ the \textit{size} of $G$. For $U \subseteq V$, $G[U]$ denotes the subgraph of $G$ induced by $U$, and write $e(U) \coloneqq e(G[U])$.
+
+
+We omit all floor and ceiling signs when they are not crucial for simplicity.
 
 \begin{proposition}[Tur\'{a}n's theorem]
   \label{prop:turan}

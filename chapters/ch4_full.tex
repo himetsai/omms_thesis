@@ -15,15 +15,7 @@ The approach to this theorem fundamentally shifts from bounding degree-collision
 
 \subsection{Point probabilities of $e(U)$}
 
-Assume that $V(G) = [n]$. Let $U$ be a uniformly random vertex subset. The random variable $e(G[U])$ has mean $e(G)/2 = \Theta(n^2)$. For variance, the standard variance identity gives
-\[
-  \Var(e(U)) = \sum_{(e, e') \in E(G)^2} \Cov(\mathbbm{1}_{e \subseteq U}, \mathbbm{1}_{e' \subseteq U}).
-\]
-The covariance is zero if $e$ and $e'$ are disjoint and $\Theta(1)$ otherwise, so $\Var(e(U)) = O(n^3)$. For a fixed vertex $v$, the number of pairs of edges sharing $v$ is $\binom{\deg(v)}{2}$, and the Erd\H{o}s--Szemer\'{e}di bound (Theorem~\ref{thm:ramsey-density}) with Jensen's inequality gives
-\[
-  \Var(e(U)) \geq \sum_v \binom{\deg(v)}{2} \geq n\binom{2e(G)/n}{2} = \Omega(n^3).
-\]
-Thus the standard deviation is $\sigma(e(U)) = \Theta(n^{3/2})$. 
+Assume that $V(G) = [n]$. Let $U$ be a uniformly random vertex subset. By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), the random variable $e(G[U])$ has mean $e(G)/2 = \Theta(n^2)$ and standard deviation $\sigma(e(U)) = \Theta(n^{3/2})$. 
 
 In Chapters~2 and~3, the anticoncentration analysis targeted the degree difference $\deg_U(x) - \deg_U(y)$ with standard deviation $\Theta(\sqrt{n})$, and the control of $e(U)$ was achieved indirectly through the construction of $\mathbf{S}, \mathbf{T}, \mathbf{X}$. In~\cite{Kwan_2023}, we show directly that the point probabilities of $e(U)$ are all of order $\Theta(1/\sigma(e(U))) = \Theta(n^{-3/2})$ within the bulk of the distribution.
 
@@ -60,7 +52,7 @@ so $|x - e(G')/4| \leq m/4 \leq m^{3/2}$. Since $m^2 \geq e(G') \geq 4x \geq n^\
 \]
 Therefore, there exists $U \subseteq V(G') \subseteq V(G)$ such that $e(G[U)] = e(G'[U]) = x$, for sufficiently large $n$. This completes the theorem. \qed
 
-We will outline the proof of Theorem~\ref{thm:ksss} for the remainder of this chapter.
+We will outline the proof of Theorem~\ref{thm:ksss} in the remainder of this chapter.
 
 \subsection{Proof overview}
 \label{sec:proof-overview}
@@ -102,15 +94,16 @@ We first decompose $e(U)$ into a sum of a linear and quadratic part. Set $\xi_v 
 \begin{equation}\label{eq:decomposition}
   X = \sum_{ij \in E(G)} \frac{(1 + x_i)(1 + x_j)}{4} = \underbrace{\frac{e(G)}{4}}_{\mathbb{E}[X]} + \underbrace{\frac{1}{4}\sum_{v \in V(G)} \deg(v) x_v}_{L} + \underbrace{\frac{1}{4}\sum_{uv \in E(G)} x_u x_v}_{Q},
 \end{equation}
-and we denote the linear term as $L$ and the quadratic term as $Q$. Since $\mathbb{E}[x_v] = 0$ and $\mathbb{E}[x_u x_v] = 0$ for $u \ne v$, we have that $\mathbb{E}[L] = \mathbb{E}[Q] = 0$, the covariance of $L$ and $Q$ is zero, and the constant term $e(G)/4 = \mathbb{E}[X]$. Note that $\mathrm{Var}(L) = \frac{1}{16}\sum_{v}\deg(v)^2$ and the Erd\H{o}s--Szemer\'{e}di bound gives $e(G) = \Theta(n^2)$, and the Jensen's inequality and handshake lemma yield
-\[
-  \Omega(n^3) = \frac{(2e(G))^2}{n} = \frac{1}{n}\left(\sum_{v}\deg(v)\right)^2 \leq \sum_{v}\deg(v)^2 \leq n\sum_{v}\deg(v) = O(n^3),
-\]
-which shows that $\mathrm{Var}(L) = \Theta(n^3)$. On the other hand, it is straightforward to see that $\mathbb{E}[x_u x_v x_{u'} x_{v'}] = 1$ when $\{u, v\} = \{u', v'\}$ and 0 otherwise, so the Erd\H{o}s--Szemer\'{e}di bound gives
-\[
-  \Var(Q) = \mathbb{E}[Q^2] = \frac{1}{16}\sum_{uv, u'v' \in E(G)} \mathbb{E}[x_u x_v x_{u'} x_{v'}] = \frac{e(G)}{16} = \Theta(n^2).
-\]
-Therefore, the linear part $L$ dominates the total variance, so we expect $L$ to drive the global behaviour of $X$, with $Q$ playing a corrective role. Write $d_v \coloneqq \deg(v)/4$ so that $L = \sum_{v} d_v x_v$. Since the variables $x_v$ are independent,
+and we denote the linear term as $L$ and the quadratic term as $Q$. Since $\mathbb{E}[x_v] = 0$ and $\mathbb{E}[x_u x_v] = 0$ for $u \ne v$, we have that $\mathbb{E}[L] = \mathbb{E}[Q] = 0$, the covariance of $L$ and $Q$ is zero, and the constant term $e(G)/4 = \mathbb{E}[X]$. It can be shown via the Erd\H{o}s--Szemer\'{e}di bound and Jensen's inequality that $\Var(L) = \Theta(n^3), \Var(Q) = \Theta(n^2)$.
+% Note that $\Var(L) = \frac{1}{16}\sum_{v}\deg(v)^2$ and the Erd\H{o}s--Szemer\'{e}di bound gives $e(G) = \Theta(n^2)$, and the Jensen's inequality and handshake lemma yield
+% \[
+%   \Omega(n^3) = \frac{(2e(G))^2}{n} = \frac{1}{n}\left(\sum_{v}\deg(v)\right)^2 \leq \sum_{v}\deg(v)^2 \leq n\sum_{v}\deg(v) = O(n^3),
+% \]
+% which shows that $\Var(L) = \Theta(n^3)$. On the other hand, it is straightforward to see that $\mathbb{E}[x_u x_v x_{u'} x_{v'}] = 1$ when $\{u, v\} = \{u', v'\}$ and 0 otherwise, so the Erd\H{o}s--Szemer\'{e}di bound gives
+% \[
+%   \Var(Q) = \mathbb{E}[Q^2] = \frac{1}{16}\sum_{uv, u'v' \in E(G)} \mathbb{E}[x_u x_v x_{u'} x_{v'}] = \frac{e(G)}{16} = \Theta(n^2).
+% \]
+Therefore, the linear part $L$ dominates the total variance, so we expect $L$ to drive the global behaviour of $X$. Write $d_v \coloneqq \deg(v)/4$ so that $L = \sum_{v} d_v x_v$. Since the variables $x_v$ are independent,
 \begin{equation}
   \label{eq:phi-L}
   \varphi_L(\tau) = \mathbb{E}\left[\exp\left(i\tau\sum_v d_v x_v\right)\right] = \prod_{v \in V(G)} \mathbb{E}\left[\exp(i\tau d_v x_v)\right] = \prod_{v \in V(G)} \cos(\tau d_v). 
@@ -132,7 +125,7 @@ In particular, the right-hand side decays exponentially in $n$ unless many of th
 \[
   \sum_{v \in V(G)} \left\|\frac{\tau d_v}{\pi}\right\|^2 = \omega(\log n)
 \]
-for all $\tau$ with $0 < |\tau| \leq \nu$, the bound \eqref{eq:phi-L-bound} gives the superpolynomial decay $|\varphi_L(\tau)| \leq n^{-\omega(1)}$ on the window. Since $\Var(Q) = \Theta(n^2)$ is a factor of $n$ smaller than $\Var(L) = \Theta(n^3)$, the quadratic part perturbs $\varphi_X$ only negligibly on the same range. Esseen's inequality applied to the difference $\varphi_X - \varphi_Z$, where $\varphi_Z(\tau) = \exp(i \mu \tau - \sigma^2 \tau^2/2)$ is the Gaussian characteristic function matching the mean and variance of $X$, then delivers the interval estimate \eqref{eq:interval-estimate}. This case admits a local central limit theorem by the standard Fourier-analytic argument.
+for all $\tau$ with $0 < |\tau| \leq \nu$, the bound \eqref{eq:phi-L-bound} gives the superpolynomial decay $|\varphi_L(\tau)| \leq n^{-\omega(1)}$ on the window. In this case, Esseen's inequality applied to the difference $\varphi_X - \varphi_Z$, where $\varphi_Z(\tau) = \exp(i \mu \tau - \sigma^2 \tau^2/2)$ is the Gaussian characteristic function matching the mean and variance of $X$, then delivers the interval estimate \eqref{eq:interval-estimate}. This case admits a local central limit theorem by the standard Fourier-analytic argument.
 
 \paragraph{The structured case.} Here we consider the opposite case that
 \[
@@ -162,17 +155,17 @@ This reduces the interval estimate \eqref{eq:interval-estimate} to evaluating th
 
 % \textit{Remark.} The dichotomy above is an instance of the inverse Littlewood--Offord phenomenon. In Chapter~\ref{sec:ch3} the forward direction of Littlewood--Offord controlled the collision probability $\Pr[\deg_U(x) = \deg_U(y)]$ via the large symmetric difference $|N(x) \triangle N(y)|$. Here the forward direction would tell us that $L = \sum_v d_v x_v$ has small-ball probability $O(n^{-3/2})$ provided the coefficient vector $(d_v)$ is generic. The inverse direction, developed by Tao and Vu and by Rudelson and Vershynin, identifies the exceptional case as precisely additive structure, which Lemma~4.12 of \cite{Kwan_2023} in turn converts into the bucket partition we used in the structured case. The formal threshold at which the inverse case kicks in is controlled by the \emph{regularised least common denominator} of $(d_v)$, a notion introduced by Vershynin in random matrix theory, and we do not require the formal definition here.
 
-It is tempting at this point to hope that, after conditioning on $\vec\Delta$, $L_{\text{err}} + Q$ satisfies a local CLT of its own, which can be resolved by a second round of the Fourier-analytic argument applied to $Q$. This hope is too optimistic.
+It is tempting at this point to hope that, after conditioning on $\vec\Delta$, $L_{\text{err}} + Q$ satisfies a local CLT of its own. This hope is too optimistic. Consider $G$ to be the disjoint union of two independent copies of $G(n/2, 1/2)$. With high probability $G$ is a Ramsey graph, but conditioning on $|U| = n/2$ yields a normalized limiting distribution of the form $\alpha Z^2 + \beta Z_2$ for independent Gaussians $Z_1, Z_2$. Therefore, the asymptotic conditional distribution of $X$ need not be Gaussian after the bucket conditioning, though we shall see that it can always be evaluated at independent Gaussians.
 
-Consider $G$ to be the disjoint union of two independent copies of $G(n/2, 1/2)$, with vertex sets $V_1$ and $V_2$. With high probability $G$ is a Ramsey graph. Every vertex has degree approximately $n/4$, so all vertices fall into a single bucket and $\vec\Delta = |U|$. Conditioning on $|U| = n/2$ and writing $s = |U \cap V_1|$,
-\[
-  \E[X\mid s] = \frac{1}{2}\binom{s}{2} + \frac{1}{2}\binom{n/2 - s}{2} = \frac{1}{2}(s - n/4)^2 + \frac{n^2}{32} - \frac{n}{8}.
-\]
-The variable $s$ is hypergeometric with mean $n/4$ and variance approximately $n/16$, so by the hypergeometric CLT, $(s - n/4)/(\sqrt{n}/4) \to Z_1 \sim \mathcal{N}(0, 1)$ in distribution. In particular, $(s - n/4)^2$ contributes a term of order $n$ to $X - \E[X]$ with a scaled limit of $\alpha Z_1^2$ for some $\alpha > 0$. The remaining randomness in $X$ comes from the random distribution of the edges in the two copies of $G(n/2, 1/2)$. This is a sum of $\Theta(n^2)$ independent Bernoulli random variables, which also contributes a term of order $n$ and has a scaled limit of a Gaussian $\beta Z_2$ for some $\beta > 0$. Thus, conditioning on $|U| = n/2$, 
-\[
-  \frac{X-\E[X]}{\sigma}\stackrel{d}{\longrightarrow}\alpha Z_1^2+\beta Z_2,
-\]
-which is not Gaussian. Therefore, the asymptotic conditional distribution of $X$ need not be Gaussian after the bucket conditioning, though we shall see that it can always be evaluated at independent Gaussians.
+% Consider $G$ to be the disjoint union of two independent copies of $G(n/2, 1/2)$, with vertex sets $V_1$ and $V_2$. With high probability $G$ is a Ramsey graph. Every vertex has degree approximately $n/4$, so all vertices fall into a single bucket and $\vec\Delta = |U|$. Conditioning on $|U| = n/2$ and writing $s = |U \cap V_1|$,
+% \[
+%   \E[X\mid s] = \frac{1}{2}\binom{s}{2} + \frac{1}{2}\binom{n/2 - s}{2} = \frac{1}{2}(s - n/4)^2 + \frac{n^2}{32} - \frac{n}{8}.
+% \]
+% The variable $s$ is hypergeometric with mean $n/4$ and variance approximately $n/16$, so by the hypergeometric CLT, $(s - n/4)/(\sqrt{n}/4) \to Z_1 \sim \mathcal{N}(0, 1)$ in distribution. In particular, $(s - n/4)^2$ contributes a term of order $n$ to $X - \E[X]$ with a scaled limit of $\alpha Z_1^2$ for some $\alpha > 0$. The remaining randomness in $X$ comes from the random distribution of the edges in the two copies of $G(n/2, 1/2)$. This is a sum of $\Theta(n^2)$ independent Bernoulli random variables, which also contributes a term of order $n$ and has a scaled limit of a Gaussian $\beta Z_2$ for some $\beta > 0$. Thus, conditioning on $|U| = n/2$, 
+% \[
+%   \frac{X-\E[X]}{\sigma}\stackrel{d}{\longrightarrow}\alpha Z_1^2+\beta Z_2,
+% \]
+% which is not Gaussian. Therefore, the asymptotic conditional distribution of $X$ need not be Gaussian after the bucket conditioning, though we shall see that it can always be evaluated at independent Gaussians.
 
 \subsection{The structured case}
 \label{sec:robust-rank}
@@ -186,12 +179,12 @@ which, after averaging over $\vec\Delta$, yields the interval estimate $\Theta(n
 
 \paragraph{Ingredient 1. The Gaussian invariance principle}
 
-We first replace the product of Boolean slices by a Gaussian space. The invariance principle of Mossel, O'Donnell and Oleszkiewicz says that a low-degree polynomial of independent low-influence bounded random variables has a distribution close to that of the same polynomial evaluated at independent standard Gaussians. Applied to $L_{err} + Q$ produces a quadratic polynomial
+We first replace the product of Boolean slices by a Gaussian space. The invariance principle of Mossel, O'Donnell and Oleszkiewicz says that a low-degree polynomial of independent bounded random variables has a distribution close to that of the same polynomial evaluated at independent standard Gaussians. Applying this to $L_{err} + Q$ produces a quadratic polynomial
 \begin{equation}
 \label{eq:gaussian-quadratic}
   f(\vec Z) = \vec Z^{\top} F\, \vec Z + \vec f \cdot \vec Z + f_0, \qquad \vec Z = (Z_1, \dots, Z_n) \sim \mathcal{N}(0, I_n),
 \end{equation}
-with a symmetric matrix $F \in \R^{n \times n}$ and $\vec f \in \R^n$ derived from the adjacency matrix of $G$ and the bucket partition, such that the characteristic functions of $L_{err} + Q$ (given $\vec\Delta$) and of $f(\vec Z)$ are close -- see Lemma~11.1 of \cite{Kwan_2023}. The role of this step is to convert a discrete, dependent domain into a continuous, independent one, allowing us to apply the Carbery--Wright theorem.
+with a symmetric matrix $F \in \R^{n \times n}$ and $\vec f \in \R^n$ derived from the adjacency matrix of $G$ and the bucket partition, such that the characteristic functions of $L_{err} + Q$ (given $\vec\Delta$) and of $f(\vec Z)$ are close -- see \cite[Lemma~11.1]{Kwan_2023}. The role of this step is to convert a discrete, dependent domain into a continuous, independent one, allowing us to apply the Carbery--Wright theorem.
 
 \paragraph{Ingredient 2. The sharpened Carbery--Wright theorem}
 
@@ -229,7 +222,9 @@ The hypothesis \eqref{eq:robust-rank-2} says that $F$ is a fixed Frobenius-norm 
   \]
 \end{lemma}
 
-The lemma says that the adjacency matrix of a Ramsey graph is at Frobenius distance $\Omega(n)$ from every matrix whose restriction to each bucket block is low rank. In the application of Theorem~\ref{thm:sharp-CW}, the parts $I_j$ are the buckets $B_j$ from Section~\ref{sec:fourier-walsh} (after a minor adjustment to make the sizes equal) and $F$ is a rescaled copy of $A$ restricted away from the exceptional set $R$. A hypothetical rank-$2$ approximation $\widetilde F$ violating \eqref{eq:robust-rank-2} would in particular satisfy $\mathrm{rank}(\widetilde F[B_j \times B_k]) \le 2$ on every bucket block, contradicting Lemma~\ref{lem:robust-rank} with $r = 2$ and $\delta = 2\gamma$. Hence \eqref{eq:robust-rank-2} holds with some $\eta = \eta(C, \gamma) > 0$.
+The lemma says that the adjacency matrix of a Ramsey graph is at Frobenius distance $\Omega(n)$ from every matrix whose restriction to each bucket block is low rank. 
+
+% In the application of Theorem~\ref{thm:sharp-CW}, the parts $I_j$ are the buckets $B_j$ from Section~\ref{sec:fourier-walsh} (after a minor adjustment to make the sizes equal) and $F$ is a rescaled copy of $A$ restricted away from the exceptional set $R$. A hypothetical rank-$2$ approximation $\widetilde F$ violating \eqref{eq:robust-rank-2} would in particular satisfy $\mathrm{rank}(\widetilde F[B_j \times B_k]) \le 2$ on every bucket block, contradicting Lemma~\ref{lem:robust-rank} with $r = 2$ and $\delta = 2\gamma$. Hence \eqref{eq:robust-rank-2} holds with some $\eta = \eta(C, \gamma) > 0$.
 
 % Lemma~\ref{lem:robust-rank} is the only place in the first stage where the Ramsey hypothesis is used directly, and its proof is the most combinatorial component in this stage. The argument proceeds by discretising the entries of the approximating matrix $B$ to a finite alphabet, observing that a low-rank block forces a small number of distinct row patterns, and applying Ramsey's theorem on an auxiliary graph to extract a monochromatic structure that contradicts the $C$-Ramsey assumption on $G$.
 
@@ -298,10 +293,10 @@ for all $\ell$ in an $O(\sqrt n)$ window around the mean, which yields
 \[
   \E[Y_\ell] = \frac{1}{4}\sum_{(y, z) \in T} \prob[s(y, z; U) = \ell \mid y \in U, z \notin U] = \Theta(|T|/\sqrt n).
 \]
-It remains to construct such a set $T$, which is produced by applying richness twice inside a linear-sized $(\eps, \delta)$-rich subgraph $S_0$, together with a pigeonhole partition of the degree sequence into $\deg(z) - \deg(y) = \Theta(\sqrt{n})$. We refer to \cite[Lemma~13.9]{Kwan_2023} for the construction. The second-moment bound \eqref{eq:moment-2} is more involved and follows a \textit{dependent random choice} technique -- see~\cite[Lemmas~13.1, 13.4, 13.9]{Kwan_2023} for details.
+It remains to construct such a set $T$, which is produced by applying richness twice inside a linear-sized $(\eps, \delta)$-rich subgraph $S_0$, together with a pigeonhole partition of the degree sequence into $\deg(z) - \deg(y) = \Theta(\sqrt{n})$ -- see~\cite[Lemma~13.9]{Kwan_2023} for details. The second-moment bound \eqref{eq:moment-2} is more involved and follows a \textit{dependent random choice} technique -- see~\cite[Lemmas~13.1, 13.4, 13.9]{Kwan_2023} for details.
 
-\subsubsection*{Closing the circle}
+% \subsubsection*{Closing the circle}
 
-The same large-symmetric-difference condition that powered the collision graph argument in Chapter~\ref{sec:ch3} drives the second-moment estimate here. There, richness lower-bounded $|N(x) \triangle N(y)|$ for every pair in the rich subgraph and forced the small-ball probability of the linear quantity $\deg_U(x) - \deg_U(y)$ to be $O(1/\sqrt n)$ by treating it as a sum of independent Bernoulli contributions indexed by $N(x) \triangle N(y)$. Here, the same large symmetric difference forces near-independence of two switching events by giving the four neighbourhoods $N(y_i), N(z_i)$ a large pool of $U$-coordinates over which to vary independently. In both cases a large symmetric difference supplies a large pool of independent coin flips to a quantity we wish to anticoncentrate.
+% The same large-symmetric-difference condition that powered the collision graph argument in Chapter~\ref{sec:ch3} drives the second-moment estimate here. There, richness lower-bounded $|N(x) \triangle N(y)|$ for every pair in the rich subgraph and forced the small-ball probability of the linear quantity $\deg_U(x) - \deg_U(y)$ to be $O(1/\sqrt n)$ by treating it as a sum of independent Bernoulli contributions indexed by $N(x) \triangle N(y)$. Here, the same large symmetric difference forces near-independence of two switching events by giving the four neighbourhoods $N(y_i), N(z_i)$ a large pool of $U$-coordinates over which to vary independently. In both cases a large symmetric difference supplies a large pool of independent coin flips to a quantity we wish to anticoncentrate.
 
-This is the sense in which Theorem~\ref{thm:ksss} closes the circle of the thesis. A single anticoncentration principle threads three increasingly delicate arguments. Chapter~\ref{sec:ch2} controls a single degree difference and produces $\Omega(\sqrt n)$ distinct degrees. Chapter~\ref{sec:ch3} controls degree collisions across many pairs and produces $\Omega(n^2)$ distinct subgraph sizes. The present chapter splits the principle into two complementary roles. The forward Littlewood--Offord direction reappears in the switching argument as the engine of~(P1), and the inverse Littlewood--Offord direction enters as the structured-versus-unstructured dichotomy of Section~\ref{sec:fourier-walsh}. The Ramsey hypothesis enters at every layer, through the Erd\H{o}s--Szemer\'edi density bound, through richness, through the robust rank of the adjacency matrix, and through the availability of large structured switching sets via dependent random choice.
+% This is the sense in which Theorem~\ref{thm:ksss} closes the circle of the thesis. A single anticoncentration principle threads three increasingly delicate arguments. Chapter~\ref{sec:ch2} controls a single degree difference and produces $\Omega(\sqrt n)$ distinct degrees. Chapter~\ref{sec:ch3} controls degree collisions across many pairs and produces $\Omega(n^2)$ distinct subgraph sizes. The present chapter splits the principle into two complementary roles. The forward Littlewood--Offord direction reappears in the switching argument as the engine of~(P1), and the inverse Littlewood--Offord direction enters as the structured-versus-unstructured dichotomy of Section~\ref{sec:fourier-walsh}. The Ramsey hypothesis enters at every layer, through the Erd\H{o}s--Szemer\'edi density bound, through richness, through the robust rank of the adjacency matrix, and through the availability of large structured switching sets via dependent random choice.

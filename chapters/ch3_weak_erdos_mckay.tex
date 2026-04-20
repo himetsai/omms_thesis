@@ -1,7 +1,7 @@
 \section{Subgraphs of Quadratically Many Sizes}
 \label{sec:ch3}
 
-Recall that Erd\H{o}s and Mckay conjectured that for any Ramsey graph $G$ on $n$ vertices, there exists $\delta = \delta(C) > 0$ such that
+Erd\H{o}s and Mckay conjectured that for any Ramsey graph $G$ on $n$ vertices, there exists $\delta = \delta(C) > 0$ such that
 \[
   \{1, 2, \ldots, \delta n^2\} \subseteq \Phi(G) \coloneqq \{e(H) : H \text{ is an induced subgraph of } G\},
 \] 
@@ -42,7 +42,7 @@ which yields an independent set $I \subseteq W_0$ of size
 by Tur\'{a}n's theorem (Proposition~\ref{prop:turan}). We thus need $|W_0| = \Omega(n^{1/2 + \delta})$ for $|I|$ to reach $\Omega(\sqrt{n})$. Unfortunately, $W_0$ is extracted by pigeonholing $n$ vertices into $O(\sqrt{n})$ degree intervals of length $O(\sqrt{n})$, so at best $|W_0| = \Theta(\sqrt{n})$, yielding only $|I| = \Omega(n^{1/2 - \delta})$.
 
 To overcome this obstacle, Kwan and Sudakov's allows the canditate set $W_0$ to also contain disjoint \textit{pairs}. Write $\mathbf{x}$ in bold denote an object that is either a single vertex or a pair of vertices, and similarly for sets of such objects. For $\mathbf{x} = \{x_1, x_2\}$, set $N(\mathbf{x}) \coloneqq N(x_1) \cup N(x_2)$ as a multiset union and $d(\mathbf{x}) \coloneqq |N(\mathbf{x})| = d(x_1) + d(x_2)$ as the pair-degree. Note that there are $\binom{n}{2} = \Theta(n^2)$ pairs but the pair-degrees take only $O(n)$ values. Pigeonholing now yields
-$\Theta(n)$ disjoint pairs sharing a common pair-degree, vastly exceeding the $n^{1/2 + \delta}$ threshold. The price is that we need the symmetric difference $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$ not just for most pairs of vertices, but for most pairs of \emph{pairs}. We call this property \textit{pair-diversity}.
+$\Theta(n)$ disjoint pairs sharing a common pair-degree, vastly exceeding the $n^{1/2 + \delta}$ threshold. The price is that we need the symmetric difference $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$ not just for most pairs of vertices, but for most pairs of \emph{pairs}. We call this \textit{pair-diversity}.
 
 \begin{definition}\label{def:pair_diverse}
   An $n$-vertex graph $G$ is \textit{$(\eps, \delta, \alpha)_2$-diverse} if for each pair of vertices $\mathbf{x} = \{x_1, x_2\}$ in $G$ with $|N(x_1) \triangle N(x_2)| \geq \alpha n$, there are $\leq n^{\delta}$ disjoint pairs of vertices $\mathbf{y} = \{y_1, y_2\}$ with $\mathbf{x} \cap \mathbf{y} = \emptyset$, such that $|N(\mathbf{x}) \triangle N(\mathbf{y})| < \eps n$.
@@ -88,7 +88,7 @@ We also introduce a reversed notion of diversity.
 \]  
 for most pairs of vertices $x_1, x_2$, so combined with diversity yields $d(x_1) + d(x_2) = \Theta(n)$.
 
-One last thing we need is to ensure $\mathbf{X}$ actually provides $\Theta(\sqrt{n})$ distinct degrees into $U \cup \mathbf{Z} \coloneqq U \cup \bigcup_{\mathbf{z} \in \mathbf{Z}} \mathbf{z}$ for each choice of augmenting set $\mathbf{Z} \subseteq \mathbf{S} \cup \mathbf{T}$. Notice the current construction of $\mathbf{X}$ only ensures distinct degrees $d_U(\mathbf{x})$ into $U$ instead of $d_{U \cup Z}(\mathbf{x})$. If $U$ were sampled once and directly constructed $\mathbf{S}, \mathbf{T}, \mathbf{X}$ based on $U$, then the $d_U(\mathbf{x})$ would be fixed numbers given the outcome of $U$. However, there is no guarantee that $d_{U \cup Z}(\mathbf{x}) = d_{U}(\mathbf{x}) + d_{Z}(\mathbf{x})$ would remain distinct, as the addition of $d_{Z}(\mathbf{x})$ could cancel out the uniqueness of $d_{U}(\mathbf{x})$. Kwan and Sudakov overcome this with a \textit{double-exposure} technique. They perform two rounds of sampling. First, they sample the random set $U_0$ and construct $\mathbf{S}, \mathbf{T}, \mathbf{X}$ relative to $U_0$. In the second round, they sample $U$ from $U_0$ by independently keeping each vertex with probability $1/2$. After the first sampling, the construction guarantees $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = \Omega(n)$ for all $x, y \in \mathbf{X}$, and the augmenting sets $\mathbf{Z} \subseteq \mathbf{S} \cup \mathbf{T}$ are fully determined by $U_0$. In the second round, the difference $d_U(\mathbf{x}) - d_U(\mathbf{y})$ becomes a sum of $\Omega(n)$ independent Bernoulli terms, and Littlewood--Offord yields $\prob[d_U(\mathbf{x}) - d_U(\mathbf{y}) = t] = O(1/\sqrt{n})$ for every integer $t$. In particular, since $t_{xy} = d_Z(\mathbf{y}) - d_Z(\mathbf{x})$ is a fixed integer for each $\mathbf{x}, \mathbf{y}$, we have the bound
+One last thing we need is to ensure $\mathbf{X}$ actually provides $\Theta(\sqrt{n})$ distinct degrees into $U \cup \mathbf{Z} \coloneqq U \cup \bigcup_{\mathbf{z} \in \mathbf{Z}} \mathbf{z}$ for each choice of augmenting set $\mathbf{Z} \subseteq \mathbf{S} \cup \mathbf{T}$. Notice the current construction of $\mathbf{X}$ only ensures distinct degrees $d_U(\mathbf{x})$ into $U$ instead of $d_{U \cup Z}(\mathbf{x})$. If $U$ were sampled once and directly constructed $\mathbf{S}, \mathbf{T}, \mathbf{X}$ based on $U$, then the $d_U(\mathbf{x})$ would be fixed numbers given the outcome of $U$. However, there is no guarantee that $d_{U \cup Z}(\mathbf{x}) = d_{U}(\mathbf{x}) + d_{Z}(\mathbf{x})$ would remain distinct, as the addition of $d_{Z}(\mathbf{x})$ could cancel out the uniqueness of $d_{U}(\mathbf{x})$. Kwan and Sudakov overcome this with a \textit{double-exposure} technique. They perform two rounds of sampling. First, they sample the random set $U_0$ and construct $\mathbf{S}, \mathbf{T}, \mathbf{X}$ relative to $U_0$. In the second round, they sample $U$ from $U_0$ by independently keeping each vertex with probability $1/2$. After the first sampling, the construction guarantees $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = \Omega(n)$ for all $x, y \in \mathbf{X}$, and the augmenting sets $\mathbf{Z} \subseteq \mathbf{S} \cup \mathbf{T}$ are fully determined by $U_0$. In the second round, the difference $d_U(\mathbf{x}) - d_U(\mathbf{y})$ becomes a sum of $\Omega(n)$ independent Bernoulli terms, and Littlewood--Offord yields $\prob[d_U(\mathbf{x}) - d_U(\mathbf{y}) = t] = O(1/\sqrt{n})$ for every integer $t$. In particular, since $t_{xy} \coloneqq d_Z(\mathbf{y}) - d_Z(\mathbf{x})$ is determined for each $\mathbf{x}, \mathbf{y}$, 
 \[
   \prob[d_{U \cup Z}(\mathbf{x}) = d_{U \cup Z}(\mathbf{y})] = \prob[d_{U}(\mathbf{x}) - d_{U}(\mathbf{y}) = t_{xy}] = O(1/\sqrt{n}).
 \]
@@ -118,8 +118,7 @@ as $|W| = O(\sqrt{n})$ and each $w \in W$ has $\leq n$ neighbours in $U \cup W$.
 \subsection{The construction of augmenting sets}
 \label{sec:construction}
 
-We now prove the key construction that produces the sets $U_0, \mathbf{S}, \mathbf{T}, \mathbf{X}$
-with the properties needed for Lemma~\ref{lemma:well-separated-edge-counts}.
+The following lemma constructs $U_0$ and the augmenting sets $\mathbf{S}, \mathbf{T}, \mathbf{X}$ with the properties needed for Lemma~\ref{lemma:well-separated-edge-counts}.
 
 \begin{lemma}
 \label{lem:construction}
@@ -219,7 +218,7 @@ For $(k, i) \in \mathcal{P}$, define $\mathbf{Z}_{k, i} \subseteq \mathbf{S} \sq
   \item \emph{Regular medium-scale spacing.} For each $k$, the values $e_{k,0}, e_{k,1}, \ldots, e_{k, c'\sqrt{n}}$ should span a range of $\Omega(n)$ and increase roughly uniformly, so that $\Theta(\sqrt{n})$ of them are pairwise separated by $\Omega(\sqrt{n})$.
 \end{enumerate}
 
-Write $\Delta_{k, i} \coloneqq e_{k, i} - e_{k, i - 1}$ and we have the following lemma, whose first two properties correspond to the first two points above, and the last two properties combined ensures regular medium-scale spacing. 
+Write $\Delta_{k, i} \coloneqq e_{k, i} - e_{k, i - 1}$ and we have the following lemma, whose first two properties correspond to the first two points above, and the last two properties combined ensures the regular medium-scale spacing. 
 
 \begin{lemma}
 \label{lem:double-exposure}

@@ -22,7 +22,7 @@ To prove Theorem \ref{thm:bs2007}, Bukh and Sudakov introduced the notion of \te
   An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-diverse} if for $x \in V(G)$, we have $|N(x) \triangle N(y)| \geq \eps n$ for $\leq n^{\delta}$ vertices $y \in V(G)$.
 \end{definition}
 
-Notice that $(\eps, \delta)$-diversity directly conditions our assumption that $|N(x) \triangle N(y)| = D \geq \eps n$ in the discussion of the anticoncentration principle in Section \ref{sec:anticoncentration}. In particular, we may show in a diverse graph that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$ for all but $\leq n^{\delta}$ pairs of vertices $x, y \in V(G)$, from which we use Jensen's inequality to conclude that there are many distinct degrees in a diverse graph. The following lemma formalizes this observation and reduces Theorem \ref{thm:bs2007} to showing every Ramsey graph contains a diverse subgraph of linear size.
+Notice that $(\eps, \delta)$-diversity directly conditions our assumption that $|N(x) \triangle N(y)| = D \geq \eps n$ in the anticoncentration principle discussion in Section \ref{sec:anticoncentration}. In particular, we may show in a diverse graph that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$ for all but $\leq n^{\delta}$ pairs of vertices $x, y \in V(G)$, from which we use Turan's theorem to conclude that there are many distinct degrees in a diverse graph. The following lemma formalizes this observation and reduces Theorem \ref{thm:bs2007} to showing every Ramsey graph contains a diverse subgraph of linear size.
 
 \begin{lemma}
   \label{lem:diversity-degrees}
@@ -41,7 +41,7 @@ Notice that $(\eps, \delta)$-diversity directly conditions our assumption that $
   \[
     \prob\left[k < \frac{|D|}{8} \text{ or } k > \frac{7|D|}{8}\right] \leq \prob\left[\left|k - \E[k]\right| > \frac{|D|}{8}\right] \leq e^{-\Theta(|D|)} = e^{-\Theta(n)} = o(n^{-1/2}).  
   \]
-  On the other hand, recall that $U$ is a uniformly random subset of a fixed size $m$. Since every $k$-subset of $D$ is equally likely to be $U \cap D$ by symmetry, conditioning on $|U \cap D| = k$, the $k$ elements of $U$ that land in $D$ form a uniformly random subset of $D$ of size $k$. Conditioning on $k$, the event $|A \cap U| = |B \cap U| = k/2$ then follows the hypergeometric distribution $\mathrm{Hyp}(|D|, |A|, k)$. Thus,
+  On the other hand, note that every $k$-subset of $D$ is equally likely to be $U \cap D$ by symmetry. Hence, conditioning on $|U \cap D| = k$, the $k$ elements of $U$ that land in $D$ form a uniformly random subset of $D$ of size $k$. Conditioning on $k$, the event $|A \cap U| = |B \cap U| = k/2$ then follows the hypergeometric distribution $\mathrm{Hyp}(|D|, |A|, k)$, so
   \[
     \prob\left[\deg_U(x) = \deg_U(y) \, \middle| \, \frac{|D|}{8} \leq k \leq \frac{7|D|}{8}\right] = \frac{\binom{|A|}{k/2}\binom{|B|}{k/2}}{\binom{|D|}{k}}.
   \]
@@ -75,7 +75,7 @@ It remains to show that every Ramsey graph contains a diverse subgraph of linear
   An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-rich} if, for $W \subseteq V(G)$ with $|W| \geq \delta n$, we have $|N(v) \cap W| \geq \eps|W|$ and $|\overline{N(v)} \cap W| \geq \eps|W|$ for $\leq n^{\delta}$ vertices $v \in V(G)$.
 \end{definition}
 
-The key property of richness is that it ensures the intersection of vertex neighbourhoods with arbitrary large vertex sets are not extremely large or small. When $W$ is the neighborhood of another vertex, richness ensures both sides of the symmetric difference $|N(x) \triangle N(y)|$ are large, rather than merely the symmetric difference itself being large. This is why richness is a stronger condition than diversity.
+The key property of richness is that it ensures the intersection of vertex neighbourhoods with arbitrary large vertex sets are not extremely large or small. When $W$ is the neighborhood of another vertex, richness ensures both sides of the symmetric difference $|N(x) \triangle N(y)|$ are large, rather than merely the symmetric difference itself being large, which is why richness is a stronger condition than diversity.
 
 \begin{lemma}
   \label{lem:richness-implies-diversity}
