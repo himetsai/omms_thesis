@@ -27,49 +27,32 @@ Notice that $(\eps, \delta)$-diversity directly conditions our assumption that $
 \begin{lemma}
   \label{lem:diversity-degrees}
 
-  Let $\delta \in (0, 1/2)$ and let $G$ be an $(\eps, \delta)$-diverse graph on $n$ vertices for large enough $n$. Then there is a subgraph on $\geq n/4$ vertices containing vertices of $\sqrt{\eps n}/300$ distinct degrees.
+  Let $\delta \in (0, 1/2)$ and let $G$ be an $(\eps, \delta)$-diverse graph on $n$ vertices for large enough $n$. Then there is a subgraph on $\geq n/4$ vertices containing vertices of $\Omega(\sqrt{n})$ distinct degrees.
 \end{lemma}
 
 \begin{proof}
-  Let $U$ be a uniformly random subset of $V(G)$. It suffices to show that with positive probability, $|U| \geq n/4$ and $G[U]$ contains $\sqrt{\eps n}/8$ vertices of distinct degrees. 
+  Let $U$ be a uniformly random subset of $V(G)$. It suffices to show that with positive probability, $|U| \geq n/4$ and $G[U]$ contains $\Omega(\sqrt{n})$ vertices of distinct degrees. 
 
-  For distinct $x, y \in V(G)$, define $\mathbbm{1}_{xy}$ to be the indicator for the event that $x, y \in U$ and $\deg_U(x) = \deg_U(y)$. Then $\E[\mathbbm{1}_{xy}] \leq \prob[\deg_U(x) = \deg_U(y)]$. Put $D = N_G(x) \triangle N_G(y), A = N_G(x) \setminus N_G(y)$, and $B = N_G(y) \setminus N_G(x)$. Then
+  For distinct $x, y \in V(G)$, define $\mathbbm{1}_{xy}$ to be the indicator for the event that $x, y \in U$ and $\deg_U(x) = \deg_U(y)$. Then $\E[\mathbbm{1}_{xy}] \leq \prob[\deg_U(x) = \deg_U(y)]$. Put $D = N_G(x) \triangle N_G(y), A = N_G(x) \setminus N_G(y)$, and $B = N_G(y) \setminus N_G(x)$. Then the random variable
   \[
-    \prob\bigl[\deg_U(x) = \deg_U(y)\bigr] = \prob\bigl[|A \cap U| = |B \cap U|\bigr].
+    \deg_U(x) - \deg_U(y) = |A \cap U| - |B \cap U| = \sum_{v \in A} \mathbbm{1}_{v \in U} - \sum_{v \in B} \mathbbm{1}_{v \in U}
   \]
-  Note that $|A \cap U|$ and $|B \cap U|$ are independent and each follow a binomial distribution with parameters $|A|, |B|$, respectively, and $p = 1/2$. Suppose $|D| \geq \eps n$ and assume without loss of generality that $|A| \geq \eps n/2$. Then,
-  \begin{align*}
-    \prob\bigl[|A \cap U| = |B \cap U|\bigr] 
-    &= \sum_{k} \prob\bigl[|A \cap U| = k\bigr] \cdot \prob\bigl[|B \cap U| = k\bigr] \\
-    &\leq \max_{k} \prob\bigl[|A \cap U| = k\bigr] \cdot \sum_{k} \prob\bigl[|B \cap U| = k\bigr] \\
-    &\leq \max_{k} \prob\bigl[|A \cap U| = k\bigr].
-  \end{align*}
-  By Stirling's approximation on binomial coefficients,
+  is of $(|D|, 1/2)$-Littlewood--Offord type. Thus by Littlewood--Offord theorem (Proposition \ref{prop:littlewood-offord}),
   \[
-    \prob\bigl[|A \cap U| = k\bigr] \leq \frac{\binom{|A|}{|A|/2}}{2^{|A|}} = (1 + o(1)) \cdot \sqrt{\frac{2}{\pi |A|}} \leq \frac{2}{\sqrt{\eps n}}.
+    \prob\bigl[\deg_U(x) = \deg_U(y)\bigr] = O\bigl(1/\sqrt{|D|}\bigr).
   \]
-  Thus, $\E[\mathbbm{1}_{xy}] \leq 2/\sqrt{\eps n}$, whenever $|D| \geq \eps n$.
+  In particular, $\E[\mathbbm{1}_{xy}] = O(1/\sqrt{n})$, whenever $|D| \geq \eps n$.
 
-  Now consider the degree collision graph $H$ on $U$, where $x, y \in U$ are adjacent if and only if $\deg_U(x) = \deg_U(y)$. Since $G$ is $(\eps, \delta)$-diverse, $\E[\mathbbm{1}_{xy}] \leq 2/\sqrt{\eps n}$ for all but $\leq n^{1 + \delta} < n^{3/2}$ pairs $x, y \in V(G)$. Hence, the expected number of edges in $H$ is
+  Now consider the degree collision graph $H$ on $U$, where $x, y \in U$ are adjacent if and only if $\deg_U(x) = \deg_U(y)$. Since $G$ is $(\eps, \delta)$-diverse, $\E[\mathbbm{1}_{xy}] = O(1/\sqrt{n})$ for all but $\leq n^{1 + \delta} < n^{3/2}$ pairs $x, y \in V(G)$. Hence, the expected number of edges in $H$ is
   \[
-    \E[e(H)] = \sum_{x, y \in V(G)} \E[\mathbbm{1}_{xy}] \leq n^{1 + \delta} + \frac{2}{\sqrt{\eps n}} \cdot n^2 \leq \frac{3}{\sqrt{\eps}}n^{3/2},
+    \E[e(H)] = \sum_{\{x, y\} \in V(G)^2} \E[\mathbbm{1}_{xy}] \leq n^{1 + \delta} + n^2 \cdot O\bigl(1/\sqrt{n}\bigr) = O\bigl(n^{3/2}\bigr)
   \] 
-  and Markov's inequality yields 
+  and Markov's inequality yields $\prob[e(H) = O(n^{3/2})] \geq 1/2$. Since $|U| < n/4$ with probability $o(1)$ by the Chernoff bound, the union bound gives a positive probability that $|U| \geq n/4$ and $e(H) \leq O(n^{3/2})$ occur simultaneously, in which case Turan's Theorem (Proposition \ref{prop:turan}) gives an independent set $I$ in $H$ of size at least 
   \[
-    \prob\left[e(H) \leq \frac{6}{\sqrt{\eps}}n^{3/2}\right] \geq 1/2.
-  \]
-  Since $|U| < n/4$ with probability $o(n^{-1})$ by the Chernoff bound, there is a positive probability that $|U| \geq n/4$ and $e(H) \leq \frac{6}{\sqrt{\eps}}n^{3/2}$, in which case Turan's Theorem (Proposition \ref{prop:turan}) gives an independent set $I$ in $H$ of size at least 
-  \[
-    |I| \geq \frac{|U|^2}{2e(H) + |U|} \geq \frac{(n/4)^2}{3 \cdot (6/\sqrt{\eps}) n^{3/2} } \geq \frac{\sqrt{\eps n}}{300}.
+    |I| \geq \frac{|U|^2}{2e(H) + |U|} = \frac{(n/4)^2}{O(n^{3/2}) + n/4} = \Omega\bigl(\sqrt{n}\bigr).
   \]
   In particular, each vertex in $I$ has a distinct degree in $G[U]$.
 \end{proof}
-
-% \textit{Remark.} The hypergeometric distribution $\mathrm{Hyp}(|D|, |A|, k)$ has variance 
-% \[
-%   \sigma^2 = \frac{k|A||B|(|D| - k)}{|D|^2(D - 1)} \leq \frac{k(|D| - k)}{4(|D| - 1)},
-% \]
-% where inequality follows from AM-GM. When $k$ is not the tail end of the distribution, we have $\sigma = \Theta(\sqrt{D}) = \Theta(\sqrt{n})$, and the Stirling bound in \eqref{eq:prob-deg-diff} is asymptotically $1/(\sigma\sqrt{2\pi})$ as $n \to \infty$, which is exactly the maximum density of a normal distribution with standard deviation $\sigma$. This confirms the intuition from Section~\ref{sec:anticoncentration} that the degree difference is approximately normally distributed so its point probabilities are $O(1/\sigma) = O(1/\sqrt{n})$.
 
 It remains to show that every Ramsey graph contains a diverse subgraph of linear size. Instead of directly proving this, we prove the same statement on a strengthening of diversity called \textit{richness}.
 
@@ -163,4 +146,4 @@ We now show that every Ramsey graph contains a rich subgraph of linear size.
 
 Theorem \ref{thm:bs2007} now follows by a simple application of Lemmas \ref{lem:rich-subgraph}, \ref{lem:richness-implies-diversity}, and \ref{lem:diversity-degrees} in sequence.
 
-\paragraph{Proof of Theorem \ref{thm:bs2007}.} Let $G$ be a $C$-Ramsey graph on $n$ vertices, and fix any $\delta \in (0, 1/2)$. By Lemma \ref{lem:rich-subgraph}, there exists $\eps = \eps(C, \delta) > 0$ and an $(\eps, \delta)$-rich induced subgraph $G[V'] \subseteq G$ with $|V'| \geq c n$ for some $c = c(C, \delta) > 0$. Put $n' = |V'|$. By Lemma \ref{lem:richness-implies-diversity}, $G[V']$ is $(\eps/2, \delta)$-diverse on $n'$ vertices. Applying Lemma \ref{lem:diversity-degrees} to $G[V']$ with $m = n'/2$, we obtain an induced subgraph of $G[V']$ on $m \geq cn/2 = \Omega(n)$ vertices containing $\frac{\sqrt{\eps n'/2}}{10} \geq \frac{\sqrt{\eps c n/2}}{10} = \Omega(\sqrt{n})$ vertices of distinct degrees. \qed
+\paragraph{Proof of Theorem \ref{thm:bs2007}.} Let $G$ be a $C$-Ramsey graph on $n$ vertices, and fix any $\delta \in (0, 1/2)$. By Lemma \ref{lem:rich-subgraph}, there exists an $(\eps, \delta)$-rich induced subgraph $G' \subseteq G$ on $m = \Omega(n)$ vertices. By Lemma \ref{lem:richness-implies-diversity}, $G'$ is $(\eps/2, \delta)$-diverse. Applying Lemma \ref{lem:diversity-degrees} to $G'$, we obtain an induced subgraph of $G'$ on $\Omega(m) = \Omega(n)$ vertices containing $\Omega(\sqrt{m}) = \Omega(\sqrt{n})$ vertices of distinct degrees. \qed

@@ -56,7 +56,7 @@ Therefore, Theorem~\ref{thm:diagonal-ramsey} may be restated as
 \[
   \frac{1}{2}\log_2 n < \hom(G) < 2\log_2 n,
 \]
-for any graph $G$ on $n$ vertices. Apart from determining the bounds of Ramsey numbers, the search for explicit graph constructions with $\hom(G) = O(\log n)$ has also been a major open problem in Ramsey Theory. We refer to such graphs as \textit{Ramsey graphs}.
+for any graph $G$ on $n$ vertices. Apart from determining the bounds of Ramsey numbers, the search for explicit graph constructions without large homogeneous sets has also been a major open problem in Ramsey Theory. We refer to such graphs as \textit{Ramsey graphs}.
 \begin{definition}
   \label{def:ramsey-graph}
 
@@ -117,7 +117,7 @@ Erd\H{o}s and McKay~\cite{EFS} conjectured that for any Ramsey graph $G$ on $n$ 
 \[
   \{1, 2, \ldots, \delta n^2\} \subseteq \Phi(G).
 \]
-It was proven for Random graphs by Calkin, Frieze, and Mckay~\cite{erdosmckayrandomgraph}, but the conjecture for Ramsey graphs remained open for decades and only started to show significant progress in recent years. In particular, a chain of results were sparked after the work of Narayanan, Sahasrabudhe, and Tomon~\cite{narayanan2017ramseygraphsinducesubgraphs} establishing that $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on some ideas from the work of Bukh and Sudakov~\cite{BUKH2007612} which showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature that dense random graphs also exhibit. Kwan and Sudakov~\cite{kwan2021ramseygraphsinducesubgraphs} later improved the bound to $|\Phi(G)| = \Omega(n^2)$ by refining the argument of Narayanan, Sahasrabudhe, and Tomon. Eventually, Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023} closed the conjecture via Fourier-analytic techniques on graph polynomials.
+It was proven for Random graphs by Calkin, Frieze, and Mckay~\cite{erdosmckayrandomgraph}, but the conjecture for Ramsey graphs remained open for decades and only started to show significant progress in recent years. In particular, a chain of results were sparked after the work of Narayanan, Sahasrabudhe, and Tomon~\cite{narayanan2017ramseygraphsinducesubgraphs} establishing that $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on some ideas from the work of Bukh and Sudakov~\cite{BUKH2007612} which showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature that dense random graphs also exhibit. Kwan and Sudakov~\cite{kwan2021ramseygraphsinducesubgraphs} later improved the bound to $|\Phi(G)| = \Omega(n^2)$ by refining the argument of Narayanan, Sahasrabudhe, and Tomon. Eventually, Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023} closed the conjecture via Fourier-analytic arguments on graph polynomials.
 
 This dissertation will start by studying the result of Bukh and Sudakov~\cite{BUKH2007612} on large induced subgraphs in Ramsey graphs with many distinct degrees. This work not only tightens the connection between Ramsey graphs and random graphs, but also builds the foundation for the subsequent $|\Phi(G)| = \Omega(n^2)$ result by Kwan and Sudakov which we will present in the following chapter. Lastly, we outline the proof of the Erd\H{o}s--McKay conjecture by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}.
 
@@ -125,7 +125,7 @@ This dissertation will start by studying the result of Bukh and Sudakov~\cite{BU
 
 \subsection{The anticoncentration behavior}\label{sec:anticoncentration}
 
-The core results of this dissertation concerns the \textit{anticoncentration} behavior exhibited by Ramsey graphs. In general, anticoncentration provides an upper bound on the point probabilities of a random variable. In the following chapters, we will repeatedly sample a uniformly random subset $U\subseteq V(G)$ and study the induced subgraph $G[U]$. A question to ask in this setting is how likely it is for two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?
+The core results of this dissertation concerns the \textit{anticoncentration} behavior exhibited in Ramsey graphs. In general, anticoncentration provides an upper bound on the point probabilities of a random variable. In the following chapters, we will repeatedly sample a uniformly random subset $U\subseteq V(G)$ and study the induced subgraph $G[U]$. A question to ask in this setting is how likely it is for two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?
 
 Observe that $\deg_U(x)-\deg_U(y)$ counts only vertices in the symmetric difference $D = N_G(x)\triangle N_G(y)$. Write
 $A=N(x)\setminus N(y), B=N(y)\setminus N(x)$. Then
@@ -143,10 +143,54 @@ Let $G = (V, E)$ be a graph. We call $e(G) \coloneqq |E(G)|$ the \textit{size} o
 
 We omit all floor and ceiling signs when they are not crucial for simplicity.
 
-\begin{proposition}[Tur\'{a}n's theorem]
-  \label{prop:turan}
-  
-  Every graph $G$ with $n$ vertices and $m$ edges contains an independent set of size at least $n^2/(2m + n)$.
+We will use the following probability bounds throughout the dissertation.
+
+\begin{proposition}[Markov's inequality]
+  \label{prop:markov}
+  Let $X$ be a non-negative random variable. Then for $t \geq 0$,
+  \[
+    \prob\bigl[X \geq t\bigr] \leq \frac{\E[X]}{t}.
+  \]
+  \qed
+\end{proposition}
+
+% \begin{proof}
+%   Since $t \cdot \mathbbm{1}_{X \geq t} \leq X$, taking expectations gives the result.
+% \end{proof}
+
+\begin{proposition}[Chebyshev's inequality]
+  \label{prop:chebyshev}
+
+  Let $X$ be a random variable. Then for $t > 0$,
+  \[
+    \prob\bigl[|X - \E[X]| \geq t\bigr] \leq \frac{\Var(X)}{t^2}.
+  \]
+  \qed
+\end{proposition}
+
+% \begin{proof}
+%   Applying Markov's inequality to $Y = (X - \E[X])^2$ gives
+%   \[
+%     \prob\bigl[|X - \E[X]| \geq t\bigr] = \prob\bigl[Y \geq t^2\bigr] \leq \frac{\E[Y]}{t^2} = \frac{\Var(X)}{t^2}.
+%   \]
+% \end{proof}
+
+For $X = \mathbbm{1}_{A_1} + \cdots + \mathbbm{1}_{A_k}$, we often use the following inequality to bound the variance:
+\begin{align*}
+  \Var(X) 
+  &= \E[X^2] - \E[X]^2 = \sum_{i}\sum_j \prob[A_i \cap A_j] - \prob[A_i] \prob[A_j] \\
+  &= \sum_i \bigl[\prob[A_i] - \prob[A_i]^2\bigr] + \sum_i \sum_{j \sim i} \bigl[\prob[A_i \cap A_j] - \prob[A_i] \prob[A_j]\bigr] \\
+  &\leq \E[X] + \sum_i \sum_{j \sim i} \prob[A_i \cap A_j]
+\end{align*}
+where we write $i \sim j$ if $i \neq j$ and $A_i, A_j$ are dependent.
+
+\begin{proposition}[Chernoff bound]
+  \label{prop:chernoff}
+  Let $X$ be a binomial random variable with parameters $n$ and $p$. Then for $t \geq 0$,
+  \[
+    \prob\left[X \leq \E[X] - t\right], \, \prob\left[X \geq \E[X] + t\right] \leq \exp\bigl(-2t^2/n\bigr).
+  \]
+  \qed
 \end{proposition}
 
 \begin{proposition}[Hoeffding's inequality]
@@ -156,9 +200,33 @@ We omit all floor and ceiling signs when they are not crucial for simplicity.
   \[
     \prob(|X - \E[X]| \geq t) \leq 2e^{-2t^2/n}.
   \]
+  \qed
 \end{proposition}
 
-\begin{definition}[Littlewood--Offord type random variable]
+We will use the following version of Tur\'{a}n's theorem frequently.
+
+\begin{proposition}[Tur\'{a}n's theorem]
+  \label{prop:turan}
+  
+  Every graph $G$ with $n$ vertices and $m$ edges contains an independent set of size at least $n^2/(2m + n)$.
+\end{proposition}
+
+\begin{proof}
+  Consider a random ordering $<$ on $V(G)$. Define 
+  \[
+    I \coloneqq \bigl\{v \in V : \{v, u\} \in E(G) \implies v < u\bigr\}.
+  \]
+  If $u, v \in I$ are adjacent, say $u > v$, then $v$ does not belong in $I$, contradiction. Thus $I$ is an independent set. Since $v \in I$ if and only if $v$ is the least element among $v$ and its neighbors, 
+  \[
+    \E\bigl[|I|\bigr] = \sum_{v \in V} \prob\bigl[v \in I\bigr] = \sum_{v \in V} \frac{1}{1 + \deg(v)}.
+  \]
+  The function $f(x) = 1/(x + 1)$ is convex on $[0, \infty)$, so by Jensen's inequality, $G$ contains an independent set $I$ of size 
+  \[
+    |I| \geq \sum_{v \in V} \frac{1}{1 + \deg(v)} \geq \frac{n}{1 + \frac{1}{n}\sum_{v \in V} \deg(v)} = \frac{n^2}{2m + n}.
+  \]
+\end{proof}
+
+\begin{definition}
   \label{def:littlewood-offord-type}
   A random variable $X$ is of \textit{$(n, p)$-Littlewood--Offord type} if it is of the form $X = a_1 \xi_1 + a_2 \xi_2 + \cdots + a_n \xi_n + C$, where $a_1, a_2, \ldots, a_n \in \Z \setminus \{0\}$ and $C \in \Z$ are fixed and $\xi_1, \xi_2, \ldots, \xi_n$ are independent Bernoulli random variables with parameter $p$.
 \end{definition}
@@ -167,7 +235,35 @@ We omit all floor and ceiling signs when they are not crucial for simplicity.
   \label{prop:littlewood-offord}
   Let $p > 0$ be constant and $X$ be a random variable of $(n, p)$-Littlewood--Offord type. Then for any $t \in \Z$, 
   \[
-    \prob[X = t] = O(1/\sqrt{n}).
+    \prob[X = t] = O\bigl(1/\sqrt{n}\bigr).
   \]
 \end{proposition}
 
+\begin{proof}
+  We first consider the case where all coefficients $a_i$ are positive. Without loss of generality, assume $X \coloneqq \sum_{i = 1}^n a_i \xi_i$. Since $a_i \geq 1$ for all $i$, we have $1 + \sum_{i \in A} a_i \leq \sum_{i \in B} a_i$ whenever $A \subset B$. For $t \in \Z$, let
+  \[
+    \mathcal{A}_t \coloneqq \left\{A : \sum_{i \in A} a_i = t\right\} \subseteq [n],
+  \]
+  so no elements of $\mathcal{A}_t$ are contained in another. Consider the chain $C = (S_1, S_2, \ldots, S_n)$ of $n$ subsets of $[n]$ such that $\emptyset = S_1 \subset S_2 \subset \cdots \subset S_n = [n]$. There are $n!$ such chains $C$ in $[n]$, and for $A \subseteq [n]$, there are $|A|!(n - |A|)!$ of them containing $A$. Since no chain can contain multiple elements of $\mathcal{A}_t$,
+  \[
+    \sum_{A \in \mathcal{A}_t} |A|!(n - |A|)! \leq n! \implies \sum_{A \in \mathcal{A}_t} \frac{1}{\binom{n}{|A|}} \leq 1.
+  \] 
+  It follows from Stirling's formula on binomial coefficients that
+  \begin{align*}
+    \prob\bigl[X = t\bigr] 
+    &\leq \sum_{A \in \mathcal{A}_t} p^{|A|}(1 - p)^{n - |A|} \\
+    &\leq \sum_{A \in \mathcal{A}_t} \frac{1}{\binom{n}{|A|}} \cdot \binom{n}{|A|}p^{|A|}(1 - p)^{n - |A|} \\
+    &\leq \left(\sum_{A \in \mathcal{A}_t} \frac{1}{\binom{n}{|A|}}\right) \cdot \binom{n}{np}p^{np}(1 - p)^{n - np} \\
+    &\leq \frac{1 + o(1)}{\sqrt{2\pi p(1 - p)n}} = O\bigl(1/\sqrt{n}\bigr).
+  \end{align*}
+  Note that the third inequality holds by the probability mass function of the binomial distribution.
+
+  Now consider the general case. Let $I \coloneqq \{i : a_i \geq 1\}$ and $J \coloneqq \{i : a_i \leq -1\}$. We may assume $|I| \geq n/2$ by passing to $-X$ and swapping $I$ with $J$ if necessary. Then conditioning on $(\xi_j)_{j \in J}$, $X$ is of Littlewood--Offord type with positive coefficients, so
+  \[
+    \prob\bigl[X = t \mid (\xi_j)_{j \in J}\bigr] = O\bigl(1/\sqrt{|I|}\bigr) = O\bigl(1/\sqrt{n}\bigr).
+  \]
+  The tower property of conditional expectation gives
+  \[
+    \prob\bigl[X = t\bigr] = \E\left[\prob\bigl[X = t \mid (\xi_j)_{j \in J}\bigr]\right] = O\bigl(1/\sqrt{n}\bigr).
+  \]
+\end{proof}

@@ -197,7 +197,7 @@ By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), $e(G
       \prob\left[|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| < \frac{p}{2}|N(\mathbf{x}) \triangle N(\mathbf{y})|\right] = e^{-\Omega(n)} = o(n).
     \]
     Union bound now gives the property.
-    \item[(v)] For $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$, note that the random variable $d_{U_0}(\mathbf{x}) - d_{U_0}(\mathbf{y})$ is of $(|N(\mathbf(x)) \triangle N(\mathbf(y)), p|)$-Littlewood--Offord type. Since $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$, we have $\prob[d_{U_0}(\mathbf{x}) = d_{U_0}(\mathbf{y})] = O(1/\sqrt{n})$, so the expected number of paris $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$ satisfying $d_{U_0}(\mathbf{x}) = d_{U_0}(\mathbf{y})$ is $O(\sqrt{n})$. The property now follows from Markov's.
+    \item[(v)] For $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$, the random variable $d_{U_0}(\mathbf{x}) - d_{U_0}(\mathbf{y})$ is of $(|N(\mathbf{x}) \triangle N(\mathbf{y})|, p)$-Littlewood--Offord type. Since $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$, the Littlewood--Offord theorem gives $\prob[d_{U_0}(\mathbf{x}) = d_{U_0}(\mathbf{y})] = O(1/\sqrt{n})$, so the expected number of paris $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$ satisfying $d_{U_0}(\mathbf{x}) = d_{U_0}(\mathbf{y})$ is $O(\sqrt{n})$. The property now follows from Markov's.
   \end{enumerate}
 \end{proof}
 
