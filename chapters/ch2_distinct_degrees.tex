@@ -58,10 +58,14 @@ It remains to show that every Ramsey graph contains a diverse subgraph of linear
 
 \begin{definition}
   \label{def:richness}
-  An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-rich} if, for $W \subseteq V(G)$ with $|W| \geq \delta n$, we have $|N(v) \cap W| \geq \eps|W|$ and $|\overline{N(v)} \cap W| \geq \eps|W|$ for $\leq n^{\delta}$ vertices $v \in V(G)$.
+  An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-rich} if, for $W \subseteq V(G)$ with $|W| \geq \delta n$, we have $|N(v) \cap W| \geq \eps|W|$ and $|\overline{N(v)} \cap W| \geq \eps|W|$ for all but $\leq n^{\delta}$ vertices $v \in V(G)$.
 \end{definition}
 
-The key property of richness is that it ensures the intersection of vertex neighbourhoods with arbitrary large vertex sets are not extremely large or small. When $W$ is the neighborhood of another vertex, richness ensures both sides of the symmetric difference $|N(x) \triangle N(y)|$ are large, rather than merely the symmetric difference itself being large, which is why richness is a stronger condition than diversity.
+In other words, almost every vertex $v \in V(G)$ satisfies 
+\[
+  \eps |W| \leq |N(v) \cap W| \leq (1 - \eps) |W|,
+\]
+whenever $|W|$ is large. Thus, richness ensures neighborhoods are not unusually concentrated in nor absent from large sets, which is exactly the density control one has in random graphs like $G_{n, 1/2}$, where $|N(v) \cap W| \approx |W|/2$ by the Chernoff bound. When $W$ is the neighborhood of another vertex, richness ensures both sides of the symmetric difference $|N(x) \triangle N(y)| = |N(x) \cap \overline{N(y)}| + |\overline{N(x)} \cap N(y)|$ are large, rather than merely the symmetric difference itself being large. This is why richness stronger than diversity.
 
 \begin{lemma}
   \label{lem:richness-implies-diversity}
@@ -83,7 +87,7 @@ The key property of richness is that it ensures the intersection of vertex neigh
   \]
 \end{proof}
 
-We now show that every Ramsey graph contains a rich subgraph of linear size.
+We now show that every Ramsey graph contains a rich subgraph of linear size. In particular, we show that if this is not the case, we may construct a highly sparse/dense subset $S \subseteq V(G)$ via induction, and invoke the Erd\H{o}s--Szemer\'{e}di theorem to find a large homogeneous set in $G[S]$.
 
 \begin{lemma}
   \label{lem:rich-subgraph}

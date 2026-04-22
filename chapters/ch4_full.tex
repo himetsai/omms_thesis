@@ -1,7 +1,7 @@
 \section{The Erd\H{o}s--McKay Conjecture}
 \label{sec:ch4}
 
-Both proofs in Chapters~2 and~3 rely on the same anticoncentration principle that, when the symmetric difference $|N(x) \triangle N(y)|$ is large, the degree difference $\deg_U(x) - \deg_U(y)$ is a sum of many weakly dependent bounded random variables, and its point probabilities are $O(1/\sqrt{n})$. The Erd\H{o}s--McKay conjecture asks for a qualitatively stronger result that asserts $\Phi(G)$ to contain every integer in a quadratic-length interval, not merely that it is large. The conjecture was resolved by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}, and this chapter is dedicated to outlining their proof. 
+Both proofs in Chapters~2 and~3 rely on the same anticoncentration principle that, when the symmetric difference $|N(x) \triangle N(y)|$ is large, the degree difference $\deg_U(x) - \deg_U(y)$ is a sum of many independent bounded random variables, and its point probabilities are $O(1/\sqrt{n})$. The Erd\H{o}s--McKay conjecture asks for a qualitatively stronger result that asserts $\Phi(G)$ to contain every integer in a quadratic-length interval, not merely that it is large. The conjecture was resolved by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}, and this chapter is dedicated to outlining their proof. 
 \begin{theorem}[Erd\H{o}s--McKay conjecture
   {\cite{Kwan_2023}}]
   \label{thm:em}
@@ -11,7 +11,7 @@ Both proofs in Chapters~2 and~3 rely on the same anticoncentration principle tha
   \]
 \end{theorem}
 
-The approach to this theorem fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself. This requires a substantially richer set of tools, but the underlying principle remains: when a random variable is approximately normal with large standard deviation, its point probabilities are small.
+The approach to this theorem fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself. This requires a substantially richer set of tools, but the underlying principle remains: when a random variable is Gaussian at the coarse scale with large standard deviation, its point probabilities are small.
 
 \subsection{Point probabilities of $e(U)$}
 
@@ -37,7 +37,7 @@ In Chapters~2 and~3, the anticoncentration analysis targeted the degree differen
 \end{theorem}
 
 \noindent
-This theorem is essentially an approximation of the local limit theorem for $e(U)$ up to constant factors. A true local CLT would give $\prob[e(U) = x] \sim \varphi((x - \mu)/\sigma)/\sigma$, where $\varphi$ is the standard Gaussian density function. 
+This theorem is essentially an approximation of the local CLT for $e(U)$ up to constant factors. A true local CLT would give $\prob[e(U) = x] \sim \varphi((x - \mu)/\sigma)/\sigma$, where $\varphi$ is the standard Gaussian density function. 
 
 The Erd\H{o}s--McKay conjecture follows directly from the lower bound of Theorem~\ref{thm:ksss} combined with an earlier result on small values of $x$ by Alon, Krivelevich, and Sudakov.
 
@@ -61,7 +61,7 @@ The standard way to approach local limit theorems is via Fourier transforms. Def
 \[
   f(\xi_1, \ldots, \xi_n) \coloneqq \sum_{ij \in E(G)} \xi_i \xi_j.
 \]
-For any $U \subseteq V(G)$, setting $\xi_v = \mathbbm{1}_{v \in U}$ gives $f(\vec{\xi}^{\,(U)}) = e(U)$. The Erd\H{o}s--McKay conjecture is thus equivalent to asking whether the range of this quadratic polynomial on $\{0,1\}^n$ covers every integer in $\{0, \ldots, \delta n^2\}$.
+For any $U \subseteq V(G)$, setting $\xi_v = \mathbbm{1}_{v \in U}$ gives $f(\vec{\xi}^{\,(U)}) = e(U)$. The Erd\H{o}s--McKay conjecture is thus equivalent to asking whether the range of this \textit{quadratic} polynomial on $\{0,1\}^n$ covers every integer in $\{0, \ldots, \delta n^2\}$.
 
 For a random variable $X$, the \textit{characteristic function} of $X$ is defined as
 \[
@@ -294,9 +294,3 @@ for all $\ell$ in an $O(\sqrt n)$ window around the mean, which yields
   \E[Y_\ell] = \frac{1}{4}\sum_{(y, z) \in T} \prob[s(y, z; U) = \ell \mid y \in U, z \notin U] = \Theta(|T|/\sqrt n).
 \]
 It remains to construct such a set $T$, which is produced by applying richness twice inside a linear-sized $(\eps, \delta)$-rich subgraph $S_0$, together with a pigeonhole partition of the degree sequence into $\deg(z) - \deg(y) = \Theta(\sqrt{n})$ -- see~\cite[Lemma~13.9]{Kwan_2023} for details. The second-moment bound \eqref{eq:moment-2} is more involved and follows a \textit{dependent random choice} technique -- see~\cite[Lemmas~13.1, 13.4, 13.9]{Kwan_2023} for details.
-
-% \subsubsection*{Closing the circle}
-
-% The same large-symmetric-difference condition that powered the collision graph argument in Chapter~\ref{sec:ch3} drives the second-moment estimate here. There, richness lower-bounded $|N(x) \triangle N(y)|$ for every pair in the rich subgraph and forced the small-ball probability of the linear quantity $\deg_U(x) - \deg_U(y)$ to be $O(1/\sqrt n)$ by treating it as a sum of independent Bernoulli contributions indexed by $N(x) \triangle N(y)$. Here, the same large symmetric difference forces near-independence of two switching events by giving the four neighbourhoods $N(y_i), N(z_i)$ a large pool of $U$-coordinates over which to vary independently. In both cases a large symmetric difference supplies a large pool of independent coin flips to a quantity we wish to anticoncentrate.
-
-% This is the sense in which Theorem~\ref{thm:ksss} closes the circle of the thesis. A single anticoncentration principle threads three increasingly delicate arguments. Chapter~\ref{sec:ch2} controls a single degree difference and produces $\Omega(\sqrt n)$ distinct degrees. Chapter~\ref{sec:ch3} controls degree collisions across many pairs and produces $\Omega(n^2)$ distinct subgraph sizes. The present chapter splits the principle into two complementary roles. The forward Littlewood--Offord direction reappears in the switching argument as the engine of~(P1), and the inverse Littlewood--Offord direction enters as the structured-versus-unstructured dichotomy of Section~\ref{sec:fourier-walsh}. The Ramsey hypothesis enters at every layer, through the Erd\H{o}s--Szemer\'edi density bound, through richness, through the robust rank of the adjacency matrix, and through the availability of large structured switching sets via dependent random choice.
