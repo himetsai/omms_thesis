@@ -132,7 +132,7 @@ $A=N(x)\setminus N(y), B=N(y)\setminus N(x)$. Then
 \begin{equation}\label{eq:deg-diff}
   \deg_U(x)-\deg_U(y) = |U\cap A| - |U\cap B|,
 \end{equation}
-so $x, y$ have the same degree in $G[U]$ precisely when $|U\cap A|=|U\cap B|$. Since each $v \in A$ contributes $+1$ to the difference $|U\cap A| - |U\cap B|$ with probability $1/2$ and each $v \in B$ contributes $-1$ with probability $1/2$, the difference is a sum of $|D| = |A| + |B|$ independent random variables, which has standard deviation $\Theta(\sqrt{n})$ when $|D| \geq \eps n$ is large. The Erd\H{o}s--Littlewood--Offord theorem then shows that the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sqrt{n})$, and thus $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$.
+so $x, y$ have the same degree in $G[U]$ precisely when $|U\cap A|=|U\cap B|$. Since each $v \in A$ contributes $+1$ to the difference $|U\cap A| - |U\cap B|$ with probability $1/2$ and each $v \in B$ contributes $-1$ with probability $1/2$, the difference is a sum of $|D| = |A| + |B|$ independent random variables, which has standard deviation $\Theta(\sqrt{n})$ when $|D| \geq \eps n$ is large. The Erd\H{o}s--Littlewood--Offord theorem then shows that the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sqrt{n})$, and thus $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$. This usually follows with a \textit{collision graph} construction and Tur\'{a}n's theorem to show the existence of many distinct degrees in $U$.
 
 An intuition to this $O(1/\sqrt{n})$ bound is that $\deg_U(x)-\deg_U(y)$ is a \textit{linear} polynomial of many independent indicators, which is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$. Since the probability density function $\phi(x)$ of a normal distribution with standard deviation $\sigma$ is at most $1/(\sigma\sqrt{2\pi})$ for all $x$, the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sigma) = O(1/\sqrt{n})$, and this anticoncentration bound is the key to the results in Chapter~\ref{sec:ch2} and \ref{sec:ch3}. 
 
@@ -140,13 +140,13 @@ In Chapter~\ref{sec:ch4}, we will study the induced edge count $e(U)$ itself, wh
 
 \subsection{Notations and tools}
 
-For $n \in \N$, write $[n] \coloneqq \{1, 2, \ldots, n\}$. For set $X$, write $\binom{X}{2}$ as the set of unordered pairs of elements in $X$.
+For $n \in \N$, write $[n] \coloneqq \{1, 2, \ldots, n\}$. For set $X$, write $\binom{X}{2}$ as the set of unordered pairs of elements in $X$. Denote the union of sets $X, Y$ as $X \sqcup Y$ if $X \cap Y = \emptyset$.
 
 Given a graph $G$ on $n$ vertices, we call $e(G) \coloneqq |E(G)|$ the \textit{size} of $G$, and we call the ratio 
 \[
   d(G) \coloneqq e(G)\binom{n}{2}^{-1}
 \]
-the \textit{density} of $G$. For vertex $v \in V(G)$, denote $N(v)$ as the neighborhood of $v$ and $\deg(v) \coloneqq |N(v)|$ as the degree of $v$. Write $\overline{G}$ as the complement graph of $G$ and $\overline{N(v)} \coloneqq V(G) \setminus N(v)$ as the non-neighborhood of $v$. For $U \subseteq V(G)$, denote $G[U]$  as the subgraph of $G$ induced by $U$. We write $e(U) \coloneqq e(G[U])$ and $d(U) \coloneqq d(G[U])$ as the size and density of $U$, respectively. We also write $N_U(v) \coloneqq N(v) \cap U$, $\deg_U(v) \coloneqq |N_U(v)|$, $\overline{N_U(v)} \coloneqq U \setminus N_U(v)$ as the neighborhood, degree, and non-neighborhood of $v$ in $U$, respectively. For $A, B \subseteq V(G)$, write $e(A, B) \coloneqq e(A \cup B) - e(A) - e(B)$ and
+the \textit{density} of $G$. For vertex $v \in V(G)$, denote $N(v)$ as the neighborhood of $v$ and $\deg(v) \coloneqq |N(v)|$ as the degree of $v$. Write $\overline{G}$ as the complement graph of $G$ and $\overline{N(v)} \coloneqq V(G) \setminus N(v)$ as the non-neighborhood of $v$. For $S \subseteq V(G)$, denote $G - S$ as the subgraph of $G$ obtained by deleting $S$ and all edges incident to $S$. For $U \subseteq V(G)$, We call $G[U] \coloneqq G - (V(G) \setminus U)$ the $\textit{induced subgraph}$ of $U$ in $G$. We write $e(U) \coloneqq e(G[U])$ and $d(U) \coloneqq d(G[U])$ as the size and density of $U$, respectively. We also write $N_U(v) \coloneqq N(v) \cap U$, $\deg_U(v) \coloneqq |N_U(v)|$, and $\overline{N_U(v)} \coloneqq U \setminus N_U(v)$ as the neighborhood, degree, and non-neighborhood of $v$ in $U$, respectively. For $A, B \subseteq V(G)$, write $e(A, B) \coloneqq e(A \cup B) - e(A) - e(B)$ and
 \[
   d(A, B) \coloneq \frac{e(A, B)}{|A||B|}
 \]
@@ -164,6 +164,15 @@ For functions $f, g: \R \to \R$, we use the standard asymptotic notations:
 
 
 The results in this dissertation mostly concern the case where the graph is large, so we omit floor and ceiling signs when they are not crucial for simplicity.
+
+We call a subset $U \subseteq X$ \textit{uniformly random} if each element of $X$ is in $U$ with probability $1/2$. For event $A$, we write
+\[
+  \mathbbm{1}_A \coloneqq \begin{cases}
+    1 & \text{if } A \text{ occurs}, \\
+    0 & \text{otherwise},
+  \end{cases}
+\]
+as the indicator function of $A$.
 
 
 We will use the following probability bounds throughout the dissertation.
@@ -271,7 +280,7 @@ Many random variables turn out to be a linear polynomial of independent Bernoull
   \]
 \end{proof}
 
-We will use the following version of Tur\'{a}n's theorem frequently.
+The following version of Tur\'{a}n's theorem is useful to extract independent sets in the collision graph argument.
 
 \begin{proposition}[Tur\'{a}n's theorem]
   \label{prop:turan}

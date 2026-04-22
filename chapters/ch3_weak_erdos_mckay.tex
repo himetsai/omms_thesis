@@ -3,19 +3,17 @@
 
 Erd\H{o}s and Mckay conjectured that for any Ramsey graph $G$ on $n$ vertices, there exists $\delta = \delta(C) > 0$ such that
 \[
-  \{1, 2, \ldots, \delta n^2\} \subseteq \Phi(G) \coloneqq \{e(H) : H \text{ is an induced subgraph of } G\},
+  \bigl\{1, 2, \ldots, \delta n^2\bigr\} \subseteq \Phi(G) \coloneqq \bigl\{e(H) : H \text{ is an induced subgraph of } G\bigr\},
 \] 
-That is, for any $1 \leq t \leq \delta n^2$, there exists an induced subgraph with exactly $t$ edges. 
-% In \cite{erdosmckayrandomgraph}, the conjecture was proven for random graphs, and so it is natural to ask whether Ramsey graphs also exhibit this property. 
-The conjecture was widely open for decades. In 2003, Alon, Krivelevich and Sudakov \cite{AlonKrivelevichSudakov2003} proved the conjecture with $n^{\delta}$ in place of $\delta n^2$, but little progress was made afterwards. 
+That is, for any $1 \leq t \leq \delta n^2$, there exists an induced subgraph with exactly $t$ edges. The conjecture was widely open for decades. In 2003, Alon, Krivelevich and Sudakov \cite{AlonKrivelevichSudakov2003} proved the conjecture with $n^{\delta}$ in place of $\delta n^2$, but little progress was made afterwards. 
 \begin{theorem}[Alon, Krivelevich and Sudakov {\cite{AlonKrivelevichSudakov2003}}]
   \label{thm:alks2003}
   For any $C > 0$, there exists $\delta = \delta(C) > 0$ such that
   \[
-  \{1, 2, \ldots, n^{\delta}\} \subseteq \Phi(G).
+  \bigl\{1, 2, \ldots, n^{\delta}\bigr\} \subseteq \Phi(G).
   \]
 \end{theorem}
-Since the conjecture implies $|\Phi(G)| = \Omega(n^2)$ and the triavial upper bound gives $|\Phi(G)| \leq \binom{n}{2}$, a natural relaxation is to ask whether $\Phi(G)$ indeed has quadratic size. In 2017, Narayanan, Sahasrabudhe, and Tomon \cite{narayanan2017ramseygraphsinducesubgraphs} proved a near optimal bound of $|\Phi(G)| = n^{2 - o(1)}$ by building on the notion of diversity from Chapter~\ref{sec:ch2}. The desired quadratic bound was achieved by Kwan and Sudakov \cite{kwan2021ramseygraphsinducesubgraphs} a few years later, and this chapter is dedicated to presenting their proof.
+Since the conjecture implies $|\Phi(G)| = \Omega(n^2)$ and the trivial upper bound gives $|\Phi(G)| \leq \binom{n}{2}$, a natural relaxation is to ask whether $\Phi(G)$ indeed has quadratic size. In 2017, Narayanan, Sahasrabudhe, and Tomon \cite{narayanan2017ramseygraphsinducesubgraphs} proved a near optimal bound of $|\Phi(G)| = n^{2 - o(1)}$ by building on the notion of diversity from Chapter~\ref{sec:ch2}. The desired quadratic bound was achieved by Kwan and Sudakov \cite{kwan2021ramseygraphsinducesubgraphs} a few years later, and this chapter is dedicated to presenting their proof.
 
 \begin{theorem}[Kwan and Sudakov {\cite{kwan2021ramseygraphsinducesubgraphs}}]
   \label{thm:ks}
@@ -27,13 +25,13 @@ Since the conjecture implies $|\Phi(G)| = \Omega(n^2)$ and the triavial upper bo
 
 Recall that Theorem \ref{thm:bs2007} provides a bound of $|\Phi(G)| = \Omega(\sqrt{n})$ for any Ramsey graph $G$ by removing a single vertex to construct each subgraph. Two ideas may be used to improve this construction. First, we apply the same idea to many different induced subgraphs rather than merely $G$ itself. Second, instead of deleting only one vertex, we add and remove various combinations of vertices to produce many more distinct sizes. 
 
-Specifically, pick a target $m$ and find two disjoint vertex sets $U$ and $W$, where $U$ is a linear-sized random set with $e(U) \approx m$ and $W$ is an augmenting set of size $O(\sqrt{n})$ selected from a candidate set $W_0 \subseteq V(G) \setminus U$ whose degrees are of linear order and all lie in a narrow interval. Then the subsets $Z \subseteq W$ produce $\Omega(n^{3/2})$ distinct values of $e(U \cup Z)$ that all lie in an interval of length $O(n^{3/2})$ centred at $e(U)$. Applying this to $\Omega(\sqrt{n})$ well-separated targets $m$ yields the full $\Omega(n^2)$ count.
+Specifically, pick a target $m$ and find two disjoint vertex sets $U$ and $W$, where $U$ is a linear-sized random set with $e(U) \approx m$ and $W$ is an augmenting set of size $O(\sqrt{n})$ selected from a candidate set $W_0 \subseteq V(G) \setminus U$ whose degrees are of linear order and all lie in a narrow interval. Then the subsets $Z \subseteq W$ produce $\Omega(n^{3/2})$ distinct values of $e(U \sqcup Z)$ that all lie in an interval of length $O(n^{3/2})$ centred at $e(U)$. Applying this to $\Omega(\sqrt{n})$ well-separated targets $m$ yields the full $\Omega(n^2)$ count.
 
-Kwan and Sudakov construct $W$ as three disjoint parts $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, each of size $\Theta(\sqrt{n})$, that act at complementary scales. Every element has $\Theta(n)$ edges into $U$, and the degrees from $\mathbf{S}$ into $U$ are uniformly smaller than those from $\mathbf{T}$ by a gap of $\Omega(\sqrt{n})$. Varying the number $k$ of elements of $\mathbf{S}$ included in $Z$ shifts $e(U \cup Z)$ at the coarsest scale $\Theta(n)$. Exchanging elements of $\mathbf{S}$ for elements of $\mathbf{T}$ shifts it by $\Theta(\sqrt{n})$. The elements of $\mathbf{X}$ fill the remaining $\Theta(\sqrt{n})$ gap by contributing $\Theta(\sqrt{n})$ distinct degrees into $U \cup Z$ for each choice of $Z$. Hence the different combinations of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ yield $\Omega(n^{3/2})$ distinct values of $e(U \cup Z)$.
+Kwan and Sudakov construct $W$ as three disjoint parts $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, each of size $\Theta(\sqrt{n})$, that act at complementary scales. Every element has $\Theta(n)$ edges into $U$, and the degrees from $\mathbf{S}$ into $U$ are uniformly smaller than those from $\mathbf{T}$ by a gap of $\Omega(\sqrt{n})$. Varying the number $k$ of elements of $\mathbf{S}$ included in $Z$ shifts $e(U \sqcup Z)$ at the coarsest scale $\Theta(n)$. Exchanging elements of $\mathbf{S}$ for elements of $\mathbf{T}$ shifts it by $\Theta(\sqrt{n})$. The elements of $\mathbf{X}$ fill the remaining $\Theta(\sqrt{n})$ gap by contributing $\Theta(\sqrt{n})$ distinct degrees into $U \sqcup Z$ for each choice of $Z$. Hence the different combinations of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ yield $\Omega(n^{3/2})$ distinct values of $e(U \sqcup Z)$.
 
-Achieving the requirement for $\mathbf{X}$ is the main technical challenge, as vertex diversity defined in Chapter~\ref{sec:ch2} does not produce enough distinct degrees in this case. By the anticoncentration principle from Section~\ref{sec:anticoncentration}, $\prob[d_U(x) = d_U(y)] = O(1/\sqrt{n})$ for all but $\leq n^{\delta}$ pairs $x, y \in V(G)$ in an $(\eps, \delta)$-diverse graph. Following the same construction as in the proof of Lemma \ref{lem:diversity-degrees}, the collision graph $H$ on the candidate set $W_0$ has expected number of edges
+Achieving the requirement for $\mathbf{X}$ is the main technical challenge, as vertex diversity defined in Chapter~\ref{sec:ch2} does not produce enough distinct degrees in this case. By the anticoncentration principle from Section~\ref{sec:anticoncentration}, $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$ for all but $\leq n^{\delta}$ pairs $x, y \in V(G)$ in an $(\eps, \delta)$-diverse graph. Following the same construction as in the proof of Lemma \ref{lem:diversity-degrees}, the collision graph $H$ on the candidate set $W_0$ has expected number of edges
 \[
-  \E[e(H)] = O(|W_0|^2/\sqrt{n} + |W_0| \cdot n^{\delta}),
+  \E[e(H)] = O\bigl(|W_0|^2/\sqrt{n} + |W_0| \cdot n^{\delta}\bigr),
 \]
 which yields an independent set $I \subseteq W_0$ of size 
 \[
@@ -41,58 +39,37 @@ which yields an independent set $I \subseteq W_0$ of size
 \]
 by Tur\'{a}n's theorem (Proposition~\ref{prop:turan}). We thus need $|W_0| = \Omega(n^{1/2 + \delta})$ for $|I|$ to reach $\Omega(\sqrt{n})$. Unfortunately, $W_0$ is extracted by pigeonholing $n$ vertices into $O(\sqrt{n})$ degree intervals of length $O(\sqrt{n})$, so at best $|W_0| = \Theta(\sqrt{n})$, yielding only $|I| = \Omega(n^{1/2 - \delta})$.
 
-To overcome this obstacle, Kwan and Sudakov's allows the canditate set $W_0$ to also contain disjoint \textit{pairs}. Write $\mathbf{x}$ in bold denote an object that is either a single vertex or a pair of vertices, and similarly for sets of such objects. For $\mathbf{x} = \{x_1, x_2\}$, set $N(\mathbf{x}) \coloneqq N(x_1) \cup N(x_2)$ as a multiset union and $d(\mathbf{x}) \coloneqq |N(\mathbf{x})| = d(x_1) + d(x_2)$ as the pair-degree. Note that there are $\binom{n}{2} = \Theta(n^2)$ pairs but the pair-degrees take only $O(n)$ values. Pigeonholing now yields
+To overcome this obstacle, Kwan and Sudakov's allows the candidate set $W_0$ to also contain disjoint \textit{pairs}. Write $\mathbf{x}$ in bold denote an object that is either a single vertex or a pair of vertices, and similarly for sets of such objects. For $\mathbf{x} = \{x_1, x_2\}$, define $N(\mathbf{x}) \coloneqq N(x_1) \cup N(x_2)$ as a multiset union and $\deg(\mathbf{x}) \coloneqq |N(\mathbf{x})| = \deg(x_1) + \deg(x_2)$ as the pair-degree. Note that there are $\binom{n}{2} = \Theta(n^2)$ pairs but the pair-degrees take only $O(n)$ values. Pigeonholing now yields
 $\Theta(n)$ disjoint pairs sharing a common pair-degree, vastly exceeding the $n^{1/2 + \delta}$ threshold. The price is that we need the symmetric difference $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$ not just for most pairs of vertices, but for most pairs of \emph{pairs}. We call this \textit{pair-diversity}.
 
 \begin{definition}\label{def:pair_diverse}
-  An $n$-vertex graph $G$ is \textit{$(\eps, \delta, \alpha)_2$-diverse} if for each pair of vertices $\mathbf{x} = \{x_1, x_2\}$ in $G$ with $|N(x_1) \triangle N(x_2)| \geq \alpha n$, there are $\leq n^{\delta}$ disjoint pairs of vertices $\mathbf{y} = \{y_1, y_2\}$ with $\mathbf{x} \cap \mathbf{y} = \emptyset$, such that $|N(\mathbf{x}) \triangle N(\mathbf{y})| < \eps n$.
+  An $n$-vertex graph $G$ is \textit{$(\eps, \delta, \alpha)_2$-diverse} if for each pair of vertices $\mathbf{x} = \{x_1, x_2\}$ in $G$ with $|N(x_1) \triangle \overline{N(x_2)}| \geq \alpha n$, there are $\leq n^{\delta}$ mutually disjoint pairs of vertices $\mathbf{y} = \{y_1, y_2\}$ with $\mathbf{x} \cap \mathbf{y} = \emptyset$, such that $|N(\mathbf{x}) \triangle N(\mathbf{y})| < \eps n$.
 \end{definition}
 
 It turns out that richness also implies pair-diversity.
 
 \begin{lemma}
   \label{lem:richness-implies-pair-diversity}
-  Let an $n$-vertex graph $G$ be $(\eps, \delta)$-rich, with $\delta \leq 1/2$. Then $G$ is $(\eps, \delta, \alpha)_2$-diverse for any $\alpha \geq 2\delta$.
+  Let an $n$-vertex graph $G$ be $(\eps, \delta)$-rich, with $\delta \leq 1/2$. Then $G$ is $(\alpha\eps/2, \delta, \alpha)_2$-diverse for any $\alpha \geq 2\delta$.
 \end{lemma}
 
 \begin{proof}
   Suppose not. Then there exists a pair $\mathbf{x} = \{x_1, x_2\}$ with $|N(x_1) \triangle \overline{N(x_2)}| \geq \alpha n$ and a set $Y$ of $n^{\delta}$ pairs such that $|N(\mathbf{x}) \triangle N(\mathbf{y})| < \alpha \eps n /2$ for all $\mathbf{y} \in Y$. Since
   \[
-    |N(x_1) \triangle \overline{N(x_2)}| = |N(x_1) \cap N(x_2)|  + |\overline{N(x_1)} \cap \overline{N(x_2)}| \geq \alpha n,
+    \left|N(x_1) \triangle \overline{N(x_2)}\right| = \left|N(x_1) \cap N(x_2)\right|  + \left|\overline{N(x_1)} \cap \overline{N(x_2)}\right| \geq \alpha n,
   \]
   we have $|N(x_1) \cap N(x_2)| \geq (\alpha/2)n \geq \delta n$ or $|\overline{N(x_1)} \cap \overline{N(x_2)}| \geq (\alpha/2)n \geq \delta n$. Assume without loss of generality that the former case holds. Then for each vertex $y$ in any $\mathbf{y} \in Y$, 
   \[
-    \left|\overline{N(y)} \cap (N(x_1) \cap N(x_2))\right| \leq |N(\mathbf{x}) \triangle N(\mathbf{y})| < \alpha \eps n /2 \leq \eps |N(x_1) \cap N(x_2)|.
+    \left|\overline{N(y)} \cap \bigl(N(x_1) \cap N(x_2)\bigr)\right| \leq |N(\mathbf{x}) \triangle N(\mathbf{y})| < \alpha \eps n /2 \leq \eps |N(x_1) \cap N(x_2)|.
   \]
   But then the set of all such $y$ now contradicts the $(\eps, \delta)$-rich condition.
 \end{proof}
 
-We also introduce a reversed notion of diversity.
-
-\begin{lemma}
-  \label{lem:richness-implies-upper-bound}
-  Let an $n$-vertex graph $G$ be $(\eps, \delta)$-rich. Then $G$ has $\leq n^{1 + \delta}$ pairs of vertices $x_1, x_2 \in V(G)$ with $|N(x_1) \triangle \overline{N(x_2)}| < (\eps/2)n$.
-\end{lemma}
-
-\begin{proof}
-  We show that for each choice of $x_1 \in V(G)$, there are $\leq n^{\delta}$ vertices $x_2 \in V(G)$ with $|N(x_1) \triangle \overline{N(x_2)}| < (\eps/2)n$. Since either $|N(x_1)| \geq n/2$ or $|\overline{N(x_1)}| \geq n/2$, we assume without loss of generality that $|N(x_1)| \geq n/2$. By $(\eps, \delta)$-richness, there are $\leq n^{\delta}$ vertices $x_2$ with $|N(x_2) \cap N(x_1)| < \eps n/2$. For all other choices of $x_2$, 
-  \[
-    |N(x_1) \triangle \overline{N(x_2)}| \geq |N(x_1) \cap N(x_2)|  \geq (\eps/2) n.
-  \]
-  The result now follows from the fact that there are only $n$ choices of $x_1$.
-\end{proof}
-
-\textit{Remark:} This lemma gives an upper bound on the symmetric difference between the neighbourhoods of two vertices. Specifically, since $|N(x_1) \triangle N(x_2)| + |N(x_1) \triangle \overline{N(x_2)}| = n - 2$ for any two vertices $x_1, x_2$,
+One last thing we need is to ensure $\mathbf{X}$ actually provides $\Theta(\sqrt{n})$ distinct degrees into $U \sqcup \mathbf{Z} \coloneqq U \sqcup \bigsqcup_{\mathbf{z} \in \mathbf{Z}} \mathbf{z}$ for each choice of augmenting set $\mathbf{Z} \subseteq \mathbf{S} \sqcup \mathbf{T}$. Notice the current construction of $\mathbf{X}$ only ensures distinct degrees $\deg_U(\mathbf{x})$ into $U$ instead of $\deg_{U \sqcup Z}(\mathbf{x})$. If $U$ were sampled once and directly constructed $\mathbf{S}, \mathbf{T}, \mathbf{X}$ based on $U$, then the $\deg_U(\mathbf{x})$ would be fixed numbers given the outcome of $U$. However, there is no guarantee that $\deg_{U \sqcup Z}(\mathbf{x}) = \deg_{U}(\mathbf{x}) + \deg_{Z}(\mathbf{x})$ would remain distinct, as the addition of $\deg_{Z}(\mathbf{x})$ could cancel out the uniqueness of $\deg_{U}(\mathbf{x})$. Kwan and Sudakov overcome this with a \textit{double-exposure} technique. They perform two rounds of sampling. First, they sample the random set $U_0$ and construct $\mathbf{S}, \mathbf{T}, \mathbf{X}$ relative to $U_0$. In the second round, they sample $U$ from $U_0$ by independently keeping each vertex with probability $1/2$. After the first sampling, the construction guarantees $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = \Omega(n)$ for all $x, y \in \mathbf{X}$, and the augmenting sets $\mathbf{Z} \subseteq \mathbf{S} \cup \mathbf{T}$ are fully determined by $U_0$. In the second round, the difference $\deg_U(\mathbf{x}) - \deg_U(\mathbf{y})$ becomes a sum of $\Omega(n)$ independent Bernoulli terms, and Littlewood--Offord yields $\prob[\deg_U(\mathbf{x}) - \deg_U(\mathbf{y}) = t] = O(1/\sqrt{n})$ for every integer $t$. In particular, since $t_{xy} \coloneqq \deg_Z(\mathbf{y}) - \deg_Z(\mathbf{x})$ is deterministic for each $\mathbf{x}, \mathbf{y}$, 
 \[
-  |N(x_1) \triangle N(x_2)| \leq (1 - \eps/2)n
-\]  
-for most pairs of vertices $x_1, x_2$, so combined with diversity yields $d(x_1) + d(x_2) = \Theta(n)$.
-
-One last thing we need is to ensure $\mathbf{X}$ actually provides $\Theta(\sqrt{n})$ distinct degrees into $U \cup \mathbf{Z} \coloneqq U \cup \bigcup_{\mathbf{z} \in \mathbf{Z}} \mathbf{z}$ for each choice of augmenting set $\mathbf{Z} \subseteq \mathbf{S} \cup \mathbf{T}$. Notice the current construction of $\mathbf{X}$ only ensures distinct degrees $d_U(\mathbf{x})$ into $U$ instead of $d_{U \cup Z}(\mathbf{x})$. If $U$ were sampled once and directly constructed $\mathbf{S}, \mathbf{T}, \mathbf{X}$ based on $U$, then the $d_U(\mathbf{x})$ would be fixed numbers given the outcome of $U$. However, there is no guarantee that $d_{U \cup Z}(\mathbf{x}) = d_{U}(\mathbf{x}) + d_{Z}(\mathbf{x})$ would remain distinct, as the addition of $d_{Z}(\mathbf{x})$ could cancel out the uniqueness of $d_{U}(\mathbf{x})$. Kwan and Sudakov overcome this with a \textit{double-exposure} technique. They perform two rounds of sampling. First, they sample the random set $U_0$ and construct $\mathbf{S}, \mathbf{T}, \mathbf{X}$ relative to $U_0$. In the second round, they sample $U$ from $U_0$ by independently keeping each vertex with probability $1/2$. After the first sampling, the construction guarantees $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = \Omega(n)$ for all $x, y \in \mathbf{X}$, and the augmenting sets $\mathbf{Z} \subseteq \mathbf{S} \cup \mathbf{T}$ are fully determined by $U_0$. In the second round, the difference $d_U(\mathbf{x}) - d_U(\mathbf{y})$ becomes a sum of $\Omega(n)$ independent Bernoulli terms, and Littlewood--Offord yields $\prob[d_U(\mathbf{x}) - d_U(\mathbf{y}) = t] = O(1/\sqrt{n})$ for every integer $t$. In particular, since $t_{xy} \coloneqq d_Z(\mathbf{y}) - d_Z(\mathbf{x})$ is determined for each $\mathbf{x}, \mathbf{y}$, 
-\[
-  \prob[d_{U \cup Z}(\mathbf{x}) = d_{U \cup Z}(\mathbf{y})] = \prob[d_{U}(\mathbf{x}) - d_{U}(\mathbf{y}) = t_{xy}] = O(1/\sqrt{n}).
+  \prob\bigl[\deg_{U \sqcup Z}(\mathbf{x}) = \deg_{U \sqcup Z}(\mathbf{y})\bigr] = \prob\bigl[\deg_{U}(\mathbf{x}) - \deg_{U}(\mathbf{y}) = t_{xy}\bigr] = O(1/\sqrt{n}).
 \]
-The same collision graph construction now finds us the desired set of $U$ such that $d_{U \cup Z}(\mathbf{x})$ is distinct for $\mathbf{x} \in \mathbf{X}$.
+The same collision graph construction now finds us the desired set of $U$ such that $\deg_{U \sqcup Z}(\mathbf{x})$ is distinct for $\mathbf{x} \in \mathbf{X}$.
 
 \subsection{The main lemma}
 
@@ -103,7 +80,7 @@ As outlined above, we will find many induced subgraphs $G[U]$ whose edge counts 
 
   Let $C > 0$. Then there exists $c = c(C) > 0$, such that for any $C$-Ramsey graph $G$ on $n$ vertices and any $m$ satisfying $cn^2 \leq m \leq 2cn^2$, there are disjoint subsets $U, W \subseteq V(G)$ with $|e(U) - m| = O(n^{3/2})$ and $|W| = O(\sqrt{n})$ such that 
   \[
-    |\{e(U \cup Z) : Z \subseteq W\}| = \Omega(n^{3/2}).
+    \left|\bigl\{e(U \sqcup Z) : Z \subseteq W\bigr\}\right| = \Omega(n^{3/2}).
   \]
 \end{lemma}
 
@@ -111,9 +88,9 @@ We first show how this implies Theorem \ref{thm:ks}.
 
 \paragraph{Proof of Theorem \ref{thm:ks}.} For any $U, W$ given by Lemma \ref{lemma:well-separated-edge-counts},  
 \[
-  |e(U \cup W) - e(U)| = O(n^{3/2}),
+  |e(U \sqcup W) - e(U)| = O(n^{3/2}),
 \]
-as $|W| = O(\sqrt{n})$ and each $w \in W$ has $\leq n$ neighbours in $U \cup W$. But then the $\Omega(n^{3/2})$ values of $e(U \cup Z)$ for $Z \subseteq W$ are contained in an interval of length $O(n^{3/2})$ centered at $e(U)$. Partition the interval between $cn^2$ and $2cn^2$ into $\frac{c}{k}\sqrt{n}$ subintervals of length $kn^{3/2}$, for some large enough constant $k$ to be determined. Apply Lemma \ref{lemma:well-separated-edge-counts} to a suitable choice of $m$ in each subinterval so that the obtained values of $e(U \cup Z)$ for $Z \subseteq W$ lie in the same subinterval as $m$, which is allowed for sufficiently large $k$. Since we applied Lemma \ref{lemma:well-separated-edge-counts} to $\Omega(\sqrt{n})$ disjoint subintervals, we obtain $\Omega(n^2)$ distinct sizes of induced subgraphs. \qed
+as $|W| = O(\sqrt{n})$ and each $w \in W$ has $\leq n$ neighbours in $U \sqcup W$. But then the $\Omega(n^{3/2})$ values of $e(U \sqcup Z)$ for $Z \subseteq W$ are contained in an interval of length $O(n^{3/2})$ centered at $e(U)$. Partition the interval between $cn^2$ and $2cn^2$ into $\frac{c}{k}\sqrt{n}$ subintervals of length $kn^{3/2}$, for some large enough constant $k$ to be determined. Apply Lemma \ref{lemma:well-separated-edge-counts} to a suitable choice of $m$ in each subinterval so that the obtained values of $e(U \sqcup Z)$ for $Z \subseteq W$ lie in the same subinterval as $m$, which is allowed for sufficiently large $k$. Since we applied Lemma \ref{lemma:well-separated-edge-counts} to $\Omega(\sqrt{n})$ disjoint subintervals, we obtain $\Omega(n^2)$ distinct sizes of induced subgraphs. \qed
 
 \subsection{The construction of augmenting sets}
 \label{sec:construction}
@@ -122,24 +99,24 @@ The following lemma constructs $U_0$ and the augmenting sets $\mathbf{S}, \mathb
 
 \begin{lemma}
 \label{lem:construction}
-For any $C > 0$ there exists $c = c(C) > 0$ such that the following holds. For any $C$-Ramsey graph $G$ on $n$ vertices and any $m$ satisfying $cn^2 \le m \le 2cn^2$, there is a vertex set $U_0 \subseteq V(G)$ with $|e(U_0) - 4m| = O(n^{3/2})$, a constant $c' = c'(C) > 0$, and sets $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$ of size $c'\sqrt{n}$ such that
+For any $C > 0$ there exists $c = c(C) > 0$ such that the following holds. For any $C$-Ramsey graph $G$ on $n$ vertices and any $m$ satisfying $cn^2 \le m \le 2cn^2$, there is vertex set $U_0 \subseteq V(G)$ with $|e(U_0) - 4m| = O(n^{3/2})$, constant $c' = c'(C) \in (0, 1]$, and sets $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$ of size $c'\sqrt{n}$ such that
 \begin{enumerate}
   \item either $U_0, \mathbf{S}, \mathbf{T}, \mathbf{X} \subseteq V(G)$ are disjoint sets of vertices, or $\mathbf{S}, \mathbf{T}, \mathbf{X} \subseteq \binom{V(G)}{2}$ are sets of disjoint pairs of vertices with no vertex appearing in more than one of $U_0, \mathbf{S}, \mathbf{T}, \mathbf{X}$,
-  \item there is $d = \Theta(n)$ such that $d_{U_0}(\mathbf{x}) = d + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{S} \cup \mathbf{T} \cup \mathbf{X}$,
-  \item $\min_{\mathbf{x} \in \mathbf{T}} d_{U_0}(\mathbf{x}) - \max_{\mathbf{x} \in \mathbf{S}} d_{U_0}(\mathbf{x}) \geq 8c'\sqrt{n}$,
+  \item there is $d = \Theta(n)$ such that $\deg_{U_0}(\mathbf{x}) = d + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{S} \sqcup \mathbf{T} \sqcup \mathbf{X}$,
+  \item $\min_{\mathbf{x} \in \mathbf{T}} \deg_{U_0}(\mathbf{x}) - \max_{\mathbf{x} \in \mathbf{S}} \deg_{U_0}(\mathbf{x}) \geq 8c'\sqrt{n}$,
   \item for each $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{X}}{2}$, we have $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = \Omega(n)$.
 \end{enumerate}
 \end{lemma}
 
-Property~2 ensures adding or removing a single element shifts the edge count by $\Theta(n)$. Property~3 guarantees swapping an element of $\mathbf{S}$ for an element of $\mathbf{T}$ shifts the edge count by $\Theta(\sqrt{n})$. Property~4 sets up the double-exposure step. 
+Property~2 ensures adding or removing a single element shifts the edge count by $\Theta(n)$. Property~3 guarantees swapping an element of $\mathbf{S}$ for an element of $\mathbf{T}$ shifts the edge count by $\Theta(\sqrt{n})$. Property~4 shows sets up the Littlewood--Offord argument in the double-exposure step. 
 
-% The proof will start with reducing to a rich subgraph of linear size using Lemma~\ref{lem:rich-subgraph} and using the pigeonhole principle to obtain a large candidate set $\mathbf{W}_0$ of vertices or pairs with similar degrees, satisfying Property~1 and Property~2. We will then sample $U_0$ at random and verify that all desired properties hold simultaneously with positive probability.
+The proof starts with reducing to a rich subgraph of linear size using Lemma~\ref{lem:rich-subgraph} and using the pigeonhole principle to obtain a large candidate set $\mathbf{W}_0$ of vertices or pairs with similar degrees, satisfying Property~1 and Property~2. It then samples $U_0$ at random and verifies that all desired properties hold simultaneously with positive probability.
 
 \begin{proof}[Proof of Lemma~\ref{lem:construction}]
 
 Let $\varepsilon = \varepsilon(C)$ be given by Lemma~\ref{lem:rich-subgraph} and set $\delta = \varepsilon/4$. By Lemma~\ref{lem:rich-subgraph}, $G$ contains an $(\varepsilon, \delta)$-rich induced subgraph $G[V']$ on $\Omega(n)$ vertices. Since $\log |V'| \ge \frac{1}{2}\log n$, the graph $G[V']$ is $2C$-Ramsey, so by adjusting constants it suffices to work inside $G[V']$. We may thus assume $G$ itself is $(\varepsilon, \delta)$-rich.
 
-By richness, Lemma~\ref{lem:richness-implies-diversity}, \ref{lem:richness-implies-pair-diversity}, and \ref{lem:richness-implies-upper-bound} with $\alpha = \varepsilon/2$, furnishes the following properties:
+By richness, Lemma~\ref{lem:richness-implies-diversity}, \ref{lem:richness-implies-upper-bound}, and \ref{lem:richness-implies-pair-diversity} with $\alpha = \varepsilon/2$, furnish the following properties:
 \begin{enumerate}
   \item[(a)] $G$ is $(\varepsilon/2, \delta)$-diverse,
   \item[(b)] $G$ is $(\varepsilon^2/4, \delta, \varepsilon/2)_2$-diverse,
@@ -148,10 +125,9 @@ By richness, Lemma~\ref{lem:richness-implies-diversity}, \ref{lem:richness-impli
       $|N(x_1) \triangle \overline{N(x_2)}| < (\varepsilon/2)n$.
 \end{enumerate}
 
-Each of the $\binom{n}{2} = \Theta(n^2)$ vertex pairs $\{x_1, x_2\}$ has a pair-degree $d(\{x_1, x_2\}) = d(x_1) + d(x_2)$ taking values from $0$ to $2n$, so by the pigeonhole principle there exists a value $d^*$ and a collection $H$ of $\Omega(n^{3/2})$ pairs with $d(\mathbf{x}) = d^* + O(\sqrt{n})$ for all $\mathbf{x} \in H$. By the remark after Lemma \ref{lem:richness-implies-upper-bound}, $d^* = \Theta(n)$. Interpret $H$ as a graph on $V(G)$ whose edges are the $\Omega(n^{3/2})$ pairs. By (c), we may delete $O(n^{1+\delta}) = o(n^{3/2})$ edges in $H$ so that all remaining pairs have $|N(x_1) \triangle \overline{N(x_2)}| \ge (\varepsilon/2)n$. Suppose there exists vertex $v$ in $H$ with degree $\Omega(n^{3/4})$. Take $\mathbf{W}_0 = N_H(v)$ and set $d = d^* - d(v)$. Then each $w \in \mathbf{W}_0$ is a single vertex with degree $d(w) = d + O(\sqrt{n})$. Now suppose $H$ has maximum degree $\Delta = o(n^{3/4})$. By iteratively picking an edge and removing $\leq 2\Delta$ edges adjacent to it, we obtain a matching of size $\Omega(n^{3/2})/o(n^{3/4}) = \Omega(n^{3/4})$. Take $\mathbf{W}_0$ to be the pairs in this matching and set $d = d^*$. In either case, the subsets of $\mathbf{W}_0$ satisfy Property~1-2.
+Each of the $\binom{n}{2} = \Theta(n^2)$ vertex pairs $\{x_1, x_2\}$ has a pair-degree $\deg(\{x_1, x_2\}) = \deg(x_1) + \deg(x_2)$ taking values from $0$ to $2n$, so by the pigeonhole principle there exists a value $d^*$ and a collection $H$ of $\Omega(n^{3/2})$ pairs with $\deg(\mathbf{x}) = d^* + O(\sqrt{n})$ for all $\mathbf{x} \in H$. By the remark after Lemma \ref{lem:richness-implies-upper-bound}, $d^* = \Theta(n)$. Interpret $H$ as a graph on $V(G)$ whose edges are the $\Omega(n^{3/2})$ pairs. By (c), we may delete $O(n^{1+\delta}) = o(n^{3/2})$ edges in $H$ so that all remaining pairs have $|N(x_1) \triangle \overline{N(x_2)}| \ge (\varepsilon/2)n$. Suppose there exists vertex $v$ in $H$ with degree $\Omega(n^{3/4})$. Take $\mathbf{W}_0 = N_H(v)$ and set $d' = d^* - \deg(v)$. Then each $w \in \mathbf{W}_0$ is a single vertex with degree $\deg(w) = d + O(\sqrt{n})$. Now suppose $H$ has maximum degree $\Delta = o(n^{3/4})$. By iteratively picking an edge and removing $\leq 2\Delta$ edges adjacent to it, we obtain a matching of size $\Omega(n^{3/2})/o(n^{3/4}) = \Omega(n^{3/4})$. Take $\mathbf{W}_0$ to be the pairs in this matching and set $d' = d^*$. The subsets of $\mathbf{W}_0$ now satisfy Property~1.
 
-Next, we extract a subset $\mathbf{A} \subseteq \mathbf{W}_0$ of size $\Omega(\sqrt{n})$
-with pairwise large symmetric differences. Define graph $F$ on $\mathbf{L}$ by joining $\mathbf{x}$ and $\mathbf{y}$ whenever $|N(\mathbf{x}) \triangle N(\mathbf{y})| < (\varepsilon^2/4)n$. By diversity, the graph $F$ has $|\mathbf{W}_0| = \Omega(n^{3/4})$ vertices and maximum degree at most $n^{\delta} < n^{1/4}$. Thus by Tur\'{a}n's theorem, $F$ has independent set $\mathbf{A} \subseteq \mathbf{W}_0$ with size $\Omega(|\mathbf{W}_0|/n^{1/4}) = \Omega(\sqrt{n})$. That is, for $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$, we have $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$.
+Next, we extract a subset $\mathbf{A} \subseteq \mathbf{W}_0$ of size $\Omega(\sqrt{n})$ with pairwise large symmetric differences. Define graph $F$ on $\mathbf{W}_0$ by joining $\mathbf{x}$ and $\mathbf{y}$ whenever $|N(\mathbf{x}) \triangle N(\mathbf{y})| < (\varepsilon^2/4)n$. By diversity, the graph $F$ has $|\mathbf{W}_0| = \Omega(n^{3/4})$ vertices and maximum degree at most $n^{\delta} < n^{1/4}$. Thus by Tur\'{a}n's theorem, $F$ has independent set $\mathbf{A} \subseteq \mathbf{W}_0$ with size $\Omega(|\mathbf{W}_0|/n^{1/4}) = \Omega(\sqrt{n})$. That is, for $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$, we have $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$.
 
 By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), $e(G) \ge 800cn^2$ for some constant $c = c(C) > 0$. For $cn^2 \le m \le 2cn^2$, set $p = \sqrt{4m/e(G)}$, so that $p = \Omega(1)$ and $p \le 0.1$. Let $U_0$ be a random subset of $V(G)$ by including each vertex with probability $p$. 
 
@@ -161,47 +137,49 @@ By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), $e(G
   \begin{enumerate}
     \item[(i)] $|e(U_0) - 4m| = O(n^{3/2})$,
     \item[(ii)] There is a set $\mathbf{Q} \subseteq \mathbf{A}$ involving no vertices of $U_0$, with $|\mathbf{Q}| \ge (2/3)|\mathbf{A}|$,
-    \item[(iii)] There is a set $\mathbf{R} \subseteq \mathbf{A}$ with $|\mathbf{R}| \ge (2/3)|\mathbf{A}|$ and $d_{U_0}(\mathbf{x}) = pd + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{R}$,
+    \item[(iii)] There is a set $\mathbf{R} \subseteq \mathbf{A}$ with $|\mathbf{R}| \ge (2/3)|\mathbf{A}|$ and $\deg_{U_0}(\mathbf{x}) = pd' + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{R}$,
     \item[(iv)] $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = \Omega(n)$ for each $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$,
-    \item[(v)] The equality $d_{U_0}(\mathbf{x}) = d_{U_0}(\mathbf{y})$ holds for $O(\sqrt{n})$ pairs $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$.
+    \item[(v)] The equality $\deg_{U_0}(\mathbf{x}) = \deg_{U_0}(\mathbf{y})$ holds for $O(\sqrt{n})$ pairs $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$.
   \end{enumerate}
 \end{claim}
 
 \begin{proof}[Proof of Claim]
   We prove each part in order.
   \begin{enumerate}
-    \item[(i)] Note that $\E[e(U_0)] = 4m$ and there are $O(n^3)$ pairs of edges in $G$ whose presence are dependent in $G[U_0]$, as this occurs only if two edges share a vertex. For $e \in E(G)$, let $A_e$ be the event that $e$ is present in $G[U_0]$. Since
+    \item[(i)] Note that $\E[e(U_0)] = 4m$ and there are $O(n^3)$ pairs of edges in $G$ whose presence are dependent in $G[U_0]$, as this occurs only if two edges share a vertex. Thus for $e \in E(G)$, the standard variance bound gives
     \[
-      \Var(e(U_0)) \leq \E[e(U_0)] + \sum_{e \sim e'} \prob(A_e \cap A_{e'}) = O(n^3),
+      \Var\bigl(e(U_0)\bigr) \leq \E[e(U_0)] + O(n^3) = O(n^3).
     \]
     Chebyshev's inequality yields
     \[
-      \prob[|e(U_0) - 4m| = \omega(n^{3/2})] \leq \frac{O(n^3)}{\omega(n^{3})} \to 0,
+      \prob\bigl[|e(U_0) - 4m| = \omega(n^{3/2})\bigr] \leq \frac{O(n^3)}{\omega(n^{3})} \to 0,
     \]
     as $n \to \infty$.
     \item[(ii)] Let $\mathbf{Q}$ be the subset of $\mathbf{A}$ involving no vertices of $U_0$. Then $|\mathbf{Q}|$ follows a binomial distribution with $|\mathbf{A}|$ trials, which has mean at least $(1 - p)^2|\mathbf{A}| \geq 0.8|\mathbf{A}|$ and variance $O(|\mathbf{A}|)$. By Chebyshev's,
     \[
-      \prob\left[|\mathbf{Q}| < \frac{2}{3}|\mathbf{A}|\right] \leq \prob\left[|\mathbf{Q}| - \E[|\mathbf{Q}|] \geq 0.1|\mathbf{A}|\right] \leq \frac{O(|\mathbf{A}|)}{0.01|\mathbf{A}|^2} = O(1/|\mathbf{A}|) \to 0,
+      \prob\left[|\mathbf{Q}| < \frac{2}{3}|\mathbf{A}|\right] \leq \prob\bigl[\E[|\mathbf{Q}|] - |\mathbf{Q}| \geq 0.1|\mathbf{A}|\bigr] \leq \frac{O\bigl(|\mathbf{A}|\bigr)}{0.01|\mathbf{A}|^2} = O\bigl(1/|\mathbf{A}|\bigr) \to 0,
     \]
     as $n \to \infty$. 
-    \item[(iii)] For $\mathbf{x} \in |\mathbf{A}|$, the degree $d_{U_0}(\mathbf{x})$ has mean $pd + O(\sqrt{n})$ and variance $O(n)$. By Chebyshev's, 
+    \item[(iii)] For $\mathbf{x} \in \mathbf{A}$, the degree $\deg_{U_0}(\mathbf{x})$ has mean $pd' + O(\sqrt{n})$ and variance $O(n)$. By Chebyshev's, 
+    \begin{align*}
+      \prob\bigl[\deg_{U_0}(\mathbf{x}) = pd' + O(\sqrt{n})\bigr] 
+      &\geq 1 - \prob\bigl[|\deg_{U_0}(\mathbf{x}) - \E[\deg_{U_0}(\mathbf{x})]| = \omega(\sqrt{n})\bigr] \\
+      &\geq 1 - \frac{O(n)}{\omega(n)} \to 1,
+    \end{align*}
+    In particular, $\deg_{U_0}(\mathbf{x}) = pd' + O(\sqrt{n})$ with probability $0.99$ for large enough $n$. Let $\mathbf{R} \subseteq \mathbf{A}$ be the set of $\mathbf{x}$ that satisfies this bound. Since $\E[|\mathbf{A} \setminus \mathbf{R}|] = 0.01|\mathbf{A}|,$ Markov's inequality gives
     \[
-      \prob[d_{U_0}(\mathbf{x}) = pd + O(\sqrt{n})] \leq 1 - \prob[|d_{U_0}(\mathbf{x}) - \E[d_{U_0}(\mathbf{x})]| = \omega(\sqrt{n})] \leq 1 - \frac{O(n)}{\omega(n)} \to 1.
+      \prob\left[|\mathbf{R}| \geq \frac{2}{3}|\mathbf{A}|\right] = 1 - \prob\left[|\mathbf{A} \setminus \mathbf{R}| \geq \frac{1}{3}|\mathbf{A}|\right] \geq 1 - \frac{\E\bigl[|\mathbf{A} \setminus \mathbf{R}|\bigr]}{\frac{1}{3}|\mathbf{A}|} \geq 0.8.
     \]
-    In particular, $d_{U_0}(\mathbf{x}) = pd + O(\sqrt{n})$ with probability $0.99$ for large enough $n$. Let $\mathbf{R} \subseteq \mathbf{A}$ be the set of $\mathbf{x}$ that satisfies this bound. Since $\E[|\mathbf{A} \setminus \mathbf{R}|] = 0.01|\mathbf{A}|,$ Markov's inequality gives
+    \item[(iv)] Fix $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$. Recall that $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$. Since $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = |(N(\mathbf{x}) \triangle N(\mathbf{y})) \cap U_0|$ has binomial distribution with parameters $N(\mathbf{x}) \triangle N(\mathbf{y})$ and $p$, the Chernoff bound gives
     \[
-      \prob\left[|\mathbf{R}| \geq \frac{2}{3}|\mathbf{A}|\right] = 1 - \prob\left[|\mathbf{A} \setminus \mathbf{R}| \geq \frac{1}{3}|\mathbf{A}|\right] \geq 1 - \frac{\E[|\mathbf{A} \setminus \mathbf{R}|]}{\frac{1}{3}|\mathbf{A}|} \geq 0.8.
+      \prob\left[|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| < \frac{p}{2}|N(\mathbf{x}) \triangle N(\mathbf{y})|\right] = e^{-\Omega(n)} = o(n^{-1}).
     \]
-    \item[(iv)] Recall that $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$ for $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$. Since $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = |N(\mathbf{x}) \triangle N(\mathbf{y}) \cap U_0|$, it has a binomial distribution with parameters $N_{U_0}(\mathbf{x})$ and $p$. By the Chernoff bound, 
-    \[
-      \prob\left[|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| < \frac{p}{2}|N(\mathbf{x}) \triangle N(\mathbf{y})|\right] = e^{-\Omega(n)} = o(n).
-    \]
-    Union bound now gives the property.
-    \item[(v)] For $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$, the random variable $d_{U_0}(\mathbf{x}) - d_{U_0}(\mathbf{y})$ is of $(|N(\mathbf{x}) \triangle N(\mathbf{y})|, p)$-Littlewood--Offord type. Since $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$, the Littlewood--Offord theorem gives $\prob[d_{U_0}(\mathbf{x}) = d_{U_0}(\mathbf{y})] = O(1/\sqrt{n})$, so the expected number of paris $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$ satisfying $d_{U_0}(\mathbf{x}) = d_{U_0}(\mathbf{y})$ is $O(\sqrt{n})$. The property now follows from Markov's.
+    The result follows from summing over $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$ and invoking the union bound.
+    \item[(v)] For $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$, the random variable $\deg_{U_0}(\mathbf{x}) - \deg_{U_0}(\mathbf{y})$ is of $(|N(\mathbf{x}) \triangle N(\mathbf{y})|, p)$-Littlewood--Offord type. Since $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$, the Littlewood--Offord theorem gives $\prob[\deg_{U_0}(\mathbf{x}) = \deg_{U_0}(\mathbf{y})] = O(1/\sqrt{n})$, so the expected number of pairs $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$ satisfying $\deg_{U_0}(\mathbf{x}) = \deg_{U_0}(\mathbf{y})$ is $O(\sqrt{n})$. The property now follows from Markov's.
   \end{enumerate}
 \end{proof}
 
-Fix an outcome of $U_0$ for which all five events hold. Let $\mathbf{A}' = \mathbf{Q} \cap \mathbf{R}$, and note that $|\mathbf{A}'| \geq |\mathbf{A}|/3 = \Omega(\sqrt{n})$. It remains to obtain $\mathbf{S}$, $\mathbf{T}$, and $\mathbf{X}$ from $\mathbf{A}'$ that satisfy Properties~3--4. The collision graph construction on $\mathbf{A}'$ and Tur\'{a}n Theorem (Proposition~\ref{prop:turan}) yields $\mathbf{W} \subseteq \mathbf{A}'$ of size $\Omega(\sqrt{n})$ that has distinct degrees into $U_0$. Partition $\mathbf{W}$ into three equal parts by the degree $d_{U_0}(\mathbf{x})$ into $U_0$, and let $\mathbf{T}$ be the top third, $\mathbf{S}$ be the bottom third, and $\mathbf{X}$ be the middle third. Since $\mathbf{W}$ has distinct degrees and $|\mathbf{X}| = \Omega(\sqrt{n})$, we may find constant $c'$ that satisfies Property~3. Since $\mathbf{X} \subseteq \mathbf{A}$, Property~4 holds. Trimming the sizes of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ to $c'\sqrt{n}$ completes the proof.
+Fix an outcome of $U_0$ for which all five events hold. Let $\mathbf{A}' = \mathbf{Q} \cap \mathbf{R}$, and note that $|\mathbf{A}'| \geq |\mathbf{A}|/3 = \Omega(\sqrt{n})$. It remains to obtain $\mathbf{S}$, $\mathbf{T}$, and $\mathbf{X}$ from $\mathbf{A}'$ that satisfy Properties~3--4. The collision graph construction on $\mathbf{A}'$ and Tur\'{a}n Theorem (Proposition~\ref{prop:turan}) yields $\mathbf{W} \subseteq \mathbf{A}'$ of size $\Omega(\sqrt{n})$ that has distinct degrees into $U_0$. Partition $\mathbf{W}$ into three equal parts by the degree $\deg_{U_0}(\mathbf{x})$ into $U_0$, and let $\mathbf{T}$ be the top third, $\mathbf{S}$ be the bottom third, and $\mathbf{X}$ be the middle third. Since $\mathbf{W}$ has distinct degrees and $|\mathbf{X}| = \Omega(\sqrt{n})$, we may find constant $c' \in (0, 1]$ that satisfies Property~3. Since $\mathbf{X} \subseteq \mathbf{A}$, Property~4 holds. Set $d = pd'$. Recall that $d' = \Theta(n)$, so $\deg_{U_0}(\mathbf{x}) = d + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{S} \sqcup \mathbf{T} \sqcup \mathbf{X}$, satisfying Property~2. Trimming the sizes of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ to $c'\sqrt{n}$ completes the proof.
 \end{proof}
 
 \subsection{Double-exposure}
@@ -209,9 +187,9 @@ Fix an outcome of $U_0$ for which all five events hold. Let $\mathbf{A}' = \math
 
 Given $\mathbf{S}, \mathbf{T}, c'$ from Lemma~\ref{lem:construction}, fix an ordering on $\mathbf{S}$ and $\mathbf{T}$ and define
 \[
-  \mathcal{P} \coloneqq \{(k, i) : c'\sqrt{n} \leq k \leq 2c'\sqrt{n} \text{ and } 0 \leq i \leq c'\sqrt{n}\}.
+  \mathcal{P} \coloneqq \bigl\{(k, i) : c'\sqrt{n} \leq k \leq 2c'\sqrt{n} \text{ and } 0 \leq i \leq c'\sqrt{n}\bigr\}.
 \]
-For $(k, i) \in \mathcal{P}$, define $\mathbf{Z}_{k, i} \subseteq \mathbf{S} \sqcup \mathbf{T}$ by taking the first $k - i$ elements from $\mathbf{S}$ and the first $i$ elements from $\mathbf{T}$. By Property 2 and 3 of Lemma~\ref{lem:construction}, the values of $e(U_0, \mathbf{Z}_{k, i}) \coloneqq \sum_{\mathbf{z} \in \mathbf{Z}_{k, i}} d_{U_0}(\mathbf{z})$ are evenly spaced by $\Theta(\sqrt{n})$ as $(k, i)$ vary lexicographically, which already forms $\Omega(n)$ distinct values of $e(U_0 \cup \mathbf{Z}_{k, i})$. It remains to fill the $\Theta(\sqrt{n})$ gaps between each $e(U_0 \cup \mathbf{Z}_{k, i})$ with $\mathbf{X}$ via the \textit{double-exposure} technique while maintaining the gap struture of $\mathbf{Z}_{k, i}$. Specifically, we sample $U$ from $U_0$ such that the values $e(U \cup \mathbf{Z}_{k, i} \cup \{\mathbf{x}\})$ are distinct as $\mathbf{Z}_{k, i} \subseteq \mathbf{S} \sqcup \mathbf{T}$ and $\mathbf{x} \in \mathbf{X}$ vary. Define $U_{k,i} \coloneqq U \cup \mathbf{Z}_{k,i}$ and $e_{k, i} \coloneqq e(U_{k, i}) - e(U) = e(\mathbf{Z}_{k,0}) + e(\mathbf{Z}_{k,0}, U)$. We need to ensure the following:
+For $(k, i) \in \mathcal{P}$, define $\mathbf{Z}_{k, i} \subseteq \mathbf{S} \sqcup \mathbf{T}$ by taking the first $k - i$ elements from $\mathbf{S}$ and the first $i$ elements from $\mathbf{T}$. By Property 2 and 3 of Lemma~\ref{lem:construction}, the values of $e(U_0, \mathbf{Z}_{k, i}) \coloneqq \sum_{\mathbf{z} \in \mathbf{Z}_{k, i}} \deg_{U_0}(\mathbf{z})$ are evenly spaced by $\Theta(\sqrt{n})$ as $(k, i)$ vary lexicographically, which already forms $\Omega(n)$ distinct values of $e(U_0 \sqcup \mathbf{Z}_{k, i})$. It remains to fill the $\Theta(\sqrt{n})$ gaps between each $e(U_0 \sqcup \mathbf{Z}_{k, i})$ with $\mathbf{X}$ via the \textit{double-exposure} technique while maintaining the gap structure of $\mathbf{Z}_{k, i}$. Specifically, we sample $U$ from $U_0$ such that the values $e(U \sqcup \mathbf{Z}_{k, i} \sqcup \{\mathbf{x}\})$ are distinct as $\mathbf{Z}_{k, i} \subseteq \mathbf{S} \sqcup \mathbf{T}$ and $\mathbf{x} \in \mathbf{X}$ vary. Define $U_{k,i} \coloneqq U \sqcup \mathbf{Z}_{k,i}$ and $e_{k, i} \coloneqq e(U_{k, i}) - e(U) = e(\mathbf{Z}_{k,i}) + e(\mathbf{Z}_{k,i}, U)$. We need to ensure the following:
 \begin{enumerate}
   \item \emph{Degree distinctness in $\mathbf{X}$.} For most $(k, i)$, the elements of $\mathbf{X}$ should have $\Omega(\sqrt{n})$ pairwise distinct degrees into $U_{k,i}$, all lying in an interval of length $O(\sqrt{n})$. This is the payoff of double-exposure.
   \item \emph{Concentration of the edge count.} The value $e_{k,0}$ should be $O(n)$ around its expectation, so that the $\Theta(n)$ spacings between $e_{k, 0}$ and $e_{k + 1, 0}$ are perserved.
@@ -222,14 +200,14 @@ Write $\Delta_{k, i} \coloneqq e_{k, i} - e_{k, i - 1}$ and we have the followin
 
 \begin{lemma}
 \label{lem:double-exposure}
-Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_0, c', d$ be obtained from Lemma~\ref{lem:construction}. Let $U$ be a random subset of $U_0$ where each vertex is present with probability $1/2$, and let $U_{k, i}, e_{k, i}, \Delta_{k, i}$ be defined as above. Then there exist positive constants $M, \beta, Q > 0$ depending on $C$, such that $Q \ge 3\beta$ and for each $c'\sqrt{n} \le k \le 2c'\sqrt{n}$ the following hold:
+Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_0, c', d$ be obtained from Lemma~\ref{lem:construction}. Let $U$ be a uniformly random subset of $U_0$, and let $U_{k, i}, e_{k, i}, \Delta_{k, i}$ be defined as above. Then there exist positive constants $M, \beta, Q > 0$ depending on $C$, such that $Q \ge 3\beta$ and for each $c'\sqrt{n} \le k \le 2c'\sqrt{n}$ the following hold:
 \begin{enumerate}
-    \item With probability $\geq 0.99$, there is a set $\mathcal{I}_k$ of $(1 - \beta/(2M)) \cdot c'\sqrt{n}$ values with the following property: for each $i \in \mathcal{I}_k$, there exists $\mathbf{X}_{k, i} \subseteq \mathbf{X}$ of size $\Omega(\sqrt{n})$, such that the values $d_{U_{k,i}}(\mathbf{x})$ for
+    \item With probability $\geq 0.99$, there is a set $\mathcal{I}_k$ of $(1 - \beta/(2M)) \cdot c'\sqrt{n}$ values with the following property: for each $i \in \mathcal{I}_k$, there exists $\mathbf{X}_{k, i} \subseteq \mathbf{X}$ of size $\Omega(\sqrt{n})$, such that the values $\deg_{U_{k,i}}(\mathbf{x})$ for
         $\mathbf{x} \in \mathbf{X}_{k,i}$ are distinct and all lie in the interval $[d/2 - Q\sqrt{n},\; d/2 + Q\sqrt{n}]$.
 
     \item With probability $\geq 0.99$,
     \[
-      |e_{k,0} - \mathbb{E}[e_{k,0}]| \le Qn.
+      \bigl|e_{k,0} - \mathbb{E}[e_{k,0}]\bigr| \le Qn.
     \]
 
     \item With probability $\geq 1/2$,
@@ -252,64 +230,64 @@ Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_
   \begin{enumerate}
     \item[3.] Note that $|e(\mathbf{Z}_{k, i}) - e(\mathbf{Z}_{k, i - 1})| \leq 2c'\sqrt{n}$, as $|\mathbf{Z}_{k, i}| = k \leq 2c'\sqrt{n}$. This and the construction of $U$ yields
     \begin{align*}
-      \E[e_{k, i} - e_{k, i - 1}] 
-      &= \E[e(U, \mathbf{Z}_{k, i}) - e(U, \mathbf{Z}_{k, i - 1})] + [e(\mathbf{Z}_{k, i}) - e(\mathbf{Z}_{k, i - 1})] \\
-      &\geq \frac{1}{2}[e(U_0, \mathbf{Z}_{k, i}) - e(U_0, \mathbf{Z}_{k, i - 1})] - 2c'\sqrt{n}.
+      \E\bigl[e_{k, i} - e_{k, i - 1}\bigr] 
+      &= \E\bigl[e(U, \mathbf{Z}_{k, i}) - e(U, \mathbf{Z}_{k, i - 1})\bigr] + \bigl[e(\mathbf{Z}_{k, i}) - e(\mathbf{Z}_{k, i - 1})\bigr] \\
+      &\geq \frac{1}{2}\bigl[e(U_0, \mathbf{Z}_{k, i}) - e(U_0, \mathbf{Z}_{k, i - 1})\bigr] - 2c'\sqrt{n}.
     \end{align*}
     Property~3 of Lemma~\ref{lem:construction} gives $e(U_0, \mathbf{Z}_{k, i}) - e(U_0, \mathbf{Z}_{k, i - 1}) \geq 8c'\sqrt{n}$, so 
     \[
-      \E[e_{k, i} - e_{k, i - 1}]  \geq 2c'\sqrt{n},
+      \E\bigl[e_{k, i} - e_{k, i - 1}\bigr]  \geq 2c'\sqrt{n},
     \]
-    for all $i$. Put $\beta = 2(c')^2/3$ so the $e_{k, c'\sqrt{n}} - e_{k, 0}$ has expectation $\geq 3\beta n$. Since $e(U, \mathbf{Z}_{k, i}) = \sum_{u \in U_0} \mathbbm{1}_{u \in U} \cdot d_{\mathbf{Z}_{k, i}}(u)$,
+    for all $i$. Put $\beta = 2(c')^2/3$ so the $e_{k, c'\sqrt{n}} - e_{k, 0}$ has expectation $\geq 3\beta n$. Since $e(U, \mathbf{Z}_{k, i}) = \sum_{u \in U_0} \mathbbm{1}_{u \in U} \cdot \deg_{\mathbf{Z}_{k, i}}(u)$,
     \begin{align*}
       e_{k, c'\sqrt{n}} - e_{k, 0} 
-      &= [e(\mathbf{Z}_{k, i}) - e(\mathbf{Z}_{k, 0})] + [e(U, \mathbf{Z}_{k, i}) - e(U, \mathbf{Z}_{k, 0})] \\
-      &= [e(\mathbf{Z}_{k, i}) - e(\mathbf{Z}_{k, 0})] + \sum_{u \in U_0} \mathbbm{1}_{u \in U} \cdot (d_{\mathbf{Z}_{k, i}}(u) - d_{\mathbf{Z}_{k, 0}}(u))
+      &= \bigl[e(\mathbf{Z}_{k, c'\sqrt{n}}) - e(\mathbf{Z}_{k, 0})\bigr] + \bigl[e(U, \mathbf{Z}_{k, c'\sqrt{n}}) - e(U, \mathbf{Z}_{k, 0})\bigr] \\
+      &= \bigl[e(\mathbf{Z}_{k, c'\sqrt{n}}) - e(\mathbf{Z}_{k, 0})\bigr] + \sum_{u \in U_0} \mathbbm{1}_{u \in U} \cdot \bigl(\deg_{\mathbf{Z}_{k, c'\sqrt{n}}}(u) - \deg_{\mathbf{Z}_{k, 0}}(u)\bigr)
     \end{align*}
     is of Littlewood--Offord type with probability $1/2$, which is symmetrically distributed around its expectation. The result now follows.
     \item[4.] Note that 
     \[
-      \Delta_{k, i} = \bigl[e(\mathbf{Z}_{k, i}) - e(\mathbf{Z}_{k, i - 1})\bigr] + \sum_{u \in U_0} \mathbbm{1}_{u \in U} \cdot \bigl(d_{\mathbf{Z}_{k, i}}(u) - d_{\mathbf{Z}_{k, i - 1}}(u)\bigr)
+      \Delta_{k, i} = \bigl[e(\mathbf{Z}_{k, i}) - e(\mathbf{Z}_{k, i - 1})\bigr] + \sum_{u \in U_0} \mathbbm{1}_{u \in U} \cdot \bigl(\deg_{\mathbf{Z}_{k, i}}(u) - \deg_{\mathbf{Z}_{k, i - 1}}(u)\bigr)
     \]
-    is of Littlewood--Offord type and measures the edge count difference of swapping one vertex from $\mathbf{S}$ to $\mathbf{T}$, so by Lemma~\ref{lem:construction} $\E\bigl[\Delta_{k, i}\bigr] = O(\sqrt{n})$ and each $u \in U_0$ contributes at most $|d_{\mathbf{Z}_{k, i}}(u) - d_{\mathbf{Z}_{k, i - 1}}(u)| \leq 2$ to $\Delta_{k, i}$. Thus by Hoeffding's inequality (Proposition~\ref{prop:azuma-hoeffding}),
+    is of Littlewood--Offord type and measures the edge count difference of swapping one vertex from $\mathbf{S}$ to $\mathbf{T}$, so by Lemma~\ref{lem:construction} $\E\bigl[\Delta_{k, i}\bigr] = O(\sqrt{n})$ and each $u \in U_0$ contributes at most $|\deg_{\mathbf{Z}_{k, i}}(u) - \deg_{\mathbf{Z}_{k, i - 1}}(u)| \leq 2$ to $\Delta_{k, i}$. Thus by Hoeffding's inequality,
     \[
-      \prob[|\Delta_{k, i}| \geq t] \leq 2\exp\left(\frac{2(t - \E[|\Delta_{k, i}|])^2}{4|U_0|}\right) = \exp(-\Omega(t^2/n)).
+      \prob[|\Delta_{k, i}| \geq t] \leq 2\exp\left(-\frac{2\left(t - \E\bigl[|\Delta_{k, i}|\bigr]\right)^2}{4|U_0|}\right) = \exp\bigl(-\Omega(t^2/n)\bigr).
     \]
     By the identity $\E[X] = \sum_{t \geq 1} \prob(X \geq t)$ for nonnegative integer random variable $X$, 
     \begin{align*}
       \E\bigl[|\Delta_{k, i}| \cdot \mathbbm{1}_{|\Delta_{k, i}| \geq M\sqrt{n}}\bigr]
       &= \sum_{t = 1}^{\infty} \prob\bigl[|\Delta_{k, i}| \cdot \mathbbm{1}_{|\Delta_{k, i}| \geq M\sqrt{n}} \geq t\bigr] \\
-      &= M\sqrt{n} \cdot \prob\bigl[|\Delta_{k, i} \geq M\sqrt{n}|\bigr] + \sum_{t = M\sqrt{n}}^{\infty} \prob\bigl[|\Delta_{k, i}| \geq t\bigr] \\
+      &= M\sqrt{n} \cdot \prob\bigl[|\Delta_{k, i}| \geq M\sqrt{n}\bigr] + \sum_{t = M\sqrt{n}}^{\infty} \prob\bigl[|\Delta_{k, i}| \geq t\bigr] \\
       &= M\sqrt{n} \cdot \exp\bigl(-\Omega(M^2)\bigr) + \sum_{t = M\sqrt{n}}^{\infty} \exp\bigl(-\Omega(t^2/n)\bigr) \\
       &= \sqrt{n} \cdot \exp\bigl(-\Omega(M^2)\bigr),
     \end{align*}
     uniformly over $M$. For large enough $M$, Markov's inequality now yields
     \[
-     \prob\left[\sum_{\substack{i \,:\, |\Delta_{k,i}| \ge M\sqrt{n}}} |\Delta_{k,i}| > \beta n\right] \leq \frac{\sum_{i = 1}^{|\mathbf{S}|} \E\bigl[|\Delta_{k, i}| \cdot \mathbbm{1}_{|\Delta_{k, i}| \geq M\sqrt{n}}\bigr]}{\beta n} \leq \frac{e^{-\Omega(M^2)}}{\beta} < 0.99.
+     \prob\left[\sum_{\substack{i \,:\, |\Delta_{k,i}| \ge M\sqrt{n}}} |\Delta_{k,i}| > \beta n\right] \leq \frac{\sum_{i = 1}^{|\mathbf{S}|} \E\bigl[|\Delta_{k, i}| \cdot \mathbbm{1}_{|\Delta_{k, i}| \geq M\sqrt{n}}\bigr]}{\beta n} \leq \frac{e^{-\Omega(M^2)}}{\beta} < 0.01.
     \]
-    \item[1.] For $\mathbf{x}, \mathbf{y} \in \binom{\mathbf{X}}{2}$, 
+    \item[1.] For $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{X}}{2}$, 
     \[
-      d_{U}(\mathbf{x}) - d_{U}(\mathbf{y}) = \sum_{u \in N_U(\mathbf{x})} \mathbbm{1}_{u \in U} - \sum_{u \in N_U(\mathbf{y})} \mathbbm{1}_{u \in U} = \sum_{u \in N_U(\mathbf{x}) \triangle N_U(\mathbf{y})} a_u \mathbbm{1}_{u \in U}
+      \deg_{U}(\mathbf{x}) - \deg_{U}(\mathbf{y}) = \sum_{u \in N_{U_0}(\mathbf{x})} \mathbbm{1}_{u \in U} - \sum_{u \in N_{U_0}(\mathbf{y})} \mathbbm{1}_{u \in U} = \sum_{u \in N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})} a_u \mathbbm{1}_{u \in U}
     \]
-    with $a_u \in \{1, -1\}$. Thus for each $k, i$, the random variable $d_{U_{k, i}}(\mathbf{x}) - d_{U_{k, i}}(\mathbf{y})$ is of $(|N_U(\mathbf{x}) \triangle N_U(\mathbf{y})|, 1/2)$-Littlewood--Offord type, as it's a deterministic translation of $d_{U}(\mathbf{x}) - d_{U}(\mathbf{y})$. By Property~4 of Lemma~\ref{lem:construction} and Littlewood--Offord theorem (Proposition~\ref{prop:littlewood-offord}),
+    with $a_u \in \Z \setminus \{0\}$. Thus for each $k, i$, the random variable $\deg_{U_{k, i}}(\mathbf{x}) - \deg_{U_{k, i}}(\mathbf{y})$ is of $\bigl(|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})|, 1/2\bigr)$-Littlewood--Offord type, as it is a translation of $\deg_{U}(\mathbf{x}) - \deg_{U}(\mathbf{y})$. By Property~4 of Lemma~\ref{lem:construction}, $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = \Omega(n)$, so by Erd\H{o}s--Littlewood--Offord,
     \[
-      \prob[d_{U_{k, i}}(\mathbf{x}) = d_{U_{k, i}}(\mathbf{y})] = O(1/\sqrt{n}).
+      \prob\bigl[\deg_{U_{k, i}}(\mathbf{x}) = \deg_{U_{k, i}}(\mathbf{y})\bigr] = O(1/\sqrt{n}).
     \]
-    Let $H_{k, i}$ be the graph on $\mathbf{X}$ with edges $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{X}}{2}$ such that $d_{U_{k, i}}(\mathbf{x}) = d_{U_{k, i}}(\mathbf{y})$, so $\E[e(H_{k, i})] = |\mathbf{X}|^2 \cdot O(1/\sqrt{n}) = O(\sqrt{n})$. By Markov's inequality, for large enough $n$,
+    Let $H_{k, i}$ be the graph on $\mathbf{X}$ with edges $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{X}}{2}$ such that $\deg_{U_{k, i}}(\mathbf{x}) = \deg_{U_{k, i}}(\mathbf{y})$, so $\E[e(H_{k, i})] = |\mathbf{X}|^2 \cdot O(1/\sqrt{n}) = O(\sqrt{n})$. By Markov's inequality, for large enough $n$,
     \[
-      \prob[e(H_{k, i}) = O(\sqrt{n})] \geq 1 - \frac{\E[e(H_{k, i})]}{\omega(\sqrt{n})} \geq 1 - \frac{\beta}{400M},
+      \prob\bigl[e(H_{k, i}) = O(\sqrt{n})\bigr] \geq 1 - \frac{\E[e(H_{k, i})]}{\omega(\sqrt{n})} \geq 1 - \frac{\beta}{400M},
     \]
-    in which case Tur\'{a}n's theorem (Proposition~\ref{prop:turan}) yields an independent set $\mathbf{Y}_{k, i}$ of size $n/(2O(\sqrt{n}) + \sqrt{n}) = 2\gamma \sqrt{n}$, for some constant $\gamma = \gamma(\beta, M) > 0$. In particular, $d_{U_{k, i}}(\mathbf{x})$ is distinct for $\mathbf{x} \in \mathbf{Y}_{k, i}$. The expected proportion of values of $i$ for which this fails to occur is $\beta/400M$, and by Markov's inequality again, it fails only for $\beta/2M$ proportion of values of $i$ with probability at least $1 - (\beta/400M)/(\beta/2M) = 0.995$, in which case put $\mathcal{I}_k$ as the set of $i$ that succeeds.
+    in which case Tur\'{a}n's theorem (Proposition~\ref{prop:turan}) yields an independent set $\mathbf{Y}_{k, i}$ of size $n/(2O(\sqrt{n}) + \sqrt{n}) = 2\gamma \sqrt{n}$, for some constant $\gamma = \gamma(\beta, M) > 0$. In particular, $\deg_{U_{k, i}}(\mathbf{x})$ is distinct for $\mathbf{x} \in \mathbf{Y}_{k, i}$. The expected proportion of values of $i$ for which this fails to occur is $\beta/400M$, and by Markov's inequality again, it fails only for $\beta/2M$ proportion of values of $i$ with probability at least $1 - (\beta/400M)/(\beta/2M) = 0.995$, in which case put $\mathcal{I}_k$ as the set of $i$ that succeeds.
 
-    By Property~2 of Lemma~\ref{lem:construction}, $\E[d_U(\mathbf{x})] = d/2 + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{X}$. Since $d_U(\mathbf{x})$ follows a binomial distribution with parameters $O(n)$ and $1/2$, we have $\Var(d_U(\mathbf{x})) = O(n)$. By triangle inequality, 
+    By Property~2 of Lemma~\ref{lem:construction}, $\E[\deg_U(\mathbf{x})] = d/2 + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{X}$. Since $\deg_U(\mathbf{x})$ follows a binomial distribution with parameters $O(n)$ and $1/2$, we have $\Var(\deg_U(\mathbf{x})) = O(n)$. By triangle inequality, 
     \[
-      |d_U(\mathbf{x}) - d/2| \leq |d_U(\mathbf{x}) - \E[d_U(\mathbf{x})]| + O(\sqrt{n}),
+      |\deg_U(\mathbf{x}) - d/2| \leq \bigl|\deg_U(\mathbf{x}) - \E[\deg_U(\mathbf{x})]\bigr| + O(\sqrt{n}),
     \]
     so for sufficiently large $Q$, Chebyshev's gives
     \[
-      \prob\left[|d_U(\mathbf{x}) - d/2| > Q\sqrt{n}\right] \leq \frac{\Var(d_U(\mathbf{x}))}{Q^2 n} = \frac{O(1)}{Q^2} < \frac{\gamma}{200}.
+      \prob\left[|\deg_U(\mathbf{x}) - d/2| > Q\sqrt{n}\right] \leq \frac{\Var(\deg_U(\mathbf{x}))}{Q^2 n} = \frac{O(1)}{Q^2} < \frac{\gamma}{200}.
     \]
-    Let $\mathbf{Y}$ be the set of all $\mathbf{x} \in \mathbf{X}$ such that $|d_U(\mathbf{x}) - d/2| \leq Q\sqrt{n}$. Then each $\mathbf{x} \in \mathbf{X}$ is not present in $\mathbf{Y}$ with probability $< \gamma/200$. By Markov's,
+    Let $\mathbf{Y}$ be the set of all $\mathbf{x} \in \mathbf{X}$ such that $|\deg_U(\mathbf{x}) - d/2| \leq Q\sqrt{n}$. Then each $\mathbf{x} \in \mathbf{X}$ is not present in $\mathbf{Y}$ with probability $< \gamma/200$. By Markov's,
     \[
       \prob\left[|\mathbf{Y}| \geq (1 - \gamma)|\mathbf{X}|\right] = 1 - \prob\left[|\mathbf{X} \setminus \mathbf{Y}| \geq \gamma|\mathbf{X}|\right] \geq 1 - \frac{\gamma|\mathbf{X}|}{200\gamma |\mathbf{X}|} = 0.995.
     \]
@@ -319,11 +297,11 @@ Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_
 
     \item[2.] Since
     \[
-      e_{k, i} = e(\mathbf{Z}_{k, i}) + e(U, \mathbf{Z}_{k, i}) = e(\mathbf{Z}_{k, i}) + \sum_{u \in U_0} \mathbbm{1}_{u \in U} \cdot d_{\mathbf{Z}_{k, i}}(u),
+      e_{k, i} = e(\mathbf{Z}_{k, i}) + e(U, \mathbf{Z}_{k, i}) = e(\mathbf{Z}_{k, i}) + \sum_{u \in U_0} \mathbbm{1}_{u \in U} \cdot \deg_{\mathbf{Z}_{k, i}}(u),
     \]
-    $e_{k, i}$ is of $(O(n), 1/2)$-Littlewood--Offord type with coefficients $d_{\mathbf{Z}_{k, i}}(u) = O(\sqrt{n})$. Thus $\Var(e_{k, 0}) = O(n^2)$ and by Chebyshev's,
+    $e_{k, i}$ is of $(O(n), 1/2)$-Littlewood--Offord type with coefficients $\deg_{\mathbf{Z}_{k, i}}(u) = O(\sqrt{n})$. Thus $\Var(e_{k, 0}) = O(n^2)$ and by Chebyshev's,
     \[
-      \prob\left[|e_{k, 0} - \E[e_{k, 0}]| \leq Qn\right] \geq 1 - \frac{\Var(e_{k, 0})}{Q^2 n^2} = 0.99,
+      \prob\bigl[|e_{k, 0} - \E[e_{k, 0}]| \leq Qn\bigr] \geq 1 - \frac{\Var(e_{k, 0})}{Q^2 n^2} = 0.99,
     \]
     for large enough $Q$. We end this proof by noting that enlarging $Q$ does not fail Property~1.
   \end{enumerate}
@@ -335,9 +313,9 @@ We assemble Lemma~\ref{lem:construction} and Lemma~\ref{lem:double-exposure} to 
 
 Apply Lemma~\ref{lem:construction} to obtain $U_0, \mathbf{S}, \mathbf{T}, \mathbf{X}, c', d$, and define $\mathcal{P}, U, \mathbf{Z}_{k, i}, U_{k, i}$ as in Section~\ref{sec:double-exposure}. Note that $U$ is the only source of randomness. We prove the main lemma with $W$ being the set of all vertices in $\mathbf{S}, \mathbf{T}, \mathbf{X}$.
 
-Recall that $k$ ranges over the interval between $c'\sqrt{n}$ and $2c'\sqrt{n}$. For each $k$, union bound shows all four properties of Lemma~\ref{lem:double-exposure} hold with probability $\geq 0.4$. Let $\mathcal{K}$ be the set of all such $k$. Then $\E\left[c'\sqrt{n} - |\mathcal{K}|\right] \leq 0.6 \, c'\sqrt{n}$, and Markov's inequality yields
+Recall that $k$ ranges over the interval between $c'\sqrt{n}$ and $2c'\sqrt{n}$. For each $k$, union bound shows all four properties of Lemma~\ref{lem:double-exposure} hold with probability $\geq 0.4$. Let $\mathcal{K}$ be the set of all such $k$. Then $\E\bigl[c'\sqrt{n} - |\mathcal{K}|\bigr] \leq 0.6 \, c'\sqrt{n}$, and Markov's inequality yields
 \[
-  \prob\left[|\mathcal{K}| \geq 0.2 \, c'\sqrt{n}\right] = 1 - \prob\left[c'\sqrt{n} - |\mathcal{K}| \geq 0.8 \, c'\sqrt{n}\right] \geq 1 - \frac{\E\left[c'\sqrt{n} - |\mathcal{K}|\right]}{0.8 \, c'\sqrt{n}} \geq 0.25.
+  \prob\left[|\mathcal{K}| \geq 0.2 \, c'\sqrt{n}\right] = 1 - \prob\left[c'\sqrt{n} - |\mathcal{K}| \geq 0.8 \, c'\sqrt{n}\right] \geq 1 - \frac{\E\bigl[c'\sqrt{n} - |\mathcal{K}|\bigr]}{0.8 \, c'\sqrt{n}} \geq 0.25.
 \]
 We now show that $e(U)$ is close to $m$ with high probability. Note that $|m - \E[e(U)]| = O(n^{3/2})$, as $\E[e(U)] = e(U_0)/4$ and $|e(U_0) - 4m| = O(n^{3/2})$ from Lemma~\ref{lem:construction}. Recall that $\Var(e(U)) = O(n^3)$. Since $|e(U) - m| \leq |e(U) - \E[e(U)]| + |\E[e(U)] - m|$, Chebyshev's inequality yields
 \[
@@ -347,24 +325,22 @@ for large enough $n$. Fix an outcome $U$ satisfying both events above, which hol
 
 For each $k$, 
 \[
-  \E[e_{k, 0}] - \E[e_{k - 1, 0}] = \frac{1}{2}[e(\mathbf{Z}_{k, 0}, U_0) - e(\mathbf{Z}_{k - 1, 0}, U_0)] + O(\sqrt{n}) = \Theta(n),
+  \E[e_{k, 0}] - \E[e_{k - 1, 0}] = \frac{1}{2}\bigl[e(\mathbf{Z}_{k, 0}, U_0) - e(\mathbf{Z}_{k - 1, 0}, U_0)\bigr] + O(\sqrt{n}) = \Theta(n),
 \]
-as $\E[d_U(\mathbf{x})] = d_{U_0}(\mathbf{x})/2 = \Theta(n)$ for $\mathbf{x} \in \mathbf{S}$. We find a subset of $\mathcal{K}$ whose realized values $e_{k, 0}$ are well-separated by $\Theta(n)$. Specifically, let $\mathcal{K}' \subseteq \mathcal{K}$ contain every $q$th element of $\mathcal{K}$, for sufficiently large $q$ such that the values of $\E[e_{k, 0}]$ are separated by $\geq 4Qn$ for $k \in \mathcal{K}'$. Then, $|\mathcal{K}'| = \Theta(\sqrt{n})$ and Property~2 of Lemma~\ref{lem:double-exposure} ensures the values of $e_{k, 0}$ are separated by $\geq 2Qn$ for $k \in \mathcal{K}'$. 
+as $\E[\deg_U(\mathbf{x})] = \deg_{U_0}(\mathbf{x})/2 = \Theta(n)$ for $\mathbf{x} \in \mathbf{S}$. We find a subset of $\mathcal{K}$ whose realized values $e_{k, 0}$ are well-separated by $\Theta(n)$. Specifically, let $\mathcal{K}' \subseteq \mathcal{K}$ contain every $q$th element of $\mathcal{K}$, for sufficiently large $q$ such that the values of $\E[e_{k, 0}]$ are separated by $\geq 4Qn$ for $k \in \mathcal{K}'$. Then, $|\mathcal{K}'| = \Theta(\sqrt{n})$ and Property~2 of Lemma~\ref{lem:double-exposure} ensures the values of $e_{k, 0}$ are separated by $\geq 2Qn$ for $k \in \mathcal{K}'$. 
 
 We now partition the linear gaps between the values of $e_{k, 0} : k \in \mathcal{K}'$ into square-root sized gaps. Let $k \in \mathcal{K}'$. By Property~3 of Lemma~\ref{lem:double-exposure}, $e_{k, c'\sqrt{n}} - e_{k, 0} \geq 3\beta n$. Consider the range of integers between $e_{k, 0}$ and $e_{k, 0} + 3\beta n$. Within this range, we take $2\beta\sqrt{n}/M$ intervals of length $M\sqrt{n}$, each separated by a distance of $M\sqrt{n}/2 = \Omega(\sqrt{n})$. By Property~4 of Lemma~\ref{lem:double-exposure}, $\leq \beta \sqrt{n} / M$ of these intervals contain no value of $e_{k, i}$. Consider the $\beta\sqrt{n}/M$ intervals that do contain a value of $e_{k, i}$ and pick a representative $e_{k, i}$ from each. Let $\mathcal{I}'_k$ be the set of indices $i$ corresponding to these representatives, and let $\mathcal{I}_k'' = \mathcal{I}_k \cap \mathcal{I}'_k$. Then 
 \[
-  |\mathcal{I}_k''| = |\mathcal{I}'_k| + |\mathcal{I}'_k| - |\mathcal{I}'_k \cup \mathcal{I}_k| \geq \beta\sqrt{n}/M - \beta c' \sqrt{n}/2M = \Omega(\sqrt{n})
+  |\mathcal{I}_k''| = |\mathcal{I}_k| + |\mathcal{I}'_k| - |\mathcal{I}_k \cup \mathcal{I}'_k| \geq \beta\sqrt{n}/M - \beta c' \sqrt{n}/2M = \Omega(\sqrt{n})
 \]
-and $e_{k, i}$ are separated by $\Omega(\sqrt{n})$ for $i \in \mathcal{I}_k''$. Recall that $Q \geq 3\beta$, so by construction $|e_{k, i} - e_{k, 0}| \leq 3\beta n \leq Qn$ for $i \in \mathcal{I}_k''$. In particular, amongst choices of $k \in \mathcal{K}'$ and $\mathcal{I}_k''$, we already have $\Omega(n)$ distinct values of $e(U_{k, i})$ that are separated by $\Omega(\sqrt{n})$. It remains to fill the square-root sized gaps between these values. 
+and each $e_{k, i}$ is separated by $\Omega(\sqrt{n})$ for $i \in \mathcal{I}_k''$. Recall that $Q \geq 3\beta$, so by construction $|e_{k, i} - e_{k, 0}| \leq 3\beta n \leq Qn$ for $i \in \mathcal{I}_k''$. In particular, amongst choices of $k \in \mathcal{K}'$ and $\mathcal{I}_k''$, we already have $\Omega(n)$ distinct values of $e(U_{k, i})$ that are separated by $\Omega(\sqrt{n})$. It remains to fill the square-root sized gaps between these values. 
 
-In increasing order of $e(U_{k, i})$, let $\mathcal{P}' \subseteq \{(k, i) : k \in \mathcal{K}', i \in \mathcal{I}_k''\}$ be the corresponding index set of every $q$th of these values. We enlarge $q$ so that $e(U_{k, i})$ from $\mathcal{P}'$ are separated by $\geq 2Qn$. For each $(k, i) \in \mathcal{P}'$ we have $i \in \mathcal{I}_k$, so Property~1 of Lemma~\ref{lem:double-exposure} furnishes a set $\mathbf{X}_{k, i}$ such that each $d_{U_{k, i}}(\mathbf{x})$ is unique for $\mathbf{x} \in \mathbf{X}_{k, i}$ while lying in a fixed interval of length $2Qn$ centered at $d/2$, where $d$ is independent of $k$ and $i$. For each $(k, i) \in \mathcal{P}'$, the set
+In increasing order of $e(U_{k, i})$, let $\mathcal{P}' \subseteq \bigl\{(k, i) : k \in \mathcal{K}', i \in \mathcal{I}_k''\bigr\}$ be the corresponding index set of every $q$th of these values. We enlarge $q$ so that $e(U_{k, i})$ from $\mathcal{P}'$ are separated by $\geq 2Q\sqrt{n}$. For each $(k, i) \in \mathcal{P}'$ we have $i \in \mathcal{I}_k$, so Property~1 of Lemma~\ref{lem:double-exposure} furnishes a set $\mathbf{X}_{k, i}$ such that each $\deg_{U_{k, i}}(\mathbf{x})$ is unique for $\mathbf{x} \in \mathbf{X}_{k, i}$ while lying in a fixed interval of length $2Q\sqrt{n}$ centered at $d/2$, where $d$ is independent of $k$ and $i$. Thus for each $(k, i) \in \mathcal{P}'$, the set
 \[
-  \{e(U_{k, i} \cup \mathbf{x}_{k, i}) : \mathbf{x}_{k, i} \in \mathbf{X}_{k, i}\}
-\]
-lie in an interval of length $2Qn$ centered at $e(U_{k, i}) + d/2$, so these sets do not overlap among different $(k, i) \in \mathcal{P}'$. 
-
-Therefore, 
+  \bigl\{e(U_{k, i} \sqcup \mathbf{x}_{k, i}) : \mathbf{x}_{k, i} \in \mathbf{X}_{k, i}\bigr\}
+\] 
+has size $|\mathbf{X}_{k, i}| = \Omega(\sqrt{n})$ and lies in an interval of length $2Q\sqrt{n}$ centered at $e(U_{k, i}) + d/2$, so these sets do not overlap among different $(k, i) \in \mathcal{P}'$. Therefore, 
 \[
-  |\{e(U \cup Z) : Z \subseteq W\}| \geq |\{e(U_{k, i} \cup \mathbf{x}_{k, i}) : (k, i) \in \mathcal{P}', \, \mathbf{x}_{k, i} \in \mathbf{X}_{k, i}\}| = \Omega(n^{3/2}). 
+  \left|\bigl\{e(U \sqcup Z) : Z \subseteq W\bigr\}\right| \geq \sum_{(k, i) \in \mathcal{P}'}\left|\bigl\{e(U_{k, i} \sqcup \mathbf{x}_{k, i}) : \mathbf{x}_{k, i} \in \mathbf{X}_{k, i}\bigr\}\right| = \Omega(n^{3/2}). 
 \]
 \qed

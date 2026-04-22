@@ -8,13 +8,11 @@ In this chapter, we present the following result of Bukh and Sudakov.
   Every Ramsey graph on $n$ vertices induces a subgraph on $\Omega(n)$ vertices with $\Omega(\sqrt{n})$ distinct degrees.
 \end{theorem}
 
-This was originally conjectured by Erd\H{o}s, Faudree, and S\'{o}s \cite{EFS} in light of the observation that the random graph $G_{n, 1/2}$ exhibits such a property almost surely. In particular, this theorem already has implications for the edge statistics of Ramsey graphs $G$, as the subgraphs $G - \{v\}$ for $v \in V(G)$ have $\Omega(\sqrt{n})$ different sizes. This idea lays the foundation for the proof in the next chapter.
+This was originally conjectured by Erd\H{o}s, Faudree, and S\'{o}s \cite{EFS} in light of the observation that the random graph $G_{n, 1/2}$ exhibits such a property almost surely. In particular, this theorem already has implications for the edge statistics of Ramsey graphs $G$, as the subgraphs $G - \{v\}$ for $v \in V(G)$ have $\Omega(\sqrt{n})$ different sizes. This construction lays the foundation for the proof in the next chapter.
 
-To prove Theorem \ref{thm:bs2007}, Bukh and Sudakov introduced the notion of \textit{diversity}, which captures the idea that the neighbourhoods of most pairs of vertices are not too similar.
+\subsection{Diversity}
 
-% , but the $\Omega(\sqrt{n})$ bound is in fact not optimal for both Ramsey graphs and $G_{n, 1/2}$. 
-
-% In particular, an upper bound of $O(n^{2/3})$ is noted in \cite{BUKH2007612}, which was later proved to be the correct order for Ramsey graphs by Jenssen, Keevash, Long, and Yepremyan \cite{jenssen2019distinctdegreesinducedsubgraphs} via a continuous relaxation approach. The corresponding order for $G_{n, 1/2}$ was also matched in an unpublished work of Conlon, Morris, Samotij, and Saxton \cite{conlon2019distinctdegrees}, further reinforcing the case that Ramsey graphs resemble random graphs in various respects. We will, however, focus on the original result of Bukh and Sudakov, as it introduces a key characteristic of Ramsey graphs that will be insightful in the following chapter.
+To prove Theorem \ref{thm:bs2007}, Bukh and Sudakov introduced the notion of \textit{diversity}, which ensures that the neighbourhoods of most pairs of vertices are not too similar.
 
 \begin{definition}
   \label{def:diversity}
@@ -47,12 +45,14 @@ Notice that $(\eps, \delta)$-diversity directly conditions our assumption that $
   \[
     \E[e(H)] = \sum_{\{x, y\} \in V(G)^2} \E[\mathbbm{1}_{xy}] \leq n^{1 + \delta} + n^2 \cdot O\bigl(1/\sqrt{n}\bigr) = O\bigl(n^{3/2}\bigr)
   \] 
-  and Markov's inequality yields $\prob[e(H) = O(n^{3/2})] \geq 1/2$. Since $|U| < n/4$ with probability $o(1)$ by the Chernoff bound, the union bound gives a positive probability that $|U| \geq n/4$ and $e(H) \leq O(n^{3/2})$ occur simultaneously, in which case Turan's Theorem (Proposition \ref{prop:turan}) gives an independent set $I$ in $H$ of size at least 
+  and Markov's inequality yields $\prob[e(H) = O(n^{3/2})] \geq 1/2$. Since $|U| < n/4$ with probability $o(1)$ by the Chernoff bound, the union bound yields a positive probability that $|U| \geq n/4$ and $e(H) \leq O(n^{3/2})$ occur simultaneously, in which case Turan's Theorem (Proposition \ref{prop:turan}) gives an independent set $I$ in $H$ of size at least 
   \[
     |I| \geq \frac{|U|^2}{2e(H) + |U|} = \frac{(n/4)^2}{O(n^{3/2}) + n/4} = \Omega\bigl(\sqrt{n}\bigr).
   \]
   In particular, each vertex in $I$ has a distinct degree in $G[U]$.
 \end{proof}
+
+\subsection{Richness}
 
 It remains to show that every Ramsey graph contains a diverse subgraph of linear size. Instead of directly proving this, we prove the same statement on a strengthening of diversity called \textit{richness}.
 
@@ -87,13 +87,36 @@ whenever $|W|$ is large. Thus, richness ensures neighborhoods are not unusually 
   \]
 \end{proof}
 
-We now show that every Ramsey graph contains a rich subgraph of linear size. In particular, we show that if this is not the case, we may construct a highly sparse/dense subset $S \subseteq V(G)$ via induction, and invoke the Erd\H{o}s--Szemer\'{e}di theorem to find a large homogeneous set in $G[S]$.
+Richness also implies the reversed notion of diversity.
+
+\begin{lemma}
+  \label{lem:richness-implies-upper-bound}
+  Let an $n$-vertex graph $G$ be $(\eps, \delta)$-rich. Then $G$ has $\leq n^{1 + \delta}$ pairs of vertices $x_1, x_2 \in V(G)$ with $|N(x_1) \triangle \overline{N(x_2)}| < (\eps/2)n$.
+\end{lemma}
+
+\begin{proof}
+  We show that for each choice of $x_1 \in V(G)$, there are $\leq n^{\delta}$ vertices $x_2 \in V(G)$ with $|N(x_1) \triangle \overline{N(x_2)}| < (\eps/2)n$. Since either $|N(x_1)| \geq n/2$ or $|\overline{N(x_1)}| \geq n/2$, we assume without loss of generality that $|N(x_1)| \geq n/2$. By $(\eps, \delta)$-richness, there are $\leq n^{\delta}$ vertices $x_2$ with $|N(x_2) \cap N(x_1)| < \eps n/2$. For all other choices of $x_2$, 
+  \[
+    |N(x_1) \triangle \overline{N(x_2)}| \geq |N(x_1) \cap N(x_2)|  \geq (\eps/2) n.
+  \]
+  The result now follows from the fact that there are only $n$ choices of $x_1$.
+\end{proof}
+
+\textit{Remark:} This lemma gives an upper bound on the symmetric difference between the neighbourhoods of two vertices. Specifically, since $|N(x_1) \triangle N(x_2)| + |N(x_1) \triangle \overline{N(x_2)}| = n - 2$ for any two vertices $x_1, x_2$, richness implies
+\[
+  (\eps/2)n \leq |N(x_1) \triangle N(x_2)| \leq (1 - \eps/2)n
+\]  
+for most pairs of vertices $x_1, x_2$, so the pair-degree $d(x_1) + d(x_2) = \Theta(n)$.
+
+We now show that every Ramsey graph contains a rich subgraph of linear size. Specifically, we show that if this is not the case, we may construct a highly sparse/dense subset $S \subseteq V(G)$ via induction, and invoke the Erd\H{o}s--Szemer\'{e}di theorem to find a large homogeneous set in $G[S]$.
 
 \begin{lemma}
   \label{lem:rich-subgraph}
 
-  For $\delta \in (0, 1)$, there exists $\eps = \eps(C, \delta) > 0$ such that every $C$-Ramsey graph $G$ on $n$ vertices contains an $(\eps, \delta)$-rich subgraph on $\Omega(n)$ vertices.
+  For $\delta \in (0, 1)$, there exists $\eps = \eps(C) > 0$ such that every $C$-Ramsey graph $G$ on $n$ vertices contains an $(\eps, \delta)$-rich subgraph on $\Omega(n)$ vertices.
 \end{lemma}
+
+\textit{Remark:} Note that $\delta$ can be taken arbitrarily small, as $\eps = \eps(C)$ is independent of $\delta$.
 
 \begin{proof}
   Suppose not. Let $K = K(C)$ be a large constant to be determined. Let $c = 4^{-K}$ and $\eps = 1/K$. We inductively construct a sequence of disjoint vertex sets $S_1, S_2, \ldots, S_K$ of size $s = (cn)^\delta/2$, such that for all $S_i$ one of the following conditions holds:
@@ -148,6 +171,8 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. In 
   Combining both inequalities gives $|Z_i| < |T_i|/2$, hence $|U_i| > |T_i|/2 \geq (\delta/4)|U_{i - 1}|$ as in the other case. For  $j > i$, each $v \in S_j \subseteq U_i$ satisfies $d(v, S_i) \geq 1 - 4\eps$, so $d(S_i, S_j) \geq 1 - 4\eps$. Thus $S_i$ satisfies condition~(ii). This completes the induction.
 \end{proof}
 
-Theorem \ref{thm:bs2007} now follows by a simple application of Lemmas \ref{lem:rich-subgraph}, \ref{lem:richness-implies-diversity}, and \ref{lem:diversity-degrees} in sequence.
+\subsection{Proof of Theorem \ref{thm:bs2007}}
 
-\paragraph{Proof of Theorem \ref{thm:bs2007}.} Let $G$ be a $C$-Ramsey graph on $n$ vertices, and fix any $\delta \in (0, 1/2)$. By Lemma \ref{lem:rich-subgraph}, there exists an $(\eps, \delta)$-rich induced subgraph $G' \subseteq G$ on $m = \Omega(n)$ vertices. By Lemma \ref{lem:richness-implies-diversity}, $G'$ is $(\eps/2, \delta)$-diverse. Applying Lemma \ref{lem:diversity-degrees} to $G'$, we obtain an induced subgraph of $G'$ on $\Omega(m) = \Omega(n)$ vertices containing $\Omega(\sqrt{m}) = \Omega(\sqrt{n})$ vertices of distinct degrees. \qed
+Theorem \ref{thm:bs2007} now follows immediately by applying Lemmas \ref{lem:rich-subgraph}, \ref{lem:richness-implies-diversity}, and \ref{lem:diversity-degrees} in sequence.
+
+Let $G$ be a $C$-Ramsey graph on $n$ vertices, and fix any $\delta \in (0, 1/2)$. By Lemma \ref{lem:rich-subgraph}, there exists an $(\eps, \delta)$-rich induced subgraph $G' \subseteq G$ on $m = \Omega(n)$ vertices. By Lemma \ref{lem:richness-implies-diversity}, $G'$ is $(\eps/2, \delta)$-diverse. Applying Lemma \ref{lem:diversity-degrees} to $G'$, we obtain an induced subgraph of $G'$ on $\Omega(m) = \Omega(n)$ vertices containing $\Omega(\sqrt{m}) = \Omega(\sqrt{n})$ vertices of distinct degrees. \qed

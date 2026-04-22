@@ -11,13 +11,21 @@ Both proofs in Chapters~2 and~3 rely on the same anticoncentration principle tha
   \]
 \end{theorem}
 
-The approach to this theorem fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself. This requires a substantially richer set of tools, but the underlying principle remains: when a random variable is Gaussian at the coarse scale with large standard deviation, its point probabilities are small.
+The approach to this theorem fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself. This requires a substantially richer set of tools, but the underlying principle remains: when a random variable is approximately Gaussian at the coarse scale with large standard deviation, its point probabilities are small.
 
 \subsection{Point probabilities of $e(U)$}
 
-Assume that $V(G) = [n]$. Let $U$ be a uniformly random vertex subset. By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), the random variable $e(G[U])$ has mean $e(G)/2 = \Theta(n^2)$ and standard deviation $\sigma(e(U)) = \Theta(n^{3/2})$. 
+Assume that $V(G) = [n]$. Let $U$ be a uniformly random vertex subset. By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), the random variable $e(G[U])$ has mean $e(G)/2 = \Theta(n^2)$. For variance, the standard variance identity gives
+\[
+  \Var\bigl(e(U)\bigr) = \sum_{(e, e') \in E(G)^2} \Cov\bigl(\mathbbm{1}_{e \in G[U]}, \mathbbm{1}_{e' \in G[U]}\bigr).
+\]
+The covariance is $0$ if $e$ and $e'$ are disjoint and $\Theta(1)$ otherwise, so $\Var(e(U)) = \Theta(n^3)$. For a fixed vertex $v$, the number of pairs of edges sharing $v$ is $\binom{\deg(v)}{2} = \Theta(\deg(v)^2)$, and the Erd\H{o}s--Szemer\'{e}di bound with Jensen's inequality gives
+\[
+  \Var\bigl(e(U)\bigr) \geq \sum_{v \in V(G)} \binom{\deg(v)}{2} \geq n\binom{2e(G)/n}{2} = \Omega(n^3).
+\]
+Thus the standard deviation is $\sigma(e(U)) = \Theta(n^{3/2})$. 
 
-In Chapters~2 and~3, the anticoncentration analysis targeted the degree difference $\deg_U(x) - \deg_U(y)$ with standard deviation $\Theta(\sqrt{n})$, and the control of $e(U)$ was achieved indirectly through the construction of $\mathbf{S}, \mathbf{T}, \mathbf{X}$. In~\cite{Kwan_2023}, we show directly that the point probabilities of $e(U)$ are all of order $\Theta(1/\sigma(e(U))) = \Theta(n^{-3/2})$ within the bulk of the distribution.
+In Chapters~2 and~3, the anticoncentration analysis targeted the degree difference $\deg_U(x) - \deg_U(y)$ with standard deviation $\Theta(\sqrt{n})$, and the control of $e(U)$ was achieved indirectly through the construction of $\mathbf{S}, \mathbf{T}, \mathbf{X}$. In~\cite{Kwan_2023}, we show directly that the point probabilities of $e(U)$ are all of order $\Theta\bigl(1/\sigma(e(U))\bigr) = \Theta(n^{-3/2})$ within the bulk of the distribution.
 
 \begin{theorem}[Kwan--Sah--Sauermann--Sawhney
   {\cite{Kwan_2023}}]
@@ -39,10 +47,10 @@ In Chapters~2 and~3, the anticoncentration analysis targeted the degree differen
 \noindent
 This theorem is essentially an approximation of the local CLT for $e(U)$ up to constant factors. A true local CLT would give $\prob[e(U) = x] \sim \varphi((x - \mu)/\sigma)/\sigma$, where $\varphi$ is the standard Gaussian density function. 
 
-The Erd\H{o}s--McKay conjecture follows directly from the lower bound of Theorem~\ref{thm:ksss} combined with an earlier result on small values of $x$ by Alon, Krivelevich, and Sudakov.
+The Erd\H{o}s--McKay conjecture follows directly from the lower bound of Theorem~\ref{thm:ksss} combined with Theorem~\ref{thm:alks2003} on small values of $x$.
 
 \paragraph{Proof of Theorem \ref{thm:em}.} 
-By Theorem \ref{thm:alks2003}, there exists $\alpha = \alpha(C) > 0$ such that $\Phi(G) \subseteq \{0, 1, \ldots, n^\alpha\}$. Fix integer $x$ between $n^\alpha$ and $e(G)/4$. Let $m$ be the smallest integer such that $e(\{1, \ldots, m\}) \geq 4x$. Put $G' = G[\{1, \ldots, m\}]$ and note that 
+By Theorem~\ref{thm:alks2003}, there exists $\alpha = \alpha(C) > 0$ such that $\Phi(G) \subseteq \{0, 1, \ldots, n^\alpha\}$. Fix integer $x$ between $n^\alpha$ and $e(G)/4$. Let $m$ be the smallest integer such that $e(\{1, \ldots, m\}) \geq 4x$. Put $G' = G[\{1, \ldots, m\}]$ and note that 
 \[
   e(G') \geq 4x \geq e(\{1, \ldots, m-1\}) \geq e(G') - m,
 \]
@@ -61,7 +69,7 @@ The standard way to approach local limit theorems is via Fourier transforms. Def
 \[
   f(\xi_1, \ldots, \xi_n) \coloneqq \sum_{ij \in E(G)} \xi_i \xi_j.
 \]
-For any $U \subseteq V(G)$, setting $\xi_v = \mathbbm{1}_{v \in U}$ gives $f(\vec{\xi}^{\,(U)}) = e(U)$. The Erd\H{o}s--McKay conjecture is thus equivalent to asking whether the range of this \textit{quadratic} polynomial on $\{0,1\}^n$ covers every integer in $\{0, \ldots, \delta n^2\}$.
+For any $U \subseteq V(G)$, setting $\xi_v = \mathbbm{1}_{v \in U}$ gives $f\bigl(\vec{\xi}^{\,(U)}\bigr) = e(U)$. The Erd\H{o}s--McKay conjecture is thus equivalent to asking whether the range of this \textit{quadratic} polynomial on $\{0,1\}^n$ covers every integer in $\{0, \ldots, \delta n^2\}$.
 
 For a random variable $X$, the \textit{characteristic function} of $X$ is defined as
 \[
@@ -76,7 +84,7 @@ for integers-valued $X$. In particular, any upper bound on the integrated $|\var
 \[
 \frac{1}{\sigma\sqrt{2\pi}}\,\exp\!\left(-\tfrac{(x-\mu)^2}{2\sigma^2}\right),
 \]
-which is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean. Hence, if $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small, then $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion}. If a local central limit theorem (CLT) held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$ and we are done.
+which is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean. Hence, if $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small, then $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion}. If a local CLT held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$ and we are done.
 
 Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. 
 
@@ -90,7 +98,7 @@ for some constant $B = B(C)$. The second stage upgrades it to a pointwise estima
 \subsection{Degree sequence dichotomy}
 \label{sec:fourier-walsh}
 
-We first decompose $e(U)$ into a sum of a linear and quadratic part. Set $\xi_v = \mathbbm{1}_{v \in U}$ and write $x_v = 2\xi_v - 1 \in \{-1, +1\}$, so that $\xi_v = (1 + x_v)/2$. Substituting into the $e(U) = f(\vec\xi) = \sum_{ij \in E(G)} \xi_i \xi_j$ yields
+We first decompose $e(U)$ into a sum of a linear and quadratic part. Set $\xi_v = \mathbbm{1}_{v \in U}$ and write $x_v = 2\xi_v - 1 \in \{-1, +1\}$, so that $\xi_v = (1 + x_v)/2$. Substituting into $e(U) = f\bigl(\vec\xi\bigr) = \sum_{ij \in E(G)} \xi_i \xi_j$,
 \begin{equation}\label{eq:decomposition}
   X = \sum_{ij \in E(G)} \frac{(1 + x_i)(1 + x_j)}{4} = \underbrace{\frac{e(G)}{4}}_{\mathbb{E}[X]} + \underbrace{\frac{1}{4}\sum_{v \in V(G)} \deg(v) x_v}_{L} + \underbrace{\frac{1}{4}\sum_{uv \in E(G)} x_u x_v}_{Q},
 \end{equation}
@@ -103,10 +111,10 @@ and we denote the linear term as $L$ and the quadratic term as $Q$. Since $\math
 % \[
 %   \Var(Q) = \mathbb{E}[Q^2] = \frac{1}{16}\sum_{uv, u'v' \in E(G)} \mathbb{E}[x_u x_v x_{u'} x_{v'}] = \frac{e(G)}{16} = \Theta(n^2).
 % \]
-Therefore, the linear part $L$ dominates the total variance, so we expect $L$ to drive the global behaviour of $X$. Write $d_v \coloneqq \deg(v)/4$ so that $L = \sum_{v} d_v x_v$. Since the variables $x_v$ are independent,
+The linear part $L$ therefore dominates the total variance, so we expect $L$ to drive the global behaviour of $X$. Write $d_v \coloneqq \deg(v)/4$ so that $L = \sum_{v} d_v x_v$. Since the variables $x_v$ are independent,
 \begin{equation}
   \label{eq:phi-L}
-  \varphi_L(\tau) = \mathbb{E}\left[\exp\left(i\tau\sum_v d_v x_v\right)\right] = \prod_{v \in V(G)} \mathbb{E}\left[\exp(i\tau d_v x_v)\right] = \prod_{v \in V(G)} \cos(\tau d_v). 
+  \varphi_L(\tau) = \mathbb{E}\left[\exp\left(i\tau\sum_v d_v x_v\right)\right] = \prod_{v \in V(G)} \mathbb{E}\bigl[\exp(i\tau d_v x_v)\bigr] = \prod_{v \in V(G)} \cos\bigl(\tau d_v\bigr). 
 \end{equation}
 The decomposition \eqref{eq:decomposition} thus allows us to bound $X$ by bounding the characteristic function of $L$ which factors well. 
 
@@ -125,7 +133,7 @@ In particular, the right-hand side decays exponentially in $n$ unless many of th
 \[
   \sum_{v \in V(G)} \left\|\frac{\tau d_v}{\pi}\right\|^2 = \omega(\log n)
 \]
-for all $\tau$ with $0 < |\tau| \leq \nu$, the bound \eqref{eq:phi-L-bound} gives the superpolynomial decay $|\varphi_L(\tau)| \leq n^{-\omega(1)}$ on the window. In this case, Esseen's inequality applied to the difference $\varphi_X - \varphi_Z$, where $\varphi_Z(\tau) = \exp(i \mu \tau - \sigma^2 \tau^2/2)$ is the Gaussian characteristic function matching the mean and variance of $X$, then delivers the interval estimate \eqref{eq:interval-estimate}. This case admits a local central limit theorem by the standard Fourier-analytic argument.
+for all $\tau$ with $0 < |\tau| \leq \nu$, the bound \eqref{eq:phi-L-bound} gives the superpolynomial decay $|\varphi_L(\tau)| \leq n^{-\omega(1)}$ on the window. In this case, Esseen's inequality applied to the difference $\varphi_X - \varphi_Z$, where $\varphi_Z(\tau) = \exp\bigl(i \mu \tau - \sigma^2 \tau^2/2\bigr)$ is the Gaussian characteristic function matching the mean and variance of $X$, then delivers the interval estimate \eqref{eq:interval-estimate}. This case admits a local CLT by the standard Fourier-analytic argument.
 
 \paragraph{The structured case.} Here we consider the opposite case that
 \[
@@ -141,17 +149,17 @@ with $|R| \leq n^{1-\gamma}$, $|B_j| = \lceil n^{1-2\gamma}\rceil$ for $j \in [m
 \]
 for $j \in [m]$ and $v \in B_j$. In other words, the vertex set splits into $m = \Theta(n^{2\gamma})$ many buckets $B_1, \dots, B_m$ each with degrees clustered around $\kappa_j$, together with an sublinear sized exceptional set $R$. This allows us to write $L$ as
 \[
- L = \sum_{j = 1}^m \sum_{v \in B_j} d_vx_v + \sum_{v \in R} d_v x_v = \underbrace{\sum_{j = 1}^m \kappa_j \sum_{v \in B_j} x_v}_{L_{main}} + \underbrace{\sum_{j = 1}^m \sum_{v \in B_j} (d_v - \kappa_j)x_v}_{L_{err}} + \underbrace{\sum_{v \in R} d_v x_v}_{L_{R}}.
+ L = \sum_{j = 1}^m \sum_{v \in B_j} d_vx_v + \sum_{v \in R} d_v x_v = \underbrace{\sum_{j = 1}^m \kappa_j \sum_{v \in B_j} x_v}_{L_{\text{main}}} + \underbrace{\sum_{j = 1}^m \sum_{v \in B_j} (d_v - \kappa_j)x_v}_{L_{\text{err}}} + \underbrace{\sum_{v \in R} d_v x_v}_{L_{R}}.
 \]
 Then conditioning on
 \[
-  \vec\Delta \coloneqq \left(|U \cap B_1|, \dots, |U \cap B_m|, (x_v)_{v \in R}\right)
+  \vec\Delta \coloneqq \bigl(|U \cap B_1|, \dots, |U \cap B_m|, (x_v)_{v \in R}\bigr)
 \]
-makes $L_{main}$ and $L_R$ deterministic and reduces the conditional variance of $L$ to $\Var(L_{err} \mid \vec\Delta) \leq n^{2 + 8\gamma}$. The effect of conditioning on $\vec\Delta$ can be thought of as conditioning on the approximate value of $L$ which governs the large-scale behaviour of $X$, allowing us to ``zoom in'' to see the smaller-scale behaviour of the distribution. In particular, $U \setminus R$ is conditionally uniform over the product of Boolean slices
+makes $L_{\text{main}}$ and $L_{R}$ deterministic and reduces the conditional variance of $L$ to $\Var(L_{\text{err}} \mid \vec\Delta) \leq n^{2 + 8\gamma}$. The effect of conditioning on $\vec\Delta$ can be thought of as conditioning on the approximate value of $L$ which governs the large-scale behaviour of $X$, allowing us to ``zoom in'' to see the smaller-scale behaviour of the distribution. In particular, $U \setminus R$ is conditionally uniform over the product of Boolean slices
 \[
   \binom{B_1}{\Delta_1} \times \cdots \times \binom{B_m}{\Delta_m}.
 \]
-This reduces the interval estimate \eqref{eq:interval-estimate} to evaluating the small-ball probability of $L_{err} + Q$ on this product of Boolean slices.
+This reduces the interval estimate \eqref{eq:interval-estimate} to evaluating the small-ball probability of $L_{\text{err}} + Q$ on this product of Boolean slices.
 
 % \textit{Remark.} The dichotomy above is an instance of the inverse Littlewood--Offord phenomenon. In Chapter~\ref{sec:ch3} the forward direction of Littlewood--Offord controlled the collision probability $\Pr[\deg_U(x) = \deg_U(y)]$ via the large symmetric difference $|N(x) \triangle N(y)|$. Here the forward direction would tell us that $L = \sum_v d_v x_v$ has small-ball probability $O(n^{-3/2})$ provided the coefficient vector $(d_v)$ is generic. The inverse direction, developed by Tao and Vu and by Rudelson and Vershynin, identifies the exceptional case as precisely additive structure, which Lemma~4.12 of \cite{Kwan_2023} in turn converts into the bucket partition we used in the structured case. The formal threshold at which the inverse case kicks in is controlled by the \emph{regularised least common denominator} of $(d_v)$, a notion introduced by Vershynin in random matrix theory, and we do not require the formal definition here.
 
@@ -175,16 +183,16 @@ The target now is to show
 \label{eq:conditional-target}
   \prob\left[|X - x| \leq B \mid \vec\Delta\right] = O(n^{-1}),
 \end{equation}
-which, after averaging over $\vec\Delta$, yields the interval estimate $\Theta(n^{-3/2})$ in \eqref{eq:interval-estimate}. The averaging contributes the remaining factor $n^{-1/2}$, reflecting the fact that only a $\Theta(n^{-1/2})$ fraction of $\vec\Delta$ values place $\E[X \mid \vec\Delta]$ within $O(n)$ of $x$. As shown in the previous section, the conditional distribution of $X$ need not be approximately Gaussian, so the standard Fourier-analytic approach does not close on its own. \cite{Kwan_2023} overcomes this by combining the following three ingredients.
+which, after averaging over $\vec\Delta$, yields the interval estimate $\Theta(n^{-3/2})$ in \eqref{eq:interval-estimate}. The averaging contributes the remaining factor $n^{-1/2}$, reflecting the fact that only a $\Theta(n^{-1/2})$ fraction of $\vec\Delta$ values place $\E\bigl[X \mid \vec\Delta\bigr]$ within $O(n)$ of $x$. As shown in the previous section, the conditional distribution of $X$ need not be approximately Gaussian, so the standard Fourier-analytic approach does not close on its own. \cite{Kwan_2023} overcomes this by combining the following three ingredients.
 
 \paragraph{Ingredient 1. The Gaussian invariance principle}
 
-We first replace the product of Boolean slices by a Gaussian space. The invariance principle of Mossel, O'Donnell and Oleszkiewicz says that a low-degree polynomial of independent bounded random variables has a distribution close to that of the same polynomial evaluated at independent standard Gaussians. Applying this to $L_{err} + Q$ produces a quadratic polynomial
+We first replace the product of Boolean slices by a Gaussian space. The invariance principle of Mossel, O'Donnell and Oleszkiewicz~\cite{mossel2005noisestabilityfunctionslow} says that a low-degree polynomial of independent bounded random variables has a distribution close to that of the same polynomial evaluated at independent standard Gaussians. Applying this to $L_{\text{err}} + Q$ produces a quadratic polynomial
 \begin{equation}
 \label{eq:gaussian-quadratic}
   f(\vec Z) = \vec Z^{\top} F\, \vec Z + \vec f \cdot \vec Z + f_0, \qquad \vec Z = (Z_1, \dots, Z_n) \sim \mathcal{N}(0, I_n),
 \end{equation}
-with a symmetric matrix $F \in \R^{n \times n}$ and $\vec f \in \R^n$ derived from the adjacency matrix of $G$ and the bucket partition, such that the characteristic functions of $L_{err} + Q$ (given $\vec\Delta$) and of $f(\vec Z)$ are close -- see \cite[Lemma~11.1]{Kwan_2023}. The role of this step is to convert a discrete, dependent domain into a continuous, independent one, allowing us to apply the Carbery--Wright theorem.
+with a symmetric matrix $F \in \R^{n \times n}$ and $\vec f \in \R^n$ derived from the adjacency matrix of $G$ and the bucket partition, such that the characteristic functions of $L_{\text{err}} + Q$ (given $\vec\Delta$) and of $f(\vec Z)$ are close -- see \cite[Lemma~11.1]{Kwan_2023}. The role of this step is to convert a discrete, dependent domain into a continuous, independent one, allowing us to apply the Carbery--Wright theorem.
 
 \paragraph{Ingredient 2. The sharpened Carbery--Wright theorem}
 
