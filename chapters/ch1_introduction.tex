@@ -140,7 +140,32 @@ In Chapter~\ref{sec:ch4}, we will study the induced edge count $e(U)$ itself, wh
 
 \subsection{Notations and tools}
 
-Let $G = (V, E)$ be a graph. We call $e(G) \coloneqq |E(G)|$ the \textit{size} of $G$. For $U \subseteq V$, $G[U]$ denotes the subgraph of $G$ induced by $U$, and write $e(U) \coloneqq e(G[U])$. We omit all floor and ceiling signs when they are not crucial for simplicity.
+For $n \in \N$, write $[n] \coloneqq \{1, 2, \ldots, n\}$. For set $X$, write $\binom{X}{2}$ as the set of unordered pairs of elements in $X$.
+
+Given a graph $G$ on $n$ vertices, we call $e(G) \coloneqq |E(G)|$ the \textit{size} of $G$, and we call the ratio 
+\[
+  d(G) \coloneqq e(G)\binom{n}{2}^{-1}
+\]
+the \textit{density} of $G$. For vertex $v \in V(G)$, denote $N(v)$ as the neighborhood of $v$ and $\deg(v) \coloneqq |N(v)|$ as the degree of $v$. Write $\overline{G}$ as the complement graph of $G$ and $\overline{N(v)} \coloneqq V(G) \setminus N(v)$ as the non-neighborhood of $v$. For $U \subseteq V(G)$, denote $G[U]$  as the subgraph of $G$ induced by $U$. We write $e(U) \coloneqq e(G[U])$ and $d(U) \coloneqq d(G[U])$ as the size and density of $U$, respectively. We also write $N_U(v) \coloneqq N(v) \cap U$, $\deg_U(v) \coloneqq |N_U(v)|$, $\overline{N_U(v)} \coloneqq U \setminus N_U(v)$ as the neighborhood, degree, and non-neighborhood of $v$ in $U$, respectively. For $A, B \subseteq V(G)$, write $e(A, B) \coloneqq e(A \cup B) - e(A) - e(B)$ and
+\[
+  d(A, B) \coloneq \frac{e(A, B)}{|A||B|}
+\]
+as the edge count and density between $A$ and $B$, respectively.
+
+For functions $f, g: \R \to \R$, we use the standard asymptotic notations:
+\begin{itemize}
+\item $f = O(g)$ and $f \ll g$ mean there exists constant $C > 0$ such that $f \leq C \cdot g$.
+\item $f = \Omega(g)$ and $f \gg g$ mean there exists constant $c > 0$ such that $f \geq c \cdot g$.
+\item $f = \Theta(g)$ means $f = O(g)$ and $f = \Omega(g)$.
+\item $f = o(g)$ means $f/g \to 0$.
+\item $f = \omega(g)$ means $f/g \to \infty$.
+\item $f \sim g$ means $f/g \to 1$.
+\end{itemize}
+
+
+The results in this dissertation mostly concern the case where the graph is large, so we omit floor and ceiling signs when they are not crucial for simplicity.
+
+
 We will use the following probability bounds throughout the dissertation.
 
 \begin{proposition}[Markov's inequality]
