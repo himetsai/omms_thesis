@@ -162,7 +162,7 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. Spe
   \]
   so $d(y, T_i) > 1 - 2\eps$ for every $y \in S_i$. Partition $T_i$ into $U_i \sqcup Z_i$ where $U_i = \{v \in T_i : d(v, S_i) > 1 - 4\eps\}$. We double count $|T_i| - e(T_i, S_i)/|S_i| = \sum_{v \in T_i}(1 - d(v, S_i))$. Since $1 - d(v, S_i) \geq 4\eps$ for $v \in Z_i$,
   \[
-    |T_i| - \frac{e(T_i, S_i)}{|S_i|} = \sum_{v \in T_i}(1 - d(v, S_i)) \geq \sum_{v \in Z_i}(1 - d(v, S_i)) \geq 4\eps|Z_i|.
+    |T_i| - \frac{e(T_i, S_i)}{|S_i|} = \sum_{v \in T_i}\bigl(1 - d(v, S_i)\bigr) \geq \sum_{v \in Z_i}\bigl(1 - d(v, S_i)\bigr) \geq 4\eps|Z_i|.
   \]
   On the other hand, using $d(y, T_i) > 1 - 2\eps$ for $y \in S_i$,
   \[

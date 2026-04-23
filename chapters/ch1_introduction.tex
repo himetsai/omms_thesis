@@ -111,11 +111,11 @@ Due to the rich variety of induced subgraphs in dense random graphs, a popular a
 
 In this dissertation, we will focus on the edge statistics of induced subgraphs in Ramsey graphs. For a graph $G$, let 
 \[
-  \Phi(G) \coloneqq \{e(H) : H \text{ is an induced subgraph of } G\}.
+  \Phi(G) \coloneqq \bigl\{e(H) : H \text{ is an induced subgraph of } G\bigr\}.
 \]
 Erd\H{o}s and McKay~\cite{EFS} conjectured that for any Ramsey graph $G$ on $n$ vertices, there exists $\delta = \delta(C) > 0$ such that
 \[
-  \{1, 2, \ldots, \delta n^2\} \subseteq \Phi(G).
+  \bigl\{1, 2, \ldots, \delta n^2\bigr\} \subseteq \Phi(G).
 \]
 It was proven for Random graphs by Calkin, Frieze, and Mckay~\cite{erdosmckayrandomgraph}, but the conjecture for Ramsey graphs remained open for decades and only started to show significant progress in recent years. In particular, a chain of results were sparked after the work of Narayanan, Sahasrabudhe, and Tomon~\cite{narayanan2017ramseygraphsinducesubgraphs} establishing that $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on some ideas from the work of Bukh and Sudakov~\cite{BUKH2007612} which showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature that dense random graphs also exhibit. Kwan and Sudakov~\cite{kwan2021ramseygraphsinducesubgraphs} later improved the bound to $|\Phi(G)| = \Omega(n^2)$ by refining the argument of Narayanan, Sahasrabudhe, and Tomon. Eventually, Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023} closed the conjecture via Fourier-analytic arguments on graph polynomials.
 
@@ -159,9 +159,7 @@ For functions $f, g: \R \to \R$, we use the standard asymptotic notations:
 \item $f = \Theta(g)$ means $f = O(g)$ and $f = \Omega(g)$.
 \item $f = o(g)$ means $f/g \to 0$.
 \item $f = \omega(g)$ means $f/g \to \infty$.
-\item $f \sim g$ means $f/g \to 1$.
 \end{itemize}
-
 
 The results in this dissertation mostly concern the case where the graph is large, so we omit floor and ceiling signs when they are not crucial for simplicity.
 
@@ -221,7 +219,7 @@ where we write $i \sim j$ if $i \neq j$ and $A_i, A_j$ are dependent.
   \label{prop:chernoff}
   Let $X$ be a binomial random variable with parameters $n$ and $p$. Then for $t \geq 0$,
   \[
-    \prob\left[X \leq \E[X] - t\right], \, \prob\left[X \geq \E[X] + t\right] \leq \exp\bigl(-2t^2/n\bigr).
+    \prob\bigl[X \leq \E[X] - t\bigr], \, \prob\bigl[X \geq \E[X] + t\bigr] \leq \exp\bigl(-2t^2/n\bigr).
   \]
   \qed
 \end{proposition}
