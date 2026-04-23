@@ -25,7 +25,7 @@ Since the conjecture implies $|\Phi(G)| = \Omega(n^2)$ and the trivial upper bou
 
 Recall that Theorem \ref{thm:bs2007} provides a bound of $|\Phi(G)| = \Omega(\sqrt{n})$ for any Ramsey graph $G$ by removing a single vertex to construct each subgraph. Two ideas may be used to improve this construction. First, we apply the same idea to many different induced subgraphs rather than merely $G$ itself. Second, instead of deleting only one vertex, we add and remove various combinations of vertices to produce many more distinct sizes. 
 
-Specifically, pick a target $m$ and find two disjoint vertex sets $U$ and $W$, where $U$ is a linear-sized random set with $e(U) \approx m$ and $W$ is an augmenting set of size $O(\sqrt{n})$ selected from a candidate set $W_0 \subseteq V(G) \setminus U$ whose degrees are of linear order and all lie in a narrow interval. Then the subsets $Z \subseteq W$ produce $\Omega(n^{3/2})$ distinct values of $e(U \sqcup Z)$ that all lie in an interval of length $O(n^{3/2})$ centred at $e(U)$. Applying this to $\Omega(\sqrt{n})$ well-separated targets $m$ yields the full $\Omega(n^2)$ count.
+Specifically, pick a target $m$ and find two disjoint vertex sets $U$ and $W$, where $U$ is a linear-sized random set with $e(U) \approx m$ and $W$ is an augmenting set of size $O(\sqrt{n})$ selected from a \textit{candidate set} $W_0 \subseteq V(G) \setminus U$ whose degrees are of linear order and all lie in a narrow interval. Then the subsets $Z \subseteq W$ produce $\Omega(n^{3/2})$ distinct values of $e(U \sqcup Z)$ that all lie in an interval of length $O(n^{3/2})$ centred at $e(U)$. Applying this to $\Omega(\sqrt{n})$ well-separated targets $m$ yields the full $\Omega(n^2)$ count.
 
 Kwan and Sudakov construct $W$ as three disjoint parts $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, each of size $\Theta(\sqrt{n})$, that act at complementary scales. Every element has $\Theta(n)$ edges into $U$, and the degrees from $\mathbf{S}$ into $U$ are uniformly smaller than those from $\mathbf{T}$ by a gap of $\Omega(\sqrt{n})$. Varying the number $k$ of elements of $\mathbf{S}$ included in $Z$ shifts $e(U \sqcup Z)$ at the coarsest scale $\Theta(n)$. Exchanging elements of $\mathbf{S}$ for elements of $\mathbf{T}$ shifts it by $\Theta(\sqrt{n})$. The elements of $\mathbf{X}$ fill the remaining $\Theta(\sqrt{n})$ gap by contributing $\Theta(\sqrt{n})$ distinct degrees into $U \sqcup Z$ for each choice of $Z$. Hence the different combinations of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ yield $\Omega(n^{3/2})$ distinct values of $e(U \sqcup Z)$.
 
@@ -99,7 +99,7 @@ The following lemma constructs $U_0$ and the augmenting sets $\mathbf{S}, \mathb
 
 \begin{lemma}
 \label{lem:construction}
-For any $C > 0$ there exists $c = c(C) > 0$ such that the following holds. For any $C$-Ramsey graph $G$ on $n$ vertices and any $m$ satisfying $cn^2 \le m \le 2cn^2$, there is vertex set $U_0 \subseteq V(G)$ with $|e(U_0) - 4m| = O(n^{3/2})$, constant $c' = c'(C) \in (0, 1]$, and sets $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$ of size $c'\sqrt{n}$ such that
+For any $C > 0$ there exists $c = c(C) > 0$ such that the following holds. For any $C$-Ramsey graph $G$ on $n$ vertices and any $m$ satisfying $cn^2 \leq m \leq 2cn^2$, there is vertex set $U_0 \subseteq V(G)$ with $|e(U_0) - 4m| = O(n^{3/2})$, constant $c' = c'(C) \in (0, 1]$, and sets $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$ of size $c'\sqrt{n}$ such that
 \begin{enumerate}
   \item either $U_0, \mathbf{S}, \mathbf{T}, \mathbf{X} \subseteq V(G)$ are disjoint sets of vertices, or $\mathbf{S}, \mathbf{T}, \mathbf{X} \subseteq \binom{V(G)}{2}$ are sets of disjoint pairs of vertices with no vertex appearing in more than one of $U_0, \mathbf{S}, \mathbf{T}, \mathbf{X}$,
   \item there is $d = \Theta(n)$ such that $\deg_{U_0}(\mathbf{x}) = d + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{S} \sqcup \mathbf{T} \sqcup \mathbf{X}$,
@@ -114,30 +114,30 @@ The proof starts with reducing to a rich subgraph of linear size using Lemma~\re
 
 \begin{proof}[Proof of Lemma~\ref{lem:construction}]
 
-Let $\varepsilon = \varepsilon(C)$ be given by Lemma~\ref{lem:rich-subgraph} and set $\delta = \varepsilon/4$. By Lemma~\ref{lem:rich-subgraph}, $G$ contains an $(\varepsilon, \delta)$-rich induced subgraph $G[V']$ on $\Omega(n)$ vertices. Since $\log |V'| \ge \frac{1}{2}\log n$, the graph $G[V']$ is $2C$-Ramsey, so by adjusting constants it suffices to work inside $G[V']$. We may thus assume $G$ itself is $(\varepsilon, \delta)$-rich.
+Let $\eps = \eps(C)$ be given by Lemma~\ref{lem:rich-subgraph} and set $\delta = \eps/4$. By Lemma~\ref{lem:rich-subgraph}, $G$ contains an $(\eps, \delta)$-rich induced subgraph $G[V']$ on $\Omega(n)$ vertices. Since $\log |V'| \geq \frac{1}{2}\log n$, the graph $G[V']$ is $2C$-Ramsey, so by adjusting constants it suffices to work inside $G[V']$. We may thus assume $G$ itself is $(\eps, \delta)$-rich.
 
-By richness, Lemma~\ref{lem:richness-implies-diversity}, \ref{lem:richness-implies-upper-bound}, and \ref{lem:richness-implies-pair-diversity} with $\alpha = \varepsilon/2$, furnish the following properties:
+By richness, Lemma~\ref{lem:richness-implies-diversity}, \ref{lem:richness-implies-upper-bound}, and \ref{lem:richness-implies-pair-diversity} with $\alpha = \eps/2$, furnish the following properties:
 \begin{enumerate}
-  \item[(a)] $G$ is $(\varepsilon/2, \delta)$-diverse,
-  \item[(b)] $G$ is $(\varepsilon^2/4, \delta, \varepsilon/2)_2$-diverse,
+  \item[(a)] $G$ is $(\eps/2, \delta)$-diverse,
+  \item[(b)] $G$ is $(\eps^2/4, \delta, \eps/2)_2$-diverse,
   \item[(c)] there are $\leq n^{1+\delta}$ pairs
       $\{x_1, x_2\}$ with
-      $|N(x_1) \triangle \overline{N(x_2)}| < (\varepsilon/2)n$.
+      $|N(x_1) \triangle \overline{N(x_2)}| < (\eps/2)n$.
 \end{enumerate}
 
-Each of the $\binom{n}{2} = \Theta(n^2)$ vertex pairs $\{x_1, x_2\}$ has a pair-degree $\deg(\{x_1, x_2\}) = \deg(x_1) + \deg(x_2)$ taking values from $0$ to $2n$, so by the pigeonhole principle there exists a value $d^*$ and a collection $H$ of $\Omega(n^{3/2})$ pairs with $\deg(\mathbf{x}) = d^* + O(\sqrt{n})$ for all $\mathbf{x} \in H$. By the remark after Lemma \ref{lem:richness-implies-upper-bound}, $d^* = \Theta(n)$. Interpret $H$ as a graph on $V(G)$ whose edges are the $\Omega(n^{3/2})$ pairs. By (c), we may delete $O(n^{1+\delta}) = o(n^{3/2})$ edges in $H$ so that all remaining pairs have $|N(x_1) \triangle \overline{N(x_2)}| \ge (\varepsilon/2)n$. Suppose there exists vertex $v$ in $H$ with degree $\Omega(n^{3/4})$. Take $\mathbf{W}_0 = N_H(v)$ and set $d' = d^* - \deg(v)$. Then each $w \in \mathbf{W}_0$ is a single vertex with degree $\deg(w) = d + O(\sqrt{n})$. Now suppose $H$ has maximum degree $\Delta = o(n^{3/4})$. By iteratively picking an edge and removing $\leq 2\Delta$ edges adjacent to it, we obtain a matching of size $\Omega(n^{3/2})/o(n^{3/4}) = \Omega(n^{3/4})$. Take $\mathbf{W}_0$ to be the pairs in this matching and set $d' = d^*$. The subsets of $\mathbf{W}_0$ now satisfy Property~1.
+Each of the $\binom{n}{2} = \Theta(n^2)$ vertex pairs $\{x_1, x_2\}$ has a pair-degree $\deg(\{x_1, x_2\}) = \deg(x_1) + \deg(x_2)$ taking values from $0$ to $2n$, so by the pigeonhole principle there exists a value $d^*$ and a collection $H$ of $\Omega(n^{3/2})$ pairs with $\deg(\mathbf{x}) = d^* + O(\sqrt{n})$ for all $\mathbf{x} \in H$. By the remark after Lemma \ref{lem:richness-implies-upper-bound}, $d^* = \Theta(n)$. Interpret $H$ as a graph on $V(G)$ whose edges are the $\Omega(n^{3/2})$ pairs. By (c), we may delete $O(n^{1+\delta}) = o(n^{3/2})$ edges in $H$ so that all remaining pairs have $|N(x_1) \triangle \overline{N(x_2)}| \geq (\eps/2)n$. Suppose there exists vertex $v$ in $H$ with degree $\Omega(n^{3/4})$. Take $\mathbf{W}_0 = N_H(v)$ and set $d' = d^* - \deg(v)$. Then each $w \in \mathbf{W}_0$ is a single vertex with degree $\deg(w) = d + O(\sqrt{n})$. Now suppose $H$ has maximum degree $\Delta = o(n^{3/4})$. By iteratively picking an edge and removing $\leq 2\Delta$ edges adjacent to it, we obtain a matching of size $\Omega(n^{3/2})/o(n^{3/4}) = \Omega(n^{3/4})$. Take $\mathbf{W}_0$ to be the pairs in this matching and set $d' = d^*$. Thus, $\mathbf{W}_0$ is now the candidate set, whose degrees lie in an $O(\sqrt{n})$ interval and subsets satisfy Property~1.
 
-Next, we extract a subset $\mathbf{A} \subseteq \mathbf{W}_0$ of size $\Omega(\sqrt{n})$ with pairwise large symmetric differences. Define graph $F$ on $\mathbf{W}_0$ by joining $\mathbf{x}$ and $\mathbf{y}$ whenever $|N(\mathbf{x}) \triangle N(\mathbf{y})| < (\varepsilon^2/4)n$. By diversity, the graph $F$ has $|\mathbf{W}_0| = \Omega(n^{3/4})$ vertices and maximum degree at most $n^{\delta} < n^{1/4}$. Thus by Tur\'{a}n's theorem, $F$ has independent set $\mathbf{A} \subseteq \mathbf{W}_0$ with size $\Omega(|\mathbf{W}_0|/n^{1/4}) = \Omega(\sqrt{n})$. That is, for $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$, we have $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$.
+Next, we extract a subset $\mathbf{A} \subseteq \mathbf{W}_0$ of size $\Omega(\sqrt{n})$ with pairwise large neighborhood symmetric differences. Define graph $F$ on $\mathbf{W}_0$ by joining $\mathbf{x}$ and $\mathbf{y}$ whenever $|N(\mathbf{x}) \triangle N(\mathbf{y})| < (\eps^2/4)n$. By diversity, $F$ has $|\mathbf{W}_0| = \Omega(n^{3/4})$ vertices and maximum degree at most $n^{\delta} < n^{1/4}$, so Tur\'{a}n's theorem gives an independent set $\mathbf{A} \subseteq \mathbf{W}_0$ in $F$ of size $\Omega(|\mathbf{W}_0|/n^{1/4}) = \Omega(\sqrt{n})$. That is, for $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$, we have $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$.
 
-By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), $e(G) \ge 800cn^2$ for some constant $c = c(C) > 0$. For $cn^2 \le m \le 2cn^2$, set $p = \sqrt{4m/e(G)}$, so that $p = \Omega(1)$ and $p \le 0.1$. Let $U_0$ be a random subset of $V(G)$ by including each vertex with probability $p$. 
+By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), $e(G) \geq 800cn^2$ for some constant $c = c(C) > 0$. For $cn^2 \leq m \leq 2cn^2$, set $p = \sqrt{4m/e(G)}$, so that $p = \Omega(1)$ and $p \leq 0.1$. Let $U_0$ be a random subset of $V(G)$ by including each vertex with probability $p$. 
 
 \begin{claim}
   The following five events each hold with probability greater than $4/5$, and therefore all hold simultaneously with positive probability by the union bound.
 
   \begin{enumerate}
     \item[(i)] $|e(U_0) - 4m| = O(n^{3/2})$,
-    \item[(ii)] There is a set $\mathbf{Q} \subseteq \mathbf{A}$ involving no vertices of $U_0$, with $|\mathbf{Q}| \ge (2/3)|\mathbf{A}|$,
-    \item[(iii)] There is a set $\mathbf{R} \subseteq \mathbf{A}$ with $|\mathbf{R}| \ge (2/3)|\mathbf{A}|$ and $\deg_{U_0}(\mathbf{x}) = pd' + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{R}$,
+    \item[(ii)] There is a set $\mathbf{Q} \subseteq \mathbf{A}$ involving no vertices of $U_0$, with $|\mathbf{Q}| \geq (2/3)|\mathbf{A}|$,
+    \item[(iii)] There is a set $\mathbf{R} \subseteq \mathbf{A}$ with $|\mathbf{R}| \geq (2/3)|\mathbf{A}|$ and $\deg_{U_0}(\mathbf{x}) = pd' + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{R}$,
     \item[(iv)] $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = \Omega(n)$ for each $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$,
     \item[(v)] The equality $\deg_{U_0}(\mathbf{x}) = \deg_{U_0}(\mathbf{y})$ holds for $O(\sqrt{n})$ pairs $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$.
   \end{enumerate}
@@ -200,25 +200,25 @@ Write $\Delta_{k, i} \coloneqq e_{k, i} - e_{k, i - 1}$ and we have the followin
 
 \begin{lemma}
 \label{lem:double-exposure}
-Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_0, c', d$ be obtained from Lemma~\ref{lem:construction}. Let $U$ be a uniformly random subset of $U_0$, and let $U_{k, i}, e_{k, i}, \Delta_{k, i}$ be defined as above. Then there exist positive constants $M, \beta, Q > 0$ depending on $C$, such that $Q \ge 3\beta$ and for each $c'\sqrt{n} \le k \le 2c'\sqrt{n}$ the following hold:
+Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_0, c', d$ be obtained from Lemma~\ref{lem:construction}. Let $U$ be a uniformly random subset of $U_0$, and let $U_{k, i}, e_{k, i}, \Delta_{k, i}$ be defined as above. Then there exist positive constants $M, \beta, Q > 0$ depending on $C$, such that $Q \geq 3\beta$ and for each $c'\sqrt{n} \leq k \leq 2c'\sqrt{n}$ the following hold:
 \begin{enumerate}
     \item With probability $\geq 0.99$, there is a set $\mathcal{I}_k$ of $(1 - \beta/(2M)) \cdot c'\sqrt{n}$ values with the following property: for each $i \in \mathcal{I}_k$, there exists $\mathbf{X}_{k, i} \subseteq \mathbf{X}$ of size $\Omega(\sqrt{n})$, such that the values $\deg_{U_{k,i}}(\mathbf{x})$ for
         $\mathbf{x} \in \mathbf{X}_{k,i}$ are distinct and all lie in the interval $[d/2 - Q\sqrt{n},\; d/2 + Q\sqrt{n}]$.
 
     \item With probability $\geq 0.99$,
     \[
-      \bigl|e_{k,0} - \mathbb{E}[e_{k,0}]\bigr| \le Qn.
+      \bigl|e_{k,0} - \mathbb{E}[e_{k,0}]\bigr| \leq Qn.
     \]
 
     \item With probability $\geq 1/2$,
     \[
-      e_{k,c'\sqrt{n}} - e_{k,0} \ge 3\beta n.
+      e_{k,c'\sqrt{n}} - e_{k,0} \geq 3\beta n.
     \]
 
     \item With probability at
         least $0.99$,
         \[
-            \sum_{\substack{i \,:\, |\Delta_{k,i}| \ge M\sqrt{n}}} |\Delta_{k,i}| \le \beta n.
+            \sum_{\substack{i \,:\, |\Delta_{k,i}| \geq M\sqrt{n}}} |\Delta_{k,i}| \leq \beta n.
         \]
         That is, the unusually large increments contribute little to the total range $e_{k,c'\sqrt{n}} - e_{k,0}$.
 \end{enumerate}
@@ -263,7 +263,7 @@ Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_
     \end{align*}
     uniformly over $M$. For large enough $M$, Markov's inequality now yields
     \[
-     \prob\left[\sum_{\substack{i \,:\, |\Delta_{k,i}| \ge M\sqrt{n}}} |\Delta_{k,i}| > \beta n\right] \leq \frac{\sum_{i = 1}^{|\mathbf{S}|} \E\bigl[|\Delta_{k, i}| \cdot \mathbbm{1}_{|\Delta_{k, i}| \geq M\sqrt{n}}\bigr]}{\beta n} \leq \frac{e^{-\Omega(M^2)}}{\beta} < 0.01.
+     \prob\left[\sum_{\substack{i \,:\, |\Delta_{k,i}| \geq M\sqrt{n}}} |\Delta_{k,i}| > \beta n\right] \leq \frac{\sum_{i = 1}^{|\mathbf{S}|} \E\bigl[|\Delta_{k, i}| \cdot \mathbbm{1}_{|\Delta_{k, i}| \geq M\sqrt{n}}\bigr]}{\beta n} \leq \frac{e^{-\Omega(M^2)}}{\beta} < 0.01.
     \]
     \item[1.] For $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{X}}{2}$, 
     \[
