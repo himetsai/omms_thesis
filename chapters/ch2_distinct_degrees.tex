@@ -17,7 +17,7 @@ To prove Theorem \ref{thm:bs2007}, Bukh and Sudakov introduced the notion of \te
 \begin{definition}
   \label{def:diversity}
 
-  An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-diverse} if for $x \in V(G)$, we have $|N(x) \triangle N(y)| \geq \eps n$ for $\leq n^{\delta}$ vertices $y \in V(G)$.
+  An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-diverse} if for each $x \in V(G)$, we have $|N(x) \triangle N(y)| \geq \eps n$ for all but $\leq n^{\delta}$ vertices $y \in V(G)$.
 \end{definition}
 
 Notice that $(\eps, \delta)$-diversity directly conditions our assumption that $|N(x) \triangle N(y)| = D \geq \eps n$ in the anticoncentration principle discussion in Section \ref{sec:anticoncentration}. In particular, we may show in a diverse graph that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$ for all but $\leq n^{\delta}$ pairs of vertices $x, y \in V(G)$, from which we use Turan's theorem to conclude that there are many distinct degrees in a diverse graph. The following lemma formalizes this observation and reduces Theorem \ref{thm:bs2007} to showing every Ramsey graph contains a diverse subgraph of linear size.
@@ -65,7 +65,7 @@ In other words, almost every vertex $v \in V(G)$ satisfies
 \[
   \eps |W| \leq |N(v) \cap W| \leq (1 - \eps) |W|,
 \]
-whenever $|W|$ is large. Thus, richness ensures neighborhoods are not unusually concentrated in nor absent from large sets, which is exactly the density control one has in random graphs like $G_{n, 1/2}$, where $|N(v) \cap W| \approx |W|/2$ by the Chernoff bound. When $W$ is the neighborhood of another vertex, richness ensures both sides of the symmetric difference $|N(x) \triangle N(y)| = |N(x) \cap \overline{N(y)}| + |\overline{N(x)} \cap N(y)|$ are large, rather than merely the symmetric difference itself being large. This is why richness stronger than diversity.
+whenever $|W|$ is large. Thus, richness ensures neighborhoods are not unusually concentrated in nor absent from large sets, which is exactly the density control one has in random graphs like $G_{n, 1/2}$, where $|N(v) \cap W| \approx |W|/2$ by the Chernoff bound. When $W$ is the neighborhood of another vertex, richness ensures both sides of the symmetric difference $|N(x) \triangle N(y)| = |N(x) \cap \overline{N(y)}| + |\overline{N(x)} \cap N(y)|$ are large, rather than merely the symmetric difference itself being large. This is why richness is stronger than diversity.
 
 \begin{lemma}
   \label{lem:richness-implies-diversity}
@@ -77,11 +77,11 @@ whenever $|W|$ is large. Thus, richness ensures neighborhoods are not unusually 
   \[
     |\overline{N(y)} \cap N(x)| \geq \eps |N(x)| \geq \eps n/2
   \]
-  for $\leq n^{\delta}$ vertices $y \in V(G)$. Similarly, if $|\overline{N(x)}| \geq n/2$, then
+  for all but $\leq n^{\delta}$ vertices $y \in V(G)$. Similarly, if $|\overline{N(x)}| \geq n/2$, then
   \[
     |N(y) \cap \overline{N(x)}| \geq \eps |\overline{N(x)}| \geq \eps n/2
   \]
-  for $\leq n^{\delta}$ vertices $y \in V(G)$. But then in either case,
+  for all but $\leq n^{\delta}$ vertices $y \in V(G)$. But then in either case,
   \[
     |N(x) \triangle N(y)| = |\overline{N(y)} \cap N(x)|  + |N(y) \cap \overline{N(x)}| \geq \eps n/2.
   \]
@@ -102,11 +102,11 @@ Richness also implies the reversed notion of diversity.
   The result now follows from the fact that there are only $n$ choices of $x_1$.
 \end{proof}
 
-\textit{Remark:} This lemma gives an upper bound on the symmetric difference between the neighbourhoods of two vertices. Specifically, since $|N(x_1) \triangle N(x_2)| + |N(x_1) \triangle \overline{N(x_2)}| = n - 2$ for any two vertices $x_1, x_2$, richness implies
+\textit{Remark:} Since $|N(x_1) \triangle N(x_2)| + |N(x_1) \triangle \overline{N(x_2)}| = n$ for any two vertices $x_1, x_2$, this lemma gives an upper bound for the symmetric difference
 \[
-  (\eps/2)n \leq |N(x_1) \triangle N(x_2)| \leq (1 - \eps/2)n
+  |N(x_1) \triangle N(x_2)| \leq (1 - \eps/2)n
 \]  
-for most pairs of vertices $x_1, x_2$, so the pair-degree $d(x_1) + d(x_2) = \Theta(n)$.
+for most pairs of vertices $x_1, x_2$.
 
 We now show that every Ramsey graph contains a rich subgraph of linear size. Specifically, we show that if this is not the case, we may construct a highly sparse/dense subset $S \subseteq V(G)$ via induction, and invoke the Erd\H{o}s--Szemer\'{e}di theorem to find a large homogeneous set in $G[S]$.
 
@@ -116,25 +116,25 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. Spe
   For $\delta \in (0, 1)$, there exists $\eps = \eps(C) > 0$ such that every $C$-Ramsey graph $G$ on $n$ vertices contains an $(\eps, \delta)$-rich subgraph on $\Omega(n)$ vertices.
 \end{lemma}
 
-\textit{Remark:} Since $\eps = \eps(C)$ is independent of $\delta$, we may take $\delta$ arbitrarily small for any given $\eps$.
+\textit{Remark:} $\eps = \eps(C)$ is independent of $\delta$, so we may take $\delta$ arbitrarily small for any given $\eps$.
 
 \begin{proof}
-  Suppose not. Let $K = K(C)$ be a large constant to be determined. Let $c = 4^{-K}$ and $\eps = 1/K$. We inductively construct a sequence of disjoint vertex sets $S_1, S_2, \ldots, S_K$ of size $s = (cn)^\delta/2$, such that for all $S_i$ one of the following conditions holds:
+  Suppose for contradiction that every set of $\geq cn$ vertices fails to induce a $(\eps, \delta)$-rich subgraph, for small $\eps = \eps(C)$ and $c = (\delta/4)^{K}$ with large $K = K(C, \delta)$ to be determined. We inductively construct a sequence of disjoint vertex sets $S_1, S_2, \ldots, S_K$ of size $s = (cn)^\delta/2$, such that for all $S_i$ one of the following conditions holds:
   \begin{enumerate}
     \item[(i)] $d(S_i, S_j) < 4\eps$ for $j > i$,
     \item[(ii)] $d(S_i, S_j) > 1 - 4\eps$ for $j > i$.
   \end{enumerate}
-  Alongside, we also construct a sequence of induced subgraphs $G = G[U_0] \supset G[U_1] \supset \cdots \supset G[U_K]$, such that $|U_i| \geq (\delta/4)|U_{i - 1}|$ and $S_i \subseteq U_{i - 1}$ for all $i$.
+  That is, each $S_i$ is small and extremely sprase or dense between each other. Alongside, we also construct a sequence of induced subgraphs $G = G[U_0] \supset G[U_1] \supset \cdots \supset G[U_K]$, such that $|U_i| \geq (\delta/4)|U_{i - 1}|$ and $S_i \subseteq U_{i - 1}$ for all $i$.
 
-  We first show how this construction gives the lemma. By working with $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $s$ and $\eps = 1/K$,
+  We first show how this construction gives the lemma. By working with $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $s$,
   \[
-    d(S) = \frac{\sum_{k = 1}^r e(S_{i_k})}{\binom{|S|}{2}} + \frac{\sum_{k < l} e(S_{i_k}, S_{i_l})}{\binom{|S|}{2}} \leq \frac{r\binom{s}{2}}{\binom{rs}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 4\eps \leq \frac{6}{K}.
+    d(S) = \frac{\sum_{k = 1}^r e(S_{i_k})}{\binom{|S|}{2}} + \frac{\sum_{k < l} e(S_{i_k}, S_{i_l})}{\binom{|S|}{2}} \leq \frac{r\binom{s}{2}}{\binom{rs}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 4\eps \leq \frac{2}{K} + 4\eps.
   \]
-  The Erd\H{o}s--Szemer\'{e}di theorem (Theorem \ref{thm:ramsey-density}) now yields a homogeneous set $A \subseteq S$ of size
+  Set $d = \frac{2}{K} + 4\eps$ and note that it can be taken arbitrarily small. The Erd\H{o}s--Szemer\'{e}di theorem (Theorem~\ref{thm:ramsey-density}) now yields a homogeneous set $A \subseteq S$ of size
   \[
-    |A| \geq \frac{\gamma K}{10\log(K/10)} \log |S| = \frac{\gamma \delta K}{10\log(K/10)} \log cn = \frac{\gamma \delta K}{10\log(K/10)} \log n + o(\log n),
+    |A| \geq \frac{\gamma d}{\log(1/d)} \log |S| = \frac{\gamma \delta d}{\log(1/d)} \log cn = \frac{\gamma \delta d}{\log(1/d)} \log n + o(\log n),
   \]
-  for some absolute constant $\gamma > 0$ given by the theorem. Take $K$ to be large enough so that $\frac{\gamma \delta K}{10\log(K/10)} > C$. Then $|A| > C\log n$, contradiction.
+  for some absolute constant $\gamma > 0$ given by the theorem. Take $d$ to be small enough so that $\frac{\gamma \delta d}{\log(1/d)} > C$. Then $|A| > C\log n$, contradiction.
 
   We now construct the sets $S_i$ and $U_i$ inductively. Suppose $U_1, \ldots, U_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. By induction, $|U_{i - 1}| \geq (\delta/4)^{i - 1}|U_0| \geq cn$. Since $G[U_{i - 1}]$ is not $(\eps, \delta)$-rich by assumption, $U_{i - 1}$ contains subsets $W_i, Y_i$ with $|W_i| \geq \delta|U_{i - 1}|$ and $|Y_i| = (cn)^{\delta}$, such that for each $y \in Y_i$ we have $|N_{G_{i - 1}}(y) \cap W_i| < \eps|W_i|$ or $|\overline{N_{G_{i - 1}}(y)} \cap W_i| < \eps|W_i|$. We consider two cases.
 
@@ -142,9 +142,9 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. Spe
   \[
     d(y, T_i) = \frac{|N_{G_{i - 1}}(y) \cap T_i|}{|T_i|} \leq \frac{|N_{G_{i - 1}}(y) \cap W_i|}{|T_i|} < \frac{\eps |W_i|}{|W_i|/2} = 2\eps.
   \]
-  Partition $T_i$ into $U_i \sqcup Z_i$ where $U_i = \{v \in T_i : d(v, S_i) \leq 4 \eps\}$. We show that $|U_i| \geq (\delta/4)|U_{i - 1}|$ by double counting $e(T_i, S_i)/|S_i|$. Since $d(v, S_i) > 4\eps$ for $v \in Z_i$,
+  Partition $T_i$ into $U_i \sqcup Z_i$ where $U_i = \{v \in T_i : d(v, S_i) < 4 \eps\}$. We show that $|U_i| \geq (\delta/4)|U_{i - 1}|$ by double counting $e(T_i, S_i)/|S_i|$. Since $d(v, S_i) \geq 4\eps$ for $v \in Z_i$,
   \[
-    \frac{e(T_i, S_i)}{|S_i|} = \sum_{v \in T_i} d(v, S_i) \geq \sum_{v \in Z_i} d(v, S_i) > 4\eps|Z_i|.
+    \frac{e(T_i, S_i)}{|S_i|} = \sum_{v \in T_i} d(v, S_i) \geq \sum_{v \in Z_i} d(v, S_i) \geq 4\eps|Z_i|.
   \]
   On the other hand, since $d(y, T_i) < 2\eps$ for $y \in S_i$,
   \[
@@ -154,21 +154,21 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. Spe
   \[
     |U_i| = |T_i| - |Z_i| > \frac{|T_i|}{2} \geq \frac{|W_i|}{4} \geq \frac{\delta}{4}|U_{i - 1}|.
   \]
-  For $j > i$, since $S_j \subseteq U_j \subseteq U_i$, we have $d(v, S_i) \leq 4\eps$ for every $v \in S_j$, and averaging gives $d(S_i, S_j) \leq 4\eps$. Thus $S_i$ satisfies condition~(i).
+  For $j > i$, since $S_j \subseteq U_{j - 1} \subseteq U_i$, we have $d(v, S_i) < 4\eps$ for every $v \in S_j$, and averaging gives $d(S_i, S_j) < 4\eps$. Thus $S_i$ satisfies condition~(i).
 
   Otherwise, $|\overline{N_{G_{i - 1}}(y)} \cap W_i| < \eps|W_i|$ for half the vertices $y \in Y_i$. Let $S_i$ be the corresponding subset of $Y_i$ and put $T_i = W_i \setminus S_i$, so again $|T_i| \geq |W_i|/2$ and $|S_i| = (cn)^{\delta}/2$. For $y \in S_i$,
   \[
     1 - d(y, T_i) = \frac{|\overline{N_{G_{i - 1}}(y)} \cap T_i|}{|T_i|} \leq \frac{|\overline{N_{G_{i - 1}}(y)} \cap W_i|}{|T_i|} < \frac{\eps |W_i|}{|W_i|/2} = 2\eps,
   \]
-  so $d(y, T_i) > 1 - 2\eps$ for every $y \in S_i$. Partition $T_i$ into $U_i \sqcup Z_i$ where $U_i = \{v \in T_i : d(v, S_i) \geq 1 - 4\eps\}$. We double count $|T_i| - e(T_i, S_i)/|S_i| = \sum_{v \in T_i}(1 - d(v, S_i))$. Since $1 - d(v, S_i) > 4\eps$ for $v \in Z_i$,
+  so $d(y, T_i) > 1 - 2\eps$ for every $y \in S_i$. Partition $T_i$ into $U_i \sqcup Z_i$ where $U_i = \{v \in T_i : d(v, S_i) > 1 - 4\eps\}$. We double count $|T_i| - e(T_i, S_i)/|S_i| = \sum_{v \in T_i}(1 - d(v, S_i))$. Since $1 - d(v, S_i) \geq 4\eps$ for $v \in Z_i$,
   \[
-    |T_i| - \frac{e(T_i, S_i)}{|S_i|} = \sum_{v \in T_i}(1 - d(v, S_i)) \geq \sum_{v \in Z_i}(1 - d(v, S_i)) > 4\eps|Z_i|.
+    |T_i| - \frac{e(T_i, S_i)}{|S_i|} = \sum_{v \in T_i}(1 - d(v, S_i)) \geq \sum_{v \in Z_i}(1 - d(v, S_i)) \geq 4\eps|Z_i|.
   \]
   On the other hand, using $d(y, T_i) > 1 - 2\eps$ for $y \in S_i$,
   \[
     |T_i| - \frac{e(T_i, S_i)}{|S_i|} = |T_i| - \frac{|T_i|}{|S_i|}\sum_{y \in S_i} d(y, T_i) < |T_i| - (1 - 2\eps)|T_i| = 2\eps|T_i|.
   \]
-  Combining both inequalities gives $|Z_i| < |T_i|/2$, hence $|U_i| > |T_i|/2 \geq (\delta/4)|U_{i - 1}|$ as in the other case. For  $j > i$, each $v \in S_j \subseteq U_i$ satisfies $d(v, S_i) \geq 1 - 4\eps$, so $d(S_i, S_j) \geq 1 - 4\eps$. Thus $S_i$ satisfies condition~(ii). This completes the induction.
+  Combining both inequalities gives $|Z_i| < |T_i|/2$, hence $|U_i| > |T_i|/2 \geq (\delta/4)|U_{i - 1}|$ as in the other case. For  $j > i$, each $v \in S_j \subseteq U_i$ satisfies $d(v, S_i) > 1 - 4\eps$, so $d(S_i, S_j) > 1 - 4\eps$. Thus $S_i$ satisfies condition~(ii). This completes the induction.
 \end{proof}
 
 \subsection{Proof of Theorem \ref{thm:bs2007}}
