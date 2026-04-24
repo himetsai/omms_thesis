@@ -17,9 +17,9 @@ The approach to this theorem fundamentally shifts from bounding degree-collision
 
 Let $G$ be a Ramsey graph on $[n]$, and let $U$ be a uniformly random vertex subset of $G$. By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), the random variable $e(U)$ has mean $\mu \coloneqq \mathbb{E}[e(U)] = e(G)/2 = \Theta(n^2)$. For variance, the standard variance identity gives
 \[
-  \Var\bigl(e(U)\bigr) = \sum_{(e, e') \in E(G)^2} \Cov\bigl(\mathbbm{1}_{e \in G[U]}, \mathbbm{1}_{e' \in G[U]}\bigr).
+  \Var\bigl(e(U)\bigr) = \sum_{(e, e') \in E(G)^2} \Cov\bigl(\mathbbm{1}_{e \subseteq U}, \mathbbm{1}_{e' \subseteq U}\bigr).
 \]
-The covariance is $0$ if $e$ and $e'$ are disjoint and $\Theta(1)$ otherwise, so $\Var(e(U)) = \Theta(n^3)$. For a fixed vertex $v$, the number of pairs of edges sharing $v$ is $\binom{\deg(v)}{2} = \Theta(\deg(v)^2)$, and the Erd\H{o}s--Szemer\'{e}di bound with Jensen's inequality gives
+The covariance is $0$ if $e$ and $e'$ are disjoint and $\Theta(1)$ otherwise, so $\Var(e(U)) = \Theta(n^3)$. For a fixed vertex $v$, the number of pairs of edges sharing $v$ is $\binom{\deg(v)}{2}$, and the Erd\H{o}s--Szemer\'{e}di bound with Jensen's inequality gives
 \[
   \Var\bigl(e(U)\bigr) \geq \sum_{v \in V(G)} \binom{\deg(v)}{2} \geq n\binom{2e(G)/n}{2} = \Omega(n^3).
 \]
@@ -42,7 +42,7 @@ for all $x \in \R$ with $\Phi$ being the standard Gaussian cumulative distributi
   and for every fixed $A > 0$,
   \[
     \inf_{\substack{x \in \Z \\
-      |x - e(U)/4| \le A n^{3/2}}}
+      |x - e(U)/4| \leq A n^{3/2}}}
     \prob[e(U) = x]
     = \Omega(n^{-3/2}).
   \]
@@ -58,11 +58,11 @@ The Erd\H{o}s--McKay conjecture follows directly from the lower bound of Theorem
 \paragraph{Proof of Theorem \ref{thm:em}.} 
 By Theorem~\ref{thm:alks2003}, there exists $\alpha = \alpha(C) > 0$ such that $\Phi(G) \subseteq \{0, 1, \ldots, n^\alpha\}$. Fix integer $x$ between $n^\alpha$ and $e(G)/4$. Let $m$ be the smallest integer such that $e(\{1, \ldots, m\}) \geq 4x$. Put $G' = G[\{1, \ldots, m\}]$ and note that 
 \[
-  e(G') \geq 4x \geq e(\{1, \ldots, m-1\}) \geq e(G') - m,
+  e(G') \geq 4x \geq e\bigl(\{1, \ldots, m-1\}\bigr) \geq e(G') - m,
 \]
 so $|x - e(G')/4| \leq m/4 \leq m^{3/2}$. Since $m^2 \geq e(G') \geq 4x \geq n^\alpha$, we have $m \geq n^{\alpha/2}$, so $G'$ is $(2C/\alpha)$-Ramsey. Applying Theorem~\ref{thm:ksss} to $G'$ with $A = 1$ gives
 \[
-  \prob[e(G'[U]) = x] = \Omega(m^{-3/2}) = \Omega(n^{3\alpha/4}) > 0.
+  \prob\bigl[e(G'[U]) = x\bigr] = \Omega(m^{-3/2}) = \Omega(n^{3\alpha/4}) > 0.
 \]
 Therefore, there exists $U \subseteq V(G') \subseteq V(G)$ such that $e(G[U)] = e(G'[U]) = x$, for sufficiently large $n$. This completes the theorem. \qed
 
@@ -88,19 +88,26 @@ and note that $|\varphi_X(\tau)| \leq 1$ for all $\tau$. Applying the Fourier in
 \end{equation}
 for integers-valued $X$. In particular, any upper bound on the integrated $|\varphi_X(\tau)|$ produces an upper bound on the point probability. For the matching lower bound, we compare $\varphi_X$ with the characteristic function $\varphi_Z(\tau) = e^{i\tau\mu - \sigma^2\tau^2/2}$ of a Gaussian $Z \sim \mathcal{N}(\mu, \sigma^2)$, where $\mu = \mathbb{E}[X]$ and $\sigma^2 = \mathrm{Var}(X)$. Since the Gaussian density at $x$ is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean, $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion} whenever $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small. If a local CLT held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$ and we are done.
 
-Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. In particular, the authors in~\cite{Kwan_2023} observed a ``two-scale'' behavior of the distribution of $e(U)$ (see Figure~\ref{fig:two-scale}), depending on the the additive structure of the degree sequence of $G$. 
+Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. In particular, the authors in~\cite{Kwan_2023} observed a ``two-scale'' behavior of the distribution of $e(U)$, depending on the the additive structure of the degree sequence of $G$ (see Figure~\ref{fig:structured} and~\ref{fig:unstructured}).
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\textwidth]{figures/two-scale.png}
-  \caption{Histograms of $e(U)$ obtained from ten million independent samples of $U$ from an outcome of the random graph $G_{1000, 0.8}$. We see that in the large scale, the distribution of $e(U)$ is approximately Gaussian, whereas in the small scale it shows multiple smaller Gaussian-like curves. Experiment reproduced from~\cite{Kwan_2023}; see Appendix~\ref{app:two-scale-code} for code.}
-  \label{fig:two-scale}
+  \includegraphics[width=0.9\textwidth]{figures/structured.png}
+  \caption{Histograms of $e(U)$ obtained from ten million independent samples of $U$ from an outcome of the random graph $G_{1000, 0.8}$. We see that in the large scale, the distribution of $e(U)$ is approximately Gaussian, whereas in the small scale it shows multiple smaller Gaussian-like curves. Experiment reproduced from~\cite{Kwan_2023}; code in Appendix~\ref{app:two-scale-code}.}
+  \label{fig:structured}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/unstructured.png}
+  \caption{Same experiment as in Figure~\ref{fig:structured} but conducted on $G_{1000, 0.5}$. In this case, the distribution is smooth at the unit scale and admits a local CLT. This is due to the degree sequence being less additively structured in sparser random graphs.}
+  \label{fig:unstructured}
 \end{figure}
 
 The proof of Theorem~\ref{thm:ksss} overcomes this obstacle in two stages. The first stage splits into two cases according to whether the degree sequence of $G$ is additively structured or not. The \textit{unstructured case} can be handled by a standard Fourier-analytic argument without further intervention. The \textit{additively structured case} is where $|\varphi_X(\tau)|$ splikes, which we will dedicate most of the effort to handle. A Fourier-analytic argument on these two cases yield the interval estimate 
 \begin{equation}
 \label{eq:interval-estimate}
-\prob\bigl[|X - x| \le B\bigr] = \Theta(n^{-3/2}),
+\prob\bigl[|X - x| \leq B\bigr] = \Theta(n^{-3/2}),
 \end{equation}
 for some constant $B = B(C)$. The second stage upgrades it to a pointwise estimate by showing that the probability mass cannot be too unevenly distributed within the interval via a \textit{switching argument}.
 
@@ -219,7 +226,7 @@ which is short of our target $O(1/\sigma(f(\vec Z)))$. The square-root exponent 
   Let $f(\vec Z) = \vec Z^{\top} F \vec Z + \vec f \cdot \vec Z + f_0$ be a real quadratic polynomial in independent standard Gaussians, with $F$ a nonzero symmetric matrix. Suppose that for some $\eta > 0$,
   \begin{equation}
   \label{eq:robust-rank-2}
-    \min_{\substack{\widetilde F \in \R^{n \times n} \\ \mathrm{rank}(\widetilde F) \le 2}} \|F - \widetilde F\|_F^2 \geq \eta \|F\|_F^2.
+    \min_{\substack{\widetilde F \in \R^{n \times n} \\ \mathrm{rank}(\widetilde F) \leq 2}} \|F - \widetilde F\|_F^2 \geq \eta \|F\|_F^2.
   \end{equation}
   Then for $\eps > 0$,
   \[
@@ -233,15 +240,15 @@ The hypothesis \eqref{eq:robust-rank-2} says that $F$ is a fixed Frobenius-norm 
 
 \begin{lemma}[Robust rank, {\cite[Lemma~10.1]{Kwan_2023}}]
 \label{lem:robust-rank}
-  Fix $C > 0$, $0 < \delta < 1$ and $r \in \N$. Let $G$ be a $C$-Ramsey graph on $n$ vertices with adjacency matrix $A$, and let $V(G) = I_1 \cup \cdots \cup I_m$ be a partition into equal parts with $n^{\delta/2} \le m \le 2n^{\delta}$. Then for every matrix $B \in \R^{n \times n}$ with $\mathrm{rank}(B[I_j \times I_k]) \le r$ for all $j, k \in [m]$,
+  Fix $C > 0$, $0 < \delta < 1$ and $r \in \N$. Let $G$ be a $C$-Ramsey graph on $n$ vertices with adjacency matrix $A$, and let $V(G) = I_1 \cup \cdots \cup I_m$ be a partition into equal parts with $n^{\delta/2} \leq m \leq 2n^{\delta}$. Then for every matrix $B \in \R^{n \times n}$ with $\mathrm{rank}(B[I_j \times I_k]) \leq r$ for all $j, k \in [m]$,
   \[
-    \|A - B\|_F^2 \;=\; \Omega_{C, r, \delta}(n^2).
+    \|A - B\|_F^2 = \Omega(n^2).
   \]
 \end{lemma}
 
 The lemma says that the adjacency matrix of a Ramsey graph is at Frobenius distance $\Omega(n)$ from every matrix whose restriction to each bucket block is low rank. 
 
-% In the application of Theorem~\ref{thm:sharp-CW}, the parts $I_j$ are the buckets $B_j$ from Section~\ref{sec:fourier-walsh} (after a minor adjustment to make the sizes equal) and $F$ is a rescaled copy of $A$ restricted away from the exceptional set $R$. A hypothetical rank-$2$ approximation $\widetilde F$ violating \eqref{eq:robust-rank-2} would in particular satisfy $\mathrm{rank}(\widetilde F[B_j \times B_k]) \le 2$ on every bucket block, contradicting Lemma~\ref{lem:robust-rank} with $r = 2$ and $\delta = 2\gamma$. Hence \eqref{eq:robust-rank-2} holds with some $\eta = \eta(C, \gamma) > 0$.
+% In the application of Theorem~\ref{thm:sharp-CW}, the parts $I_j$ are the buckets $B_j$ from Section~\ref{sec:fourier-walsh} (after a minor adjustment to make the sizes equal) and $F$ is a rescaled copy of $A$ restricted away from the exceptional set $R$. A hypothetical rank-$2$ approximation $\widetilde F$ violating \eqref{eq:robust-rank-2} would in particular satisfy $\mathrm{rank}(\widetilde F[B_j \times B_k]) \leq 2$ on every bucket block, contradicting Lemma~\ref{lem:robust-rank} with $r = 2$ and $\delta = 2\gamma$. Hence \eqref{eq:robust-rank-2} holds with some $\eta = \eta(C, \gamma) > 0$.
 
 % Lemma~\ref{lem:robust-rank} is the only place in the first stage where the Ramsey hypothesis is used directly, and its proof is the most combinatorial component in this stage. The argument proceeds by discretising the entries of the approximating matrix $B$ to a finite alphabet, observing that a low-rank block forces a small number of distinct row patterns, and applying Ramsey's theorem on an auxiliary graph to extract a monochromatic structure that contradicts the $C$-Ramsey assumption on $G$.
 
@@ -253,7 +260,7 @@ To sum it up, applying ingredients~1, ~3, and ~2 in sequence yields the interval
 
 The first stage delivers the interval estimate 
 \[
-\prob[|X - x| \leq B] = \Theta(n^{-3/2}),
+\prob\bigl[|X - x| \leq B\bigr] = \Theta(n^{-3/2}),
 \]
 but leaves open the worst case where all of this mass sits on a single integer $x' \ne x$ inside the window $[x - B, x + B]$. We rule this out via a \textit{switching argument} between different possibilities of the set $U$, and this upgrade the interval estimate to a pointwise bound. The interval estimate \eqref{eq:interval-estimate} already implies an upper bound on $\prob[X = x]$, so it remains to show a lower bound.
 
@@ -282,9 +289,9 @@ Rearranging and applying \eqref{eq:switching-identity} yields
 The goal now is to find $\ell$ and the candidate set $T$ so that
 \begin{align}
   \label{eq:moment-1}
-  \E\bigl[Y_\ell \cdot \mathbbm{1}_{|X - x| \le B}\bigr] &\gtrsim \frac{|T|}{\sqrt n} \cdot n^{-3/2}, \\
+  \E\bigl[Y_\ell \cdot \mathbbm{1}_{|X - x| \leq B}\bigr] &\gtrsim \frac{|T|}{\sqrt n} \cdot n^{-3/2}, \\
   \label{eq:moment-2}
-  \E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{|X - x| \le B}\bigr] &\lesssim \left(\frac{|T|}{\sqrt n}\right)^2 \cdot n^{-3/2}.
+  \E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{|X - x| \leq B}\bigr] &\lesssim \left(\frac{|T|}{\sqrt n}\right)^2 \cdot n^{-3/2}.
 \end{align}
 The two factors have concrete meanings. The factor $n^{-3/2}$ is
 $\prob[|X - x| \leq B]$, supplied by the interval estimate
@@ -296,10 +303,8 @@ $a_w = 2\mathbbm{1}_{w \in N(z) \setminus N(y)} - 1$,
 \begin{align*}
   s(y, z; U)
   &= \deg_{U \setminus \{y\}}(z) - \deg_{U}(y) \\
-  &= \sum_{w \in N(z),\, w \neq y} \mathbbm{1}_{w \in U}
-     - \sum_{w \in N(y)} \mathbbm{1}_{w \in U} \\
-  &= \frac{\deg(z) - \deg(y)}{2}
-     + \frac{1}{2}\sum_{w \in N(y) \triangle N(z)} a_w R_w
+  &= \sum_{w \in N(z),\, w \neq y} \mathbbm{1}_{w \in U} - \sum_{w \in N(y)} \mathbbm{1}_{w \in U} \\
+  &= \frac{\deg(z) - \deg(y)}{2} + \frac{1}{2}\sum_{w \in N(y) \triangle N(z)} a_w R_w
 \end{align*}
 is a sum of $|N(y) \triangle N(z)|$ independent $\pm\mathrm{Bernoulli}(1/2)$
 contributions plus the deterministic shift $(\deg(z) - \deg(y))/2$. Therefore, if we can find $T$ such that $\deg(z) - \deg(y) = \Theta(\sqrt{n})$ and $|N(y) \triangle N(z)| = \Theta(n)$ for all $(y, z) \in T$, then a local CLT gives 
@@ -308,6 +313,6 @@ contributions plus the deterministic shift $(\deg(z) - \deg(y))/2$. Therefore, i
 \]
 for all $\ell$ in an $O(\sqrt n)$ window around the mean, which yields
 \[
-  \E[Y_\ell] = \frac{1}{4}\sum_{(y, z) \in T} \prob[s(y, z; U) = \ell \mid y \in U, z \notin U] = \Theta(|T|/\sqrt n).
+  \E[Y_\ell] = \frac{1}{4}\sum_{(y, z) \in T} \prob\bigl[s(y, z; U) = \ell \mid y \in U, z \notin U\bigr] = \Theta\bigl(|T|/\sqrt n\bigr).
 \]
 It remains to construct such a set $T$, which is produced by applying richness twice inside a linear-sized $(\eps, \delta)$-rich subgraph $S_0$, together with a pigeonhole partition of the degree sequence into $\deg(z) - \deg(y) = \Theta(\sqrt{n})$ -- see~\cite[Lemma~13.9]{Kwan_2023} for details. The second-moment bound \eqref{eq:moment-2} is more involved and follows a \textit{dependent random choice} technique -- see~\cite[Lemmas~13.1, 13.4, 13.9]{Kwan_2023} for details.

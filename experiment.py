@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 n = 1000
-p_edge = 0.8
+p_edge = 0.8  # p_edge=0.5 for Figure 2
 p_sample = 0.5
 num_samples = 10000000
 
@@ -35,4 +35,4 @@ axes[1].set_ylabel("count")
 axes[1].margins(x=0)
 
 plt.tight_layout()
-plt.savefig("figures/two-scale.png", dpi=150)
+plt.show()
