@@ -45,3 +45,4 @@ submission/
 .vscode/
 .idea/
 dissertation/
+*.ipynb

@@ -7,15 +7,15 @@ Both proofs in Chapters~2 and~3 rely on the same anticoncentration principle tha
   \label{thm:em}
   Fix $C > 0$. Let $G$ be a $C$-Ramsey graph on $n$ vertices for sufficiently large $n$. Then there exists $\delta = \delta(C) > 0$ such that
   \[
-    \Phi(G) \supseteq \{1, 2, \ldots, \delta e(G)\}.
+    \Phi(G) \supseteq \bigl\{1, 2, \ldots, \delta e(G)\bigr\}.
   \]
 \end{theorem}
 
-The approach to this theorem fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself. This requires a substantially richer set of tools, but the underlying principle remains: when a random variable is approximately Gaussian at the coarse scale with large standard deviation, its point probabilities are small.
+The approach to this theorem fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself. This requires a substantially richer set of tools, but the underlying principle remains: when a random variable is approximately Gaussian at the large-scale with large standard deviation, its point probabilities are small.
 
 \subsection{Point probabilities of $e(U)$}
 
-Assume that $V(G) = [n]$. Let $U$ be a uniformly random vertex subset. By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), the random variable $e(G[U])$ has mean $e(G)/2 = \Theta(n^2)$. For variance, the standard variance identity gives
+Let $G$ be a Ramsey graph on $[n]$, and let $U$ be a uniformly random vertex subset of $G$. By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), the random variable $e(U)$ has mean $\mu \coloneqq \mathbb{E}[e(U)] = e(G)/2 = \Theta(n^2)$. For variance, the standard variance identity gives
 \[
   \Var\bigl(e(U)\bigr) = \sum_{(e, e') \in E(G)^2} \Cov\bigl(\mathbbm{1}_{e \in G[U]}, \mathbbm{1}_{e' \in G[U]}\bigr).
 \]
@@ -23,14 +23,18 @@ The covariance is $0$ if $e$ and $e'$ are disjoint and $\Theta(1)$ otherwise, so
 \[
   \Var\bigl(e(U)\bigr) \geq \sum_{v \in V(G)} \binom{\deg(v)}{2} \geq n\binom{2e(G)/n}{2} = \Omega(n^3).
 \]
-Thus the standard deviation is $\sigma(e(U)) = \Theta(n^{3/2})$. 
+Thus the standard deviation is $\sigma \coloneqq \sigma(e(U)) = \Theta(n^{3/2})$. 
 
-In Chapters~2 and~3, the anticoncentration analysis targeted the degree difference $\deg_U(x) - \deg_U(y)$ with standard deviation $\Theta(\sqrt{n})$, and the control of $e(U)$ was achieved indirectly through the construction of $\mathbf{S}, \mathbf{T}, \mathbf{X}$. In~\cite{Kwan_2023}, we show directly that the point probabilities of $e(U)$ are all of order $\Theta\bigl(1/\sigma(e(U))\bigr) = \Theta(n^{-3/2})$ within the bulk of the distribution.
+In Chapters~2 and~3, the anticoncentration analysis targeted the degree difference $\deg_U(x) - \deg_U(y)$, which is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$, and the control of $e(U)$ was achieved indirectly through the construction of $\mathbf{S}, \mathbf{T}, \mathbf{X}$. It turns out that, via standard techniques, a CLT directly holds for $e(U)$, giving us
+\[
+  \prob\bigl[e(U) \leq x\bigr] = \Phi\left(\frac{x - \mu}{\sigma}\right) + o(1/\sigma)
+\]
+for all $x \in \R$ with $\Phi$ being the standard Gaussian cumulative distribution function. In~\cite{Kwan_2023}, it is strengthened to a local CLT \textit{up to constant factors}, showing that the point probabilities of $e(U)$ are all of order $\Theta(1/\sigma) = \Theta(n^{-3/2})$ within the bulk of the distribution.
 
 \begin{theorem}[Kwan--Sah--Sauermann--Sawhney
   {\cite{Kwan_2023}}]
   \label{thm:ksss}
-  Fix constant $C > 0$. Let $G$ be a $C$-Ramsey graph on $n$ vertices and let $U$ be a $(1/2)$-random subset of $V(G)$. Then
+  Fix constant $C > 0$. Let $G$ be a $C$-Ramsey graph on $n$ vertices and let $U$ be a uniformly random subset of $V(G)$. Then
   \[
     \sup_{x \in \Z} \prob[e(U) = x]
     = O(n^{-3/2}),
@@ -43,9 +47,11 @@ In Chapters~2 and~3, the anticoncentration analysis targeted the degree differen
     = \Omega(n^{-3/2}).
   \]
 \end{theorem}
-
-\noindent
-This theorem is essentially an approximation of the local CLT for $e(U)$ up to constant factors. A true local CLT would give $\prob[e(U) = x] \sim \varphi((x - \mu)/\sigma)/\sigma$, where $\varphi$ is the standard Gaussian density function. 
+Indeed, a true local CLT would give
+\[
+  \prob[e(U) = x] \sim \frac{1}{\sigma\sqrt{2\pi}} \exp\left(-\frac{\bigl(x - \mu\bigr)^2}{2\sigma^2}\right)
+\]
+for all $x \in \Z$, which is also of order $\Theta(1/\sigma)$ for all $x$ within $O(\sigma)$ of the mean.
 
 The Erd\H{o}s--McKay conjecture follows directly from the lower bound of Theorem~\ref{thm:ksss} combined with Theorem~\ref{thm:alks2003} on small values of $x$.
 
@@ -80,18 +86,21 @@ and note that $|\varphi_X(\tau)| \leq 1$ for all $\tau$. Applying the Fourier in
 \label{eq:fourier-inversion}
 \prob[X = x] = \frac{1}{2\pi}\int_{-\pi}^{\pi} e^{-i\tau x}  \varphi_X(\tau) \, d\tau \leq \frac{1}{2\pi}\int_{-\pi}^{\pi} |\varphi_X(\tau)| \, d\tau,
 \end{equation}
-for integers-valued $X$. In particular, any upper bound on the integrated $|\varphi_X(\tau)|$ produces an upper bound on the point probability. For the matching lower bound, we compare $\varphi_X$ with the characteristic function $\varphi_Z(\tau) = e^{i\tau\mu - \sigma^2\tau^2/2}$ of a Gaussian $Z \sim \mathcal{N}(\mu, \sigma^2)$, where $\mu = \mathbb{E}[X]$ and $\sigma^2 = \mathrm{Var}(X)$. The Gaussian density at $x$ is
-\[
-\frac{1}{\sigma\sqrt{2\pi}}\,\exp\!\left(-\tfrac{(x-\mu)^2}{2\sigma^2}\right),
-\]
-which is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean. Hence, if $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small, then $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion}. If a local CLT held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$ and we are done.
+for integers-valued $X$. In particular, any upper bound on the integrated $|\varphi_X(\tau)|$ produces an upper bound on the point probability. For the matching lower bound, we compare $\varphi_X$ with the characteristic function $\varphi_Z(\tau) = e^{i\tau\mu - \sigma^2\tau^2/2}$ of a Gaussian $Z \sim \mathcal{N}(\mu, \sigma^2)$, where $\mu = \mathbb{E}[X]$ and $\sigma^2 = \mathrm{Var}(X)$. Since the Gaussian density at $x$ is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean, $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion} whenever $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small. If a local CLT held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$ and we are done.
 
-Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. 
+Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. In particular, the authors in~\cite{Kwan_2023} observed a ``two-scale'' behavior of the distribution of $e(U)$ (see Figure~\ref{fig:two-scale}), depending on the the additive structure of the degree sequence of $G$. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{figures/two-scale.png}
+  \caption{Histograms of $e(U)$ obtained from ten million independent samples of $U$ from an outcome of the random graph $G_{1000, 0.8}$. We see that in the large scale, the distribution of $e(U)$ is approximately Gaussian, whereas in the small scale it shows multiple smaller Gaussian-like curves. Experiment reproduced from~\cite{Kwan_2023}.}
+  \label{fig:two-scale}
+\end{figure}
 
 The proof of Theorem~\ref{thm:ksss} overcomes this obstacle in two stages. The first stage splits into two cases according to whether the degree sequence of $G$ is additively structured or not. The \textit{unstructured case} can be handled by a standard Fourier-analytic argument without further intervention. The \textit{additively structured case} is where $|\varphi_X(\tau)|$ splikes, which we will dedicate most of the effort to handle. A Fourier-analytic argument on these two cases yield the interval estimate 
 \begin{equation}
 \label{eq:interval-estimate}
-\prob\left[|X - x| \le B\right] = \Theta(n^{-3/2}),
+\prob\bigl[|X - x| \le B\bigr] = \Theta(n^{-3/2}),
 \end{equation}
 for some constant $B = B(C)$. The second stage upgrades it to a pointwise estimate by showing that the probability mass cannot be too unevenly distributed within the interval via a \textit{switching argument}.
 

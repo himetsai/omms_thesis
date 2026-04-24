@@ -130,11 +130,11 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. Spe
   \[
     d(S) = \frac{\sum_{k = 1}^r e(S_{i_k})}{\binom{|S|}{2}} + \frac{\sum_{k < l} e(S_{i_k}, S_{i_l})}{\binom{|S|}{2}} \leq \frac{r\binom{s}{2}}{\binom{rs}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 4\eps \leq \frac{2}{K} + 4\eps.
   \]
-  Set $d = \frac{2}{K} + 4\eps$ and note that it can be taken arbitrarily small. The Erd\H{o}s--Szemer\'{e}di theorem (Theorem~\ref{thm:ramsey-density}) now yields a homogeneous set $A \subseteq S$ of size
+  Set $d = 2/K + 4\eps$, which is a positive constant to be taken small. The Erd\H{o}s--Szemer\'{e}di theorem (Theorem~\ref{thm:ramsey-density}) now yields a homogeneous set $A \subseteq S$ of size
   \[
-    |A| \geq \frac{\gamma d}{\log(1/d)} \log |S| = \frac{\gamma \delta d}{\log(1/d)} \log cn = \frac{\gamma \delta d}{\log(1/d)} \log n + o(\log n),
+    |A| \geq \frac{\gamma}{d\log(1/d)} \log |S| = \frac{\gamma \delta}{d\log(1/d)} \log cn = \frac{\gamma \delta}{d\log(1/d)} \log n + o(\log n),
   \]
-  for some absolute constant $\gamma > 0$ given by the theorem. Take $d$ to be small enough so that $\frac{\gamma \delta d}{\log(1/d)} > C$. Then $|A| > C\log n$, contradiction.
+  for some absolute constant $\gamma > 0$ given by the theorem. Take $d$ to be small enough so that $\frac{\gamma \delta}{d\log(1/d)} > C$. Then $|A| > C\log n$, contradiction.
 
   We now construct the sets $S_i$ and $U_i$ inductively. Suppose $U_1, \ldots, U_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. By induction, $|U_{i - 1}| \geq (\delta/4)^{i - 1}|U_0| \geq cn$. Since $G[U_{i - 1}]$ is not $(\eps, \delta)$-rich by assumption, $U_{i - 1}$ contains subsets $W_i, Y_i$ with $|W_i| \geq \delta|U_{i - 1}|$ and $|Y_i| = (cn)^{\delta}$, such that for each $y \in Y_i$ we have $|N_{G_{i - 1}}(y) \cap W_i| < \eps|W_i|$ or $|\overline{N_{G_{i - 1}}(y)} \cap W_i| < \eps|W_i|$. We consider two cases.
 

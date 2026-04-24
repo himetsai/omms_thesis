@@ -277,7 +277,7 @@ Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_
     \[
       \prob\bigl[e(H_{k, i}) = O(\sqrt{n})\bigr] \geq 1 - \frac{\E[e(H_{k, i})]}{\omega(\sqrt{n})} \geq 1 - \frac{\beta}{400M},
     \]
-    in which case Tur\'{a}n's theorem (Proposition~\ref{prop:turan}) yields an independent set $\mathbf{Y}_{k, i}$ of size $n/(2O(\sqrt{n}) + \sqrt{n}) = 2\gamma \sqrt{n}$, for some constant $\gamma = \gamma(\beta, M) > 0$. In particular, $\deg_{U_{k, i}}(\mathbf{x})$ is distinct for $\mathbf{x} \in \mathbf{Y}_{k, i}$. The expected proportion of values of $i$ for which this fails to occur is $\beta/400M$, and by Markov's inequality again, it fails only for $\beta/2M$ proportion of values of $i$ with probability at least $1 - (\beta/400M)/(\beta/2M) = 0.995$, in which case put $\mathcal{I}_k$ as the set of $i$ that succeeds.
+    in which case Tur\'{a}n's theorem yields an independent set $\mathbf{Y}_{k, i}$ of size $n/(2O(\sqrt{n}) + \sqrt{n}) = 2\gamma \sqrt{n}$, for some constant $\gamma = \gamma(\beta, M) > 0$. In particular, $\deg_{U_{k, i}}(\mathbf{x})$ is distinct for $\mathbf{x} \in \mathbf{Y}_{k, i}$. The expected proportion of values of $i$ for which this fails to occur is $\beta/400M$, and by Markov's inequality again, it fails only for $\beta/2M$ proportion of values of $i$ with probability at least $1 - (\beta/400M)/(\beta/2M) = 0.995$, in which case put $\mathcal{I}_k$ as the set of $i$ that succeeds.
 
     By Property~2 of Lemma~\ref{lem:construction}, $\E[\deg_U(\mathbf{x})] = d/2 + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{X}$. Since $\deg_U(\mathbf{x})$ follows a binomial distribution with parameters $O(n)$ and $1/2$, we have $\Var(\deg_U(\mathbf{x})) = O(n)$. By triangle inequality, 
     \[
