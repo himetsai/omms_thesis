@@ -62,6 +62,13 @@ for any graph $G$ on $n$ vertices. Apart from determining the bounds of Ramsey n
 
   Let $C > 0$ be a constant. A \textit{$C$-Ramsey graph} is a graph with no homogeneous set of size greater than $C\log n$.
 \end{definition}
+
+\textit{Remark: } For any constant $p \in (0, 1)$, $G_{n, p}$ is almost surely a Ramsey graph, as
+\[
+  \prob\bigl[\hom(G_{n, p}) \geq C\log n\bigr] \leq \binom{n}{C\log n}\big(p^{\binom{C\log n}{2}} + (1-p)^{\binom{C\log n}{2}}\big) = o(1),
+\]
+for some $C = C(p) > 0$. 
+
 Despite decades of intensive research, all known constructions of Ramsey graphs still rely on some randomness. Thus it is believed that Ramsey graphs inherently resemble dense random graphs like $G_{n, 1/2}$, and there are a number of theorems showing that certain ``richness'' properties of random graphs also hold for Ramsey graphs. The first result that cemented this connection is due to Erd\H{o}s and Szemer\'{e}di, showing that Ramsey graphs are also dense.
 
 \begin{theorem}[Erd\H{o}s--Szemer\'{e}di~\cite{erdos1972ramsey}]

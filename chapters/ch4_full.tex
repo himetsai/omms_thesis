@@ -92,24 +92,24 @@ Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The dist
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.9\textwidth]{figures/structured.png}
+  \includegraphics[width=0.95\textwidth]{figures/structured.png}
   \caption{Histograms of $e(U)$ obtained from ten million independent samples of $U$ from an outcome of the random graph $G_{1000, 0.8}$. We see that in the large scale, the distribution of $e(U)$ is approximately Gaussian, whereas in the small scale it shows multiple smaller Gaussian-like curves. Experiment reproduced from~\cite{Kwan_2023}; code in Appendix~\ref{app:two-scale-code}.}
   \label{fig:structured}
 \end{figure}
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.9\textwidth]{figures/unstructured.png}
-  \caption{Same experiment as in Figure~\ref{fig:structured} but conducted on $G_{1000, 0.5}$. In this case, the distribution is smooth at the unit scale and admits a local CLT. This is due to the degree sequence being less additively structured in sparser random graphs.}
-  \label{fig:unstructured}
-\end{figure}
+% \begin{figure}[h]
+%   \centering
+%   \includegraphics[width=0.95\textwidth]{figures/unstructured.png}
+%   \caption{Same experiment as in Figure~\ref{fig:structured} but conducted on $G_{1000, 0.5}$. In this case, the distribution is smooth at the unit scale and admits a local CLT.}
+%   \label{fig:unstructured}
+% \end{figure}
 
-The proof of Theorem~\ref{thm:ksss} overcomes this obstacle in two stages. The first stage splits into two cases according to whether the degree sequence of $G$ is additively structured or not. The \textit{unstructured case} can be handled by a standard Fourier-analytic argument without further intervention. The \textit{additively structured case} is where $|\varphi_X(\tau)|$ splikes, which we will dedicate most of the effort to handle. A Fourier-analytic argument on these two cases yield the interval estimate 
+The proof of Theorem~\ref{thm:ksss} overcomes this obstacle in two stages. The first stage splits into two cases according to whether the degree sequence of $G$ is additively structured or not. The \textit{unstructured case} can be handled by a standard Fourier-analytic argument without further intervention. The \textit{additively structured case} is where $|\varphi_X(\tau)|$ splikes, which we will dedicate most of the effort to handle. These two cases yield the interval estimate 
 \begin{equation}
 \label{eq:interval-estimate}
 \prob\bigl[|X - x| \leq B\bigr] = \Theta(n^{-3/2}),
 \end{equation}
-for some constant $B = B(C)$. The second stage upgrades it to a pointwise estimate by showing that the probability mass cannot be too unevenly distributed within the interval via a \textit{switching argument}.
+for some $B = B(C)$. The second stage upgrades~\eqref{eq:interval-estimate} to a pointwise estimate by showing that the probability mass cannot be too unevenly distributed within the interval via a \textit{switching argument}.
 
 \subsection{Degree sequence dichotomy}
 \label{sec:fourier-walsh}
@@ -118,7 +118,7 @@ We first decompose $e(U)$ into a sum of a linear and quadratic part. Set $\xi_v 
 \begin{equation}\label{eq:decomposition}
   X = \sum_{ij \in E(G)} \frac{(1 + x_i)(1 + x_j)}{4} = \underbrace{\frac{e(G)}{4}}_{\mathbb{E}[X]} + \underbrace{\frac{1}{4}\sum_{v \in V(G)} \deg(v) x_v}_{L} + \underbrace{\frac{1}{4}\sum_{uv \in E(G)} x_u x_v}_{Q},
 \end{equation}
-and we denote the linear term as $L$ and the quadratic term as $Q$. Since $\mathbb{E}[x_v] = 0$ and $\mathbb{E}[x_u x_v] = 0$ for $u \ne v$, we have that $\mathbb{E}[L] = \mathbb{E}[Q] = 0$, the covariance of $L$ and $Q$ is zero, and the constant term $e(G)/4 = \mathbb{E}[X]$. It can be shown via the Erd\H{o}s--Szemer\'{e}di bound and Jensen's inequality that $\Var(L) = \Theta(n^3), \Var(Q) = \Theta(n^2)$.
+and denote the linear term as $L$ and the quadratic term as $Q$. Since $\mathbb{E}[x_v] = 0$ and $\mathbb{E}[x_u x_v] = 0$ for $u \ne v$, we have $\mathbb{E}[L] = \mathbb{E}[Q] = 0$, the covariance of $L$ and $Q$ is zero, and the constant term $e(G)/4 = \mathbb{E}[X]$. It can be shown via the Erd\H{o}s--Szemer\'{e}di bound and Jensen's inequality that $\Var(L) = \Theta(n^3), \Var(Q) = \Theta(n^2)$.
 % Note that $\Var(L) = \frac{1}{16}\sum_{v}\deg(v)^2$ and the Erd\H{o}s--Szemer\'{e}di bound gives $e(G) = \Theta(n^2)$, and the Jensen's inequality and handshake lemma yield
 % \[
 %   \Omega(n^3) = \frac{(2e(G))^2}{n} = \frac{1}{n}\left(\sum_{v}\deg(v)\right)^2 \leq \sum_{v}\deg(v)^2 \leq n\sum_{v}\deg(v) = O(n^3),
@@ -127,7 +127,7 @@ and we denote the linear term as $L$ and the quadratic term as $Q$. Since $\math
 % \[
 %   \Var(Q) = \mathbb{E}[Q^2] = \frac{1}{16}\sum_{uv, u'v' \in E(G)} \mathbb{E}[x_u x_v x_{u'} x_{v'}] = \frac{e(G)}{16} = \Theta(n^2).
 % \]
-The linear part $L$ therefore dominates the total variance, so we expect $L$ to drive the global behaviour of $X$. Write $d_v \coloneqq \deg(v)/4$ so that $L = \sum_{v} d_v x_v$. Since the variables $x_v$ are independent,
+The linear part $L$ therefore dominates the total variance, so we expect $L$ to drive the global behaviour of $X$ and $Q$ to act as a corrective role. Write $d_v \coloneqq \deg(v)/4$ so that $L = \sum_{v} d_v x_v$. Since the variables $x_v$ are independent,
 \begin{equation}
   \label{eq:phi-L}
   \varphi_L(\tau) = \mathbb{E}\left[\exp\left(i\tau\sum_v d_v x_v\right)\right] = \prod_{v \in V(G)} \mathbb{E}\bigl[\exp(i\tau d_v x_v)\bigr] = \prod_{v \in V(G)} \cos\bigl(\tau d_v\bigr). 
@@ -143,19 +143,19 @@ for $y \in \R$, so applying to \eqref{eq:phi-L} gives
 \label{eq:phi-L-bound}
 |\varphi_L(\tau)| \leq \exp\left(-2\sum_{v \in V(G)} \left\|\frac{\tau d_v}{\pi}\right\|^2\right).
 \end{equation}
-In particular, the right-hand side decays exponentially in $n$ unless many of the quantities $\tau d_v/\pi$ are simultaneously close to integers. We treat these two cases separately. Throughout what follows, let $\nu = \nu(C) > 0$ be a small constant and take the relevant frequency window to be $0 < |\tau| \leq \nu$. 
+The right-hand side decays exponentially in $n$ unless many of the quantities $\tau d_v/\pi$ are simultaneously close to integers. Throughout what follows, let $\nu = \nu(C) > 0$ be a small constant. The low range $|\tau| \leq n^{-0.99}$ is controlled by comparison with the Gaussian $\varphi_Z$ via a version of the Esseen's inequality~\cite[Lemma 6.1]{Kwan_2023}. The high range $|\tau| \geq \nu$ is controlled by a \textit{quadratic-cancellation} estimate on $Q$~\cite[Section 8]{Kwan_2023}. What we concern is the medium window $n^{-0.99} \leq |\tau| \leq \nu$, in which the bound~\eqref{eq:phi-L-bound} splits into two cases. 
 
 \paragraph{The unstructured case.} In the case that
 \[
   \sum_{v \in V(G)} \left\|\frac{\tau d_v}{\pi}\right\|^2 = \omega(\log n)
 \]
-for all $\tau$ with $0 < |\tau| \leq \nu$, the bound \eqref{eq:phi-L-bound} gives the superpolynomial decay $|\varphi_L(\tau)| \leq n^{-\omega(1)}$ on the window. In this case, Esseen's inequality applied to the difference $\varphi_X - \varphi_Z$, where $\varphi_Z(\tau) = \exp\bigl(i \mu \tau - \sigma^2 \tau^2/2\bigr)$ is the Gaussian characteristic function matching the mean and variance of $X$, then delivers the interval estimate \eqref{eq:interval-estimate}. This case admits a local CLT by the standard Fourier-analytic argument.
+for all $n^{-0.99} < |\tau| \leq \nu$, the bound \eqref{eq:phi-L-bound} gives a superpolynomial decay $|\varphi_L(\tau)| \leq n^{-\omega(1)}$ on the window. In this case, Esseen's inequality applied to the difference $\varphi_X - \varphi_Z$, where $\varphi_Z(\tau) = \exp\bigl(i \mu \tau - \sigma^2 \tau^2/2\bigr)$ is the Gaussian characteristic function matching the mean and variance of $X$, then delivers the interval estimate \eqref{eq:interval-estimate}. This case admits a local CLT.
 
 \paragraph{The structured case.} Here we consider the opposite case that
 \[
   \sum_{v \in V(G)} \left\|\frac{\tau d_v}{\pi}\right\|^2 = O(\log n),
 \]
-for some $\tau$ with $0 < |\tau| \leq \nu$. This says that for this one frequency, many of the numbers $\tau d_v/\pi$ are simultaneously close to integers. Lemma~4.12 of \cite{Kwan_2023} uses this condition to show that for small enough $\gamma > 0$, the vertex set admits a partition
+for some $n^{-0.99} < |\tau| \leq \nu$. This says that for this one frequency, many of the numbers $\tau d_v/\pi$ are simultaneously close to integers. Lemma~4.12 of~\cite{Kwan_2023} uses this condition to show that for small enough $\gamma > 0$, the vertex set admits a partition
 \[
   V(G) = R \sqcup (B_1 \sqcup \cdots \sqcup B_m),
 \]
@@ -169,9 +169,9 @@ for $j \in [m]$ and $v \in B_j$. In other words, the vertex set splits into $m =
 \]
 Then conditioning on
 \[
-  \vec\Delta \coloneqq \bigl(|U \cap B_1|, \dots, |U \cap B_m|, (x_v)_{v \in R}\bigr)
+  \vec\Delta \coloneqq \bigl(|U \cap B_1|, \dots, |U \cap B_m|, (x_v)_{v \in R}\bigr),
 \]
-makes $L_{\text{main}}$ and $L_{R}$ deterministic and reduces the conditional variance of $L$ to $\Var(L_{\text{err}} \mid \vec\Delta) \leq n^{2 + 8\gamma}$. The effect of conditioning on $\vec\Delta$ can be thought of as conditioning on the approximate value of $L$ which governs the large-scale behaviour of $X$, allowing us to ``zoom in'' to see the smaller-scale behaviour of the distribution. In particular, $U \setminus R$ is conditionally uniform over the product of Boolean slices
+namely the sizes of each bucket's intersection with $U$ and $(x_v)_{v \in R}$, makes $L_{\text{main}}$ and $L_{R}$ deterministic, reducing the conditional variance of $L$ to $\Var(L_{\text{err}} \mid \vec\Delta) \leq n^{2 + 8\gamma}$. The effect of conditioning on $\vec\Delta$ can be thought of as conditioning on the approximate value of $L$ which governs the large-scale behavior of $X$, allowing us to ``zoom in'' to see the smaller-scale behavior of the distribution. In particular, $U \setminus R$ is conditionally uniform over the product of Boolean slices
 \[
   \binom{B_1}{\Delta_1} \times \cdots \times \binom{B_m}{\Delta_m}.
 \]
@@ -179,7 +179,7 @@ This reduces the interval estimate \eqref{eq:interval-estimate} to evaluating th
 
 % \textit{Remark.} The dichotomy above is an instance of the inverse Littlewood--Offord phenomenon. In Chapter~\ref{sec:ch3} the forward direction of Littlewood--Offord controlled the collision probability $\Pr[\deg_U(x) = \deg_U(y)]$ via the large symmetric difference $|N(x) \triangle N(y)|$. Here the forward direction would tell us that $L = \sum_v d_v x_v$ has small-ball probability $O(n^{-3/2})$ provided the coefficient vector $(d_v)$ is generic. The inverse direction, developed by Tao and Vu and by Rudelson and Vershynin, identifies the exceptional case as precisely additive structure, which Lemma~4.12 of \cite{Kwan_2023} in turn converts into the bucket partition we used in the structured case. The formal threshold at which the inverse case kicks in is controlled by the \emph{regularised least common denominator} of $(d_v)$, a notion introduced by Vershynin in random matrix theory, and we do not require the formal definition here.
 
-It is tempting at this point to hope that, after conditioning on $\vec\Delta$, $L_{\text{err}} + Q$ satisfies a local CLT of its own. This hope is too optimistic. Consider $G$ to be the disjoint union of two independent copies of $G(n/2, 1/2)$. With high probability $G$ is a Ramsey graph, but conditioning on $|U| = n/2$ yields a normalized limiting distribution of the form $\alpha Z^2 + \beta Z_2$ for independent Gaussians $Z_1, Z_2$. Therefore, the asymptotic conditional distribution of $X$ need not be Gaussian after the bucket conditioning, though we shall see that it can always be evaluated at independent Gaussians.
+It is tempting at this point to hope that, after conditioning on $\vec\Delta$, $L_{\text{err}} + Q$ satisfies a local CLT of its own. This hope is too optimistic. Consider $G$ to be the disjoint union of two independent copies of $G(n/2, 1/2)$. With high probability $G$ is a Ramsey graph. Every vertex has degree approximately $n/4$, so all vertices fall into a single bucket and $\vec\Delta = |U|$. However, conditioning on $|U| = n/2$ yields a normalized limiting distribution of the form $\alpha Z^2 + \beta Z_2$ for independent Gaussians $Z_1, Z_2$. Therefore, the asymptotic conditional distribution of $X$ need not be Gaussian after the bucket conditioning, though we shall see that it can always be evaluated at independent Gaussians.
 
 % Consider $G$ to be the disjoint union of two independent copies of $G(n/2, 1/2)$, with vertex sets $V_1$ and $V_2$. With high probability $G$ is a Ramsey graph. Every vertex has degree approximately $n/4$, so all vertices fall into a single bucket and $\vec\Delta = |U|$. Conditioning on $|U| = n/2$ and writing $s = |U \cap V_1|$,
 % \[
