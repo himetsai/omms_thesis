@@ -24,7 +24,6 @@ axes[0].hist(counts, bins=600, color='#1b365d')
 axes[0].set_title("large scale")
 axes[0].set_xlabel("e(U)")
 axes[0].set_ylabel("count")
-axes[0].set_xlim(counts.min(), counts.max())
 
 lo = int(counts.mean()) - 2500
 hi = int(counts.mean()) + 2500

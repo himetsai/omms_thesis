@@ -43,6 +43,17 @@
 \usepackage[dvipsnames]{xcolor}
 \definecolor{oxfordblue}{RGB}{0, 33, 71}
 
+\usepackage{listings}
+\lstdefinestyle{pythonstyle}{
+  language     = Python,
+  basicstyle   = \ttfamily\footnotesize,
+  keywordstyle = \color{oxfordblue}\bfseries,
+  commentstyle = \color{gray}\itshape,
+  stringstyle  = \color{OliveGreen},
+  breaklines   = true,
+  upquote      = true,
+}
+
 \usepackage[
   colorlinks = true,
   linkcolor  = oxfordblue,
@@ -167,6 +178,12 @@
 
 %TC:ignore
 \bibliography{references}
+%TC:endignore
+
+\newpage
+
+%TC:ignore
+\input{chapters/appendix_code}
 %TC:endignore
 
 \end{document}
