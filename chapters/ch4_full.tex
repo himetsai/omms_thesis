@@ -88,7 +88,7 @@ and note that $|\varphi_X(\tau)| \leq 1$ for all $\tau$. Applying the Fourier in
 \end{equation}
 for integers-valued $X$. In particular, any upper bound on the integrated $|\varphi_X(\tau)|$ produces an upper bound on the point probability. For the matching lower bound, we compare $\varphi_X$ with the characteristic function $\varphi_Z(\tau) = e^{i\tau\mu - \sigma^2\tau^2/2}$ of a Gaussian $Z \sim \mathcal{N}(\mu, \sigma^2)$, where $\mu = \mathbb{E}[X]$ and $\sigma^2 = \mathrm{Var}(X)$. Since the Gaussian density at $x$ is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean, $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion} whenever $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small. If a local CLT held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$ and we are done.
 
-Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. In particular, the authors in~\cite{Kwan_2023} observed a ``two-scale'' behavior of the distribution of $e(U)$, depending on the the additive structure of the degree sequence of $G$ (see Figure~\ref{fig:structured} and~\ref{fig:unstructured}).
+Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. In particular, the authors in~\cite{Kwan_2023} observed a ``two-scale'' behavior of the distribution of $e(U)$, depending on the the additive structure of the degree sequence of $G$ (see Figure~\ref{fig:structured}).
 
 \begin{figure}[h]
   \centering
@@ -218,7 +218,7 @@ The classical result in this direction is the Carbery--Wright theorem, which sta
 \[
   \sup_{x \in \R} \prob\left[|f(\vec Z) - x| \leq \eps\right] = O\left(\sqrt{\eps / \sigma(f(\vec Z))}\right),
 \]
-which is short of our target $O\bigl(1/\sigma(f(\vec Z))\bigr)$. The square-root exponent cannot be improved in general, but it turns out that forcing the associated matrix $F$ to have effective rank at least three yields the desired bound.
+which falls short of our target $O\bigl(1/\sigma(f(\vec Z))\bigr)$. The square-root exponent cannot be improved in general, but it turns out that forcing the associated matrix $F$ to have \textit{effective rank} at least three yields the desired bound.
 
 \begin{theorem}[Sharpened Carbery--Wright, {\cite[Theorem~1.6]{Kwan_2023}}]
 \label{thm:sharp-CW}
@@ -233,7 +233,9 @@ which is short of our target $O\bigl(1/\sigma(f(\vec Z))\bigr)$. The square-root
   \]
 \end{theorem}
 
-The hypothesis \eqref{eq:robust-rank-2} says that $F$ is a fixed Frobenius-norm proportion away from every matrix of rank $\leq 2$. Thus, it remains to show \eqref{eq:robust-rank-2} for the matrix $F$ arising from the bucket structure, and this is where the Ramsey hypothesis enters.
+By the Eckart--Young theorem, the left-hand side of \eqref{eq:robust-rank-2} equals $\sum_{i \geq 3} \sigma_i(F)^2$, the Frobenius mass of $F$ past its top two singular values. Condition \eqref{eq:robust-rank-2} therefore asserts that the rank-$(\geq 3)$ tail of $F$ carries at least $\eta$-fraction of $\|F\|_F^2$. 
+
+It remains to show \eqref{eq:robust-rank-2} for the matrix $F$ arising from the bucket structure, and this is where the Ramsey hypothesis enters.
 
 \paragraph{Ingredient 3. The robust rank lemma}
 
@@ -308,7 +310,7 @@ $a_w = 2\mathbbm{1}_{w \in N(z) \setminus N(y)} - 1$,
 is a sum of $|N(y) \triangle N(z)|$ independent $\pm\mathrm{Bernoulli}(1/2)$
 contributions plus the deterministic shift $(\deg(z) - \deg(y))/2$. Therefore, if we can find $T$ such that $\deg(z) - \deg(y) = \Theta(\sqrt{n})$ and $|N(y) \triangle N(z)| = \Theta(n)$ for all $(y, z) \in T$, then a local CLT gives 
 \[
-  \prob[s(y, z; U) = \ell \mid y \in U, z \notin U] = \Theta(1/\sqrt n)
+  \prob\bigl[s(y, z; U) = \ell \mid y \in U, z \notin U\bigr] = \Theta(1/\sqrt n)
 \]
 for all $\ell$ in an $O(\sqrt n)$ window around the mean, which yields
 \[
