@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 n = 1000
-p_edge = 0.8  # p_edge=0.5 for Figure 2
+p_edge = 0.8
 p_sample = 0.5
 num_samples = 10000000
 

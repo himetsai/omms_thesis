@@ -143,13 +143,13 @@ for $y \in \R$, so applying to \eqref{eq:phi-L} gives
 \label{eq:phi-L-bound}
 |\varphi_L(\tau)| \leq \exp\left(-2\sum_{v \in V(G)} \left\|\frac{\tau d_v}{\pi}\right\|^2\right).
 \end{equation}
-The right-hand side decays exponentially in $n$ unless many of the quantities $\tau d_v/\pi$ are simultaneously close to integers. Throughout what follows, let $\nu = \nu(C) > 0$ be a small constant. The low range $|\tau| \leq n^{-0.99}$ is controlled by comparison with the Gaussian $\varphi_Z$ via a version of the Esseen's inequality~\cite[Lemma 6.1]{Kwan_2023}. The high range $|\tau| \geq \nu$ is controlled by a \textit{quadratic-cancellation} estimate on $Q$~\cite[Section 8]{Kwan_2023}. What we concern is the medium window $n^{-0.99} \leq |\tau| \leq \nu$, in which the bound~\eqref{eq:phi-L-bound} splits into two cases. 
+The right-hand side decays exponentially in $n$ unless many of the quantities $\tau d_v/\pi$ are simultaneously close to integers. Throughout what follows, let $\nu = \nu(C) > 0$ be a small constant. The low range $|\tau| \leq n^{-0.99}$ is controlled by comparison with the characteristic function of a Gaussian $\varphi_Z(\tau) = \exp\bigl(i \mu \tau - \sigma^2 \tau^2/2\bigr)$ via a version of the Esseen's inequality~\cite[Lemma 6.1]{Kwan_2023}. The high range $|\tau| \geq \nu$ is controlled by a \textit{quadratic-cancellation} estimate on $Q$~\cite[Section 8]{Kwan_2023}. What we concern is the medium window $n^{-0.99} \leq |\tau| \leq \nu$, in which the bound~\eqref{eq:phi-L-bound} splits into two cases. 
 
 \paragraph{The unstructured case.} In the case that
 \[
   \sum_{v \in V(G)} \left\|\frac{\tau d_v}{\pi}\right\|^2 = \omega(\log n)
 \]
-for all $n^{-0.99} < |\tau| \leq \nu$, the bound \eqref{eq:phi-L-bound} gives a superpolynomial decay $|\varphi_L(\tau)| \leq n^{-\omega(1)}$ on the window. In this case, Esseen's inequality applied to the difference $\varphi_X - \varphi_Z$, where $\varphi_Z(\tau) = \exp\bigl(i \mu \tau - \sigma^2 \tau^2/2\bigr)$ is the Gaussian characteristic function matching the mean and variance of $X$, then delivers the interval estimate \eqref{eq:interval-estimate}. This case admits a local CLT.
+for all $n^{-0.99} < |\tau| \leq \nu$, the bound \eqref{eq:phi-L-bound} gives a superpolynomial decay $|\varphi_L(\tau)| \leq n^{-\omega(1)}$ on the window. In this case, Esseen's inequality applied to the difference $\varphi_X - \varphi_Z$ delivers the interval estimate \eqref{eq:interval-estimate}. This case admits a local CLT.
 
 \paragraph{The structured case.} Here we consider the opposite case that
 \[
@@ -212,14 +212,13 @@ with a symmetric matrix $F \in \R^{n \times n}$ and $\vec f \in \R^n$ derived fr
 
 \paragraph{Ingredient 2. The sharpened Carbery--Wright theorem}
 
-Given the $f(\vec Z)$ from ingredient~1, we now bound $\sup_x \prob[|f(\vec Z) - x| \leq 1]$. In our application $\sigma(f(\vec Z)) = \Theta(n)$, since the invariance principle preserves the variance and \eqref{eq:decomposition} gave $\Var(Q) = \Theta(n^2)$. The target $O(n^{-1})$ in~\eqref{eq:conditional-target} is therefore asking for a bound of the form $1/\sigma(f(\vec Z))$.
+Given the $f(\vec Z)$ from ingredient~1, we now bound $\sup_x \prob[|f(\vec Z) - x| \leq 1]$. In our application $\sigma(f(\vec Z)) = \Omega(n)$, since the invariance principle preserves the variance and $\Var(Q)$ alone contributes $\Theta(n^2)$. The target $O(n^{-1})$ in~\eqref{eq:conditional-target} is therefore asking for a bound of the form $1/\sigma(f(\vec Z))$.
 
 The classical result in this direction is the Carbery--Wright theorem, which states that for quadratic polynomial $f$ in independent standard Gaussians and any $\eps > 0$,
-\begin{equation}
-\label{eq:CW-vanilla}
-  \sup_{x \in \R} \prob\left[|f(\vec Z) - x| \leq \eps\right] = O\!\left(\sqrt{\eps / \sigma(f(\vec Z))}\right),
-\end{equation} 
-which is short of our target $O(1/\sigma(f(\vec Z)))$. The square-root exponent in \eqref{eq:CW-vanilla} cannot be improved in general, but it turns out that forcing the associated matrix $F$ to have effective rank at least three yields the desired bound.
+\[
+  \sup_{x \in \R} \prob\left[|f(\vec Z) - x| \leq \eps\right] = O\left(\sqrt{\eps / \sigma(f(\vec Z))}\right),
+\]
+which is short of our target $O\bigl(1/\sigma(f(\vec Z))\bigr)$. The square-root exponent cannot be improved in general, but it turns out that forcing the associated matrix $F$ to have effective rank at least three yields the desired bound.
 
 \begin{theorem}[Sharpened Carbery--Wright, {\cite[Theorem~1.6]{Kwan_2023}}]
 \label{thm:sharp-CW}
