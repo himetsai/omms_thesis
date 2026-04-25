@@ -200,7 +200,7 @@ The target now is to show
 \label{eq:conditional-target}
   \prob\left[|X - x| \leq B \mid \vec\Delta\right] = O(n^{-1}),
 \end{equation}
-whcih gives the interval estimate~\eqref{eq:interval-estimate} after averaging over $\vec\Delta$. Specifically, since $\sigma\bigl(\E[X \mid \vec \Delta]\bigr) = \Theta(n^{3/2})$, only $O(n/n^{3/2}) = O(n^{-1/2})$ fraction of $\vec \Delta$ values place $\E\bigl[X \mid \vec\Delta\bigr]$ within $O(n)$ of $x$, so this fraction contributes $O(n^{-1/2}) \cdot O(n^{-1}) = O(n^{-3/2})$ when averaged over $\vec\Delta$. The remaining tail values of $\vec \Delta$ are negligible by \textit{hypercontractivity}~\cite[Theorem 4.15]{Kwan_2023}. 
+whcih gives the interval estimate~\eqref{eq:interval-estimate} after averaging over $\vec\Delta$. Specifically, since $\sigma\bigl(\E[X \mid \vec \Delta]\bigr) = \Theta(n^{3/2})$, only $O(n/n^{3/2}) = O(n^{-1/2})$ fraction of $\vec \Delta$ values place $\E[X \mid \vec\Delta]$ within $O(n)$ of $x$, so this fraction contributes $O(n^{-1/2}) \cdot O(n^{-1}) = O(n^{-3/2})$ when averaged over $\vec\Delta$. The remaining tail values of $\vec \Delta$ are negligible by \textit{hypercontractivity}~\cite[Theorem 4.15]{Kwan_2023}. 
 
 As shown in the previous section, the conditional distribution of $X$ need not be approximately Gaussian, so the standard Fourier-analytic approach does not close on its own. \cite{Kwan_2023} overcomes this by combining the following three ingredients.
 

@@ -63,13 +63,13 @@ for any graph $G$ on $n$ vertices. Apart from determining the bounds of Ramsey n
   Let $C > 0$ be a constant. A \textit{$C$-Ramsey graph} is a graph with no homogeneous set of size greater than $C\log n$.
 \end{definition}
 
-\textit{Remark: } For any constant $p \in (0, 1)$, $G_{n, p}$ is almost surely a Ramsey graph, as
+\textit{Remark: } For constant $p \in (0, 1)$, $G_{n, p}$ is almost surely a Ramsey graph, as
 \[
   \prob\bigl[\hom(G_{n, p}) \geq C\log n\bigr] \leq \binom{n}{C\log n}\left(p^{\binom{C\log n}{2}} + (1 - p)^{\binom{C\log n}{2}}\right) = o(1),
 \]
 for some $C = C(p) > 0$. 
 
-Despite decades of intensive research, all known constructions of Ramsey graphs still rely on some randomness. Thus it is believed that Ramsey graphs inherently resemble dense random graphs like $G_{n, 1/2}$, and there are a number of theorems showing that certain ``richness'' properties of random graphs also hold for Ramsey graphs. The first result that cemented this connection is due to Erd\H{o}s and Szemer\'{e}di, showing that Ramsey graphs are also dense.
+Despite decades of intensive research, all known constructions of Ramsey graphs still rely on some randomness. Thus it is believed that Ramsey graphs inherently resemble dense random graphs, and there are a number of theorems showing that certain ``richness'' properties of random graphs also hold for Ramsey graphs. The first result that cemented this connection is due to Erd\H{o}s and Szemer\'{e}di, showing that Ramsey graphs are also dense.
 
 \begin{theorem}[Erd\H{o}s--Szemer\'{e}di~\cite{erdos1972ramsey}]
   \label{thm:ramsey-density}
@@ -134,7 +134,7 @@ This dissertation will start by studying the result of Bukh and Sudakov on large
 
 The core results of this dissertation concerns the \textit{anticoncentration} behavior exhibited in Ramsey graphs. In general, anticoncentration provides an upper bound on the point probabilities of a random variable. In the following chapters, we will repeatedly sample a uniformly random subset $U\subseteq V(G)$ and study its induced subgraph $G[U]$. A question to ask in this setting is how likely it is for two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?
 
-Observe that $\deg_U(x)-\deg_U(y)$ counts only vertices in the symmetric difference $D = N_G(x)\triangle N_G(y)$. Write
+Observe that $\deg_U(x)-\deg_U(y)$ counts only vertices in $D = N_G(x)\triangle N_G(y)$. Write
 $A=N(x)\setminus N(y), B=N(y)\setminus N(x)$. Then
 \begin{equation}\label{eq:deg-diff}
   \deg_U(x)-\deg_U(y) = |U\cap A| - |U\cap B|,
@@ -143,17 +143,17 @@ so $x, y$ have the same degree in $G[U]$ precisely when $|U\cap A|=|U\cap B|$. S
 
 An intuition to this $O(1/\sqrt{n})$ bound is that $\deg_U(x)-\deg_U(y)$ is a \textit{linear} polynomial of many independent indicators, which is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$. Since the probability density function $\phi(x)$ of a normal distribution with standard deviation $\sigma$ is at most $1/(\sigma\sqrt{2\pi})$ for all $x$, the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sigma) = O(1/\sqrt{n})$, and this anticoncentration bound is the key to the results in Chapter~\ref{sec:ch2} and \ref{sec:ch3}. 
 
-In Chapter~\ref{sec:ch4}, we will study the induced edge count $e(U)$ itself, which is instead a \textit{quadratic} polynomial of indicators. It turns out a central limit theorem still holds for $e(U)$ at the coarse scale with standard deviation $\sigma(e(U)) = \Theta(n^{3/2})$, and we prove its point probabilities follow the $O(1/\sigma) = O(n^{-3/2})$ bound that a Gaussian would give, even though $e(U)$ need not be Gaussian at the fine scale. This is the same anticoncentration principle as in Chapters~\ref{sec:ch2} and \ref{sec:ch3}, sharpened to a statement about $e(U)$ rather than a degree difference.
+In Chapter~\ref{sec:ch4}, we will study the induced edge count $e(U)$ itself, which is instead a \textit{quadratic} polynomial of indicators. It turns out a central limit theorem still holds for $e(U)$ at the large scale with standard deviation $\sigma(e(U)) = \Theta(n^{3/2})$, and we prove its point probabilities follow the $O(1/\sigma) = O(n^{-3/2})$ bound that a Gaussian would give, even though $e(U)$ need not be Gaussian at the small scale. This is the same anticoncentration principle as in Chapters~\ref{sec:ch2} and \ref{sec:ch3}, sharpened to a statement about $e(U)$ rather than a degree difference.
 
 \subsection{Notations and tools}
 
 For $n \in \N$, write $[n] \coloneqq \{1, 2, \ldots, n\}$. For set $X$, write $\binom{X}{2}$ as the set of unordered pairs of elements in $X$. Denote the union of sets $X, Y$ as $X \sqcup Y$ if $X \cap Y = \emptyset$.
 
-Given a graph $G$ on $n$ vertices, we call $e(G) \coloneqq |E(G)|$ the \textit{size} of $G$, and we call the ratio 
+Given graph $G$ on $n$ vertices, we call $e(G) \coloneqq |E(G)|$ the \textit{size} of $G$, and the ratio 
 \[
   d(G) \coloneqq e(G)\binom{n}{2}^{-1}
 \]
-the \textit{density} of $G$. For vertex $v \in V(G)$, denote $N(v)$ as the neighborhood of $v$ and $\deg(v) \coloneqq |N(v)|$ as the degree of $v$. Write $\overline{G}$ as the complement graph of $G$ and $\overline{N(v)} \coloneqq V(G) \setminus N(v)$ as the non-neighborhood of $v$. For $S \subseteq V(G)$, denote $G - S$ as the subgraph of $G$ obtained by deleting $S$ and all edges incident to $S$. For $U \subseteq V(G)$, We call $G[U] \coloneqq G - (V(G) \setminus U)$ the $\textit{induced subgraph}$ of $U$ in $G$. We write $e(U) \coloneqq e(G[U])$ and $d(U) \coloneqq d(G[U])$ as the size and density of $U$, respectively. We also write $N_U(v) \coloneqq N(v) \cap U$, $\deg_U(v) \coloneqq |N_U(v)|$, and $\overline{N_U(v)} \coloneqq U \setminus N_U(v)$ as the neighborhood, degree, and non-neighborhood of $v$ in $U$, respectively. For $A, B \subseteq V(G)$, write $e(A, B) \coloneqq e(A \cup B) - e(A) - e(B)$ and
+the \textit{density} of $G$. For vertex $v \in V(G)$, denote $N(v) \coloneqq \{w \in V(G) : \{v, w\} \in E(G)\}$ as the \textit{neighborhood} of $v$ and $\deg(v) \coloneqq |N(v)|$ as the \textit{degree} of $v$. Write $\overline{G}$ as the \textit{complement graph} of $G$ and $\overline{N(v)} \coloneqq V(G) \setminus N(v)$ as the \textit{non-neighborhood} of $v$. For $S \subseteq V(G)$, denote $G - S$ as the subgraph of $G$ obtained by deleting $S$ and all edges incident to $S$. For $U \subseteq V(G)$, We call $G[U] \coloneqq G - (V(G) \setminus U)$ the $\textit{induced subgraph}$ of $U$ in $G$. Write $e(U) \coloneqq e(G[U])$ and $d(U) \coloneqq d(G[U])$ as the size and density of $U$, respectively. Write $N_U(v) \coloneqq N(v) \cap U$, $\deg_U(v) \coloneqq |N_U(v)|$, and $\overline{N_U(v)} \coloneqq U \setminus N_U(v)$ as the neighborhood, degree, and non-neighborhood of $v$ in $U$, respectively. For $A, B \subseteq V(G)$, write $e(A, B) \coloneqq e(A \cup B) - e(A) - e(B)$ and
 \[
   d(A, B) \coloneq \frac{e(A, B)}{|A||B|}
 \]
@@ -170,7 +170,7 @@ For functions $f, g: \R \to \R$, we use the standard asymptotic notations:
 
 The results in this dissertation mostly concern the case where the graph is large, so we omit floor and ceiling signs when they are not crucial for simplicity.
 
-We call a subset $U \subseteq X$ \textit{uniformly random} if each element of $X$ is in $U$ with probability $1/2$. For event $A$, we write
+We call subset $U \subseteq X$ \textit{uniformly random} if each element of $X$ is in $U$ independently with probability $1/2$. For event $A$, write
 \[
   \mathbbm{1}_A \coloneqq \begin{cases}
     1 & \text{if } A \text{ occurs}, \\
@@ -234,14 +234,14 @@ where we write $i \sim j$ if $i \neq j$ and $A_i, A_j$ are dependent.
 \begin{proposition}[Hoeffding's inequality]
   \label{prop:azuma-hoeffding}
   
-  Let $X_1, X_2, \ldots, X_n$ be independent real-valued random variables with $0 \leq X_i \leq 1$ for each $i$, and write $X = \sum_{i = 1}^n X_i$. Then for $t \geq 0$, 
+  Let $X_1, X_2, \ldots, X_n$ be independent random variables with $0 \leq X_i \leq 1$ for each $i$, and write $X = \sum_{i = 1}^n X_i$. Then for $t \geq 0$, 
   \[
-    \prob(|X - \E[X]| \geq t) \leq 2e^{-2t^2/n}.
+    \prob\bigl[|X - \E[X]| \geq t\bigr] \leq 2e^{-2t^2/n}.
   \]
   \qed
 \end{proposition}
 
-Many random variables turn out to be a linear polynomial of independent Bernoulli random variables, to which the Erd\H{o}s--Littlewood--Offord theorem can be applied to show anticoncentration. We refer to these random variables as \textit{Littlewood--Offord type}.
+Many random variables turn out to be linear polynomials of independent Bernoulli random variables, to which the Erd\H{o}s--Littlewood--Offord theorem can be applied to show anticoncentration. We refer to these random variables as \textit{Littlewood--Offord type}.
 
 \begin{definition}
   \label{def:littlewood-offord-type}
@@ -257,7 +257,7 @@ Many random variables turn out to be a linear polynomial of independent Bernoull
 \end{proposition}
 
 \begin{proof}
-  We first consider the case where all coefficients $a_i$ are positive. Without loss of generality, assume $X \coloneqq \sum_{i = 1}^n a_i \xi_i$. For $t \in \Z$, let
+  First consider the case where all coefficients $a_i$ are positive. Without loss of generality, assume $X \coloneqq \sum_{i = 1}^n a_i \xi_i$. For $t \in \Z$, let
   \[
     \mathcal{A}_t \coloneqq \left\{A : \sum_{i \in A} a_i = t\right\} \subseteq [n].
   \]
@@ -265,27 +265,26 @@ Many random variables turn out to be a linear polynomial of independent Bernoull
   \[
     \sum_{A \in \mathcal{A}_t} |A|!(n - |A|)! \leq n! \implies \sum_{A \in \mathcal{A}_t} \frac{1}{\binom{n}{|A|}} \leq 1.
   \] 
-  It follows from Stirling's formula on binomial coefficients that
+  By Stirling's formula on binomial coefficients,
   \begin{align*}
     \prob\bigl[X = t\bigr] 
     &= \sum_{A \in \mathcal{A}_t} p^{|A|}(1 - p)^{n - |A|} \\
     &\leq \sum_{A \in \mathcal{A}_t} \frac{1}{\binom{n}{|A|}} \cdot \binom{n}{|A|}p^{|A|}(1 - p)^{n - |A|} \\
     &\leq \left(\sum_{A \in \mathcal{A}_t} \frac{1}{\binom{n}{|A|}}\right) \cdot \binom{n}{np}p^{np}(1 - p)^{n - np} \\
-    &\leq \frac{1 + o(1)}{\sqrt{2\pi p(1 - p)n}} = O\bigl(1/\sqrt{n}\bigr),
+    &\leq \frac{1 + o(1)}{\sqrt{2\pi p(1 - p)n}} = O\bigl(1/\sqrt{n}\bigr).
   \end{align*}
-  where the third inequality holds by the probability mass function of the binomial distribution.
 
-  Now consider the general case. Let $I \coloneqq \{i : a_i \geq 1\}$ and $J \coloneqq \{i : a_i \leq -1\}$. We may assume $|I| \geq n/2$ by passing to $-X$ and swapping $I$ with $J$ if necessary. Then conditioning on $(\xi_j)_{j \in J}$, $X$ is of $(|I|, p)$-Littlewood--Offord type with positive coefficients, so
+  Now consider the general case. Let $I \coloneqq \{i : a_i \geq 1\}$ and $J \coloneqq \{i : a_i \leq -1\}$. We may assume $|I| \geq n/2$ by passing to $-X$ and swapping $I$ with $J$ if necessary. Conditioning on $(\xi_j)_{j \in J}$, $X$ is of $(|I|, p)$-Littlewood--Offord type with positive coefficients, so
   \[
     \prob\bigl[X = t \mid (\xi_j)_{j \in J}\bigr] = O\bigl(1/\sqrt{|I|}\bigr) = O\bigl(1/\sqrt{n}\bigr).
   \]
-  The law of total probability now yields
+  The law of total probability gives
   \[
     \prob\bigl[X = t\bigr] = \E\left[\prob\bigl[X = t \mid (\xi_j)_{j \in J}\bigr]\right] = O\bigl(1/\sqrt{n}\bigr).
   \]
 \end{proof}
 
-The following version of Tur\'{a}n's theorem is useful to extract independent sets in the collision graph argument.
+We also use the following version of Tur\'{a}n's theorem.
 
 \begin{proposition}[Tur\'{a}n's theorem]
   \label{prop:turan}

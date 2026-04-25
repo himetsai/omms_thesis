@@ -8,11 +8,11 @@ In this chapter, we present the following result of Bukh and Sudakov.
   Every Ramsey graph on $n$ vertices induces a subgraph on $\Omega(n)$ vertices with $\Omega(\sqrt{n})$ distinct degrees.
 \end{theorem}
 
-This was originally conjectured by Erd\H{o}s, Faudree, and S\'{o}s \cite{EFS} in light of the observation that the random graph $G_{n, 1/2}$ exhibits such a property almost surely. In particular, this theorem already has implications for the edge statistics of Ramsey graphs $G$, as the subgraphs $G - \{v\}$ for $v \in V(G)$ have $\Omega(\sqrt{n})$ different sizes. This construction lays the foundation for the proof in the next chapter.
+This was originally conjectured by Erd\H{o}s, Faudree, and S\'{o}s \cite{EFS} in light of the observation that the random graph $G_{n, 1/2}$ exhibits such a property almost surely. In particular, Theorem~\ref{thm:bs2007} already has implications for the edge statistics of Ramsey graphs $G$, as the subgraphs $G - \{v\}$ for $v \in V(G)$ have $\Omega(\sqrt{n})$ different sizes. This construction lays the foundation for the proof in the next chapter.
 
 \subsection{Diversity}
 
-To prove Theorem \ref{thm:bs2007}, Bukh and Sudakov introduced the notion of \textit{diversity}, which ensures that the neighbourhoods of most pairs of vertices are not too similar.
+To prove Theorem \ref{thm:bs2007}, Bukh and Sudakov introduced the notion of \textit{diversity}, which ensures the neighbourhoods of most pairs of vertices are not too similar.
 
 \begin{definition}
   \label{def:diversity}
@@ -20,7 +20,7 @@ To prove Theorem \ref{thm:bs2007}, Bukh and Sudakov introduced the notion of \te
   An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-diverse} if for each $x \in V(G)$, we have $|N(x) \triangle N(y)| \geq \eps n$ for all but $\leq n^{\delta}$ vertices $y \in V(G)$.
 \end{definition}
 
-Notice that $(\eps, \delta)$-diversity directly conditions our assumption that $|N(x) \triangle N(y)| = D \geq \eps n$ in the anticoncentration principle discussion in Section \ref{sec:anticoncentration}. In particular, we may show in a diverse graph that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$ for all but $\leq n^{\delta}$ pairs of vertices $x, y \in V(G)$, from which we use Turan's theorem to conclude that there are many distinct degrees in a diverse graph. The following lemma formalizes this observation and reduces Theorem \ref{thm:bs2007} to showing every Ramsey graph contains a diverse subgraph of linear size.
+Notice that $(\eps, \delta)$-diversity directly conditions our assumption $|N(x) \triangle N(y)| = D \geq \eps n$ in the  discussion of anticoncentration in Section \ref{sec:anticoncentration}. Hence, we may show in a diverse graph that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$ for most pairs of vertices $x, y \in V(G)$, from which we use Turan's theorem to conclude that there are many distinct degrees in a diverse graph. The following lemma formalizes this observation and reduces Theorem \ref{thm:bs2007} to showing every Ramsey graph contains a diverse subgraph of linear size.
 
 \begin{lemma}
   \label{lem:diversity-degrees}
@@ -54,18 +54,18 @@ Notice that $(\eps, \delta)$-diversity directly conditions our assumption that $
 
 \subsection{Richness}
 
-It remains to show that every Ramsey graph contains a diverse subgraph of linear size. Instead of directly proving this, we prove the same statement on a strengthening of diversity called \textit{richness}.
+It remains to show that every Ramsey graph contains a diverse subgraph of linear size. We prove the same statement on a strengthening of diversity called \textit{richness}.
 
 \begin{definition}
   \label{def:richness}
   An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-rich} if, for $W \subseteq V(G)$ with $|W| \geq \delta n$, we have $|N(v) \cap W| \geq \eps|W|$ and $|\overline{N(v)} \cap W| \geq \eps|W|$ for all but $\leq n^{\delta}$ vertices $v \in V(G)$.
 \end{definition}
 
-In other words, almost every vertex $v \in V(G)$ satisfies 
+That is, almost every vertex $v \in V(G)$ satisfies 
 \[
   \eps |W| \leq |N(v) \cap W| \leq (1 - \eps) |W|,
 \]
-whenever $|W|$ is large. Thus, richness ensures neighborhoods are not unusually concentrated in nor absent from large sets, which is exactly the density control one has in random graphs like $G_{n, 1/2}$, where $|N(v) \cap W| \approx |W|/2$ by the Chernoff bound. When $W$ is the neighborhood of another vertex, richness ensures both sides of the symmetric difference $|N(x) \triangle N(y)| = |N(x) \cap \overline{N(y)}| + |\overline{N(x)} \cap N(y)|$ are large, rather than merely the symmetric difference itself being large. This is why richness is stronger than diversity.
+whenever $|W|$ is large. Thus, richness ensures neighborhoods are not unusually concentrated in nor absent from large sets, which is exactly the density control one has in random graphs like $G_{n, 1/2}$, where $|N(v) \cap W| \approx |W|/2$ by the Chernoff bound. When $W$ is the neighborhood of another vertex, richness ensures one side of the symmetric difference $|N(x) \triangle N(y)| = |N(x) \cap \overline{N(y)}| + |\overline{N(x)} \cap N(y)|$ is large, implying diversity.
 
 \begin{lemma}
   \label{lem:richness-implies-diversity}
@@ -87,7 +87,7 @@ whenever $|W|$ is large. Thus, richness ensures neighborhoods are not unusually 
   \]
 \end{proof}
 
-Richness also implies the reversed notion of diversity.
+Richness also gives the reversed notion of diversity.
 
 \begin{lemma}
   \label{lem:richness-implies-upper-bound}
@@ -102,13 +102,13 @@ Richness also implies the reversed notion of diversity.
   The result now follows from the fact that there are only $n$ choices of $x_1$.
 \end{proof}
 
-\textit{Remark:} Since $|N(x_1) \triangle N(x_2)| + |N(x_1) \triangle \overline{N(x_2)}| = n$ for any two vertices $x_1, x_2$, this lemma gives an upper bound for the symmetric difference
+\textit{Remark:} Since $|N(x_1) \triangle N(x_2)| + |N(x_1) \triangle \overline{N(x_2)}| = n$ for any $x_1, x_2 \in V(G)$, Lemma~\ref{lem:richness-implies-upper-bound} gives the upper bound
 \[
   |N(x_1) \triangle N(x_2)| \leq (1 - \eps/2)n
 \]  
-for most pairs of vertices $x_1, x_2$.
+for most pairs $x_1, x_2 \in V(G)$.
 
-We now show that every Ramsey graph contains a rich subgraph of linear size. Specifically, we show that if this is not the case, we may construct a highly sparse/dense subset $S \subseteq V(G)$ via induction, and invoke the Erd\H{o}s--Szemer\'{e}di theorem to find a large homogeneous set in $G[S]$.
+We now show that every Ramsey graph contains a rich subgraph of linear size. Specifically, we show that if this is not the case, a highly sparse/dense subset $S \subseteq V(G)$ may be constructed inductively, and the Erd\H{o}s--Szemer\'{e}di theorem gives a large homogeneous set in $G[S]$.
 
 \begin{lemma}
   \label{lem:rich-subgraph}
@@ -116,7 +116,7 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. Spe
   For $\delta \in (0, 1)$, there exists $\eps = \eps(C) > 0$ such that every $C$-Ramsey graph $G$ on $n$ vertices contains an $(\eps, \delta)$-rich subgraph on $\Omega(n)$ vertices.
 \end{lemma}
 
-\textit{Remark:} $\eps = \eps(C)$ is independent of $\delta$, so we may take $\delta$ arbitrarily small for any given $\eps$.
+\textit{Remark:} $\eps = \eps(C)$ is independent of $\delta$, so  $\delta$ can be taken arbitrarily small for any given $\eps$.
 
 \begin{proof}
   Suppose for contradiction that every set of $\geq cn$ vertices fails to induce a $(\eps, \delta)$-rich subgraph, for small $\eps = \eps(C)$ and $c = (\delta/4)^{K}$ with large $K = K(C, \delta)$ to be determined. We inductively construct a sequence of disjoint vertex sets $S_1, S_2, \ldots, S_K$ of size $s = (cn)^\delta/2$, such that for all $S_i$ one of the following conditions holds:
