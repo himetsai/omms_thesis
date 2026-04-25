@@ -1,7 +1,7 @@
 \section{The Erd\H{o}s--McKay Conjecture}
 \label{sec:ch4}
 
-Both proofs in Chapters~2 and~3 rely on the same anticoncentration principle that, when the symmetric difference $|N(x) \triangle N(y)|$ is large, the degree difference $\deg_U(x) - \deg_U(y)$ is a sum of many independent bounded random variables, and its point probabilities are $O(1/\sqrt{n})$. The Erd\H{o}s--McKay conjecture asks for a qualitatively stronger result that asserts $\Phi(G)$ to contain every integer in a quadratic-length interval, not merely that it is large. The conjecture was resolved by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}, and this chapter is dedicated to outlining their proof. 
+Both proofs in Chapters~2 and~3 rely on the same anticoncentration principle: when the symmetric difference $|N(x) \triangle N(y)|$ is large, the degree difference $\deg_U(x) - \deg_U(y)$ is a sum of many independent bounded random variables, and its point probabilities are $O(1/\sqrt{n})$. The Erd\H{o}s--McKay conjecture asks for a qualitatively stronger result that asserts $\Phi(G)$ contains every integer in a quadratic-length interval, not merely that it is large. The conjecture was resolved by Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023}, and this chapter is dedicated to outlining their proof. 
 \begin{theorem}[Erd\H{o}s--McKay conjecture
   {\cite{Kwan_2023}}]
   \label{thm:em}
@@ -11,7 +11,7 @@ Both proofs in Chapters~2 and~3 rely on the same anticoncentration principle tha
   \]
 \end{theorem}
 
-The approach to this theorem fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself. This requires a substantially richer set of tools, but the underlying principle remains: when a random variable is approximately Gaussian at the large-scale with large standard deviation, its point probabilities are small.
+The approach to this theorem fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself. This requires a substantially richer set of tools, but the underlying principle remains: when a random variable is approximately Gaussian on the large scale with large standard deviation, its point probabilities are small.
 
 \subsection{Point probabilities of $e(U)$}
 
@@ -64,7 +64,7 @@ so $|x - e(G')/4| \leq m/4 \leq m^{3/2}$. Since $m^2 \geq e(G') \geq 4x \geq n^\
 \[
   \prob\bigl[e(G'[U]) = x\bigr] = \Omega(m^{-3/2}) = \Omega(n^{3\alpha/4}) > 0.
 \]
-Therefore, there exists $U \subseteq V(G') \subseteq V(G)$ such that $e(G[U)] = e(G'[U]) = x$, for sufficiently large $n$. This completes the theorem. \qed
+Therefore, there exists $U \subseteq V(G') \subseteq V(G)$ such that $e(G[U]) = e(G'[U]) = x$, for sufficiently large $n$. This completes the proof. \qed
 
 We will outline the proof of Theorem~\ref{thm:ksss} in the remainder of this chapter.
 
@@ -86,14 +86,14 @@ and note that $|\varphi_X(\tau)| \leq 1$ for all $\tau$. Applying the Fourier in
 \label{eq:fourier-inversion}
 \prob[X = x] = \frac{1}{2\pi}\int_{-\pi}^{\pi} e^{-i\tau x}  \varphi_X(\tau) \, d\tau \leq \frac{1}{2\pi}\int_{-\pi}^{\pi} |\varphi_X(\tau)| \, d\tau,
 \end{equation}
-for integers-valued $X$. In particular, any upper bound on the integrated $|\varphi_X(\tau)|$ produces an upper bound on the point probability. For the matching lower bound, we compare $\varphi_X$ with the characteristic function $\varphi_Z(\tau) = e^{i\tau\mu - \sigma^2\tau^2/2}$ of a Gaussian $Z \sim \mathcal{N}(\mu, \sigma^2)$, where $\mu = \mathbb{E}[X]$ and $\sigma^2 = \mathrm{Var}(X)$. Since the Gaussian density at $x$ is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean, $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion} whenever $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small. If a local CLT held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$ and we are done.
+for integer-valued $X$. In particular, any upper bound on the integrated $|\varphi_X(\tau)|$ produces an upper bound on the point probability. For the matching lower bound, we compare $\varphi_X$ with the characteristic function $\varphi_Z(\tau) = e^{i\tau\mu - \sigma^2\tau^2/2}$ of a Gaussian $Z \sim \mathcal{N}(\mu, \sigma^2)$, where $\mu = \mathbb{E}[X]$ and $\sigma^2 = \mathrm{Var}(X)$. Since the Gaussian density at $x$ is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean, $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion} whenever $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small. If a local CLT held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$ and we are done.
 
-Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. In particular, the authors in~\cite{Kwan_2023} observed a ``two-scale'' behavior of the distribution of $e(U)$, depending on the the additive structure of the degree sequence of $G$ (see Figure~\ref{fig:structured}).
+Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. In particular, the authors in~\cite{Kwan_2023} observed a ``two-scale'' behaviour of the distribution of $e(U)$, depending on the additive structure of the degree sequence of $G$ (see Figure~\ref{fig:structured}).
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.95\textwidth]{figures/structured.png}
-  \caption{Histograms of $e(U)$ obtained from ten million independent samples of $U$ from an outcome of the random graph $G_{1000, 0.8}$. We see that in the large scale, the distribution of $e(U)$ is approximately Gaussian, whereas in the small scale it shows multiple smaller Gaussian-like curves. Experiment reproduced from~\cite{Kwan_2023}; code in Appendix~\ref{app:two-scale-code}.}
+  \caption{Histograms of $e(U)$ obtained from ten million independent samples of $U$ from an outcome of the random graph $G_{1000, 0.8}$. We see that on the large scale, the distribution of $e(U)$ is approximately Gaussian, whereas on the small scale it shows multiple smaller Gaussian-like curves. Experiment reproduced from~\cite{Kwan_2023}; code in Appendix~\ref{app:two-scale-code}.}
   \label{fig:structured}
 \end{figure}
 
@@ -104,7 +104,7 @@ Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The dist
 %   \label{fig:unstructured}
 % \end{figure}
 
-The proof of Theorem~\ref{thm:ksss} overcomes this obstacle in two stages. The first stage splits into two cases according to whether the degree sequence of $G$ is additively structured or not. The \textit{unstructured case} can be handled by a standard Fourier-analytic argument without further intervention. The \textit{additively structured case} is where $|\varphi_X(\tau)|$ splikes, which we will dedicate most of the effort to handle. These two cases yield the interval estimate 
+The proof of Theorem~\ref{thm:ksss} overcomes this obstacle in two stages. The first stage splits into two cases according to whether the degree sequence of $G$ is additively structured or not. The \textit{unstructured case} can be handled by a standard Fourier-analytic argument without further intervention. The \textit{additively structured case} is where $|\varphi_X(\tau)|$ spikes, which we will dedicate most of the effort to handling. These two cases yield the interval estimate 
 \begin{equation}
 \label{eq:interval-estimate}
 \prob\bigl[|X - x| \leq B\bigr] = \Theta(n^{-3/2}),
@@ -164,7 +164,7 @@ with $|R| \leq n^{1-\gamma}$, $|B_j| = \lceil n^{1-2\gamma}\rceil$ for $j \in [m
 \[
   |d_v - \kappa_j| \leq n^{1/2 + 4\gamma},
 \]
-for $j \in [m]$ and $v \in B_j$. In other words, the vertex set splits into $m = \Theta(n^{2\gamma})$ many buckets $B_1, \dots, B_m$ each with degrees clustered around $\kappa_j$, together with an sublinear sized exceptional set $R$. This allows us to write $L$ as
+for $j \in [m]$ and $v \in B_j$. In other words, the vertex set splits into $m = \Theta(n^{2\gamma})$ many buckets $B_1, \dots, B_m$, each with degrees clustered around $\kappa_j$, together with a sublinear-sized exceptional set $R$. This allows us to write $L$ as
 \[
  L = \sum_{j = 1}^m \sum_{v \in B_j} d_vx_v + \sum_{v \in R} d_v x_v = \underbrace{\sum_{j = 1}^m \kappa_j \sum_{v \in B_j} x_v}_{L_{\text{main}}} + \underbrace{\sum_{j = 1}^m \sum_{v \in B_j} (d_v - \kappa_j)x_v}_{L_{\text{err}}} + \underbrace{\sum_{v \in R} d_v x_v}_{L_{R}}.
 \]
@@ -172,13 +172,13 @@ Then conditioning on
 \[
   \vec\Delta \coloneqq \bigl(|U \cap B_1|, \dots, |U \cap B_m|, (x_v)_{v \in R}\bigr),
 \]
-namely the sizes of each bucket's intersection with $U$ and $(x_v)_{v \in R}$, makes $L_{\text{main}}$ and $L_{R}$ deterministic, reducing the conditional variance of $L$ to $\Var(L_{\text{err}} \mid \vec\Delta) \leq n^{2 + 8\gamma}$. The effect of conditioning on $\vec\Delta$ can be thought of as conditioning on the approximate value of $L$ which governs the large-scale behavior of $X$, allowing us to ``zoom in'' to see the smaller-scale behavior of the distribution. In particular, $U \setminus R$ is conditionally uniform over the product of Boolean slices
+namely the sizes of each bucket's intersection with $U$ and $(x_v)_{v \in R}$, makes $L_{\text{main}}$ and $L_{R}$ deterministic, reducing the conditional variance of $L$ to $\Var(L_{\text{err}} \mid \vec\Delta) \leq n^{2 + 8\gamma}$. The effect of conditioning on $\vec\Delta$ can be thought of as conditioning on the approximate value of $L$ which governs the large-scale behaviour of $X$, allowing us to ``zoom in'' to see the smaller-scale behaviour of the distribution. In particular, $U \setminus R$ is conditionally uniform over the product of Boolean slices
 \[
   \binom{B_1}{\Delta_1} \times \cdots \times \binom{B_m}{\Delta_m}.
 \]
 This reduces the interval estimate \eqref{eq:interval-estimate} to evaluating the small-ball probability of $L_{\text{err}} + Q$ on this product of Boolean slices.
 
-% \textit{Remark.} The dichotomy above is an instance of the inverse Littlewood--Offord phenomenon. In Chapter~\ref{sec:ch3} the forward direction of Littlewood--Offord controlled the collision probability $\Pr[\deg_U(x) = \deg_U(y)]$ via the large symmetric difference $|N(x) \triangle N(y)|$. Here the forward direction would tell us that $L = \sum_v d_v x_v$ has small-ball probability $O(n^{-3/2})$ provided the coefficient vector $(d_v)$ is generic. The inverse direction, developed by Tao and Vu and by Rudelson and Vershynin, identifies the exceptional case as precisely additive structure, which Lemma~4.12 of \cite{Kwan_2023} in turn converts into the bucket partition we used in the structured case. The formal threshold at which the inverse case kicks in is controlled by the \emph{regularised least common denominator} of $(d_v)$, a notion introduced by Vershynin in random matrix theory, and we do not require the formal definition here.
+% \textit{Remark.} The dichotomy above is an instance of the inverse Littlewood--Offord phenomenon. In Chapter~\ref{sec:ch3} the forward direction of Littlewood--Offord controlled the collision probability $\Pr[\deg_U(x) = \deg_U(y)]$ via the large symmetric difference $|N(x) \triangle N(y)|$. Here the forward direction would tell us that $L = \sum_v d_v x_v$ has small-ball probability $O(n^{-3/2})$ provided the coefficient vector $(d_v)$ is generic. The inverse direction, developed by Tao and Vu and by Rudelson and Vershynin, identifies the exceptional case as precisely additive structure, which Lemma~4.12 of \cite{Kwan_2023} in turn converts into the bucket partition we used in the structured case. The formal threshold at which the inverse case kicks in is controlled by the \emph{regularized least common denominator} of $(d_v)$, a notion introduced by Vershynin in random matrix theory, and we do not require the formal definition here.
 
 It is tempting at this point to hope that, after conditioning on $\vec\Delta$, $L_{\text{err}} + Q$ satisfies a local CLT of its own. This hope is too optimistic. Consider $G$ to be the disjoint union of two independent copies of $G(n/2, 1/2)$. With high probability $G$ is a Ramsey graph. Every vertex has degree approximately $n/4$, so all vertices fall into a single bucket and $\vec\Delta = |U|$. However, conditioning on $|U| = n/2$ yields a normalized limiting distribution of the form $\alpha Z_1^2 + \beta Z_2$ for independent Gaussians $Z_1, Z_2$. Therefore, the asymptotic conditional distribution of $X$ need not be Gaussian after the bucket conditioning, though we shall see that it can always be evaluated at independent Gaussians.
 
@@ -200,9 +200,9 @@ The target now is to show
 \label{eq:conditional-target}
   \prob\left[|X - x| \leq B \mid \vec\Delta\right] = O(n^{-1}),
 \end{equation}
-whcih gives the interval estimate~\eqref{eq:interval-estimate} after averaging over $\vec\Delta$. Specifically, since $\sigma\bigl(\E[X \mid \vec \Delta]\bigr) = \Theta(n^{3/2})$, only $O(n/n^{3/2}) = O(n^{-1/2})$ fraction of $\vec \Delta$ values place $\E[X \mid \vec\Delta]$ within $O(n)$ of $x$, so this fraction contributes $O(n^{-1/2}) \cdot O(n^{-1}) = O(n^{-3/2})$ when averaged over $\vec\Delta$. The remaining tail values of $\vec \Delta$ are negligible by \textit{hypercontractivity}~\cite[Theorem 4.15]{Kwan_2023}. 
+which gives the interval estimate~\eqref{eq:interval-estimate} after averaging over $\vec\Delta$. Specifically, since $\sigma\bigl(\E[X \mid \vec \Delta]\bigr) = \Theta(n^{3/2})$, only $O(n/n^{3/2}) = O(n^{-1/2})$ fraction of $\vec \Delta$ values place $\E[X \mid \vec\Delta]$ within $O(n)$ of $x$, so this fraction contributes $O(n^{-1/2}) \cdot O(n^{-1}) = O(n^{-3/2})$ when averaged over $\vec\Delta$. The remaining tail values of $\vec \Delta$ are negligible by \textit{hypercontractivity}~\cite[Theorem 4.15]{Kwan_2023}. 
 
-As shown in the previous section, the conditional distribution of $X$ need not be approximately Gaussian, so the standard Fourier-analytic approach does not close on its own. \cite{Kwan_2023} overcomes this by combining the following three ingredients.
+As shown in the previous section, the conditional distribution of $X$ need not be approximately Gaussian, so the standard Fourier-analytic approach does not close on its own. The authors of~\cite{Kwan_2023} overcome this by combining the following three ingredients.
 
 \paragraph{Ingredient 1. The Gaussian invariance principle}
 
@@ -263,7 +263,7 @@ for some fixed $\alpha$ and a correction matrix $B$ satisfying $\mathrm{rank}(B[
 \] 
 But then on every $B_j \times B_k$ we have $\mathrm{rank}(\tilde{A}[B_j \times B_k]) \leq b + 2$, contradicting \eqref{eq:robust} for small enough $\eta$. Hence \eqref{eq:robust-rank-2} holds for some $\eta = \eta(C, \gamma)$. See~\cite[Section~12]{Kwan_2023} for the explicit construction of $F$.
 
-To sum it up, applying ingredients~1, ~3, and ~2 in sequence yields \eqref{eq:conditional-target}.
+To sum it up, applying Ingredients~1, ~3, and ~2 in sequence yields \eqref{eq:conditional-target}.
 
 
 \subsection{Switching for pointwise control}
@@ -273,7 +273,7 @@ The first stage delivers the interval estimate
 \[
 \prob\bigl[|X - x| \leq B\bigr] = \Theta(n^{-3/2}),
 \]
-but leaves open the worst case where all of this mass sits on a single integer $x' \ne x$ inside the window $[x - B, x + B]$. We rule this out via a \textit{switching argument} between different possibilities of the set $U$, and this upgrade the interval estimate to a pointwise bound. The interval estimate \eqref{eq:interval-estimate} already implies an upper bound on $\prob[X = x]$, so it remains to show a lower bound.
+but leaves open the worst case where all of this mass sits on a single integer $x' \ne x$ inside the window $[x - B, x + B]$. We rule this out via a \textit{switching argument} between different possibilities of the set $U$, and this upgrades the interval estimate to a pointwise bound. The interval estimate \eqref{eq:interval-estimate} already implies an upper bound on $\prob[X = x]$, so it remains to show a lower bound.
 
 For $y \in U$ and $z \notin U$, the \emph{switch} $(y, z)$ replaces $U$ by $U' = (U \setminus \{y\}) \cup \{z\}$. This operation shifts $X$ by
 \[
@@ -283,14 +283,14 @@ Fix a set $T \subseteq V(G)^2$ of candidate ordered pairs, to be specified later
 \[
   Y_\ell \coloneqq \#\bigl\{(y, z) \in T : y \in U,\ z \notin U,\ s(y, z; U) = \ell\bigr\}
 \]
-count candidate switches at $U$ that shift $X$ by exactly $\ell$. Notice that each candidate switch with $y \in U, z \in U$, and $s(y, z; U) = \ell$ pairs $U$ with the set $U' = (U \setminus \{y\}) \cup \{z\}$, and the switch $(z, y)$ from $U'$ recovers $U$ and shifts $X$ by $-\ell$. In particular, pairing $(U, (y, z))$ with $(U', (z, y))$ in this way is a bijection. Since the uniform measure on $\{0,1\}^n$ assigns the same probability $2^{-n}$ to every $U$, the bijection gives the symmetry identity
+count candidate switches at $U$ that shift $X$ by exactly $\ell$. Notice that each candidate switch with $y \in U, z \notin U$, and $s(y, z; U) = \ell$ pairs $U$ with the set $U' = (U \setminus \{y\}) \cup \{z\}$, and the switch $(z, y)$ from $U'$ recovers $U$ and shifts $X$ by $-\ell$. In particular, pairing $(U, (y, z))$ with $(U', (z, y))$ in this way is a bijection. Since the uniform measure on $\{0,1\}^n$ assigns the same probability $2^{-n}$ to every $U$, the bijection gives the symmetry identity
 \begin{equation}
   \label{eq:switching-identity}
   \E\bigl[Y_\ell \cdot \mathbbm{1}_{X = x}\bigr] = \E\bigl[Y_{-\ell} \cdot \mathbbm{1}_{X = x + \ell}\bigr],
 \end{equation}
-for any integer $x$ and $\ell$. By Cauchy--Schwarz inequality,
+for any integer $x$ and $\ell$. By the Cauchy--Schwarz inequality,
 \[
-  \bigl(\E\bigl[Y_{\ell} \cdot \mathbbm{1}_{X = x}\bigr]\bigr)^2 \leq \E\bigl[(Y_\ell^2 \cdot \mathbbm{1}_{X = x})^2\bigr] \cdot \E\bigl[(\mathbbm{1}_{X = x})^2\bigr].
+  \bigl(\E\bigl[Y_{\ell} \cdot \mathbbm{1}_{X = x}\bigr]\bigr)^2 \leq \E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{X = x}\bigr] \cdot \E\bigl[\mathbbm{1}_{X = x}\bigr].
 \]
 Rearranging and applying \eqref{eq:switching-identity} yields
 \begin{equation}

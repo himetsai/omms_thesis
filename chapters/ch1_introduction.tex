@@ -8,7 +8,7 @@ Classical Ramsey Theory asks for the minimum number of vertices required to guar
   The \textit{Ramsey number} $R(s, t)$ is the minimum number $N$ such that any graph on $N$ vertices contains a clique of size $s$ or an independent set of size $t$.
 \end{definition}
 
-The existence of these numbers was proven by Ramsey~\cite{ramsey1930} in 1930, but their quantitative behaviors remain largely unknown despite decades of intensive research. In particular, it is known that $R(3, 3) = 6$ and $R(4, 4) = 18$, but the exact values of $R(5, 5)$ and beyond are yet to be determined. The cornerstone of Ramsey Theory due to Erd\H{o}s and Szekeres in 1935 gives the following upper bound on $R(s, t)$:
+The existence of these numbers was proven by Ramsey~\cite{ramsey1930} in 1930, but their quantitative behaviours remain largely unknown despite decades of intensive research. In particular, it is known that $R(3, 3) = 6$ and $R(4, 4) = 18$, but the exact values of $R(5, 5)$ and beyond are yet to be determined. The cornerstone of Ramsey Theory due to Erd\H{o}s and Szekeres in 1935 gives the following upper bound on $R(s, t)$:
 \begin{theorem}[Erd\H{o}s--Szekeres~\cite{erdos1935some}]
   \label{thm:erdos-szekeres}
   For $s, t \geq 2$,
@@ -78,7 +78,7 @@ Despite decades of intensive research, all known constructions of Ramsey graphs 
 \end{theorem}
 
 \begin{proof}
-  Suppose not. Pick $c < 1/32$. Since $G$ contains $d\binom{n}{2}$ edges, there exists $m \geq n/2$ vertices in $G$ with degree at most $dn$, by the pigeonhole principle. We work with the graph $G'$ induced by these $m$ vertices. Let $I$ be the largest independent set in $G'$ and let $k = |I|$. Since $\deg(v) \leq dn$ for all $v \in I$, we have $\sum_{v \in I} \deg(v) \leq dnk \leq 2dmk$. Put $s = 8dk$. Again by pigeonhole, there are at least $m/2 - k$ vertices $v \in V(G') \setminus I$ with $\deg_{I}(v) < s$. Let $J$ be the set of these vertices. Consider the family $\mathcal{F}$ of subsets of $I$ with size less than $s$. Partition $J$ by each vertex's neighbourhood in $I$, and note that each resulting class corresponds to an element of $\mathcal{F}$. By the standard bounds $\binom{x}{r} \leq \left(ex/r\right)^{r}$ and $1 + x \leq e^{x}$,
+  Suppose not. Pick $c < 1/32$. Since $G$ contains $d\binom{n}{2}$ edges, there exist $m \geq n/2$ vertices in $G$ with degree at most $dn$, by the pigeonhole principle. We work with the graph $G'$ induced by these $m$ vertices. Let $I$ be the largest independent set in $G'$ and let $k = |I|$. Since $\deg(v) \leq dn$ for all $v \in I$, we have $\sum_{v \in I} \deg(v) \leq dnk \leq 2dmk$. Put $s = 8dk$. Again by pigeonhole, there are at least $m/2 - k$ vertices $v \in V(G') \setminus I$ with $\deg_{I}(v) < s$. Let $J$ be the set of these vertices. Consider the family $\mathcal{F}$ of subsets of $I$ with size less than $s$. Partition $J$ by each vertex's neighbourhood in $I$, and note that each resulting class corresponds to an element of $\mathcal{F}$. By the standard bounds $\binom{x}{r} \leq \left(ex/r\right)^{r}$ and $1 + x \leq e^{x}$,
   \[
     |\mathcal{F}| \leq s\binom{k}{s - 1} \leq s\left(\frac{ek}{s - 1}\right)^{s - 1} \!\!= s\left(\frac{s}{s - 1}\right)^{s - 1}\left(\frac{ek}{s}\right)^{s - 1} \!\!\leq se\left(\frac{ek}{s}\right)^{s - 1} \!\!= \frac{s^2}{k}\left(\frac{ek}{s}\right)^s.
   \]
@@ -94,7 +94,7 @@ Despite decades of intensive research, all known constructions of Ramsey graphs 
   \[
     \frac{|J|}{|\mathcal{F}|} \geq \frac{m/2 - k}{n^{1/3}} \geq \sqrt{n},
   \]
-  so by pigeonhole, there exists a class of vertices $Z$ in $J$ of size at least $\sqrt{n}$. Let $G'' = G[Z]$. Note that $G''$ does not contain an independent set of size $s$, otherwise exchange it with $Y$ in $I$ creates a larger independent set in $G'$, contradicting the maximality of $I$. Let $t$ be the size of the largest clique in $G''$, and note that $t < K$ by assumption. Erd\H{o}s--Szekeres theorem and the standard binomial bounds give
+  so by pigeonhole, there exists a class of vertices $Z$ in $J$ of size at least $\sqrt{n}$. Let $G'' = G[Z]$. Note that $G''$ does not contain an independent set of size $s$, as otherwise exchanging it with the corresponding subset of $I$ would create a larger independent set in $G'$, contradicting the maximality of $I$. Let $t$ be the size of the largest clique in $G''$, and note that $t < K$ by assumption. Erd\H{o}s--Szekeres theorem and the standard binomial bounds give
   \[
     \sqrt{n} \leq |Z| \leq \binom{s + K - 2}{s - 1} \leq \binom{s + K}{s} \leq \binom{8dK + K}{8dK} \leq \left(\frac{e(8d + 1)}{8d}\right)^{s} \leq \left(\frac{2}{d}\right)^s,
   \]
@@ -107,7 +107,7 @@ Despite decades of intensive research, all known constructions of Ramsey graphs 
 
 Recall that the Erd\H{o}s--Szekeres theorem (Theorem \ref{thm:erdos-szekeres}) gives $\hom(G) \geq \frac{1}{2} \log_2 n$, regardless of the edge density. Theorem~\ref{thm:ramsey-density} improves this when the density is small. For example, if $d = 1/n^{\eps}$ for some $\eps > 0$, then $\hom(G) = \Omega\left(\frac{n^{\eps}}{\log n^{\eps}} \log n\right)$, vastly larger than $\frac{1}{2}\log_2 n$. Intuitively, a sparse graph should contain a large independent set, and the theorem makes this notion precise. 
 
-If $G$ is $C$-Ramsey, then applying Theorem~\ref{thm:ramsey-density} to whichever $G$ or $\overline{G}$ has density $d \leq 1/2$ yields $c/(d\log(1/d)) \leq C$, forcing $d$ to be bounded away from $0$. By the same argument applied to $\overline{G}$ forces $d$ to be bounded away from $1$. This gives the following corollary.
+If $G$ is $C$-Ramsey, then applying Theorem~\ref{thm:ramsey-density} to whichever $G$ or $\overline{G}$ has density $d \leq 1/2$ yields $c/(d\log(1/d)) \leq C$, forcing $d$ to be bounded away from $0$. The same argument applied to $\overline{G}$ forces $d$ to be bounded away from $1$. This gives the following corollary.
 
 \begin{corollary}
   \label{cor:ramsey-density}
@@ -124,24 +124,24 @@ Erd\H{o}s and McKay~\cite{EFS} conjectured that for any Ramsey graph $G$ on $n$ 
 \[
   \bigl\{1, 2, \ldots, \delta n^2\bigr\} \subseteq \Phi(G).
 \]
-It was proven for Random graphs by Calkin, Frieze, and Mckay~\cite{erdosmckayrandomgraph}, but the conjecture for Ramsey graphs remained open for decades and only started to show significant progress in recent years. In particular, a chain of results were sparked after the work of Narayanan, Sahasrabudhe, and Tomon~\cite{narayanan2017ramseygraphsinducesubgraphs} establishing that $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on some ideas from the work of Bukh and Sudakov~\cite{BUKH2007612} which showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature that dense random graphs also exhibit. Kwan and Sudakov~\cite{kwan2021ramseygraphsinducesubgraphs} later improved the bound to $|\Phi(G)| = \Omega(n^2)$ by refining the argument of Narayanan, Sahasrabudhe, and Tomon. Eventually, Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023} closed the conjecture via Fourier-analytic arguments on graph polynomials.
+It was proven for random graphs by Calkin, Frieze, and McKay~\cite{erdosmckayrandomgraph}, but the conjecture for Ramsey graphs remained open for decades and only started to show significant progress in recent years. In particular, a chain of results was sparked after the work of Narayanan, Sahasrabudhe, and Tomon~\cite{narayanan2017ramseygraphsinducesubgraphs} establishing that $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on some ideas from the work of Bukh and Sudakov~\cite{BUKH2007612} which showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature that dense random graphs also exhibit. Kwan and Sudakov~\cite{kwan2021ramseygraphsinducesubgraphs} later improved the bound to $|\Phi(G)| = \Omega(n^2)$ by refining the argument of Narayanan, Sahasrabudhe, and Tomon. Eventually, Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023} closed the conjecture via Fourier-analytic arguments on graph polynomials.
 
 This dissertation will start by studying the result of Bukh and Sudakov on large induced subgraphs in Ramsey graphs with many distinct degrees. This work not only tightens the connection between Ramsey graphs and random graphs, but also builds the foundation for the subsequent $|\Phi(G)| = \Omega(n^2)$ result by Kwan and Sudakov which we will present in the following chapter. Lastly, we outline the proof of the Erd\H{o}s--McKay conjecture by Kwan, Sah, Sauermann, and Sawhney.
 
 % Another research direction is to consider whether forbidding certain induced subgraphs could force homogeneous sets beyond logarithmic size. Erd\H{o}s and Hajnal famously conjectured that for any graph $H$, if a graph $G$ does not contain $H$ as an induced subgraph, then $G$ contains a homogeneous set of size $|G|^{\eta}$ for some $\eta = \eta(H) > 0$.  
 
-\subsection{The anticoncentration behavior}\label{sec:anticoncentration}
+\subsection{The anticoncentration behaviour}\label{sec:anticoncentration}
 
-The core results of this dissertation concerns the \textit{anticoncentration} behavior exhibited in Ramsey graphs. In general, anticoncentration provides an upper bound on the point probabilities of a random variable. In the following chapters, we will repeatedly sample a uniformly random subset $U\subseteq V(G)$ and study its induced subgraph $G[U]$. A question to ask in this setting is how likely it is for two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?
+The core results of this dissertation concern the \textit{anticoncentration} behaviour exhibited in Ramsey graphs. In general, anticoncentration provides an upper bound on the point probabilities of a random variable. In the following chapters, we will repeatedly sample a uniformly random subset $U\subseteq V(G)$ and study its induced subgraph $G[U]$. A question to ask in this setting is how likely it is for two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?
 
 Observe that $\deg_U(x)-\deg_U(y)$ counts only vertices in $D = N_G(x)\triangle N_G(y)$. Write
-$A=N(x)\setminus N(y), B=N(y)\setminus N(x)$. Then
+$A = N(x)\setminus N(y), B = N(y)\setminus N(x)$. Then
 \begin{equation}\label{eq:deg-diff}
-  \deg_U(x)-\deg_U(y) = |U\cap A| - |U\cap B|,
+  \deg_U(x) - \deg_U(y) = |U \cap A| - |U \cap B|,
 \end{equation}
-so $x, y$ have the same degree in $G[U]$ precisely when $|U\cap A|=|U\cap B|$. Since each $v \in A$ contributes $+1$ to the difference $|U\cap A| - |U\cap B|$ with probability $1/2$ and each $v \in B$ contributes $-1$ with probability $1/2$, the difference is a sum of $|D| = |A| + |B|$ independent random variables, which has standard deviation $\Theta(\sqrt{n})$ when $|D| \geq \eps n$ is large. The Erd\H{o}s--Littlewood--Offord theorem then shows that the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sqrt{n})$, and thus $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$. This usually follows with a \textit{collision graph} construction and Tur\'{a}n's theorem to show the existence of many distinct degrees in $U$.
+so $x, y$ have the same degree in $G[U]$ precisely when $|U \cap A|=|U \cap B|$. Since each $v \in A$ contributes $+1$ to the difference $|U \cap A| - |U \cap B|$ with probability $1/2$ and each $v \in B$ contributes $-1$ with probability $1/2$, the difference is a sum of $|D| = |A| + |B|$ independent random variables, which has standard deviation $\Theta(\sqrt{n})$ when $|D| \geq \eps n$ is large. The Erd\H{o}s--Littlewood--Offord theorem then shows that the probability that $\deg_U(x) - \deg_U(y)$ equals any particular value is $O(1/\sqrt{n})$, and thus $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$. This usually follows with a \textit{collision graph} construction and Tur\'{a}n's theorem to show the existence of many distinct degrees in $U$.
 
-An intuition to this $O(1/\sqrt{n})$ bound is that $\deg_U(x)-\deg_U(y)$ is a \textit{linear} polynomial of many independent indicators, which is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$. Since the probability density function $\phi(x)$ of a normal distribution with standard deviation $\sigma$ is at most $1/(\sigma\sqrt{2\pi})$ for all $x$, the probability that $\deg_U(x)-\deg_U(y)$ equals any particular value is $O(1/\sigma) = O(1/\sqrt{n})$, and this anticoncentration bound is the key to the results in Chapter~\ref{sec:ch2} and \ref{sec:ch3}. 
+An intuition for this $O(1/\sqrt{n})$ bound is that $\deg_U(x) - \deg_U(y)$ is a \textit{linear} polynomial of many independent indicators, which is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$. Since the probability density function $\phi(x)$ of a normal distribution with standard deviation $\sigma$ is at most $1/(\sigma\sqrt{2\pi})$ for all $x$, the probability that $\deg_U(x) - \deg_U(y)$ equals any particular value is $O(1/\sigma) = O(1/\sqrt{n})$, and this anticoncentration bound is the key to the results in Chapters~\ref{sec:ch2} and~\ref{sec:ch3}. 
 
 In Chapter~\ref{sec:ch4}, we will study the induced edge count $e(U)$ itself, which is instead a \textit{quadratic} polynomial of indicators. It turns out a central limit theorem still holds for $e(U)$ at the large scale with standard deviation $\sigma(e(U)) = \Theta(n^{3/2})$, and we prove its point probabilities follow the $O(1/\sigma) = O(n^{-3/2})$ bound that a Gaussian would give, even though $e(U)$ need not be Gaussian at the small scale. This is the same anticoncentration principle as in Chapters~\ref{sec:ch2} and \ref{sec:ch3}, sharpened to a statement about $e(U)$ rather than a degree difference.
 
@@ -153,9 +153,9 @@ Given graph $G$ on $n$ vertices, we call $e(G) \coloneqq |E(G)|$ the \textit{siz
 \[
   d(G) \coloneqq e(G)\binom{n}{2}^{-1}
 \]
-the \textit{density} of $G$. For vertex $v \in V(G)$, denote $N(v) \coloneqq \{w \in V(G) : \{v, w\} \in E(G)\}$ as the \textit{neighborhood} of $v$ and $\deg(v) \coloneqq |N(v)|$ as the \textit{degree} of $v$. Write $\overline{G}$ as the \textit{complement graph} of $G$ and $\overline{N(v)} \coloneqq V(G) \setminus N(v)$ as the \textit{non-neighborhood} of $v$. For $S \subseteq V(G)$, denote $G - S$ as the subgraph of $G$ obtained by deleting $S$ and all edges incident to $S$. For $U \subseteq V(G)$, We call $G[U] \coloneqq G - (V(G) \setminus U)$ the $\textit{induced subgraph}$ of $U$ in $G$. Write $e(U) \coloneqq e(G[U])$ and $d(U) \coloneqq d(G[U])$ as the size and density of $U$, respectively. Write $N_U(v) \coloneqq N(v) \cap U$, $\deg_U(v) \coloneqq |N_U(v)|$, and $\overline{N_U(v)} \coloneqq U \setminus N_U(v)$ as the neighborhood, degree, and non-neighborhood of $v$ in $U$, respectively. For $A, B \subseteq V(G)$, write $e(A, B) \coloneqq e(A \cup B) - e(A) - e(B)$ and
+the \textit{density} of $G$. For vertex $v \in V(G)$, denote $N(v) \coloneqq \{w \in V(G) : \{v, w\} \in E(G)\}$ as the \textit{neighbourhood} of $v$ and $\deg(v) \coloneqq |N(v)|$ as the \textit{degree} of $v$. Write $\overline{G}$ as the \textit{complement graph} of $G$ and $\overline{N(v)} \coloneqq V(G) \setminus N(v)$ as the \textit{non-neighbourhood} of $v$. For $S \subseteq V(G)$, denote $G - S$ as the subgraph of $G$ obtained by deleting $S$ and all edges incident to $S$. For $U \subseteq V(G)$, we call $G[U] \coloneqq G - (V(G) \setminus U)$ the $\textit{induced subgraph}$ of $U$ in $G$. Write $e(U) \coloneqq e(G[U])$ and $d(U) \coloneqq d(G[U])$ as the size and density of $U$, respectively. Write $N_U(v) \coloneqq N(v) \cap U$, $\deg_U(v) \coloneqq |N_U(v)|$, and $\overline{N_U(v)} \coloneqq U \setminus N_U(v)$ as the neighbourhood, degree, and non-neighbourhood of $v$ in $U$, respectively. For $A, B \subseteq V(G)$, write $e(A, B) \coloneqq e(A \cup B) - e(A) - e(B)$ and
 \[
-  d(A, B) \coloneq \frac{e(A, B)}{|A||B|}
+  d(A, B) \coloneqq \frac{e(A, B)}{|A||B|}
 \]
 as the edge count and density between $A$ and $B$, respectively.
 
@@ -297,7 +297,7 @@ We also use the following version of Tur\'{a}n's theorem.
   \[
     I \coloneqq \bigl\{v \in V : v < u, \, \forall u \in N(v)\bigr\}.
   \]
-  For distinct $u, v \in V(G)$, either $u > v$ or $v > u$, so $u, v$ cannot both be in $I$ if they are adjacent. Thus $I$ is an independent set. Since $v \in I$ if and only if $v$ is the least element among $v$ and its neighbors, 
+  For distinct $u, v \in V(G)$, either $u > v$ or $v > u$, so $u, v$ cannot both be in $I$ if they are adjacent. Thus $I$ is an independent set. Since $v \in I$ if and only if $v$ is the least element among $v$ and its neighbours, 
   \[
     \E\bigl[|I|\bigr] = \sum_{v \in V} \prob\bigl[v \in I\bigr] = \sum_{v \in V} \frac{1}{1 + \deg(v)}.
   \]

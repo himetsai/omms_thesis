@@ -20,7 +20,7 @@ To prove Theorem \ref{thm:bs2007}, Bukh and Sudakov introduced the notion of \te
   An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-diverse} if for each $x \in V(G)$, we have $|N(x) \triangle N(y)| \geq \eps n$ for all but $\leq n^{\delta}$ vertices $y \in V(G)$.
 \end{definition}
 
-Notice that $(\eps, \delta)$-diversity directly conditions our assumption $|N(x) \triangle N(y)| = D \geq \eps n$ in the  discussion of anticoncentration in Section \ref{sec:anticoncentration}. Hence, we may show in a diverse graph that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$ for most pairs of vertices $x, y \in V(G)$, from which we use Turan's theorem to conclude that there are many distinct degrees in a diverse graph. The following lemma formalizes this observation and reduces Theorem \ref{thm:bs2007} to showing every Ramsey graph contains a diverse subgraph of linear size.
+Notice that $(\eps, \delta)$-diversity directly matches our assumption $|N(x) \triangle N(y)| = D \geq \eps n$ in the discussion of anticoncentration in Section~\ref{sec:anticoncentration}. Hence, we may show in a diverse graph that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$ for most pairs of vertices $x, y \in V(G)$, from which Tur\'{a}n's theorem allows us to conclude that there are many distinct degrees in a diverse graph. The following lemma formalizes this observation and reduces Theorem~\ref{thm:bs2007} to showing that every Ramsey graph contains a diverse subgraph of linear size.
 
 \begin{lemma}
   \label{lem:diversity-degrees}
@@ -35,7 +35,7 @@ Notice that $(\eps, \delta)$-diversity directly conditions our assumption $|N(x)
   \[
     \deg_U(x) - \deg_U(y) = |A \cap U| - |B \cap U| = \sum_{v \in A} \mathbbm{1}_{v \in U} - \sum_{v \in B} \mathbbm{1}_{v \in U}
   \]
-  is of $(|D|, 1/2)$-Littlewood--Offord type. Thus by Littlewood--Offord theorem (Proposition \ref{prop:littlewood-offord}),
+  is of $(|D|, 1/2)$-Littlewood--Offord type. Thus by the Littlewood--Offord theorem (Proposition~\ref{prop:littlewood-offord}),
   \[
     \prob\bigl[\deg_U(x) = \deg_U(y)\bigr] = O\bigl(1/\sqrt{|D|}\bigr).
   \]
@@ -45,7 +45,7 @@ Notice that $(\eps, \delta)$-diversity directly conditions our assumption $|N(x)
   \[
     \E[e(H)] = \sum_{\{x, y\} \in V(G)^2} \E[\mathbbm{1}_{xy}] \leq n^{1 + \delta} + n^2 \cdot O\bigl(1/\sqrt{n}\bigr) = O\bigl(n^{3/2}\bigr)
   \] 
-  and Markov's inequality yields $\prob[e(H) = O(n^{3/2})] \geq 1/2$. Since $|U| < n/4$ with probability $o(1)$ by the Chernoff bound, the union bound yields a positive probability that $|U| \geq n/4$ and $e(H) \leq O(n^{3/2})$ occur simultaneously, in which case Turan's Theorem (Proposition \ref{prop:turan}) gives an independent set $I$ in $H$ of size at least 
+  and Markov's inequality yields $\prob[e(H) = O(n^{3/2})] \geq 1/2$. Since $|U| < n/4$ with probability $o(1)$ by the Chernoff bound, the union bound yields a positive probability that $|U| \geq n/4$ and $e(H) \leq O(n^{3/2})$ occur simultaneously, in which case Tur\'{a}n's theorem (Proposition~\ref{prop:turan}) gives an independent set $I$ in $H$ of size at least 
   \[
     |I| \geq \frac{|U|^2}{2e(H) + |U|} = \frac{(n/4)^2}{O(n^{3/2}) + n/4} = \Omega\bigl(\sqrt{n}\bigr).
   \]
@@ -65,7 +65,7 @@ That is, almost every vertex $v \in V(G)$ satisfies
 \[
   \eps |W| \leq |N(v) \cap W| \leq (1 - \eps) |W|,
 \]
-whenever $|W|$ is large. Thus, richness ensures neighborhoods are not unusually concentrated in nor absent from large sets, which is exactly the density control one has in random graphs like $G_{n, 1/2}$, where $|N(v) \cap W| \approx |W|/2$ by the Chernoff bound. When $W$ is the neighborhood of another vertex, richness ensures one side of the symmetric difference $|N(x) \triangle N(y)| = |N(x) \cap \overline{N(y)}| + |\overline{N(x)} \cap N(y)|$ is large, implying diversity.
+whenever $|W|$ is large. Thus, richness ensures neighbourhoods are not unusually concentrated in nor absent from large sets, which is exactly the density control one has in random graphs like $G_{n, 1/2}$, where $|N(v) \cap W| \approx |W|/2$ by the Chernoff bound. When $W$ is the neighbourhood of another vertex, richness ensures one side of the symmetric difference $|N(x) \triangle N(y)| = |N(x) \cap \overline{N(y)}| + |\overline{N(x)} \cap N(y)|$ is large, implying diversity.
 
 \begin{lemma}
   \label{lem:richness-implies-diversity}
@@ -95,7 +95,7 @@ Richness also gives the reversed notion of diversity.
 \end{lemma}
 
 \begin{proof}
-  We show that for each choice of $x_1 \in V(G)$, there are $\leq n^{\delta}$ vertices $x_2 \in V(G)$ with $|N(x_1) \triangle \overline{N(x_2)}| < (\eps/2)n$. Since either $|N(x_1)| \geq n/2$ or $|\overline{N(x_1)}| \geq n/2$, we assume without loss of generality that $|N(x_1)| \geq n/2$. By $(\eps, \delta)$-richness, there are $\leq n^{\delta}$ vertices $x_2$ with $|N(x_2) \cap N(x_1)| < \eps n/2$. For all other choices of $x_2$, 
+  We show that for each $x_1 \in V(G)$, there are $\leq n^{\delta}$ vertices $x_2 \in V(G)$ with $|N(x_1) \triangle \overline{N(x_2)}| < (\eps/2)n$. Since either $|N(x_1)| \geq n/2$ or $|\overline{N(x_1)}| \geq n/2$, we assume without loss of generality that $|N(x_1)| \geq n/2$. By $(\eps, \delta)$-richness, there are $\leq n^{\delta}$ vertices $x_2$ with $|N(x_2) \cap N(x_1)| < \eps n/2$. For all other $x_2$, 
   \[
     |N(x_1) \triangle \overline{N(x_2)}| \geq |N(x_1) \cap N(x_2)|  \geq (\eps/2) n.
   \]
@@ -116,7 +116,7 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. Spe
   For $\delta \in (0, 1)$, there exists $\eps = \eps(C) > 0$ such that every $C$-Ramsey graph $G$ on $n$ vertices contains an $(\eps, \delta)$-rich subgraph on $\Omega(n)$ vertices.
 \end{lemma}
 
-\textit{Remark:} $\eps = \eps(C)$ is independent of $\delta$, so  $\delta$ can be taken arbitrarily small for any given $\eps$.
+\textit{Remark:} $\eps = \eps(C)$ is independent of $\delta$, so $\delta$ can be taken arbitrarily small for any given $\eps$.
 
 \begin{proof}
   Suppose for contradiction that every set of $\geq cn$ vertices fails to induce a $(\eps, \delta)$-rich subgraph, for small $\eps = \eps(C)$ and $c = (\delta/4)^{K}$ with large $K = K(C, \delta)$ to be determined. We inductively construct a sequence of disjoint vertex sets $S_1, S_2, \ldots, S_K$ of size $s = (cn)^\delta/2$, such that for all $S_i$ one of the following conditions holds:
@@ -124,7 +124,7 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. Spe
     \item[(i)] $d(S_i, S_j) < 4\eps$ for $j > i$,
     \item[(ii)] $d(S_i, S_j) > 1 - 4\eps$ for $j > i$.
   \end{enumerate}
-  That is, each $S_i$ is small and extremely sprase or dense between each other. Alongside, we also construct a sequence of induced subgraphs $G = G[U_0] \supset G[U_1] \supset \cdots \supset G[U_K]$, such that $|U_i| \geq (\delta/4)|U_{i - 1}|$ and $S_i \subseteq U_{i - 1}$ for all $i$.
+  That is, each $S_i$ is small, and the sets are extremely sparse or dense between one another. Alongside, we also construct a sequence of induced subgraphs $G = G[U_0] \supset G[U_1] \supset \cdots \supset G[U_K]$, such that $|U_i| \geq (\delta/4)|U_{i - 1}|$ and $S_i \subseteq U_{i - 1}$ for all $i$.
 
   We first show how this construction gives the lemma. By working with $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $s$,
   \[
@@ -138,7 +138,7 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. Spe
 
   We now construct the sets $S_i$ and $U_i$ inductively. Suppose $U_1, \ldots, U_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. By induction, $|U_{i - 1}| \geq (\delta/4)^{i - 1}|U_0| \geq cn$. Since $G[U_{i - 1}]$ is not $(\eps, \delta)$-rich by assumption, $U_{i - 1}$ contains subsets $W_i, Y_i$ with $|W_i| \geq \delta|U_{i - 1}|$ and $|Y_i| = (cn)^{\delta}$, such that for each $y \in Y_i$ we have $|N_{G_{i - 1}}(y) \cap W_i| < \eps|W_i|$ or $|\overline{N_{G_{i - 1}}(y)} \cap W_i| < \eps|W_i|$. We consider two cases.
 
-  Suppose $|N_{G_{i - 1}}(y) \cap W_i| < \eps|W_i|$ for half the vertices $y \in Y_i$, and let $S_i$ be the corresponding subset of $Y_i$, so $|S_i| = (cn)^{\delta}/2$. Put $T_i = W_i \setminus S_i$ and note that $|T_i| \geq |W_i|/2$, as $|S_i| \leq |W_i|/2$ for large enough $n$. Then for $y \in S_i$,
+  Suppose $|N_{G_{i - 1}}(y) \cap W_i| < \eps|W_i|$ for half the vertices $y \in Y_i$, and let $S_i$ be the corresponding subset of $Y_i$, so $|S_i| = (cn)^{\delta}/2$. Put $T_i = W_i \setminus S_i$. Since $|S_i| \leq |W_i|/2$ for large enough $n$, we have $|T_i| \geq |W_i|/2$. Thus for $y \in S_i$,
   \[
     d(y, T_i) = \frac{|N_{G_{i - 1}}(y) \cap T_i|}{|T_i|} \leq \frac{|N_{G_{i - 1}}(y) \cap W_i|}{|T_i|} < \frac{\eps |W_i|}{|W_i|/2} = 2\eps.
   \]
@@ -168,7 +168,7 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. Spe
   \[
     |T_i| - \frac{e(T_i, S_i)}{|S_i|} = |T_i| - \frac{|T_i|}{|S_i|}\sum_{y \in S_i} d(y, T_i) < |T_i| - (1 - 2\eps)|T_i| = 2\eps|T_i|.
   \]
-  Combining both inequalities gives $|Z_i| < |T_i|/2$, hence $|U_i| > |T_i|/2 \geq (\delta/4)|U_{i - 1}|$ as in the other case. For  $j > i$, each $v \in S_j \subseteq U_i$ satisfies $d(v, S_i) > 1 - 4\eps$, so $d(S_i, S_j) > 1 - 4\eps$. Thus $S_i$ satisfies condition~(ii). This completes the induction.
+  Combining both inequalities gives $|Z_i| < |T_i|/2$, hence $|U_i| > |T_i|/2 \geq (\delta/4)|U_{i - 1}|$ as in the other case. For $j > i$, each $v \in S_j \subseteq U_i$ satisfies $d(v, S_i) > 1 - 4\eps$, so $d(S_i, S_j) > 1 - 4\eps$. Thus $S_i$ satisfies condition~(ii). This completes the induction.
 \end{proof}
 
 \subsection{Proof of Theorem \ref{thm:bs2007}}
