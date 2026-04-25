@@ -156,9 +156,10 @@ for all $n^{-0.99} < |\tau| \leq \nu$, the bound \eqref{eq:phi-L-bound} gives a 
   \sum_{v \in V(G)} \left\|\frac{\tau d_v}{\pi}\right\|^2 = O(\log n),
 \]
 for some $n^{-0.99} < |\tau| \leq \nu$. This says that for this one frequency, many of the numbers $\tau d_v/\pi$ are simultaneously close to integers. Lemma~4.12 of~\cite{Kwan_2023} uses this condition to show that for small enough $\gamma > 0$, the vertex set admits a partition
-\[
+\begin{equation}
+  \label{eq:partition}
   V(G) = R \sqcup (B_1 \sqcup \cdots \sqcup B_m),
-\]
+\end{equation}
 with $|R| \leq n^{1-\gamma}$, $|B_j| = \lceil n^{1-2\gamma}\rceil$ for $j \in [m]$, and real numbers $\kappa_1, \dots, \kappa_m \geq 0$ such that
 \[
   |d_v - \kappa_j| \leq n^{1/2 + 4\gamma},
@@ -179,7 +180,7 @@ This reduces the interval estimate \eqref{eq:interval-estimate} to evaluating th
 
 % \textit{Remark.} The dichotomy above is an instance of the inverse Littlewood--Offord phenomenon. In Chapter~\ref{sec:ch3} the forward direction of Littlewood--Offord controlled the collision probability $\Pr[\deg_U(x) = \deg_U(y)]$ via the large symmetric difference $|N(x) \triangle N(y)|$. Here the forward direction would tell us that $L = \sum_v d_v x_v$ has small-ball probability $O(n^{-3/2})$ provided the coefficient vector $(d_v)$ is generic. The inverse direction, developed by Tao and Vu and by Rudelson and Vershynin, identifies the exceptional case as precisely additive structure, which Lemma~4.12 of \cite{Kwan_2023} in turn converts into the bucket partition we used in the structured case. The formal threshold at which the inverse case kicks in is controlled by the \emph{regularised least common denominator} of $(d_v)$, a notion introduced by Vershynin in random matrix theory, and we do not require the formal definition here.
 
-It is tempting at this point to hope that, after conditioning on $\vec\Delta$, $L_{\text{err}} + Q$ satisfies a local CLT of its own. This hope is too optimistic. Consider $G$ to be the disjoint union of two independent copies of $G(n/2, 1/2)$. With high probability $G$ is a Ramsey graph. Every vertex has degree approximately $n/4$, so all vertices fall into a single bucket and $\vec\Delta = |U|$. However, conditioning on $|U| = n/2$ yields a normalized limiting distribution of the form $\alpha Z^2 + \beta Z_2$ for independent Gaussians $Z_1, Z_2$. Therefore, the asymptotic conditional distribution of $X$ need not be Gaussian after the bucket conditioning, though we shall see that it can always be evaluated at independent Gaussians.
+It is tempting at this point to hope that, after conditioning on $\vec\Delta$, $L_{\text{err}} + Q$ satisfies a local CLT of its own. This hope is too optimistic. Consider $G$ to be the disjoint union of two independent copies of $G(n/2, 1/2)$. With high probability $G$ is a Ramsey graph. Every vertex has degree approximately $n/4$, so all vertices fall into a single bucket and $\vec\Delta = |U|$. However, conditioning on $|U| = n/2$ yields a normalized limiting distribution of the form $\alpha Z_1^2 + \beta Z_2$ for independent Gaussians $Z_1, Z_2$. Therefore, the asymptotic conditional distribution of $X$ need not be Gaussian after the bucket conditioning, though we shall see that it can always be evaluated at independent Gaussians.
 
 % Consider $G$ to be the disjoint union of two independent copies of $G(n/2, 1/2)$, with vertex sets $V_1$ and $V_2$. With high probability $G$ is a Ramsey graph. Every vertex has degree approximately $n/4$, so all vertices fall into a single bucket and $\vec\Delta = |U|$. Conditioning on $|U| = n/2$ and writing $s = |U \cap V_1|$,
 % \[
@@ -199,20 +200,22 @@ The target now is to show
 \label{eq:conditional-target}
   \prob\left[|X - x| \leq B \mid \vec\Delta\right] = O(n^{-1}),
 \end{equation}
-which, after averaging over $\vec\Delta$, yields the interval estimate $\Theta(n^{-3/2})$ in \eqref{eq:interval-estimate}. The averaging contributes the remaining factor $n^{-1/2}$, reflecting the fact that only a $\Theta(n^{-1/2})$ fraction of $\vec\Delta$ values place $\E\bigl[X \mid \vec\Delta\bigr]$ within $O(n)$ of $x$. As shown in the previous section, the conditional distribution of $X$ need not be approximately Gaussian, so the standard Fourier-analytic approach does not close on its own. \cite{Kwan_2023} overcomes this by combining the following three ingredients.
+whcih gives the interval estimate~\eqref{eq:interval-estimate} after averaging over $\vec\Delta$. Specifically, since $\sigma\bigl(\E[X \mid \vec \Delta]\bigr) = \Theta(n^{3/2})$, only $O(n/n^{3/2}) = O(n^{-1/2})$ fraction of $\vec \Delta$ values place $\E\bigl[X \mid \vec\Delta\bigr]$ within $O(n)$ of $x$, so this fraction contributes $O(n^{-1/2}) \cdot O(n^{-1}) = O(n^{-3/2})$ when averaged over $\vec\Delta$. The remaining tail values of $\vec \Delta$ are negligible by \textit{hypercontractivity}~\cite[Theorem 4.15]{Kwan_2023}. 
+
+As shown in the previous section, the conditional distribution of $X$ need not be approximately Gaussian, so the standard Fourier-analytic approach does not close on its own. \cite{Kwan_2023} overcomes this by combining the following three ingredients.
 
 \paragraph{Ingredient 1. The Gaussian invariance principle}
 
-We first replace the product of Boolean slices by a Gaussian space. The invariance principle of Mossel, O'Donnell and Oleszkiewicz~\cite{mossel2005noisestabilityfunctionslow} says that a low-degree polynomial of independent bounded random variables has a distribution close to that of the same polynomial evaluated at independent standard Gaussians. Applying this to $L_{\text{err}} + Q$ produces a quadratic polynomial
+We first replace the product of Boolean slices by a Gaussian space. The \textit{invariance principle} of Mossel, O'Donnell and Oleszkiewicz~\cite{mossel2005noisestabilityfunctionslow} says that a low-degree polynomial of independent bounded random variables has a distribution close to that of the same polynomial evaluated at independent standard Gaussians. Applying this to $L_{\text{err}} + Q$ produces a quadratic polynomial
 \begin{equation}
 \label{eq:gaussian-quadratic}
-  f(\vec Z) = \vec Z^{\top} F\, \vec Z + \vec f \cdot \vec Z + f_0, \qquad \vec Z = (Z_1, \dots, Z_n) \sim \mathcal{N}(0, I_n),
+  f(\vec Z) = \vec Z^{\top} F \vec Z + \vec f \cdot \vec Z + f_0, \qquad \vec Z = (Z_1, \dots, Z_n) \sim \mathcal{N}(0, I_n),
 \end{equation}
-with a symmetric matrix $F \in \R^{n \times n}$ and $\vec f \in \R^n$ derived from the adjacency matrix of $G$ and the bucket partition, such that the characteristic functions of $L_{\text{err}} + Q$ (given $\vec\Delta$) and of $f(\vec Z)$ are close -- see \cite[Lemma~11.1]{Kwan_2023}. The role of this step is to convert a discrete, dependent domain into a continuous, independent one, allowing us to apply the Carbery--Wright theorem.
+with a symmetric matrix $F \in \R^{n \times n}$ and $\vec f \in \R^n$ derived from the adjacency matrix of $G$ and the bucket partition, such that the characteristic functions of $L_{\text{err}} + Q$ (given $\vec\Delta$) and of $f(\vec Z)$ are close -- see \cite[Lemma~11.1]{Kwan_2023}. The role of this step is to convert a discrete, dependent domain into a continuous, independent one, allowing us to apply the \textit{Carbery--Wright theorem}.
 
 \paragraph{Ingredient 2. The sharpened Carbery--Wright theorem}
 
-Given the $f(\vec Z)$ from ingredient~1, we now bound $\sup_x \prob[|f(\vec Z) - x| \leq 1]$. In our application $\sigma(f(\vec Z)) = \Omega(n)$, since the invariance principle preserves the variance and $\Var(Q)$ alone contributes $\Theta(n^2)$. The target $O(n^{-1})$ in~\eqref{eq:conditional-target} is therefore asking for a bound of the form $1/\sigma(f(\vec Z))$.
+Given the $f(\vec Z)$ from ingredient~1, we now bound $\sup_x \prob[|f(\vec Z) - x| \leq 1]$. Recall that the \textit{Frobenius norm} for matrix $M \in \R^{n \times n}$ is $\|M\|_{\mathrm{F}} \coloneqq \left(\sum_{i, j} M_{ij}^2\right)^{1/2}$. In our application $\sigma(f(\vec Z)) = \Omega(n)$, as $\sigma(f(\vec Z))^2 = 2\|F\|_{\mathrm{F}}^2 + \|\vec f\|_2^2$ by \cite[Lemma~11.1(2)]{Kwan_2023} and Ingredient~3 below forces $\|F\|_{\mathrm{F}}^2 = \Omega(n^2)$. The target $O(n^{-1})$ in~\eqref{eq:conditional-target} is therefore asking for a bound of the form $1/\sigma(f(\vec Z))$.
 
 The classical result in this direction is the Carbery--Wright theorem, which states that for quadratic polynomial $f$ in independent standard Gaussians and any $\eps > 0$,
 \[
@@ -225,7 +228,7 @@ which falls short of our target $O\bigl(1/\sigma(f(\vec Z))\bigr)$. The square-r
   Let $f(\vec Z) = \vec Z^{\top} F \vec Z + \vec f \cdot \vec Z + f_0$ be a real quadratic polynomial in independent standard Gaussians, with $F$ a nonzero symmetric matrix. Suppose that for some $\eta > 0$,
   \begin{equation}
   \label{eq:robust-rank-2}
-    \min_{\substack{\widetilde F \in \R^{n \times n} \\ \mathrm{rank}(\widetilde F) \leq 2}} \|F - \widetilde F\|_F^2 \geq \eta \|F\|_F^2.
+    \min_{\substack{\widetilde F \in \R^{n \times n} \\ \mathrm{rank}(\widetilde F) \leq 2}} \|F - \widetilde F\|_{\mathrm{F}}^2 \geq \eta \|F\|_{\mathrm{F}}^2.
   \end{equation}
   Then for $\eps > 0$,
   \[
@@ -233,7 +236,7 @@ which falls short of our target $O\bigl(1/\sigma(f(\vec Z))\bigr)$. The square-r
   \]
 \end{theorem}
 
-By the Eckart--Young theorem, the left-hand side of \eqref{eq:robust-rank-2} equals $\sum_{i \geq 3} \sigma_i(F)^2$, the Frobenius mass of $F$ past its top two singular values. Condition \eqref{eq:robust-rank-2} therefore asserts that the rank-$(\geq 3)$ tail of $F$ carries at least $\eta$-fraction of $\|F\|_F^2$. 
+By the Eckart--Young--Mirsky theorem, the left-hand side of \eqref{eq:robust-rank-2} equals $\sum_{i \geq 3} \sigma_i(F)^2$, the Frobenius mass of $F$ in singular values excluding the top two. Condition \eqref{eq:robust-rank-2} therefore asserts that the rank-$(\geq 3)$ tail of $F$ carries at least $\eta$-fraction of $\|F\|_{\mathrm{F}}^2$. 
 
 It remains to show \eqref{eq:robust-rank-2} for the matrix $F$ arising from the bucket structure, and this is where the Ramsey hypothesis enters.
 
@@ -241,19 +244,26 @@ It remains to show \eqref{eq:robust-rank-2} for the matrix $F$ arising from the 
 
 \begin{lemma}[Robust rank, {\cite[Lemma~10.1]{Kwan_2023}}]
 \label{lem:robust-rank}
-  Fix $C > 0$, $0 < \delta < 1$ and $r \in \N$. Let $G$ be a $C$-Ramsey graph on $n$ vertices with adjacency matrix $A$, and let $V(G) = I_1 \cup \cdots \cup I_m$ be a partition into equal parts with $n^{\delta/2} \leq m \leq 2n^{\delta}$. Then for every matrix $B \in \R^{n \times n}$ with $\mathrm{rank}(B[I_j \times I_k]) \leq r$ for all $j, k \in [m]$,
-  \[
-    \|A - B\|_F^2 = \Omega(n^2).
-  \]
+  Fix $C > 0$, $0 < \delta < 1$ and $r \in \N$. Let $G$ be a $C$-Ramsey graph on $n$ vertices with adjacency matrix $A$, and let $V(G) = B_1 \sqcup \cdots \sqcup B_m$ be a partition into equal parts with $n^{\delta/2} \leq m \leq 2n^{\delta}$. Then for every matrix $M \in \R^{n \times n}$ with $\mathrm{rank}(M[B_j \times B_k]) \leq r$ for all $j, k \in [m]$,
+  \begin{equation}
+    \label{eq:robust}
+    \|A - M\|_{\mathrm{F}}^2 = \Omega(n^2).
+  \end{equation}
 \end{lemma}
 
-The lemma says that the adjacency matrix of a Ramsey graph is at Frobenius distance $\Omega(n)$ from every matrix whose restriction to each bucket block is low rank. 
+The lemma says that the adjacency matrix of a Ramsey graph is at Frobenius distance $\Omega(n)$ from every matrix whose restriction to each bucket block has low rank. When $M$ is binary, $\|A - M\|_{\mathrm{F}}^2$ counts the number of entries on which $A, M$ disagree, so the lemma says no binary matrix with low-rank blocks can agree with $A$ on almost all entries.
 
-% In the application of Theorem~\ref{thm:sharp-CW}, the parts $I_j$ are the buckets $B_j$ from Section~\ref{sec:fourier-walsh} (after a minor adjustment to make the sizes equal) and $F$ is a rescaled copy of $A$ restricted away from the exceptional set $R$. A hypothetical rank-$2$ approximation $\widetilde F$ violating \eqref{eq:robust-rank-2} would in particular satisfy $\mathrm{rank}(\widetilde F[B_j \times B_k]) \leq 2$ on every bucket block, contradicting Lemma~\ref{lem:robust-rank} with $r = 2$ and $\delta = 2\gamma$. Hence \eqref{eq:robust-rank-2} holds with some $\eta = \eta(C, \gamma) > 0$.
+In the application of Theorem~\ref{thm:sharp-CW}, the parts $B_j$ are the buckets from~\eqref{eq:partition} of size $\lceil n^{1-2\gamma} \rceil$. Write $\vec x \coloneqq (x_v)_{v \in V}$. The matrix $F$ is constructed so that, after conditioning on $\vec \Delta$, the quadratic form $\vec x^{\top} F \vec x$ only concerns the deviation of $\vec x$ from its bucket averages. Specifically, the adjacency matrix $A$ of $G[V \setminus R]$ may be written as
+\[
+  A = \alpha F + B
+\]
+for some fixed $\alpha$ and a correction matrix $B$ satisfying $\mathrm{rank}(B[B_j \times B_k]) \leq b$ for any block $B_j \times B_k$ and some constant $b$. Suppose for contradiction that some $\tilde{F}$ with rank $\leq 2$ violates~\eqref{eq:robust-rank-2}. Set $\tilde{A} \coloneqq \alpha \tilde{F} + B$. Then for $\eta > 0$, since $\|F\|_{\mathrm{F}}^2 = O(n^2)$,
+\[
+  \|A - \tilde A\|_{\mathrm{F}}^2 = |\alpha|^2 \cdot \|F - \tilde F\|_{\mathrm{F}}^2 < \eta \cdot |\alpha|^2 \cdot \|F\|_{\mathrm{F}}^2 = O(\eta n^2).
+\] 
+But then on every $B_j \times B_k$ we have $\mathrm{rank}(\tilde{A}[B_j \times B_k]) \leq b + 2$, contradicting \eqref{eq:robust} for small enough $\eta$. Hence \eqref{eq:robust-rank-2} holds for some $\eta = \eta(C, \gamma)$. See~\cite[Section~12]{Kwan_2023} for the explicit construction of $F$.
 
-% Lemma~\ref{lem:robust-rank} is the only place in the first stage where the Ramsey hypothesis is used directly, and its proof is the most combinatorial component in this stage. The argument proceeds by discretising the entries of the approximating matrix $B$ to a finite alphabet, observing that a low-rank block forces a small number of distinct row patterns, and applying Ramsey's theorem on an auxiliary graph to extract a monochromatic structure that contradicts the $C$-Ramsey assumption on $G$.
-
-To sum it up, applying ingredients~1, ~3, and ~2 in sequence yields the interval estimate in \eqref{eq:conditional-target}.
+To sum it up, applying ingredients~1, ~3, and ~2 in sequence yields \eqref{eq:conditional-target}.
 
 
 \subsection{Switching for pointwise control}
