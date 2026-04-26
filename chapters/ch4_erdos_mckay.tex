@@ -11,7 +11,7 @@ Both proofs in Chapters~2 and~3 rely on the same anticoncentration principle: wh
   \]
 \end{theorem}
 
-The approach to this theorem fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself. This requires a substantially richer set of tools, but the underlying principle remains: when a random variable is approximately Gaussian on the large scale with large standard deviation, its point probabilities are small.
+The approach to this theorem fundamentally shifts from bounding degree-collision probabilities for pairs of vertices to directly controlling the point probabilities of $e(U)$ itself.
 
 \subsection{Point probabilities of $e(U)$}
 
@@ -29,7 +29,7 @@ In Chapters~2 and~3, the anticoncentration analysis targeted the degree differen
 \[
   \prob\bigl[e(U) \leq x\bigr] = \Phi\left(\frac{x - \mu}{\sigma}\right) + o(1/\sigma)
 \]
-for all $x \in \R$ with $\Phi$ being the standard Gaussian cumulative distribution function. In~\cite{Kwan_2023}, it is strengthened to a local CLT \textit{up to constant factors}, showing that the point probabilities of $e(U)$ are all of order $\Theta(1/\sigma) = \Theta(n^{-3/2})$ within the bulk of the distribution.
+for all $x \in \R$ with $\Phi$ being the standard Gaussian cumulative distribution function. In~\cite{Kwan_2023}, it is strengthened to a local CLT (up to constant factors), showing that the point probabilities of $e(U)$ are all of order $\Theta(1/\sigma) = \Theta(n^{-3/2})$ within the bulk of the distribution.
 
 \begin{theorem}[Kwan--Sah--Sauermann--Sawhney
   {\cite{Kwan_2023}}]
@@ -47,11 +47,6 @@ for all $x \in \R$ with $\Phi$ being the standard Gaussian cumulative distributi
     = \Omega(n^{-3/2}).
   \]
 \end{theorem}
-Indeed, a true local CLT would give
-\[
-  \prob[e(U) = x] \sim \frac{1}{\sigma\sqrt{2\pi}} \exp\left(-\frac{\bigl(x - \mu\bigr)^2}{2\sigma^2}\right)
-\]
-for all $x \in \Z$, which is also of order $\Theta(1/\sigma)$ for all $x$ within $O(\sigma)$ of the mean.
 
 The Erd\H{o}s--McKay conjecture follows directly from the lower bound of Theorem~\ref{thm:ksss} combined with Theorem~\ref{thm:alks2003} on small values of $x$.
 
@@ -65,6 +60,8 @@ so $|x - e(G')/4| \leq m/4 \leq m^{3/2}$. Since $m^2 \geq e(G') \geq 4x \geq n^\
   \prob\bigl[e(G'[U]) = x\bigr] = \Omega(m^{-3/2}) = \Omega(n^{3\alpha/4}) > 0.
 \]
 Therefore, there exists $U \subseteq V(G') \subseteq V(G)$ such that $e(G[U]) = e(G'[U]) = x$, for sufficiently large $n$. This completes the proof. \qed
+
+\textit{Remark:} Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023} prove the stronger statement $\Phi(G) \supseteq \{0, 1, \ldots, (1 - \eta) e(G)\}$ for any $\eta > 0$, at the cost of a slight complication in the argument. We settle for the weaker version that suffices for the conjecture.
 
 We will outline the proof of Theorem~\ref{thm:ksss} in the remainder of this chapter.
 
@@ -92,8 +89,8 @@ Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The dist
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.95\textwidth]{figures/structured.png}
-  \caption{Histograms of $e(U)$ obtained from ten million independent samples of $U$ from an outcome of the random graph $G_{1000, 0.8}$. We see that on the large scale, the distribution of $e(U)$ is approximately Gaussian, whereas on the small scale it shows multiple smaller Gaussian-like curves. Experiment reproduced from~\cite{Kwan_2023}; code in Appendix~\ref{app:two-scale-code}.}
+  \includegraphics[width=\textwidth]{figures/structured.png}
+  \caption{Histograms of $e(U)$ obtained from ten million independent samples of $U$ from an outcome of $G_{1000, 0.8}$. We see that on the large scale, the distribution of $e(U)$ is approximately Gaussian, whereas on the small scale it shows multiple smaller Gaussian-like curves. Experiment reproduced from~\cite{Kwan_2023}; code in Appendix~\ref{app:two-scale-code}.}
   \label{fig:structured}
 \end{figure}
 
@@ -164,7 +161,7 @@ with $|R| \leq n^{1-\gamma}$, $|B_j| = \lceil n^{1-2\gamma}\rceil$ for $j \in [m
 \[
   |d_v - \kappa_j| \leq n^{1/2 + 4\gamma},
 \]
-for $j \in [m]$ and $v \in B_j$. In other words, the vertex set splits into $m = \Theta(n^{2\gamma})$ many buckets $B_1, \dots, B_m$, each with degrees clustered around $\kappa_j$, together with a sublinear-sized exceptional set $R$. This allows us to write $L$ as
+for $j \in [m]$ and $v \in B_j$. That is, the vertex set splits into $m = \Theta(n^{2\gamma})$ many buckets $B_1, \dots, B_m$, each with degrees clustered around $\kappa_j$, and a sublinear-sized exceptional set $R$. This allows us to write $L$ as
 \[
  L = \sum_{j = 1}^m \sum_{v \in B_j} d_vx_v + \sum_{v \in R} d_v x_v = \underbrace{\sum_{j = 1}^m \kappa_j \sum_{v \in B_j} x_v}_{L_{\text{main}}} + \underbrace{\sum_{j = 1}^m \sum_{v \in B_j} (d_v - \kappa_j)x_v}_{L_{\text{err}}} + \underbrace{\sum_{v \in R} d_v x_v}_{L_{R}}.
 \]
@@ -211,7 +208,7 @@ We first replace the product of Boolean slices by a Gaussian space. The \textit{
 \label{eq:gaussian-quadratic}
   f(\vec Z) = \vec Z^{\top} F \vec Z + \vec f \cdot \vec Z + f_0, \qquad \vec Z = (Z_1, \dots, Z_n) \sim \mathcal{N}(0, I_n),
 \end{equation}
-with a symmetric matrix $F \in \R^{n \times n}$ and $\vec f \in \R^n$ derived from the adjacency matrix of $G$ and the bucket partition, such that the characteristic functions of $L_{\text{err}} + Q$ (given $\vec\Delta$) and of $f(\vec Z)$ are close -- see \cite[Lemma~11.1]{Kwan_2023}. The role of this step is to convert a discrete, dependent domain into a continuous, independent one, allowing us to apply the \textit{Carbery--Wright theorem}.
+with a symmetric matrix $F \in \R^{n \times n}$ and $\vec f \in \R^n$ derived from the adjacency matrix $A$ of $G$ and the bucket partition, such that the characteristic functions of $L_{\text{err}} + Q$ (given $\vec\Delta$) and of $f(\vec Z)$ are close -- see \cite[Lemma~11.1]{Kwan_2023}. The role of this step is to convert a discrete, dependent domain into a continuous, independent one, allowing us to apply the \textit{Carbery--Wright theorem}.
 
 \paragraph{Ingredient 2. The sharpened Carbery--Wright theorem}
 
@@ -253,7 +250,7 @@ It remains to show \eqref{eq:robust-rank-2} for the matrix $F$ arising from the 
 
 The lemma says that the adjacency matrix of a Ramsey graph is at Frobenius distance $\Omega(n)$ from every matrix whose restriction to each bucket block has low rank. When $M$ is binary, $\|A - M\|_{\mathrm{F}}^2$ counts the number of entries on which $A, M$ disagree, so the lemma says no binary matrix with low-rank blocks can agree with $A$ on almost all entries.
 
-In the application of Theorem~\ref{thm:sharp-CW}, the parts $B_j$ are the buckets from~\eqref{eq:partition} of size $\lceil n^{1-2\gamma} \rceil$. Write $\vec x \coloneqq (x_v)_{v \in V}$. The matrix $F$ is constructed so that, after conditioning on $\vec \Delta$, the quadratic form $\vec x^{\top} F \vec x$ only concerns the deviation of $\vec x$ from its bucket averages. Specifically, the adjacency matrix $A$ of $G[V \setminus R]$ may be written as
+In the application of Theorem~\ref{thm:sharp-CW}, the parts $B_j$ are the buckets from~\eqref{eq:partition} of size $\lceil n^{1-2\gamma} \rceil$. Write $\vec x \coloneqq (x_v)_{v \in V}$. The matrix $F$ from Ingredient~1 has the property that, after conditioning on $\vec \Delta$, the quadratic form $\vec x^{\top} F \vec x$ only concerns the deviation of $\vec x$ from its bucket averages. Specifically, the adjacency matrix $A$ of $G[V \setminus R]$ may be written as
 \[
   A = \alpha F + B
 \]

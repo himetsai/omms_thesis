@@ -128,9 +128,11 @@ Calkin, Frieze, and McKay~\cite{erdosmckayrandomgraph} proved it for random grap
 
 This dissertation starts by studying the result of Bukh and Sudakov on large induced subgraphs in Ramsey graphs with many distinct degrees. This work not only tightens the connection between Ramsey graphs and random graphs, but also builds the foundation for the subsequent $|\Phi(G)| = \Omega(n^2)$ result by Kwan and Sudakov which we will present in the following chapter. Lastly, we outline the proof of the Erd\H{o}s--McKay conjecture by Kwan, Sah, Sauermann, and Sawhney.
 
-\subsection{The anticoncentration behaviour}\label{sec:anticoncentration}
+\subsection{Anticoncentration}\label{sec:anticoncentration}
 
-The core results of this dissertation concern the \textit{anticoncentration} behaviour exhibited in Ramsey graphs. In general, anticoncentration provides an upper bound on the point probabilities of a random variable. In the following chapters, we will repeatedly sample a uniformly random subset $U\subseteq V(G)$ and study its induced subgraph $G[U]$. A question to ask in this setting is how likely it is for two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?
+The core probabilistic mechanism in this dissertation is \textit{anticoncentration}. In the following chapters, we will repeatedly sample a uniformly random subset $U\subseteq V(G)$ and study the graph statistics of $G[U]$, such as vertex degrees or edge counts. The guiding principle is that if a random variable depends on many independent choices, then it should not concentrate too heavily on any  particular value.
+
+For example, a question to ask in this setting is \textit{how likely it is for two vertices $x, y \in V(G)$ to have the same degree in $G[U]$?}
 
 Observe that $\deg_U(x)-\deg_U(y)$ counts only vertices in $D = N_G(x)\triangle N_G(y)$. Write
 $A = N(x)\setminus N(y), B = N(y)\setminus N(x)$. Then
