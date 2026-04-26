@@ -16,7 +16,7 @@ The existence of these numbers was proven by Ramsey~\cite{ramsey1930} in 1930, b
     R(s, t) \leq \binom{s + t - 2}{s - 1}.
   \]
 \end{theorem}
-Following the fact that $\binom{2t - 2}{t - 1} < 2^{2t}$, we can see $R(t, t) < 4^{t}$. Very little progress had been made on this bound until the recent breakthrough of Campos, Griffiths, Morris, and Sahasrabudhe~\cite{campos2025exponentialimprovementdiagonalramsey}, giving the first exponential improvement since the result of Erd\H{o}s and Szekeres. On the other hand, the lower bound of Ramsey numbers has been even harder to determine. A rather basic result which already gives the best known exponents is the famous random graph construction due to Erd\H{o}s in 1947, marking one of the first applications of the probabilistic method in combinatorics. Before stating the result, we define the \textit{Erd\H{o}s--R\'{e}nyi random graph}.
+Since $\binom{2t-2}{t-1} < 2^{2t}$, we get $R(t,t) < 4^t$. This bound resisted improvement until the recent breakthrough of Campos, Griffiths, Morris, and Sahasrabudhe~\cite{campos2025exponentialimprovementdiagonalramsey}, giving the first exponential improvement since Erd\H{o}s--Szekeres. The lower bound of Ramsey numbers has been even harder to determine. A rather basic result which already gives the best known exponents is the famous random graph construction due to Erd\H{o}s in 1947, marking one of the first applications of the probabilistic method in combinatorics. Before stating the result, we define the \textit{Erd\H{o}s--R\'{e}nyi random graph}.
 
 \begin{definition}
   \label{def:random-graph}
@@ -24,7 +24,7 @@ Following the fact that $\binom{2t - 2}{t - 1} < 2^{2t}$, we can see $R(t, t) < 
   For $n \geq 1$ and $p \in [0, 1]$, the \textit{random graph} $G_{n, p}$ is the graph on $n$ vertices in which each of the $\binom{n}{2}$ edges is present independently with probability $p$.
 \end{definition}
 
-\textit{Remark: For constant $p$, the random graph $G_{n, p}$ is dense in the sense that it has $\Theta(n^2)$ many edges almost surely.}
+\textit{Remark: For constant $p$, $G_{n, p}$ is dense in the sense that it has $\Theta(n^2)$ many edges almost surely.}
 
 \begin{theorem}[Erd\H{o}s \cite{erdos1972ramsey}]
   \label{thm:diagonal-ramsey}
@@ -69,7 +69,7 @@ for any graph $G$ on $n$ vertices. Apart from determining the bounds of Ramsey n
 \]
 for some $C = C(p) > 0$. 
 
-Despite decades of intensive research, all known constructions of Ramsey graphs still rely on some randomness. Thus it is believed that Ramsey graphs inherently resemble dense random graphs, and there are a number of theorems showing that certain ``richness'' properties of random graphs also hold for Ramsey graphs. The first result that cemented this connection is due to Erd\H{o}s and Szemer\'{e}di, showing that Ramsey graphs are also dense.
+Despite decades of intensive research, all known constructions of Ramsey graphs still rely on randomness, thus raising the belief that Ramsey graphs inherently ``random-like'' and share certain ``richness'' properties of dense random graphs. The first result that cemented this connection is due to Erd\H{o}s and Szemer\'{e}di, showing that Ramsey graphs are also dense.
 
 \begin{theorem}[Erd\H{o}s--Szemer\'{e}di~\cite{erdos1972ramsey}]
   \label{thm:ramsey-density}
@@ -124,11 +124,9 @@ Erd\H{o}s and McKay~\cite{EFS} conjectured that for any Ramsey graph $G$ on $n$ 
 \[
   \bigl\{1, 2, \ldots, \delta n^2\bigr\} \subseteq \Phi(G).
 \]
-It was proven for random graphs by Calkin, Frieze, and McKay~\cite{erdosmckayrandomgraph}, but the conjecture for Ramsey graphs remained open for decades and only started to show significant progress in recent years. In particular, a chain of results was sparked after the work of Narayanan, Sahasrabudhe, and Tomon~\cite{narayanan2017ramseygraphsinducesubgraphs} establishing that $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on some ideas from the work of Bukh and Sudakov~\cite{BUKH2007612} which showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature that dense random graphs also exhibit. Kwan and Sudakov~\cite{kwan2021ramseygraphsinducesubgraphs} later improved the bound to $|\Phi(G)| = \Omega(n^2)$ by refining the argument of Narayanan, Sahasrabudhe, and Tomon. Eventually, Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023} closed the conjecture via Fourier-analytic arguments on graph polynomials.
+Calkin, Frieze, and McKay~\cite{erdosmckayrandomgraph} proved it for random graphs, but the conjecture for Ramsey graphs remained open for decades. Significant progress began with Narayanan, Sahasrabudhe, and Tomon~\cite{narayanan2017ramseygraphsinducesubgraphs}, who established $|\Phi(G)| = n^{2 - o(1)}$ for Ramsey graph $G$ on $n$ vertices. Their proof builds on ideas from Bukh and Sudakov~\cite{BUKH2007612}, who showed that every Ramsey graph contains a linear sized subgraph with many distinct degrees, a feature shared with dense random graphs. Kwan and Sudakov~\cite{kwan2021ramseygraphsinducesubgraphs} later gave an optimal bound $|\Phi(G)| = \Omega(n^2)$ via a refined argument. Finally, Kwan, Sah, Sauermann, and Sawhney~\cite{Kwan_2023} closed the conjecture via Fourier-analytic arguments on graph polynomials.
 
-This dissertation will start by studying the result of Bukh and Sudakov on large induced subgraphs in Ramsey graphs with many distinct degrees. This work not only tightens the connection between Ramsey graphs and random graphs, but also builds the foundation for the subsequent $|\Phi(G)| = \Omega(n^2)$ result by Kwan and Sudakov which we will present in the following chapter. Lastly, we outline the proof of the Erd\H{o}s--McKay conjecture by Kwan, Sah, Sauermann, and Sawhney.
-
-% Another research direction is to consider whether forbidding certain induced subgraphs could force homogeneous sets beyond logarithmic size. Erd\H{o}s and Hajnal famously conjectured that for any graph $H$, if a graph $G$ does not contain $H$ as an induced subgraph, then $G$ contains a homogeneous set of size $|G|^{\eta}$ for some $\eta = \eta(H) > 0$.  
+This dissertation starts by studying the result of Bukh and Sudakov on large induced subgraphs in Ramsey graphs with many distinct degrees. This work not only tightens the connection between Ramsey graphs and random graphs, but also builds the foundation for the subsequent $|\Phi(G)| = \Omega(n^2)$ result by Kwan and Sudakov which we will present in the following chapter. Lastly, we outline the proof of the Erd\H{o}s--McKay conjecture by Kwan, Sah, Sauermann, and Sawhney.
 
 \subsection{The anticoncentration behaviour}\label{sec:anticoncentration}
 
@@ -139,7 +137,7 @@ $A = N(x)\setminus N(y), B = N(y)\setminus N(x)$. Then
 \begin{equation}\label{eq:deg-diff}
   \deg_U(x) - \deg_U(y) = |U \cap A| - |U \cap B|,
 \end{equation}
-so $x, y$ have the same degree in $G[U]$ precisely when $|U \cap A|=|U \cap B|$. Since each $v \in A$ contributes $+1$ to the difference $|U \cap A| - |U \cap B|$ with probability $1/2$ and each $v \in B$ contributes $-1$ with probability $1/2$, the difference is a sum of $|D| = |A| + |B|$ independent random variables, which has standard deviation $\Theta(\sqrt{n})$ when $|D| \geq \eps n$ is large. The Erd\H{o}s--Littlewood--Offord theorem then shows that the probability that $\deg_U(x) - \deg_U(y)$ equals any particular value is $O(1/\sqrt{n})$, and thus $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$. This usually follows with a \textit{collision graph} construction and Tur\'{a}n's theorem to show the existence of many distinct degrees in $U$.
+so $x, y$ have the same degree in $G[U]$ precisely when $|U \cap A|=|U \cap B|$. Since each $v \in A$ contributes $+1$ to the difference $|U \cap A| - |U \cap B|$ with probability $1/2$ and each $v \in B$ contributes $-1$ with probability $1/2$, the difference is a sum of $|D| = |A| + |B|$ independent random variables, which has standard deviation $\Theta(\sqrt{n})$ whenever $|D| \geq \eps n$ is large. Erd\H{o}s--Littlewood--Offord then gives $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$, and a \textit{collision graph} construction with Tur\'{a}n's theorem yields many distinct degrees in $U$.
 
 An intuition for this $O(1/\sqrt{n})$ bound is that $\deg_U(x) - \deg_U(y)$ is a \textit{linear} polynomial of many independent indicators, which is approximately normally distributed with standard deviation $\Theta(\sqrt{n})$. Since the probability density function $\phi(x)$ of a normal distribution with standard deviation $\sigma$ is at most $1/(\sigma\sqrt{2\pi})$ for all $x$, the probability that $\deg_U(x) - \deg_U(y)$ equals any particular value is $O(1/\sigma) = O(1/\sqrt{n})$, and this anticoncentration bound is the key to the results in Chapters~\ref{sec:ch2} and~\ref{sec:ch3}. 
 
@@ -168,16 +166,15 @@ For functions $f, g: \R \to \R$, we use the standard asymptotic notations:
 \item $f = \omega(g)$ means $f/g \to \infty$.
 \end{itemize}
 
-The results in this dissertation mostly concern the case where the graph is large, so we omit floor and ceiling signs when they are not crucial for simplicity.
+The results in this dissertation mostly concern large graphs, so we omit floor and ceiling signs when they are not crucial.
 
-We call subset $U \subseteq X$ \textit{uniformly random} if each element of $X$ is in $U$ independently with probability $1/2$. For event $A$, write
+We call subset $U \subseteq X$ \textit{uniformly random} if each $x \in X$ is in $U$ independently with probability $1/2$. For event $A$, write its indicator function as
 \[
   \mathbbm{1}_A \coloneqq \begin{cases}
     1 & \text{if } A \text{ occurs}, \\
-    0 & \text{otherwise},
+    0 & \text{otherwise}.
   \end{cases}
 \]
-as the indicator function of $A$.
 
 
 We will use the following probability bounds throughout the dissertation.
@@ -241,7 +238,7 @@ where we write $i \sim j$ if $i \neq j$ and $A_i, A_j$ are dependent.
   \qed
 \end{proposition}
 
-Many random variables turn out to be linear polynomials of independent Bernoulli random variables, to which the Erd\H{o}s--Littlewood--Offord theorem can be applied to show anticoncentration. We refer to these random variables as \textit{Littlewood--Offord type}.
+Many random variables turn out to be linear polynomials of independent Bernoulli random variables, to which Erd\H{o}s--Littlewood--Offord can be applied to show anticoncentration. We refer to these random variables as \textit{Littlewood--Offord type}.
 
 \begin{definition}
   \label{def:littlewood-offord-type}

@@ -236,7 +236,7 @@ which falls short of our target $O\bigl(1/\sigma(f(\vec Z))\bigr)$. The square-r
   \]
 \end{theorem}
 
-By the Eckart--Young--Mirsky theorem, the left-hand side of \eqref{eq:robust-rank-2} equals $\sum_{i \geq 3} \sigma_i(F)^2$, the Frobenius mass of $F$ in singular values excluding the top two. Condition \eqref{eq:robust-rank-2} therefore asserts that the rank-$(\geq 3)$ tail of $F$ carries at least $\eta$-fraction of $\|F\|_{\mathrm{F}}^2$. 
+By the Eckart--Young theorem, the left-hand side of \eqref{eq:robust-rank-2} equals $\sum_{i \geq 3} \sigma_i(F)^2$, where $\sigma_1(F) \geq \sigma_2(F) \geq \cdots \geq \sigma_n(F) \geq 0$ are the singular values of $F$. Condition \eqref{eq:robust-rank-2} therefore asserts that the rank-$(\geq 3)$ tail of $F$ carries at least $\eta$-fraction of $\|F\|_{\mathrm{F}}^2$. 
 
 It remains to show \eqref{eq:robust-rank-2} for the matrix $F$ arising from the bucket structure, and this is where the Ramsey hypothesis enters.
 
@@ -263,8 +263,7 @@ for some fixed $\alpha$ and a correction matrix $B$ satisfying $\mathrm{rank}(B[
 \] 
 But then on every $B_j \times B_k$ we have $\mathrm{rank}(\tilde{A}[B_j \times B_k]) \leq b + 2$, contradicting \eqref{eq:robust} for small enough $\eta$. Hence \eqref{eq:robust-rank-2} holds for some $\eta = \eta(C, \gamma)$. See~\cite[Section~12]{Kwan_2023} for the explicit construction of $F$.
 
-To sum it up, applying Ingredients~1, ~3, and ~2 in sequence yields \eqref{eq:conditional-target}.
-
+To sum it up, applying Ingredients~1, 3, and 2 in sequence yields \eqref{eq:conditional-target}.
 
 \subsection{Switching for pointwise control}
 \label{sec:switching}
@@ -273,57 +272,94 @@ The first stage delivers the interval estimate
 \[
 \prob\bigl[|X - x| \leq B\bigr] = \Theta(n^{-3/2}),
 \]
-but leaves open the worst case where all of this mass sits on a single integer $x' \ne x$ inside the window $[x - B, x + B]$. We rule this out via a \textit{switching argument} between different possibilities of the set $U$, and this upgrades the interval estimate to a pointwise bound. The interval estimate \eqref{eq:interval-estimate} already implies an upper bound on $\prob[X = x]$, so it remains to show a lower bound.
+but leaves open the worst case where all of this mass sits on some single integer $x' \ne x$ inside the window $[x - B, x + B]$. We rule this out via a \textit{switching argument} between different possibilities of the set $U$, which upgrades the interval estimate to a pointwise bound. The interval estimate \eqref{eq:interval-estimate} already implies an upper bound on $\prob[X = x]$, so it remains to show a lower bound.
 
 For $y \in U$ and $z \notin U$, the \emph{switch} $(y, z)$ replaces $U$ by $U' = (U \setminus \{y\}) \cup \{z\}$. This operation shifts $X$ by
 \[
-  s(y, z; U) \coloneqq e(G[U']) - e(G[U]) = \deg_{U \setminus \{y\}}(z) - \deg_{U}(y).
+  s(y, z; U) \coloneqq e(U') - e(U) = \deg_{U \setminus \{y\}}(z) - \deg_{U}(y).
 \]
 Fix a set $T \subseteq V(G)^2$ of candidate ordered pairs, to be specified later, and let
 \[
   Y_\ell \coloneqq \#\bigl\{(y, z) \in T : y \in U,\ z \notin U,\ s(y, z; U) = \ell\bigr\}
 \]
-count candidate switches at $U$ that shift $X$ by exactly $\ell$. Notice that each candidate switch with $y \in U, z \notin U$, and $s(y, z; U) = \ell$ pairs $U$ with the set $U' = (U \setminus \{y\}) \cup \{z\}$, and the switch $(z, y)$ from $U'$ recovers $U$ and shifts $X$ by $-\ell$. In particular, pairing $(U, (y, z))$ with $(U', (z, y))$ in this way is a bijection. Since the uniform measure on $\{0,1\}^n$ assigns the same probability $2^{-n}$ to every $U$, the bijection gives the symmetry identity
+count candidate switches at $U$ that shift $X$ by exactly $\ell \in \{-B, \ldots, B\}$. Each switch $(y, z) \in T$ with $y \in U, z \notin U$, and $s(y, z; U) = \ell$ pairs $U$ with the set $U' = (U \setminus \{y\}) \cup \{z\}$. The reverse switch $(z, y) \in T$ from $U'$ recovers $U$ and shifts $X$ by $-\ell$. In particular, pairing $(U, (y, z))$ with $(U', (z, y))$ in this way is a bijection. Since the uniform measure on $\{0,1\}^n$ assigns the same probability $2^{-n}$ to every $U$, the bijection gives the symmetry identity
 \begin{equation}
   \label{eq:switching-identity}
   \E\bigl[Y_\ell \cdot \mathbbm{1}_{X = x}\bigr] = \E\bigl[Y_{-\ell} \cdot \mathbbm{1}_{X = x + \ell}\bigr],
 \end{equation}
-for any integer $x$ and $\ell$. By the Cauchy--Schwarz inequality,
+for any $x \in \Z$ and $\ell \in \{-B, \ldots, B\}$. By Cauchy--Schwarz,
 \[
-  \bigl(\E\bigl[Y_{\ell} \cdot \mathbbm{1}_{X = x}\bigr]\bigr)^2 \leq \E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{X = x}\bigr] \cdot \E\bigl[\mathbbm{1}_{X = x}\bigr].
+  \bigl(\E\bigl[Y_{\ell} \cdot \mathbbm{1}_{X = x}\bigr]\bigr)^2 \leq \E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{X = x}\bigr] \cdot \E\bigl[\mathbbm{1}_{X = x}\bigr],
 \]
-Rearranging and applying \eqref{eq:switching-identity} yields
+and applying \eqref{eq:switching-identity} yields
 \begin{equation}
   \label{eq:CS-main}
-  \prob[X = x] \geq \frac{\bigl(\E\bigl[Y_{-\ell} \cdot \mathbbm{1}_{X = x + \ell}\bigr]\bigr)^2}{\E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{X = x}\bigr]}.
+  \prob[X = x] = \E\bigl[\mathbbm{1}_{X = x}\bigr] \geq \frac{\bigl(\E\bigl[Y_{-\ell} \cdot \mathbbm{1}_{X = x + \ell}\bigr]\bigr)^2}{\E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{X = x}\bigr]},
 \end{equation}
-The goal now is to find $\ell$ and the candidate set $T$ so that
-\begin{align}
+reducing the problem to bounding the numerator and denominator using the interval estimate \eqref{eq:interval-estimate}. For a suitable $T$, Lemma~13.4 of~\cite{Kwan_2023} converts the interval estimate \eqref{eq:interval-estimate} to moment estimates for $Y_\ell$,
+\begin{equation}
+  \label{eq:moment-estimates}
+  \E\left[\prod_{\ell=-B}^B Y_\ell^{a_\ell} \cdot \mathbbm{1}_{|X - x| \leq B}\right] = \Theta\left(\bigl(|T|/\sqrt n\bigr)^{\sum_\ell a_\ell} \cdot n^{-3/2}\right),
+\end{equation}
+for $a_\ell \in \{0,1,2\}$. Below we apply \eqref{eq:moment-estimates} to bound both numerator and denominator in \eqref{eq:CS-main}.
+
+Since $\mathbbm{1}_{X = x} \leq \mathbbm{1}_{|X - x| \leq B}$, \eqref{eq:moment-estimates} bounds the denominator of \eqref{eq:CS-main} by
+\begin{equation}
+  \label{eq:den-bound}
+  \E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{X = x}\bigr] \leq \E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{|X - x| \leq B}\bigr] \lesssim \left(\frac{|T|}{\sqrt n}\right)^2 \cdot n^{-3/2}.
+\end{equation}
+As for the numerator, Cauchy--Schwarz yields
+\[
+  \E\bigl[Y_{-\ell} \cdot \mathbbm{1}_{X = x + \ell}\bigr] \geq \frac{\left(\E\left[\prod_{\ell=-B}^B Y_\ell \cdot \mathbbm{1}_{X = x + \ell}\right]\right)^2}{\E\Big[\prod_{i\ne -\ell}Y_i^{2}\cdot Y_{-\ell} \cdot \mathbbm{1}_{X = x + \ell}\Big]}.
+\]
+By writing $\mathbbm{1}_{|X - x| \leq B} = \sum_{\ell' = -B}^{B} \mathbbm{1}_{X = x + \ell'}$ and pigeonholing on the largest term, there exists $\ell^* \in \{-B, \ldots, B\}$ such that
+\begin{equation}
   \label{eq:moment-1}
-  \E\bigl[Y_\ell \cdot \mathbbm{1}_{|X - x| \leq B}\bigr] &\gtrsim \frac{|T|}{\sqrt n} \cdot n^{-3/2}, \\
+  \E\left[\prod_{\ell=-B}^B Y_\ell \cdot \mathbbm{1}_{X = x + \ell^*}\right] \geq \frac{1}{2B+1}\E\left[\prod_{\ell=-B}^B Y_\ell \cdot \mathbbm{1}_{|X - x| \leq B}\right] \gtrsim \left(\frac{|T|}{\sqrt n}\right)^{2B + 1} \cdot n^{-3/2}.
+\end{equation}
+On the other hand, for all $\ell \in \{-B, \ldots, B\}$, \eqref{eq:moment-estimates} gives
+\begin{equation}
   \label{eq:moment-2}
-  \E\bigl[Y_\ell^2 \cdot \mathbbm{1}_{|X - x| \leq B}\bigr] &\lesssim \left(\frac{|T|}{\sqrt n}\right)^2 \cdot n^{-3/2}.
-\end{align}
-The two factors have concrete meanings. The factor $n^{-3/2}$ is
-$\prob[|X - x| \leq B]$, supplied by the interval estimate
-\eqref{eq:interval-estimate}. The factor $|T|/\sqrt n$ represents $\E[Y_\ell]$,
-which we now compute. For any pair $(y, z) \in T$,
-$\prob[y \in U, z \notin U] = 1/4$. Conditional on this event, setting
-$R_w = 2\mathbbm{1}_{w \in U} - 1$ and
-$a_w = 2\mathbbm{1}_{w \in N(z) \setminus N(y)} - 1$,
+  \E\left[\prod_{i\neq -\ell}Y_i^{2}\cdot Y_{-\ell} \cdot \mathbbm{1}_{X = x + \ell}\right] \leq \E\left[\prod_{i\neq -\ell}Y_i^{2}\cdot Y_{-\ell} \cdot \mathbbm{1}_{|X - x| \leq B}\right] \lesssim \left(\frac{|T|}{\sqrt n}\right)^{4B + 1} \cdot n^{-3/2}.
+\end{equation}
+Combining \eqref{eq:moment-1} and \eqref{eq:moment-2} gives
+\begin{equation}
+  \label{eq:num-bound}
+  \E\bigl[Y_{-\ell^*} \cdot \mathbbm{1}_{X = x + \ell^*}\bigr] \gtrsim \bigl(|T| / \sqrt{n}\bigr) \cdot n^{-3/2},
+\end{equation}
+for some $\ell^* \in \{-B, \ldots, B\}$. Thus, \eqref{eq:num-bound} and \eqref{eq:den-bound} gives the desired pointwise bound
+\[
+  \prob[X = x] \gtrsim \frac{\bigl((|T| / \sqrt{n}) \cdot n^{-3/2}\bigr)^2}{\bigl(|T| / \sqrt{n}\bigr)^{2} \cdot n^{-3/2}} = n^{-3/2}.
+\]
+
+It remains to find the suitable set $T$ that enables \eqref{eq:moment-estimates}. The two factors in \eqref{eq:moment-estimates} have concrete meanings: $n^{-3/2}$ is the interval estimate \eqref{eq:interval-estimate}, whereas $\E[Y_\ell] = \Theta(|T|/\sqrt n)$, as follows.
+
+For $(y, z) \in T$, we have $\prob[y \in U, z \notin U] = 1/4$. Conditional on this event and set $R_w = 2\mathbbm{1}_{w \in U} - 1$ and 
+\[
+  a_w = \mathbbm{1}_{w \in N(z) \setminus N(y)} - \mathbbm{1}_{w \in N(y) \setminus N(z)}.
+\]
+Then $s(y, z; U)$ may be written as
 \begin{align*}
   s(y, z; U)
   &= \deg_{U \setminus \{y\}}(z) - \deg_{U}(y) \\
   &= \sum_{w \in N(z),\, w \neq y} \mathbbm{1}_{w \in U} - \sum_{w \in N(y)} \mathbbm{1}_{w \in U} \\
-  &= \frac{\deg(z) - \deg(y)}{2} + \frac{1}{2}\sum_{w \in N(y) \triangle N(z)} a_w R_w
+  &= \frac{\deg(z) - \deg(y)}{2} + \frac{1}{2}\sum_{w \in N(y) \triangle N(z)} a_w R_w,
 \end{align*}
-is a sum of $|N(y) \triangle N(z)|$ independent $\pm\mathrm{Bernoulli}(1/2)$
-contributions plus the deterministic shift $(\deg(z) - \deg(y))/2$. Therefore, if we can find $T$ such that $\deg(z) - \deg(y) = \Theta(\sqrt{n})$ and $|N(y) \triangle N(z)| = \Theta(n)$ for all $(y, z) \in T$, then a local CLT gives 
+which is of $(|N(y) \triangle N(z)|, 1/2)$-Littlewood--Offord type. Now suppose we can find $T$ such that for $(y, z) \in T$
+\begin{enumerate}
+  \item $|N(y) \triangle N(z)| = \Theta(n)$,
+  \item $|\deg(z) - \deg(y)| = O(\sqrt{n})$
+\end{enumerate}
+Condition~1 controls the variance of $s(y, z; U)$ at $\Theta(n)$, and condition~2 places the conditional mean $(\deg(z) - \deg(y))/2$ within $O(\sqrt n)$ of zero, so $\ell \in \{-B, \ldots, B\}$ falls within $O(\sqrt n)$ around the mean. Erd\H{o}s--Littlewood--Offord then gives the upper bound
 \[
-  \prob\bigl[s(y, z; U) = \ell \mid y \in U, z \notin U\bigr] = \Theta(1/\sqrt n)
+  \prob\bigl[s(y, z; U) = \ell \mid y \in U, z \notin U\bigr] = O(1/\sqrt n)
 \]
-for all $\ell$ in an $O(\sqrt n)$ window around the mean, which yields
+uniformly in $\ell$, and Stirling's formula in the form $\binom{m}{m/2 + k} 2^{-m} = \Theta(m^{-1/2})$ for $|k| = O(\sqrt m)$ gives the matching lower bound 
+\[
+  \prob\bigl[s(y, z; U) = \ell \mid y \in U, z \notin U\bigr] = \Omega(1/\sqrt n)
+\]
+for $\ell$ around the mean. Hence, $\prob[s(y, z; U) = \ell \mid y \in U, z \notin U] = \Theta(1/\sqrt n)$ for $\ell \in \{-B, \ldots, B\}$, and so
 \[
   \E[Y_\ell] = \frac{1}{4}\sum_{(y, z) \in T} \prob\bigl[s(y, z; U) = \ell \mid y \in U, z \notin U\bigr] = \Theta\bigl(|T|/\sqrt n\bigr).
 \]
-It remains to construct such a set $T$, which is produced by applying richness twice inside a linear-sized $(\eps, \delta)$-rich subgraph $S_0$, together with a pigeonhole partition of the degree sequence into $\deg(z) - \deg(y) = \Theta(\sqrt{n})$ -- see~\cite[Lemma~13.9]{Kwan_2023} for details. The second-moment bound \eqref{eq:moment-2} is more involved and follows a \textit{dependent random choice} technique -- see~\cite[Lemmas~13.1, 13.4, 13.9]{Kwan_2023} for details.
+It remains to construct such a set $T$ and to prove \eqref{eq:moment-estimates}. Both are carried out inside a linear-sized $(\eps, \delta)$-rich induced subgraph $S_0 \subseteq V(G)$. Condition 1 follows from two applications of richness inside $S_0$, condition 2 follows from pigeonholing. The proof of \eqref{eq:moment-estimates} further relies on a \textit{dependent random choice} technique which supplies $S_0$ with a strong common-neighborhood property needed to control correlations between switches of multiple pairs in $T$ -- see \cite[Lemmas~13.1, 13.3, 13.4]{Kwan_2023} for details.

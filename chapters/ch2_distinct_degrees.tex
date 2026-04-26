@@ -20,7 +20,7 @@ To prove Theorem \ref{thm:bs2007}, Bukh and Sudakov introduced the notion of \te
   An $n$-vertex graph $G$ is \textit{$(\eps, \delta)$-diverse} if for each $x \in V(G)$, we have $|N(x) \triangle N(y)| \geq \eps n$ for all but $\leq n^{\delta}$ vertices $y \in V(G)$.
 \end{definition}
 
-Notice that $(\eps, \delta)$-diversity directly matches our assumption $|N(x) \triangle N(y)| = D \geq \eps n$ in the discussion of anticoncentration in Section~\ref{sec:anticoncentration}. Hence, we may show in a diverse graph that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$ for most pairs of vertices $x, y \in V(G)$, from which Tur\'{a}n's theorem allows us to conclude that there are many distinct degrees in a diverse graph. The following lemma formalizes this observation and reduces Theorem~\ref{thm:bs2007} to showing that every Ramsey graph contains a diverse subgraph of linear size.
+Diversity matches our assumption $|N(x) \triangle N(y)| = D \geq \eps n$ from Section~\ref{sec:anticoncentration}. Hence, in a diverse graph we have $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$ for most pairs of vertices $x, y \in V(G)$, and Tur\'{a}n's theorem then yields many distinct degrees. The following lemma formalizes this observation and reduces Theorem~\ref{thm:bs2007} to showing that every Ramsey graph contains a diverse subgraph of linear size.
 
 \begin{lemma}
   \label{lem:diversity-degrees}
@@ -65,7 +65,7 @@ That is, almost every vertex $v \in V(G)$ satisfies
 \[
   \eps |W| \leq |N(v) \cap W| \leq (1 - \eps) |W|,
 \]
-whenever $|W|$ is large. Thus, richness ensures neighbourhoods are not unusually concentrated in nor absent from large sets, which is exactly the density control one has in random graphs like $G_{n, 1/2}$, where $|N(v) \cap W| \approx |W|/2$ by the Chernoff bound. When $W$ is the neighbourhood of another vertex, richness ensures one side of the symmetric difference $|N(x) \triangle N(y)| = |N(x) \cap \overline{N(y)}| + |\overline{N(x)} \cap N(y)|$ is large, implying diversity.
+whenever $|W|$ is large. Thus, richness ensures neighbourhoods are not unusually concentrated in nor absent from large sets, which mirrors the density control in random graphs like $G_{n, 1/2}$, where $|N(v) \cap W| \approx |W|/2$ by the Chernoff bound. When $W$ is the neighbourhood of another vertex, richness ensures one side of the symmetric difference $|N(x) \triangle N(y)| = |N(x) \cap \overline{N(y)}| + |\overline{N(x)} \cap N(y)|$ is large, implying diversity.
 
 \begin{lemma}
   \label{lem:richness-implies-diversity}
@@ -73,7 +73,7 @@ whenever $|W|$ is large. Thus, richness ensures neighbourhoods are not unusually
 \end{lemma}
 
 \begin{proof}
-  Note that for each $x \in V(G)$, either $|N(x)| \geq n/2$ or $|\overline{N(x)}| \geq n/2$. If $|N(x)| \geq n/2$, then richness implies that
+  For each $x \in V(G)$, either $|N(x)| \geq n/2$ or $|\overline{N(x)}| \geq n/2$. If $|N(x)| \geq n/2$, then richness gives
   \[
     |\overline{N(y)} \cap N(x)| \geq \eps |N(x)| \geq \eps n/2
   \]
@@ -108,7 +108,7 @@ Richness also gives the reversed notion of diversity.
 \]  
 for most pairs $x_1, x_2 \in V(G)$.
 
-We now show that every Ramsey graph contains a rich subgraph of linear size. Specifically, we show that if this is not the case, a highly sparse/dense subset $S \subseteq V(G)$ may be constructed inductively, and the Erd\H{o}s--Szemer\'{e}di theorem gives a large homogeneous set in $G[S]$.
+We now show that every Ramsey graph contains a rich subgraph of linear size. Specifically, we show that if this is not the case, we may inductively construct a sequence of small vertex sets $S_1, S_2, \ldots, S_K$ that are sparse/dense between one another, and the union $S$ of some of these sets induces a sparse/dense subgraph, which contains a large homogeneous set by the Erd\H{o}s--Szemer\'{e}di theorem.
 
 \begin{lemma}
   \label{lem:rich-subgraph}

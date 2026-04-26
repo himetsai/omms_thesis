@@ -5,7 +5,7 @@ Erd\H{o}s and McKay conjectured that for any Ramsey graph $G$ on $n$ vertices, t
 \[
   \bigl\{1, 2, \ldots, \delta n^2\bigr\} \subseteq \Phi(G) \coloneqq \bigl\{e(H) : H \text{ is an induced subgraph of } G\bigr\}.
 \]
-That is, for any $1 \leq t \leq \delta n^2$, there exists an induced subgraph with exactly $t$ edges. The conjecture was widely open for decades. In 2003, Alon, Krivelevich and Sudakov \cite{AlonKrivelevichSudakov2003} proved the conjecture with $n^{\delta}$ in place of $\delta n^2$, but little progress was made afterwards. 
+That is, for any $1 \leq t \leq \delta n^2$, there exists an induced subgraph with exactly $t$ edges. The conjecture was widely open for decades. In 2003, Alon, Krivelevich and Sudakov \cite{AlonKrivelevichSudakov2003} proved the conjecture with $n^{\delta}$ in place of $\delta n^2$.
 \begin{theorem}[Alon, Krivelevich and Sudakov {\cite{AlonKrivelevichSudakov2003}}]
   \label{thm:alks2003}
   For any $C > 0$, there exists $\delta = \delta(C) > 0$ such that
@@ -147,7 +147,7 @@ By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), $e(G
 \begin{proof}[Proof of Claim]
   We prove each part in order.
   \begin{enumerate}
-    \item[(i)] Note that $\E[e(U_0)] = 4m$ and there are $O(n^3)$ pairs of edges in $G$ whose presence are dependent in $G[U_0]$, as this occurs only if two edges share a vertex. Thus for $e \in E(G)$, the standard variance bound gives
+    \item[(i)] $\E[e(U_0)] = 4m$ and there are $O(n^3)$ pairs of edges in $G$ whose presence are dependent in $G[U_0]$, as this occurs only if two edges share a vertex. Thus for $e \in E(G)$, the standard variance bound gives
     \[
       \Var\bigl(e(U_0)\bigr) \leq \E[e(U_0)] + O(n^3) = O(n^3).
     \]
@@ -246,11 +246,11 @@ Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_
       &= \bigl[e(\mathbf{Z}_{k, c'\sqrt{n}}) - e(\mathbf{Z}_{k, 0})\bigr] + \sum_{u \in U_0} \mathbbm{1}_{u \in U} \cdot \bigl(\deg_{\mathbf{Z}_{k, c'\sqrt{n}}}(u) - \deg_{\mathbf{Z}_{k, 0}}(u)\bigr)
     \end{align*}
     is of Littlewood--Offord type with parameter $1/2$, which is symmetrically distributed around its expectation. The result now follows.
-    \item[4.] Note that 
+    \item[4.] Since 
     \[
       \Delta_{k, i} = \bigl[e(\mathbf{Z}_{k, i}) - e(\mathbf{Z}_{k, i - 1})\bigr] + \sum_{u \in U_0} \mathbbm{1}_{u \in U} \cdot \bigl(\deg_{\mathbf{Z}_{k, i}}(u) - \deg_{\mathbf{Z}_{k, i - 1}}(u)\bigr)
     \]
-    is of Littlewood--Offord type and measures the edge count difference of swapping one vertex from $\mathbf{S}$ to $\mathbf{T}$, so by Lemma~\ref{lem:construction} $\E\bigl[\Delta_{k, i}\bigr] = O(\sqrt{n})$ and each $u \in U_0$ contributes at most $|\deg_{\mathbf{Z}_{k, i}}(u) - \deg_{\mathbf{Z}_{k, i - 1}}(u)| \leq 2$ to $\Delta_{k, i}$. Thus by Hoeffding's inequality,
+    is of Littlewood--Offord type and measures the edge count difference of swapping one vertex from $\mathbf{S}$ to $\mathbf{T}$, Lemma~\ref{lem:construction} gives $\E\bigl[\Delta_{k, i}\bigr] = O(\sqrt{n})$ and each $u \in U_0$ contributes at most $|\deg_{\mathbf{Z}_{k, i}}(u) - \deg_{\mathbf{Z}_{k, i - 1}}(u)| \leq 2$ to $\Delta_{k, i}$. Thus by Hoeffding's inequality,
     \[
       \prob[|\Delta_{k, i}| \geq t] \leq 2\exp\left(-\frac{2\left(t - \E\bigl[|\Delta_{k, i}|\bigr]\right)^2}{4|U_0|}\right) = \exp\bigl(-\Omega(t^2/n)\bigr).
     \]
@@ -310,7 +310,7 @@ Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_
 
 \subsection{Proof of the main lemma}
 
-We assemble Lemma~\ref{lem:construction} and Lemma~\ref{lem:double-exposure} to prove the main lemma.
+We assemble Lemma~\ref{lem:construction} and Lemma~\ref{lem:double-exposure} to prove the main lemma. 
 
 Apply Lemma~\ref{lem:construction} to obtain $U_0, \mathbf{S}, \mathbf{T}, \mathbf{X}, c', d$, and define $\mathcal{P}, U, \mathbf{Z}_{k, i}, U_{k, i}$ as in Section~\ref{sec:double-exposure}. Note that $U$ is the only source of randomness. We prove the main lemma with $W$ being the set of all vertices in $\mathbf{S}, \mathbf{T}, \mathbf{X}$.
 
