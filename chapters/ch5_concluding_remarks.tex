@@ -1,7 +1,7 @@
 \section{Concluding Remarks}
 \label{sec:ch5}
 
-This dissertation built progressively sharper statements about induced subgraphs of Ramsey graphs, confirming their intimate resemblance to random graphs and culminating in the resolution of the Erd\H{o}s--McKay conjecture. The core results all follow a similar \textit{anticoncentration} principle that bounds the point probabilities of a random variable $X$ associated with a Ramsey graph in roughly the same way as a local central limit theorem would:
+This dissertation built progressively sharper statements about induced subgraphs of Ramsey graphs, confirming their strong resemblance to random graphs and culminating in the resolution of the Erd\H{o}s--McKay conjecture. The core results all follow a similar \textit{anticoncentration} principle that bounds the point probabilities of a random variable $X$ associated with a Ramsey graph in roughly the same way as a local central limit theorem would:
 \[
 \sup_{x \in \Z} \prob[X = x] = O\bigl(1/\sigma(X)\bigr).
 \]
@@ -9,4 +9,4 @@ The underlying characteristic of Ramsey graphs that powers this anticoncentratio
 
 The belief that graphs with small homogeneous sets have various random-like properties goes beyond the Ramsey graph constraint $\hom(G) = O(\log n)$. For instance, Erd\H{o}s and Hajnal~\cite{ERDOS198937} famously conjectured that for any graph $H$, there exists $\eps = \eps(H) > 0$ such that any graph $G$ on $n$ vertices with $\hom(G) < n^\eps$ contains an induced copy of $H$. This conjecture is widely open despite intensive research. 
 
-Alon, Krivelevich, and Sudakov~\cite{AlonKrivelevichSudakov2003} also conjectured a strengthening of Theorem~\ref{thm:ksss} that $\hom(G) \leq n/4$ is enough to force $\Phi(G) \supseteq \{0, 1, \ldots, \delta e(G)\}$ for some $\delta > 0$. They noted the constant $1/4$ cannot be relaxed below $1/3$ via a counterexample of $G$ consisting of two vertex-disjoint $(n/3)$-cliques and $n/3$ isolated vertices. Kwan and Sudakov~\cite{kwan2021ramseygraphsinducesubgraphs} also proposed the natural weakening that $\hom(G) \leq n/4$ should already force $|\Phi(G)| = \Omega(e(G))$, which is open as well.
+Alon, Krivelevich, and Sudakov~\cite{AlonKrivelevichSudakov2003} also conjectured a strengthening of Theorem~\ref{thm:em} that $\hom(G) \leq n/4$ is enough to force $\Phi(G) \supseteq \{0, 1, \ldots, \delta e(G)\}$ for some $\delta > 0$. They noted the constant $1/4$ cannot be relaxed below $1/3$ via a counterexample of $G$ consisting of two vertex-disjoint $(n/3)$-cliques and $n/3$ isolated vertices. Kwan and Sudakov~\cite{kwan2021ramseygraphsinducesubgraphs} also proposed the natural weakening that $\hom(G) \leq n/4$ should already force $|\Phi(G)| = \Omega(e(G))$, which is open as well.

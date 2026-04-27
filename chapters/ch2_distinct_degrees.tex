@@ -5,10 +5,10 @@ In this chapter, we present the following result of Bukh and Sudakov.
 
 \begin{theorem}[Bukh--Sudakov {\cite{BUKH2007612}}]
   \label{thm:bs2007}
-  Every Ramsey graph on $n$ vertices induces a subgraph on $\Omega(n)$ vertices with $\Omega(\sqrt{n})$ distinct degrees.
+  Every Ramsey graph on $n$ vertices has an induced subgraph on $\Omega(n)$ vertices with $\Omega(\sqrt{n})$ distinct degrees.
 \end{theorem}
 
-This was originally conjectured by Erd\H{o}s, Faudree, and S\'{o}s \cite{EFS} in light of the observation that the random graph $G_{n, 1/2}$ exhibits such a property almost surely. In particular, Theorem~\ref{thm:bs2007} already has implications for the edge statistics of Ramsey graphs $G$, as the subgraphs $G - \{v\}$ for $v \in V(G)$ have $\Omega(\sqrt{n})$ different sizes. This construction lays the foundation for the proof in the next chapter.
+This was originally conjectured by Erd\H{o}s, Faudree, and S\'{o}s \cite{EFS} in light of the observation that the random graph $G_{n, 1/2}$ exhibits such a property almost surely. In particular, Theorem~\ref{thm:bs2007} already has implications for the edge statistics of Ramsey graphs $G$: if $G[U]$ is the resulting induced subgraph, then $G[U] - \{v\}$ has $\Omega(\sqrt{n})$ different sizes for $v \in U$.
 
 \subsection{Diversity}
 
@@ -35,7 +35,7 @@ Diversity matches our assumption $|N(x) \triangle N(y)| = D \geq \eps n$ from Se
   \[
     \deg_U(x) - \deg_U(y) = |A \cap U| - |B \cap U| = \sum_{v \in A} \mathbbm{1}_{v \in U} - \sum_{v \in B} \mathbbm{1}_{v \in U}
   \]
-  is of $(|D|, 1/2)$-Littlewood--Offord type. Thus, Erd\H{o}s-Littlewood--Offord gives
+  is of $(|D|, 1/2)$-Littlewood--Offord type. Thus, Erd\H{o}s--Littlewood--Offord gives
   \[
     \prob\bigl[\deg_U(x) = \deg_U(y)\bigr] = O\bigl(1/\sqrt{|D|}\bigr).
   \]
@@ -43,7 +43,7 @@ Diversity matches our assumption $|N(x) \triangle N(y)| = D \geq \eps n$ from Se
 
   Now consider the degree collision graph $H$ on $U$, where $x, y \in U$ are adjacent if and only if $\deg_U(x) = \deg_U(y)$. Since $G$ is $(\eps, \delta)$-diverse, $\E[\mathbbm{1}_{xy}] = O(1/\sqrt{n})$ for all but $\leq n^{1 + \delta} < n^{3/2}$ pairs $x, y \in V(G)$. Hence, the expected number of edges in $H$ is
   \[
-    \E[e(H)] = \sum_{\{x, y\} \in V(G)^2} \E[\mathbbm{1}_{xy}] \leq n^{1 + \delta} + n^2 \cdot O\bigl(1/\sqrt{n}\bigr) = O\bigl(n^{3/2}\bigr)
+    \E[e(H)] = \sum_{\{x, y\} \in \binom{V(G)}{2}} \E[\mathbbm{1}_{xy}] \leq n^{1 + \delta} + n^2 \cdot O\bigl(1/\sqrt{n}\bigr) = O\bigl(n^{3/2}\bigr)
   \] 
   and Markov's inequality yields $\prob[e(H) = O(n^{3/2})] \geq 1/2$. Since $|U| < n/4$ with probability $o(1)$ by the Chernoff bound, the union bound yields a positive probability that $|U| \geq n/4$ and $e(H) \leq O(n^{3/2})$ occur simultaneously, in which case Tur\'{a}n's theorem (Proposition~\ref{prop:turan}) gives an independent set $I$ in $H$ of size at least 
   \[

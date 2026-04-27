@@ -26,7 +26,7 @@ Since $\binom{2t-2}{t-1} < 2^{2t}$, we get $R(t,t) < 4^t$. This bound resisted i
 
 \textit{Remark: For constant $p$, $G_{n, p}$ is dense in the sense that it has $\Theta(n^2)$ many edges almost surely.}
 
-\begin{theorem}[Erd\H{o}s \cite{erdos1972ramsey}]
+\begin{theorem}[Erd\H{o}s~\cite{erdos1947}]
   \label{thm:diagonal-ramsey}
   For $t \geq 3$,
   \[
@@ -66,22 +66,22 @@ Beyond improving these bounds, a major problem in Ramsey Theory is to give expli
 \]
 for some $C = C(p) > 0$. 
 
-Despite decades of intensive research, all known constructions of Ramsey graphs still rely on randomness, thus raising the belief that Ramsey graphs are inherently ``random-like'' and share certain ``richness'' properties of dense random graphs. The first result that cemented this connection is due to Erd\H{o}s and Szemer\'{e}di, showing that Ramsey graphs are also dense.
+Despite decades of intensive research, all known constructions of Ramsey graphs still rely on randomness, which raises the belief that Ramsey graphs are inherently ``random-like.'' In particular, there are various evidence that Ramsey graphs share certain ``richness'' properties of dense random graphs. The first result that cemented this connection is due to Erd\H{o}s and Szemer\'{e}di, showing that Ramsey graphs are also dense.
 
 \begin{theorem}[Erd\H{o}s--Szemer\'{e}di~\cite{erdos1972ramsey}]
   \label{thm:ramsey-density}
 
-  Let $G$ be a graph on $n$ vertices with edge density $d \leq 1/2$. Then $G$ contains a homogeneous set of size greater than $K = \frac{c}{d\log(1/d)} \log n$, for some constant $c > 0$ and sufficiently large $n$.
+  Let $G$ be a graph on $n$ vertices with edge density $d \in (0, 1/2]$. Then $G$ contains a homogeneous set of size greater than $K = \frac{c}{d\log(1/d)} \log n$, for some constant $c > 0$ and sufficiently large $n$.
 \end{theorem}
 
 \begin{proof}
-  Fix $c < 1/32$ and suppose for contradiction that $\hom(G) \leq K$. Since $G$ has $d\binom{n}{2}$ edges, by pigeonhole at least $m \geq n/2$ vertices have degree $\leq dn$. Let $G'$ be the graph induced by these $m$ vertices and let $I$ be a largest independent set in $G'$, so $k \coloneqq |I| \leq K$. Define
+  Fix $c < 1/32$ and suppose for contradiction that $\hom(G) \leq K$. Since $G$ has $d\binom{n}{2}$ edges, by pigeonhole at least $m \geq n/2$ vertices have degree $\leq 2dn$. Let $G'$ be the graph induced by these $m$ vertices and let $I$ be a largest independent set in $G'$, so $k \coloneqq |I| \leq K$. Define
   \[
     s \coloneqq 8dk, \quad S \coloneqq 8dK = \frac{8c\log n}{\log(1/d)},
   \]
   so that $s \leq S = O(\log n)$.
 
-  We first show for a large subset $Z \subseteq V(G') \setminus I$ whose vertices share a common neighbourhood in $I$. Each $v \in I$ has $\deg(v) \leq dn$, so $\sum_{v \in I} \deg_{G'}(v) \leq dnk \leq 2dmk$. By pigeonhole, at least $m/2 - k$ vertices $v \in V(G') \setminus I$ satisfy $\deg_I(v) < s$. Call this set $J$. Partition $J$ by the value of $N_I(v)$ to get at most $|\mathcal{F}|$ classes, where $\mathcal{F} \coloneqq \{F \subseteq I : |F| < s\}$. The bound $\sum_{j < r} \binom{n}{j} \leq (en/r)^{r}$ gives
+  We first find a large subset $Z \subseteq V(G') \setminus I$ whose vertices share a common neighbourhood in $I$. Each $v \in I$ has $\deg(v) \leq 2dn$, so $\sum_{v \in I} \deg_{G'}(v) \leq 2dnk \leq 4dmk$. By pigeonhole, at least $m/2 - k$ vertices $v \in V(G') \setminus I$ satisfy $\deg_I(v) < s$. Call this set $J$. Partition $J$ by the value of $N_I(v)$ to get at most $|\mathcal{F}|$ classes, where $\mathcal{F} \coloneqq \{F \subseteq I : |F| < s\}$. The bound $\sum_{j < r} \binom{n}{j} \leq (en/r)^{r}$ gives
   \[
     |\mathcal{F}| \leq \left(\frac{ek}{s}\right)^{s} = \left(\frac{e}{8d}\right)^{s} \leq \left(\frac{1}{d}\right)^{s} \leq \left(\frac{1}{d}\right)^{S} = n^{8c} < n^{1/3}.
   \]
@@ -186,7 +186,7 @@ We will use the following probability bounds throughout the dissertation.
 
 \begin{proposition}[Markov's inequality]
   \label{prop:markov}
-  Let $X$ be a non-negative random variable. Then for $t \geq 0$,
+  Let $X$ be a non-negative random variable. Then for $t > 0$,
   \[
     \prob\bigl[X \geq t\bigr] \leq \frac{\E[X]}{t}.
   \]
@@ -252,7 +252,7 @@ Many random variables turn out to be linear polynomials of independent Bernoulli
 
 \begin{proposition}[Erd\H{o}s--Littlewood--Offord theorem]
   \label{prop:littlewood-offord}
-  Let $p > 0$ be constant and $X$ be a random variable of $(n, p)$-Littlewood--Offord type. Then for any $t \in \Z$, 
+  Let $p \in (0, 1)$ be constant and $X$ be a random variable of $(n, p)$-Littlewood--Offord type. Then for any $t \in \Z$, 
   \[
     \prob[X = t] = O\bigl(1/\sqrt{n}\bigr).
   \]
@@ -263,7 +263,7 @@ Many random variables turn out to be linear polynomials of independent Bernoulli
   \[
     \mathcal{A}_t \coloneqq \left\{A : \sum_{i \in A} a_i = t\right\} \subseteq [n].
   \]
-  Since $a_i \geq 1$ for all $i$, we have $1 + \sum_{i \in A} a_i \leq \sum_{i \in B} a_i$ whenever $A \subset B$. Thus, no elements of $\mathcal{A}_t$ are contained in another. Consider the chain $C = (S_1, S_2, \ldots, S_n)$ of $n$ subsets of $[n]$ such that $\emptyset = S_1 \subset S_2 \subset \cdots \subset S_n = [n]$. There are $n!$ such chains $C$ in $[n]$, and for $A \subseteq [n]$, there are $|A|!(n - |A|)!$ of them containing $A$. Since no chain can contain multiple elements of $\mathcal{A}_t$,
+  Since $a_i \geq 1$ for all $i$, we have $1 + \sum_{i \in A} a_i \leq \sum_{i \in B} a_i$ whenever $A \subset B$. Thus, no elements of $\mathcal{A}_t$ are contained in another. Consider the chain $C = (S_0, S_1, \ldots, S_n)$ of $n$ subsets of $[n]$ such that $\emptyset = S_0 \subset S_1 \subset \cdots \subset S_n = [n]$. There are $n!$ such chains $C$ in $[n]$, and for $A \subseteq [n]$, there are $|A|!(n - |A|)!$ of them containing $A$. Since no chain can contain multiple elements of $\mathcal{A}_t$,
   \[
     \sum_{A \in \mathcal{A}_t} |A|!(n - |A|)! \leq n! \implies \sum_{A \in \mathcal{A}_t} \frac{1}{\binom{n}{|A|}} \leq 1.
   \] 

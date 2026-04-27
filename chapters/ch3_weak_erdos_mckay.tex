@@ -8,16 +8,17 @@ Erd\H{o}s and McKay conjectured that for any Ramsey graph $G$ on $n$ vertices, t
 That is, for any $1 \leq t \leq \delta n^2$, there exists an induced subgraph with exactly $t$ edges. The conjecture was widely open for decades. In 2003, Alon, Krivelevich and Sudakov \cite{AlonKrivelevichSudakov2003} proved the conjecture with $n^{\delta}$ in place of $\delta n^2$.
 \begin{theorem}[Alon, Krivelevich and Sudakov {\cite{AlonKrivelevichSudakov2003}}]
   \label{thm:alks2003}
-  For any $C > 0$, there exists $\delta = \delta(C) > 0$ such that
+  Fix $C > 0$. For any $C$-Ramsey graph $G$ on $n$ vertices,
   \[
-  \bigl\{1, 2, \ldots, n^{\delta}\bigr\} \subseteq \Phi(G).
+  \bigl\{1, 2, \ldots, n^{\delta}\bigr\} \subseteq \Phi(G),
   \]
+  for some $\delta = \delta(C) > 0$.
 \end{theorem}
 Since the conjecture implies $|\Phi(G)| = \Omega(n^2)$ and trivially $|\Phi(G)| \leq \binom{n}{2}$, a natural relaxation is to ask whether $\Phi(G)$ indeed has quadratic size. In 2017, Narayanan, Sahasrabudhe, and Tomon \cite{narayanan2017ramseygraphsinducesubgraphs} proved a near optimal bound of $|\Phi(G)| = n^{2 - o(1)}$ by building on the notion of diversity from Chapter~\ref{sec:ch2}. The desired quadratic bound was achieved by Kwan and Sudakov \cite{kwan2021ramseygraphsinducesubgraphs} a few years later, and this chapter is dedicated to presenting their proof.
 
 \begin{theorem}[Kwan and Sudakov {\cite{kwan2021ramseygraphsinducesubgraphs}}]
   \label{thm:ks}
-  For any $C > 0$, 
+  For any $C > 0$, every $C$-Ramsey graph $G$ on $n$ vertices has
   \[
     |\Phi(G)| = \Theta(n^2).
   \]
@@ -27,7 +28,7 @@ Recall that Theorem \ref{thm:bs2007} provides a bound of $|\Phi(G)| = \Omega(\sq
 
 Specifically, pick a target $m$ and find two disjoint vertex sets $U$ and $W$, where $U$ is a linear-sized random set with $e(U) \approx m$ and $W$ is an augmenting set of size $O(\sqrt{n})$ selected from a \textit{candidate set} $W_0 \subseteq V(G) \setminus U$ whose degrees are of linear order and all lie in a narrow interval. Then the subsets $Z \subseteq W$ produce $\Omega(n^{3/2})$ distinct values of $e(U \sqcup Z)$ that all lie in an interval of length $O(n^{3/2})$ centred at $e(U)$. Applying this to $\Omega(\sqrt{n})$ well-separated targets $m$ yields the full $\Omega(n^2)$ count.
 
-Kwan and Sudakov construct $W$ as three disjoint parts $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, each of size $\Theta(\sqrt{n})$, that act at complementary scales. Every element has $\Theta(n)$ edges into $U$, and the degrees from $\mathbf{S}$ into $U$ are uniformly smaller than those from $\mathbf{T}$ by a gap of $\Omega(\sqrt{n})$. Three operation on $Z \subseteq W$ shift $e(U \sqcup Z)$ at three separate scales. Varying $k = |Z \cap (\mathbf{S} \sqcup \mathbf{T})|$ shifts $e(U \sqcup Z)$ at the coarse scale $\Theta(n)$. With $k$ fixed, exchanging an element of $\mathbf{S}$ for an element of $\mathbf{T}$ shifts $e(U \sqcup Z)$ by $\Theta(\sqrt{n})$, so the achievable values at this level are spaced by $\Theta(\sqrt{n})$. The set $\mathbf{X}$ will contain $\Theta(\sqrt{n})$ distinct degrees into $U$, so varying the singleton $x \in \mathbf{X}$ fills these $\Theta(\sqrt{n})$ gaps. Hence, the different combinations of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ yield $\Omega(n^{3/2})$ distinct values of $e(U \sqcup Z)$.
+Kwan and Sudakov construct $W$ as three disjoint parts $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, each of size $\Theta(\sqrt{n})$, that act at complementary scales. Every element has $\Theta(n)$ edges into $U$, and the degrees from $\mathbf{S}$ into $U$ are uniformly smaller than those from $\mathbf{T}$ by a gap of $\Omega(\sqrt{n})$. Three operations on $Z \subseteq W$ shift $e(U \sqcup Z)$ at three separate scales. Varying $k = |Z \cap (\mathbf{S} \sqcup \mathbf{T})|$ shifts $e(U \sqcup Z)$ at the coarse scale $\Theta(n)$. With $k$ fixed, exchanging an element of $\mathbf{S}$ for an element of $\mathbf{T}$ shifts $e(U \sqcup Z)$ by $\Theta(\sqrt{n})$, so the achievable values at this level are spaced by $\Theta(\sqrt{n})$. The set $\mathbf{X}$ will contain $\Theta(\sqrt{n})$ distinct degrees into $U$, so varying the singleton $x \in \mathbf{X}$ fills these $\Theta(\sqrt{n})$ gaps. Hence, the different combinations of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ yield $\Omega(n^{3/2})$ distinct values of $e(U \sqcup Z)$.
 
 \begin{figure}[ht]
   \centering
@@ -91,7 +92,7 @@ It turns out that richness also implies pair-diversity.
 \end{lemma}
 
 \begin{proof}
-  Suppose not. Then there exists a pair $\mathbf{x} = \{x_1, x_2\}$ with $|N(x_1) \triangle \overline{N(x_2)}| \geq \alpha n$ and a set $Y$ of $n^{\delta}$ pairs with $|N(\mathbf{x}) \triangle N(\mathbf{y})| < \alpha \eps n /2$ for all $\mathbf{y} \in Y$. Since
+  Suppose not. Then there exists a pair $\mathbf{x} = \{x_1, x_2\}$ with $|N(x_1) \triangle \overline{N(x_2)}| \geq \alpha n$ and a set $Y$ of $> n^{\delta}$ pairs with $|N(\mathbf{x}) \triangle N(\mathbf{y})| < \alpha \eps n /2$ for all $\mathbf{y} \in Y$. Since
   \[
     |N(x_1) \triangle \overline{N(x_2)}| = |N(x_1) \cap N(x_2)|  + |\overline{N(x_1)} \cap \overline{N(x_2)}| \geq \alpha n,
   \]
@@ -136,7 +137,7 @@ The following lemma constructs $U_0$ and the augmenting sets $\mathbf{S}, \mathb
 
 \begin{lemma}
 \label{lem:construction}
-For any $C > 0$ there exists $c = c(C) > 0$ such that the following holds. For any $C$-Ramsey graph $G$ on $n$ vertices and any $m$ satisfying $cn^2 \leq m \leq 2cn^2$, there is vertex set $U_0 \subseteq V(G)$ with $|e(U_0) - 4m| = O(n^{3/2})$, constant $c' = c'(C) \in (0, 1]$, and sets $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$ of size $c'\sqrt{n}$ such that
+For any $C > 0$ there exists $c = c(C) > 0$ such that the following holds. For any $C$-Ramsey graph $G$ on $n$ vertices and any $m$ satisfying $cn^2 \leq m \leq 2cn^2$, there is vertex set $U_0 \subseteq V(G)$ with $|e(U_0) - 4m| = O(n^{3/2})$, constant $c' = c'(C) \in (0, 1]$, and sets $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$ of size $2c'\sqrt{n}$ such that
 \begin{enumerate}
   \item either $U_0, \mathbf{S}, \mathbf{T}, \mathbf{X} \subseteq V(G)$ are disjoint sets of vertices, or $\mathbf{S}, \mathbf{T}, \mathbf{X} \subseteq \binom{V(G)}{2}$ are sets of disjoint pairs of vertices with no vertex appearing in more than one of $U_0, \mathbf{S}, \mathbf{T}, \mathbf{X}$,
   \item there is $d = \Theta(n)$ such that $\deg_{U_0}(\mathbf{x}) = d + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{S} \sqcup \mathbf{T} \sqcup \mathbf{X}$,
@@ -164,9 +165,9 @@ By richness, Lemmas~\ref{lem:richness-implies-diversity}, \ref{lem:richness-impl
 
 Each of the $\binom{n}{2} = \Theta(n^2)$ vertex pairs $\{x_1, x_2\}$ has a pair-degree $\deg(\{x_1, x_2\}) = \deg(x_1) + \deg(x_2)$ taking values from $0$ to $2n$, so by pigeonhole there exists $d^*$ and a collection $H$ of $\Omega(n^{3/2})$ pairs with $\deg(\mathbf{x}) = d^* + O(\sqrt{n})$ for all $\mathbf{x} \in H$. 
 
-Interpret $H$ as a graph on $V(G)$ whose edges are the $\Omega(n^{3/2})$ pairs. By (c), we may delete $O(n^{1+\delta}) = o(n^{3/2})$ edges in $H$ so that all remaining pairs have $|N(x_1) \triangle \overline{N(x_2)}| \geq (\eps/2)n$. Suppose there exists vertex $v$ in $H$ with degree $\Omega(n^{3/4})$. Take $\mathbf{W}_0 = N_H(v)$ and set $d' = d^* - \deg(v)$. Then each $w \in \mathbf{W}_0$ is a single vertex with degree $\deg(w) = d + O(\sqrt{n})$. Now suppose $H$ has maximum degree $\Delta = o(n^{3/4})$. By iteratively picking an edge and removing $\leq 2\Delta$ edges adjacent to it, we obtain a matching of size $\Omega(n^{3/2})/o(n^{3/4}) = \Omega(n^{3/4})$. Take $\mathbf{W}_0$ to be the pairs in this matching and set $d' = d^*$. Thus, $\mathbf{W}_0$ is now the candidate set, such that $\deg(\mathbf{x}) = d' + O(\sqrt{n})$ for all $\mathbf{x} \in \mathbf{W}_0$ and all subsets of $\mathbf{W}_0$ satisfy Property~1.
+Interpret $H$ as a graph on $V(G)$ whose edges are the $\Omega(n^{3/2})$ pairs. By (c), we may delete $O(n^{1+\delta}) = o(n^{3/2})$ edges in $H$ so that all remaining pairs have $|N(x_1) \triangle \overline{N(x_2)}| \geq (\eps/2)n$. Suppose there exists vertex $v$ in $H$ with degree $\Omega(n^{3/4})$. Take $\mathbf{W}_0 = N_H(v)$ and set $d' = d^* - \deg(v)$. Then each $w \in \mathbf{W}_0$ is a single vertex with degree $\deg(w) = d' + O(\sqrt{n})$. Now suppose $H$ has maximum degree $\Delta = o(n^{3/4})$. By iteratively picking an edge and removing $\leq 2\Delta$ edges adjacent to it, we obtain a matching of size $\Omega(n^{3/2})/o(n^{3/4}) = \Omega(n^{3/4})$. Take $\mathbf{W}_0$ to be the pairs in this matching and set $d' = d^*$. Thus, $\mathbf{W}_0$ is now the candidate set, such that $\deg(\mathbf{x}) = d' + O(\sqrt{n})$ for all $\mathbf{x} \in \mathbf{W}_0$ and all subsets of $\mathbf{W}_0$ satisfy Property~1.
 
-Next, we extract a subset $\mathbf{A} \subseteq \mathbf{W}_0$ of size $\Omega(\sqrt{n})$ with pairwise large neighbourhood symmetric differences. Define graph $F$ on $\mathbf{W}_0$ by joining $\mathbf{x}$ and $\mathbf{y}$ whenever $|N(\mathbf{x}) \triangle N(\mathbf{y})| < (\eps^2/4)n$. By diversity, $F$ has $|\mathbf{W}_0| = \Omega(n^{3/4})$ vertices and maximum degree at most $n^{\delta} < n^{1/4}$, so Tur\'{a}n's theorem gives an independent set $\mathbf{A} \subseteq \mathbf{W}_0$ in $F$ of size $\Omega\bigl(|\mathbf{W}_0|/n^{1/4}\bigr) = \Omega(\sqrt{n})$. That is, for $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$, we have $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$, which implies $d' = \Omega(n)$.
+Next, we extract a subset $\mathbf{A} \subseteq \mathbf{W}_0$ of size $\Theta(\sqrt{n})$ with pairwise large neighbourhood symmetric differences. Define graph $F$ on $\mathbf{W}_0$ by joining $\mathbf{x}$ and $\mathbf{y}$ whenever $|N(\mathbf{x}) \triangle N(\mathbf{y})| < (\eps^2/4)n$. By diversity, $F$ has $|\mathbf{W}_0| = \Omega(n^{3/4})$ vertices and maximum degree at most $n^{\delta} < n^{1/4}$, so Tur\'{a}n's theorem gives an independent set $\mathbf{A} \subseteq \mathbf{W}_0$ in $F$ of size $\Omega\bigl(|\mathbf{W}_0|/n^{1/4}\bigr) = \Omega(\sqrt{n})$. That is, for $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$, we have $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$, which implies $d' = \Omega(n)$. Trim $\mathbf{A}$ to size $\Theta(\sqrt{n})$.
 
 By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), $e(G) \geq 800cn^2$ for some constant $c = c(C) > 0$. For $cn^2 \leq m \leq 2cn^2$, set $p = \sqrt{4m/e(G)}$, so that $p = \Omega(1)$ and $p \leq 0.1$. Let $U_0$ be a random subset of $V(G)$ by including each vertex with probability $p$. 
 
@@ -218,7 +219,7 @@ By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), $e(G
   \end{enumerate}
 \end{proof}
 
-Fix an outcome of $U_0$ for which all five events hold. Since $|\mathbf{Q} \cap \mathbf{R}| \geq |\mathbf{A}|/3 = \Omega(\sqrt{n})$, the collision graph construction on $\mathbf{Q} \cap \mathbf{R}$ and Tur\'{a}n's theorem yield a set $\mathbf{B}$ of size $\Omega(\sqrt{n})$ that has distinct degrees into $U_0$. Partition $\mathbf{B}$ into three equal parts by the degree $\deg_{U_0}(\mathbf{x})$ into $U_0$, and let $\mathbf{T}$ be the top third, $\mathbf{S}$ be the bottom third, and $\mathbf{X}$ be the middle third. Since $\mathbf{B}$ has distinct degrees and $|\mathbf{X}| = \Omega(\sqrt{n})$, we may find constant $c' \in (0, 1]$ that satisfies Property~3. Since $\mathbf{X} \subseteq \mathbf{A}$, Property~4 holds. Set $d = pd'$. Recall that $d' = \Theta(n)$, so $\deg_{U_0}(\mathbf{x}) = d + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{S} \sqcup \mathbf{T} \sqcup \mathbf{X}$, satisfying Property~2. Trimming the sizes of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ to $c'\sqrt{n}$ completes the proof.
+Fix an outcome of $U_0$ for which all five events hold. Since $|\mathbf{Q} \cap \mathbf{R}| \geq |\mathbf{A}|/3 = \Omega(\sqrt{n})$, the collision graph construction on $\mathbf{Q} \cap \mathbf{R}$ and Tur\'{a}n's theorem yield a set $\mathbf{B}$ of size $\Omega(\sqrt{n})$ that has distinct degrees into $U_0$. Partition $\mathbf{B}$ into three equal parts by the degree $\deg_{U_0}(\mathbf{x})$ into $U_0$, and let $\mathbf{T}$ be the top third, $\mathbf{S}$ be the bottom third, and $\mathbf{X}$ be the middle third. Since $\mathbf{B}$ has distinct degrees and $|\mathbf{X}| = \Omega(\sqrt{n})$, we may find constant $c' \in (0, 1]$ that satisfies Property~3. Since $\mathbf{X} \subseteq \mathbf{A}$, Property~4 holds. Set $d = pd'$. Recall that $d' = \Theta(n)$, so $\deg_{U_0}(\mathbf{x}) = d + O(\sqrt{n})$ for each $\mathbf{x} \in \mathbf{S} \sqcup \mathbf{T} \sqcup \mathbf{X}$, satisfying Property~2. Trimming the sizes of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ to $2c'\sqrt{n}$ completes the proof.
 \end{proof}
 
 \subsection{Double-exposure}
@@ -302,7 +303,7 @@ Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_
     \end{align*}
     uniformly over $M$. For large enough $M$, Markov's inequality now yields
     \[
-     \prob\left[\sum_{\substack{i \,:\, |\Delta_{k,i}| \geq M\sqrt{n}}} |\Delta_{k,i}| > \beta n\right] \leq \frac{\sum_{i = 1}^{|\mathbf{S}|} \E\bigl[|\Delta_{k, i}| \cdot \mathbbm{1}_{|\Delta_{k, i}| \geq M\sqrt{n}}\bigr]}{\beta n} \leq \frac{e^{-\Omega(M^2)}}{\beta} < 0.01.
+     \prob\left[\sum_{\substack{i \,:\, |\Delta_{k,i}| \geq M\sqrt{n}}} |\Delta_{k,i}| > \beta n\right] \leq \frac{\sum_{i = 1}^{c'\sqrt{n}} \E\bigl[|\Delta_{k, i}| \cdot \mathbbm{1}_{|\Delta_{k, i}| \geq M\sqrt{n}}\bigr]}{\beta n} \leq \frac{e^{-\Omega(M^2)}}{\beta} < 0.01.
     \]
     \item[1.] For $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{X}}{2}$, 
     \[

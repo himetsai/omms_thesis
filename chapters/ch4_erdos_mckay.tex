@@ -21,7 +21,7 @@ Let $G$ be a Ramsey graph on $[n]$, and let $U$ be a uniformly random vertex sub
 \]
 The covariance is $0$ if $e$ and $e'$ are disjoint and $\Theta(1)$ otherwise, so $\Var(e(U)) = \Theta(n^3)$. For a fixed vertex $v$, the number of pairs of edges sharing $v$ is $\binom{\deg(v)}{2}$, and the Erd\H{o}s--Szemer\'{e}di bound with Jensen's inequality gives
 \[
-  \Var\bigl(e(U)\bigr) \geq \sum_{v \in V(G)} \binom{\deg(v)}{2} \geq n\binom{2e(G)/n}{2} = \Omega(n^3).
+  \Var\bigl(e(U)\bigr) \gtrsim \sum_{v \in V(G)} \binom{\deg(v)}{2} \geq n\binom{2e(G)/n}{2} = \Omega(n^3).
 \]
 Thus the standard deviation is $\sigma \coloneqq \sigma(e(U)) = \Theta(n^{3/2})$. 
 
@@ -29,7 +29,7 @@ In Chapters~2 and~3, the anticoncentration analysis targeted the degree differen
 \[
   \prob\bigl[e(U) \leq x\bigr] = \Phi\left(\frac{x - \mu}{\sigma}\right) + o(1/\sigma)
 \]
-for all $x \in \R$ with $\Phi$ being the standard Gaussian cumulative distribution function. In~\cite{Kwan_2023}, it is strengthened to a local CLT (up to constant factors), showing that the point probabilities of $e(U)$ are all of order $\Theta(1/\sigma) = \Theta(n^{-3/2})$ within the bulk of the distribution.
+for all $x \in \R$ with $\Phi$ being the standard Gaussian cumulative distribution function. In~\cite{Kwan_2023}, it is strengthened to an approximation of the local CLT, showing that the point probabilities of $e(U)$ are all of order $\Theta(1/\sigma) = \Theta(n^{-3/2})$ within the bulk of the distribution.
 
 \begin{theorem}[Kwan--Sah--Sauermann--Sawhney
   {\cite{Kwan_2023}}]
@@ -255,7 +255,7 @@ But then on every $B_j \times B_k$ we have $\mathrm{rank}(\tilde{A}[B_j \times B
 
 To sum it up, applying Ingredients~1, 3, and 2 in sequence yields \eqref{eq:conditional-target}.
 
-\subsection{Switching for pointwise control}
+\subsection{The switching argument}
 \label{sec:switching}
 
 The first stage delivers the interval estimate 
