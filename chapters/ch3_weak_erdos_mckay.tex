@@ -27,7 +27,45 @@ Recall that Theorem \ref{thm:bs2007} provides a bound of $|\Phi(G)| = \Omega(\sq
 
 Specifically, pick a target $m$ and find two disjoint vertex sets $U$ and $W$, where $U$ is a linear-sized random set with $e(U) \approx m$ and $W$ is an augmenting set of size $O(\sqrt{n})$ selected from a \textit{candidate set} $W_0 \subseteq V(G) \setminus U$ whose degrees are of linear order and all lie in a narrow interval. Then the subsets $Z \subseteq W$ produce $\Omega(n^{3/2})$ distinct values of $e(U \sqcup Z)$ that all lie in an interval of length $O(n^{3/2})$ centred at $e(U)$. Applying this to $\Omega(\sqrt{n})$ well-separated targets $m$ yields the full $\Omega(n^2)$ count.
 
-Kwan and Sudakov construct $W$ as three disjoint parts $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, each of size $\Theta(\sqrt{n})$, that act at complementary scales. Every element has $\Theta(n)$ edges into $U$, and the degrees from $\mathbf{S}$ into $U$ are uniformly smaller than those from $\mathbf{T}$ by a gap of $\Omega(\sqrt{n})$. Varying the number $k$ of elements of $\mathbf{S}$ included in $Z$ shifts $e(U \sqcup Z)$ at the coarsest scale $\Theta(n)$. Exchanging elements of $\mathbf{S}$ for elements of $\mathbf{T}$ shifts it by $\Theta(\sqrt{n})$. The elements of $\mathbf{X}$ fill the remaining $\Theta(\sqrt{n})$ gap by contributing $\Theta(\sqrt{n})$ distinct degrees into $U \sqcup Z$ for each choice of $Z$. Hence the different combinations of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ yield $\Omega(n^{3/2})$ distinct values of $e(U \sqcup Z)$.
+Kwan and Sudakov construct $W$ as three disjoint parts $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, each of size $\Theta(\sqrt{n})$, that act at complementary scales. Every element has $\Theta(n)$ edges into $U$, and the degrees from $\mathbf{S}$ into $U$ are uniformly smaller than those from $\mathbf{T}$ by a gap of $\Omega(\sqrt{n})$. Three operation on $Z \subseteq W$ shift $e(U \sqcup Z)$ at three separate scales. Varying $k = |Z \cap (\mathbf{S} \sqcup \mathbf{T})|$ shifts $e(U \sqcup Z)$ at the coarse scale $\Theta(n)$. With $k$ fixed, exchanging an element of $\mathbf{S}$ for an element of $\mathbf{T}$ shifts $e(U \sqcup Z)$ by $\Theta(\sqrt{n})$, so the achievable values at this level are spaced by $\Theta(\sqrt{n})$. The set $\mathbf{X}$ will contain $\Theta(\sqrt{n})$ distinct degrees into $U$, so varying the singleton $x \in \mathbf{X}$ fills these $\Theta(\sqrt{n})$ gaps. Hence, the different combinations of $\mathbf{S}, \mathbf{T}, \mathbf{X}$ yield $\Omega(n^{3/2})$ distinct values of $e(U \sqcup Z)$.
+
+\begin{figure}[ht]
+  \centering
+  \hspace*{-0.4cm}%
+  \begin{tikzpicture}[
+    blob/.style={draw, thick},
+    subset/.style={draw, thick, fill=gray!12},
+    bundle/.style={gray!70, line width=0.3pt},
+    vtx/.style={circle, fill=black, inner sep=1.3pt}
+  ]
+  \draw[blob] (0,0) ellipse (1.5 and 2.4);
+  \node at (0,0) {\Large $U$};
+  
+  \draw[blob]   (5, 2.45) ellipse (1.6 and 0.95);
+  \draw[subset] (4.55, 2.45) ellipse (0.75 and 0.5);
+  \node at (6, 2.45) {\Large $\mathbf T$};
+
+  \draw[blob]   (5, 0.0) ellipse (1.6 and 0.95);
+  \draw[subset] (4.55, 0.0) ellipse (0.75 and 0.5);
+  \node at (6, 0) {\Large $\mathbf S$};
+
+  \draw[thick, overlay] (6.85, 0) -- (7.15, 0) -- (7.15, 2.45) -- (6.85, 2.45);
+  \node[anchor=west, align=center, font=\small, overlay] at (7.25, 1.225) {$\Theta(\sqrt n)$ gap\\in $\deg_U(x)$};
+  
+  \draw[blob] (5, -2.45) ellipse (1.6 and 0.95);
+  \node[vtx] (xpt) at (4.55, -2.45) {};
+  \node at (6, -2.45) {\Large $\mathbf X$};
+
+  \foreach \dy in {-0.35, -0.15, 0.05, 0.25} {
+    \draw[bundle] ({1.5*sqrt(1-((1.7+\dy*0.6)/2.4)^2)}, {1.7+\dy*0.6}) -- (3.84, 2.45+\dy*0.4);
+    \draw[bundle] (1.50, 0.0+\dy*0.6) -- (3.84, 0.0+\dy*0.4);
+    \draw[bundle] ({1.5*sqrt(1-((-1.7+\dy*0.6)/2.4)^2)}, {-1.7+\dy*0.6}) -- (4.55,-2.45);
+  }
+  \node[align=center, font=\small, overlay] at (8.3,-2.45) {$\Theta(\sqrt n)$ distinct\\values of $\deg_U(x)$};
+  \end{tikzpicture}
+  \caption{Construction of $U \sqcup Z$. The gray areas and singleton in $\mathbf X$ constitute $Z$, and $\deg_U(x) = \Theta(n)$ for all $x \in \mathbf{S} \sqcup \mathbf{T} \sqcup \mathbf{X}$.}
+  \label{fig:ks-sets}
+\end{figure}
 
 Achieving the requirement for $\mathbf{X}$ is the main technical challenge, as vertex diversity defined in Chapter~\ref{sec:ch2} does not produce enough distinct degrees in this case. In the proof of Lemma~\ref{lem:diversity-degrees}, we saw that $\prob[\deg_U(x) = \deg_U(y)] = O(1/\sqrt{n})$ for all but $\leq n^{\delta}$ pairs $x, y \in V(G)$ in an $(\eps, \delta)$-diverse graph, and the same construction yields the collision graph $H$ on the candidate set $W_0$ with expected number of edges
 \[
@@ -39,7 +77,7 @@ producing an independent set $I \subseteq W_0$ of size
 \]
 by Tur\'{a}n's theorem. We thus need $|W_0| = \Omega(n^{1/2 + \delta})$ for $|I|$ to reach $\Omega(\sqrt{n})$. Unfortunately, $W_0$ is extracted by pigeonholing $n$ vertices into $O(\sqrt{n})$ degree intervals of length $O(\sqrt{n})$, so at best $|W_0| = \Theta(\sqrt{n})$, yielding only $|I| = \Omega(n^{1/2 - \delta})$.
 
-To overcome this obstacle, Kwan and Sudakov's construction allows the candidate set $W_0$ to also contain disjoint \textit{pairs}. Write $\mathbf{x}$ in bold to denote an object that is either a single vertex or a pair of vertices, and similarly for sets of such objects. For $\mathbf{x} = \{x_1, x_2\}$, define $N(\mathbf{x}) \coloneqq N(x_1) \cup N(x_2)$ as a multiset union and $\deg(\mathbf{x}) \coloneqq |N(\mathbf{x})| = \deg(x_1) + \deg(x_2)$ as the \textit{pair-degree}. Note that there are $\binom{n}{2} = \Theta(n^2)$ pairs, but the pair-degrees take only $O(n)$ values. Pigeonholing now yields $\Theta(n)$ disjoint pairs sharing a common pair-degree, vastly exceeding the $n^{1/2 + \delta}$ threshold. The price is that we need the symmetric difference $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$ not just for most pairs of vertices, but for most pairs of \emph{pairs}. We call this \textit{pair-diversity}.
+To overcome this obstacle, Kwan and Sudakov's construction allows the candidate set $W_0$ to also contain disjoint \textit{pairs} while treating them like singletons. Write $\mathbf{x}$ in bold to denote an object that is either a single vertex or a pair of vertices, and similarly for sets of such objects. For $\mathbf{x} = \{x_1, x_2\}$, define $N(\mathbf{x}) \coloneqq N(x_1) \cup N(x_2)$ as a multiset union and $\deg(\mathbf{x}) \coloneqq |N(\mathbf{x})| = \deg(x_1) + \deg(x_2)$ as the \textit{pair-degree}. Note that there are $\binom{n}{2} = \Theta(n^2)$ pairs, but the pair-degrees take only $O(n)$ values. Pigeonholing now yields $\Theta(n)$ disjoint pairs sharing a common pair-degree, vastly exceeding the $n^{1/2 + \delta}$ threshold. The price is that we need the symmetric difference $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$ not just for most pairs of vertices, but for most pairs of \emph{pairs}. We call this \textit{pair-diversity}.
 
 \begin{definition}\label{def:pair_diverse}
   An $n$-vertex graph $G$ is \textit{$(\eps, \delta, \alpha)_2$-diverse} if for each pair of vertices $\mathbf{x} = \{x_1, x_2\}$ in $G$ with $|N(x_1) \triangle \overline{N(x_2)}| \geq \alpha n$, there are $\leq n^{\delta}$ mutually disjoint pairs of vertices $\mathbf{y} = \{y_1, y_2\}$ with $\mathbf{x} \cap \mathbf{y} = \emptyset$, such that $|N(\mathbf{x}) \triangle N(\mathbf{y})| < \eps n$.
@@ -64,7 +102,7 @@ It turns out that richness also implies pair-diversity.
   But then the set of all such $y$ now contradicts the $(\eps, \delta)$-rich condition.
 \end{proof}
 
-One last thing we need is to ensure $\mathbf{X}$ actually provides $\Theta(\sqrt{n})$ distinct degrees into $U \sqcup \mathbf{Z} \coloneqq U \sqcup \bigsqcup_{\mathbf{z} \in \mathbf{Z}} \mathbf{z}$ for each choice of augmenting set $\mathbf{Z} \subseteq \mathbf{S} \sqcup \mathbf{T}$. Notice the current construction of $\mathbf{X}$ only ensures distinct degrees $\deg_U(\mathbf{x})$ into $U$ instead of $\deg_{U \sqcup Z}(\mathbf{x})$. If $U$ were sampled once and directly constructed $\mathbf{S}, \mathbf{T}, \mathbf{X}$ based on $U$, then the $\deg_U(\mathbf{x})$ would be fixed numbers given the outcome of $U$. However, there is no guarantee that $\deg_{U \sqcup Z}(\mathbf{x}) = \deg_{U}(\mathbf{x}) + \deg_{Z}(\mathbf{x})$ would remain distinct, as the addition of $\deg_{Z}(\mathbf{x})$ could cancel out the uniqueness of $\deg_{U}(\mathbf{x})$. Kwan and Sudakov overcome this with a \textit{double-exposure} technique. They perform two rounds of sampling. First, they sample the random set $U_0$ and construct $\mathbf{S}, \mathbf{T}, \mathbf{X}$ relative to $U_0$. In the second round, they sample $U$ from $U_0$ by independently keeping each vertex with probability $1/2$. After the first sampling, the construction guarantees $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = \Omega(n)$ for all $\mathbf{x}, \mathbf{y} \in \mathbf{X}$, and the augmenting sets $\mathbf{Z} \subseteq \mathbf{S} \cup \mathbf{T}$ are fully determined by $U_0$. In the second round, the difference $\deg_U(\mathbf{x}) - \deg_U(\mathbf{y})$ becomes a sum of $\Omega(n)$ independent Bernoulli terms, and Erd\H{o}s--Littlewood--Offord yields $\prob[\deg_U(\mathbf{x}) - \deg_U(\mathbf{y}) = t] = O(1/\sqrt{n})$ for every integer $t$. In particular, since $t_{xy} \coloneqq \deg_Z(\mathbf{y}) - \deg_Z(\mathbf{x})$ is deterministic for each $\mathbf{x}, \mathbf{y}$, 
+One last thing we need is to ensure $\mathbf{X}$ actually provides $\Theta(\sqrt{n})$ distinct degrees into $U \sqcup \mathbf{Z} \coloneqq U \sqcup \bigsqcup_{\mathbf{z} \in \mathbf{Z}} \mathbf{z}$ for each choice of augmenting set $\mathbf{Z} \subseteq \mathbf{S} \sqcup \mathbf{T}$. Notice the current construction of $\mathbf{X}$ only ensures distinct degrees $\deg_U(\mathbf{x})$ into $U$ instead of $\deg_{U \sqcup Z}(\mathbf{x})$. If we sampled $U$ once and directly constructed $\mathbf{S}, \mathbf{T}, \mathbf{X}$ based on $U$, then the $\deg_U(\mathbf{x})$ would be fixed numbers given the outcome of $U$. However, there is no guarantee that $\deg_{U \sqcup Z}(\mathbf{x}) = \deg_{U}(\mathbf{x}) + \deg_{Z}(\mathbf{x})$ would remain distinct, as the addition of $\deg_{Z}(\mathbf{x})$ could cancel out the uniqueness of $\deg_{U}(\mathbf{x})$. Kwan and Sudakov overcome this with a \textit{double-exposure} technique. They perform two rounds of sampling. First, they sample the random set $U_0$ and construct $\mathbf{S}, \mathbf{T}, \mathbf{X}$ relative to $U_0$. In the second round, they sample $U$ from $U_0$ by independently keeping each vertex with probability $1/2$. After the first sampling, the construction guarantees $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = \Omega(n)$ for all $\mathbf{x}, \mathbf{y} \in \mathbf{X}$, and the augmenting sets $\mathbf{Z} \subseteq \mathbf{S} \cup \mathbf{T}$ are fully determined by $U_0$. In the second round, the difference $\deg_U(\mathbf{x}) - \deg_U(\mathbf{y})$ becomes a sum of $\Omega(n)$ independent Bernoulli terms, and Erd\H{o}s--Littlewood--Offord yields $\prob[\deg_U(\mathbf{x}) - \deg_U(\mathbf{y}) = t] = O(1/\sqrt{n})$ for every integer $t$. In particular, since $t_{xy} \coloneqq \deg_Z(\mathbf{y}) - \deg_Z(\mathbf{x})$ is deterministic for each $\mathbf{x}, \mathbf{y}$, 
 \[
   \prob\bigl[\deg_{U \sqcup Z}(\mathbf{x}) = \deg_{U \sqcup Z}(\mathbf{y})\bigr] = \prob\bigl[\deg_{U}(\mathbf{x}) - \deg_{U}(\mathbf{y}) = t_{xy}\bigr] = O(1/\sqrt{n}).
 \]
@@ -190,7 +228,7 @@ Given $\mathbf{S}, \mathbf{T}, c'$ from Lemma~\ref{lem:construction}, fix an ord
 \[
   \mathcal{P} \coloneqq \bigl\{(k, i) : c'\sqrt{n} \leq k \leq 2c'\sqrt{n} \text{ and } 0 \leq i \leq c'\sqrt{n}\bigr\}.
 \]
-For $(k, i) \in \mathcal{P}$, define $\mathbf{Z}_{k, i} \subseteq \mathbf{S} \sqcup \mathbf{T}$ by taking the first $k - i$ elements from $\mathbf{S}$ and the first $i$ elements from $\mathbf{T}$. By Property 2 and 3 of Lemma~\ref{lem:construction}, the values of $e(U_0, \mathbf{Z}_{k, i}) \coloneqq \sum_{\mathbf{z} \in \mathbf{Z}_{k, i}} \deg_{U_0}(\mathbf{z})$ are evenly spaced by $\Theta(\sqrt{n})$ as $(k, i)$ vary lexicographically, which already forms $\Omega(n)$ distinct values of $e(U_0 \sqcup \mathbf{Z}_{k, i})$. It remains to fill the $\Theta(\sqrt{n})$ gaps between each $e(U_0 \sqcup \mathbf{Z}_{k, i})$ with $\mathbf{X}$ via the \textit{double-exposure} technique while maintaining the gap structure of $\mathbf{Z}_{k, i}$. Specifically, we sample $U$ from $U_0$ such that the values $e(U \sqcup \mathbf{Z}_{k, i} \sqcup \{\mathbf{x}\})$ are distinct as $\mathbf{Z}_{k, i} \subseteq \mathbf{S} \sqcup \mathbf{T}$ and $\mathbf{x} \in \mathbf{X}$ vary. Define $U_{k,i} \coloneqq U \sqcup \mathbf{Z}_{k,i}$ and $e_{k, i} \coloneqq e(U_{k, i}) - e(U) = e(\mathbf{Z}_{k,i}) + e(\mathbf{Z}_{k,i}, U)$. We need to ensure the following:
+For $(k, i) \in \mathcal{P}$, define $\mathbf{Z}_{k, i} \subseteq \mathbf{S} \sqcup \mathbf{T}$ by taking the first $k - i$ elements from $\mathbf{S}$ and the first $i$ elements from $\mathbf{T}$. By Properties 2 and 3 of Lemma~\ref{lem:construction}, the values of $e(U_0, \mathbf{Z}_{k, i}) \coloneqq \sum_{\mathbf{z} \in \mathbf{Z}_{k, i}} \deg_{U_0}(\mathbf{z})$ are evenly spaced by $\Theta(\sqrt{n})$ as $(k, i)$ vary lexicographically, which already forms $\Omega(n)$ distinct values of $e(U_0 \sqcup \mathbf{Z}_{k, i})$. It remains to fill the $\Theta(\sqrt{n})$ gaps between each $e(U_0 \sqcup \mathbf{Z}_{k, i})$ with $\mathbf{X}$ via the \textit{double-exposure} technique while maintaining the gap structure of $\mathbf{Z}_{k, i}$. Specifically, we sample $U$ from $U_0$ such that the values $e(U \sqcup \mathbf{Z}_{k, i} \sqcup \{\mathbf{x}\})$ are distinct as $\mathbf{Z}_{k, i} \subseteq \mathbf{S} \sqcup \mathbf{T}$ and $\mathbf{x} \in \mathbf{X}$ vary. Define $U_{k,i} \coloneqq U \sqcup \mathbf{Z}_{k,i}$ and $e_{k, i} \coloneqq e(U_{k, i}) - e(U) = e(\mathbf{Z}_{k,i}) + e(\mathbf{Z}_{k,i}, U)$. We need to ensure the following:
 \begin{enumerate}
   \item \emph{Degree distinctness in $\mathbf{X}$.} For most $(k, i)$, the elements of $\mathbf{X}$ should have $\Omega(\sqrt{n})$ pairwise distinct degrees into $U_{k,i}$, all lying in an interval of length $O(\sqrt{n})$. This is the payoff of double-exposure.
     \item \emph{Concentration of the edge count.} The value $e_{k,0}$ should be $O(n)$ around its expectation, so that the $\Theta(n)$ spacings between $e_{k, 0}$ and $e_{k + 1, 0}$ are preserved.
@@ -292,7 +330,7 @@ Let $G$ be a $C$-Ramsey graph, let $\mathbf{S}$, $\mathbf{T}$, $\mathbf{X}$, $U_
     \[
       \prob\bigl[|\mathbf{Y}| \geq (1 - \gamma)|\mathbf{X}|\bigr] = 1 - \prob\bigl[|\mathbf{X} \setminus \mathbf{Y}| \geq \gamma|\mathbf{X}|\bigr] \geq 1 - \frac{\gamma|\mathbf{X}|}{200\gamma |\mathbf{X}|} = 0.995.
     \]
-    Hence, with probability $\geq 0.995$, there exists large enough $Q$ and set $\mathbf{Y} \subseteq \mathbf{X}$ of size $\geq (1 - \gamma)|\mathbf{X}|$ whose elements lie in the interval $[d/2 - Q\sqrt{n},\; d/2 + Q\sqrt{n}]$.
+    Hence, with probability $\geq 0.995$, for sufficiently large $Q$ we obtain $\mathbf{Y} \subseteq \mathbf{X}$ of size $\geq (1 - \gamma)|\mathbf{X}|$ whose elements lie in the interval $[d/2 - Q\sqrt{n},\; d/2 + Q\sqrt{n}]$.
 
     By the union bound, both of the above events occur with probability $\geq 0.99$, in which case take $\mathbf{X}_{k, i} = \mathbf{Y}_{k, i} \cap \mathbf{Y}$ for $i \in \mathcal{I}_k$. Since $|\mathbf{Y}_{k, i}| \geq 2\gamma \sqrt{n}$ and $|\mathbf{Y}| \geq (1 - \gamma)|\mathbf{X}|$, we have $|\mathbf{X}_{k, i}| \geq \gamma \sqrt{n}$. This proves Property~1.
 
