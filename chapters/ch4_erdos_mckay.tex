@@ -51,7 +51,7 @@ for all $x \in \R$ with $\Phi$ being the standard Gaussian cumulative distributi
 The Erd\H{o}s--McKay conjecture follows directly from the lower bound of Theorem~\ref{thm:ksss} combined with Theorem~\ref{thm:alks2003} on small values of $x$.
 
 \paragraph{Proof of Theorem \ref{thm:em}.} 
-By Theorem~\ref{thm:alks2003}, there exists $\alpha = \alpha(C) > 0$ such that $\Phi(G) \supseteq \{0, 1, \ldots, n^\alpha\}$. Fix integer $x$ between $n^\alpha$ and $e(G)/4$. Let $m$ be the smallest integer such that $e(\{1, \ldots, m\}) \geq 4x$. Put $G' = G[\{1, \ldots, m\}]$ and note that 
+By Theorem~\ref{thm:alks2003}, there exists $\alpha = \alpha(C) > 0$ such that $\Phi(G) \supseteq \{0, 1, \ldots, n^\alpha\}$. Fix integer $x$ between $n^\alpha$ and $e(G)/4$. Let $m$ be the smallest integer such that $e(\{1, \ldots, m\}) \geq 4x$. Put $G' \coloneqq G[\{1, \ldots, m\}]$ and note that 
 \[
   e(G') \geq 4x \geq e\bigl(\{1, \ldots, m-1\}\bigr) \geq e(G') - m,
 \]
@@ -72,7 +72,7 @@ The standard way to approach local limit theorems is via Fourier transforms. Def
 \[
   f(\xi_1, \ldots, \xi_n) \coloneqq \sum_{ij \in E(G)} \xi_i \xi_j.
 \]
-For any $U \subseteq V(G)$, setting $\xi_v = \mathbbm{1}_{v \in U}$ gives $f\bigl(\vec{\xi}^{\,(U)}\bigr) = e(U)$. The Erd\H{o}s--McKay conjecture is thus equivalent to asking whether the range of this \textit{quadratic} polynomial on $\{0,1\}^n$ covers every integer in $\{0, \ldots, \delta n^2\}$.
+For any $U \subseteq V(G)$, setting $\xi_v \coloneqq \mathbbm{1}_{v \in U}$ gives $f\bigl(\vec{\xi}^{\,(U)}\bigr) = e(U)$. The Erd\H{o}s--McKay conjecture is thus equivalent to asking whether the range of this \textit{quadratic} polynomial on $\{0,1\}^n$ covers every integer in $\{0, \ldots, \delta n^2\}$.
 
 For a random variable $X$, the \textit{characteristic function} of $X$ is defined as
 \[
@@ -83,7 +83,7 @@ and note that $|\varphi_X(\tau)| \leq 1$ for all $\tau$. Applying the Fourier in
 \label{eq:fourier-inversion}
 \prob[X = x] = \frac{1}{2\pi}\int_{-\pi}^{\pi} e^{-i\tau x}  \varphi_X(\tau) \, d\tau \leq \frac{1}{2\pi}\int_{-\pi}^{\pi} |\varphi_X(\tau)| \, d\tau,
 \end{equation}
-for integer-valued $X$. In particular, any upper bound on the integrated $|\varphi_X(\tau)|$ produces an upper bound on the point probability. For the matching lower bound, we compare $\varphi_X$ with the characteristic function $\varphi_Z(\tau) = e^{i\tau\mu - \sigma^2\tau^2/2}$ of a Gaussian $Z \sim \mathcal{N}(\mu, \sigma^2)$, where $\mu = \mathbb{E}[X]$ and $\sigma^2 = \mathrm{Var}(X)$. Since the Gaussian density at $x$ is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean, $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion} whenever $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small. If a local CLT held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$ and we are done.
+for integer-valued $X$. In particular, any upper bound on the integrated $|\varphi_X(\tau)|$ produces an upper bound on the point probability. For the matching lower bound, we compare $\varphi_X$ with the characteristic function $\varphi_Z(\tau) \coloneqq e^{i\tau\mu - \sigma^2\tau^2/2}$ of a Gaussian $Z \sim \mathcal{N}(\mu, \sigma^2)$, where $\mu = \mathbb{E}[X]$ and $\sigma^2 = \mathrm{Var}(X)$. Since the Gaussian density at $x$ is of order $\Theta(1/\sigma)$ for any $x$ within $O(\sigma)$ of the mean, $\prob[X = x]$ inherits the same order of magnitude $\Theta(1/\sigma)$ through \eqref{eq:fourier-inversion} whenever $|\varphi_X(\tau) - \varphi_Z(\tau)|$ is small. If a local CLT held for $X = e(U)$, the proof would amount to verifying suitable estimates on $|\varphi_X(\tau)|$ on $[-\pi, \pi]$ and we are done.
 
 Unfortunately, an actual local CLT does not hold for $e(U)$ in general. The distribution of $e(U)$ can fail to be smooth at the unit scale despite the global shape being approximately Gaussian, which results in spikes in the characteristic function and prevents the integrand in \eqref{eq:fourier-inversion} from being uniformly small. In particular, the authors in~\cite{Kwan_2023} observed a ``two-scale'' behaviour of the distribution of $e(U)$, depending on the additive structure of the degree sequence of $G$ (see Figure~\ref{fig:structured}).
 
@@ -104,7 +104,7 @@ for some $B = B(C)$. The second stage upgrades~\eqref{eq:interval-estimate} to a
 \subsection{Degree sequence dichotomy}
 \label{sec:fourier-walsh}
 
-We first decompose $e(U)$ into a sum of a linear and quadratic part. Set $\xi_v = \mathbbm{1}_{v \in U}$ and write $x_v = 2\xi_v - 1 \in \{-1, +1\}$, so that $\xi_v = (1 + x_v)/2$. Substituting into $e(U) = f\bigl(\vec\xi\bigr) = \sum_{ij \in E(G)} \xi_i \xi_j$,
+We first decompose $e(U)$ into a sum of a linear and quadratic part. Set $\xi_v \coloneqq \mathbbm{1}_{v \in U}$ and write $x_v \coloneqq 2\xi_v - 1 \in \{-1, +1\}$, so that $\xi_v = (1 + x_v)/2$. Substituting into $e(U) = f\bigl(\vec\xi\bigr) = \sum_{ij \in E(G)} \xi_i \xi_j$,
 \begin{equation}\label{eq:decomposition}
   X = \sum_{ij \in E(G)} \frac{(1 + x_i)(1 + x_j)}{4} = \underbrace{\frac{e(G)}{4}}_{\mathbb{E}[X]} + \underbrace{\frac{1}{4}\sum_{v \in V(G)} \deg(v) x_v}_{L} + \underbrace{\frac{1}{4}\sum_{uv \in E(G)} x_u x_v}_{Q},
 \end{equation}
@@ -133,7 +133,7 @@ for $y \in \R$, so applying to \eqref{eq:phi-L} gives
 \label{eq:phi-L-bound}
 |\varphi_L(\tau)| \leq \exp\left(-2\sum_{v \in V(G)} \left\|\frac{\tau d_v}{\pi}\right\|^2\right).
 \end{equation}
-The right-hand side decays exponentially in $n$ unless many of the quantities $\tau d_v/\pi$ are simultaneously close to integers. Throughout what follows, let $\nu = \nu(C) > 0$ be a small constant. The low range $|\tau| \leq n^{-0.99}$ is controlled by comparison with the characteristic function of a Gaussian $\varphi_Z(\tau) = \exp\bigl(i \mu \tau - \sigma^2 \tau^2/2\bigr)$ via a version of the Esseen's inequality~\cite[Lemma 6.1]{Kwan_2023}. The high range $|\tau| \geq \nu$ is controlled by a \textit{quadratic-cancellation} estimate on $Q$~\cite[Section 8]{Kwan_2023}. What concerns us is the medium window $n^{-0.99} \leq |\tau| \leq \nu$, in which the bound~\eqref{eq:phi-L-bound} splits into two cases. 
+The right-hand side decays exponentially in $n$ unless many of the quantities $\tau d_v/\pi$ are simultaneously close to integers. Throughout what follows, let $\nu = \nu(C) > 0$ be a small constant. The low range $|\tau| \leq n^{-0.99}$ is controlled by comparison with the characteristic function of a Gaussian $\varphi_Z(\tau) \coloneqq \exp\bigl(i \mu \tau - \sigma^2 \tau^2/2\bigr)$ via a version of the Esseen's inequality~\cite[Lemma 6.1]{Kwan_2023}. The high range $|\tau| \geq \nu$ is controlled by a \textit{quadratic-cancellation} estimate on $Q$~\cite[Section 8]{Kwan_2023}. What concerns us is the medium window $n^{-0.99} \leq |\tau| \leq \nu$, in which the bound~\eqref{eq:phi-L-bound} splits into two cases. 
 
 \paragraph{The unstructured case.} In the case that
 \[
@@ -324,9 +324,9 @@ for some $\ell^* \in \{-B, \ldots, B\}$. Thus, \eqref{eq:num-bound} and \eqref{e
 
 It remains to find the suitable set $T$ that enables \eqref{eq:moment-estimates}. The two factors in \eqref{eq:moment-estimates} have concrete meanings: $n^{-3/2}$ is the interval estimate \eqref{eq:interval-estimate}, whereas $\E[Y_\ell] = \Theta(|T|/\sqrt n)$, as follows.
 
-For $(y, z) \in T$, we have $\prob[y \in U, z \notin U] = 1/4$. Conditional on this event and set $R_w = 2\mathbbm{1}_{w \in U} - 1$ and 
+For $(y, z) \in T$, we have $\prob[y \in U, z \notin U] = 1/4$. Conditional on this event, set $R_w \coloneqq 2\mathbbm{1}_{w \in U} - 1$ and 
 \[
-  a_w = \mathbbm{1}_{w \in N(z) \setminus N(y)} - \mathbbm{1}_{w \in N(y) \setminus N(z)}.
+  a_w \coloneqq \mathbbm{1}_{w \in N(z) \setminus N(y)} - \mathbbm{1}_{w \in N(y) \setminus N(z)}.
 \]
 Then $s(y, z; U)$ may be written as
 \begin{align*}

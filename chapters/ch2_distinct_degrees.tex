@@ -31,9 +31,9 @@ Diversity matches our assumption $|N(x) \triangle N(y)| = D \geq \eps n$ from Se
 \begin{proof}
   Let $U$ be a uniformly random subset of $V(G)$. It suffices to show that with positive probability, $|U| \geq n/4$ and $G[U]$ contains $\Omega(\sqrt{n})$ vertices of distinct degrees. 
 
-  For distinct $x, y \in V(G)$, define $\mathbbm{1}_{xy}$ to be the indicator for the event that $x, y \in U$ and $\deg_U(x) = \deg_U(y)$. Then $\E[\mathbbm{1}_{xy}] \leq \prob[\deg_U(x) = \deg_U(y)]$. Put $D = N_G(x) \triangle N_G(y), A = N_G(x) \setminus N_G(y)$, and $B = N_G(y) \setminus N_G(x)$. Then the random variable
+  For distinct $x, y \in V(G)$, define $\mathbbm{1}_{xy}$ to be the indicator for the event that $x, y \in U$ and $\deg_U(x) = \deg_U(y)$. Then $\E[\mathbbm{1}_{xy}] \leq \prob[\deg_U(x) = \deg_U(y)]$. Put $D \coloneqq N_G(x) \triangle N_G(y), A \coloneqq N_G(x) \setminus N_G(y)$, and $B \coloneqq N_G(y) \setminus N_G(x)$. Then the random variable
   \[
-    \deg_U(x) - \deg_U(y) = |A \cap U| - |B \cap U| = \sum_{v \in A} \mathbbm{1}_{v \in U} - \sum_{v \in B} \mathbbm{1}_{v \in U}
+    \deg_U(x) - \deg_U(y) = |A \cap U| - |B \cap U| = \sum_{v \in A} \mathbbm{1}_{v \in U} - \sum_{v \in B} \mathbbm{1}_{v \in U} \leq |D|
   \]
   is of $(|D|, 1/2)$-Littlewood--Offord type. Thus, Erd\H{o}s--Littlewood--Offord gives
   \[
@@ -121,18 +121,18 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. Spe
 \textit{Remark:} $\eps = \eps(C)$ is independent of $\delta$, so $\delta$ can be taken arbitrarily small for any given $\eps$.
 
 \begin{proof}
-  Suppose for contradiction that every set of $\geq cn$ vertices fails to induce a $(\eps, \delta)$-rich subgraph, for small $\eps = \eps(C)$ and $c = (\delta/4)^{K}$ with large $K = K(C, \delta)$ to be determined. We inductively construct a sequence of disjoint vertex sets $S_1, S_2, \ldots, S_K$ of size $s = (cn)^\delta/2$, such that for all $S_i$ one of the following conditions holds:
+  Suppose for contradiction that every set of $\geq cn$ vertices fails to induce a $(\eps, \delta)$-rich subgraph, for small $\eps = \eps(C)$ and $c = (\delta/4)^{K}$ with large $K = K(C, \delta)$ to be determined. We inductively construct a sequence of disjoint vertex sets $S_1, S_2, \ldots, S_K$ of size $s \coloneqq (cn)^\delta/2$, such that for all $S_i$ one of the following conditions holds:
   \begin{enumerate}
     \item[(i)] $d(S_i, S_j) < 4\eps$ for $j > i$,
     \item[(ii)] $d(S_i, S_j) > 1 - 4\eps$ for $j > i$.
   \end{enumerate}
   That is, each $S_i$ is small, and the sets are extremely sparse or dense between one another. Alongside, we also construct a sequence of induced subgraphs $G = G[U_0] \supset G[U_1] \supset \cdots \supset G[U_K]$, such that $|U_i| \geq (\delta/4)|U_{i - 1}|$ and $S_i \subseteq U_{i - 1}$ for all $i$.
 
-  We first show how this construction gives the lemma. By working with $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S = \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $s$,
+  We first show how this construction gives the lemma. By working with $\overline{G}$ instead of $G$ if necessary, we may assume that $r \geq K/2$ of the sets $S_{1}, \ldots, S_{K}$ satisfy condition (i), say $S_{i_1}, \ldots, S_{i_r}$. Put $S \coloneqq \bigsqcup_{k = 1}^r S_{i_k}$. Since each $S_{i_k}$ has size $s$,
   \[
     d(S) = \frac{\sum_{k = 1}^r e(S_{i_k})}{\binom{|S|}{2}} + \frac{\sum_{k < l} e(S_{i_k}, S_{i_l})}{\binom{|S|}{2}} \leq \frac{r\binom{s}{2}}{\binom{rs}{2}} + \max_{(k, l)} d(S_{i_k}, S_{i_l}) \leq \frac{1}{r} + 4\eps \leq \frac{2}{K} + 4\eps.
   \]
-  Set $d = 2/K + 4\eps$, which is a positive constant to be taken small. The Erd\H{o}s--Szemer\'{e}di theorem (Theorem~\ref{thm:ramsey-density}) now yields a homogeneous set $A \subseteq S$ of size
+  Set $d \coloneqq 2/K + 4\eps$, which is a positive constant to be taken small. The Erd\H{o}s--Szemer\'{e}di theorem (Theorem~\ref{thm:ramsey-density}) now yields a homogeneous set $A \subseteq S$ of size
   \[
     |A| \geq \frac{\gamma}{d\log(1/d)} \log |S| = \frac{\gamma \delta}{d\log(1/d)} \log cn = \frac{\gamma \delta}{d\log(1/d)} \log n + o(\log n),
   \]
@@ -140,11 +140,11 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. Spe
 
   We now construct the sets $S_i$ and $U_i$ inductively. Suppose $U_1, \ldots, U_{i - 1}$ and $S_1, \ldots, S_{i - 1}$ have been constructed. By induction, $|U_{i - 1}| \geq (\delta/4)^{i - 1}|U_0| \geq cn$. Since $G[U_{i - 1}]$ is not $(\eps, \delta)$-rich by assumption, $U_{i - 1}$ contains subsets $W_i, Y_i$ with $|W_i| \geq \delta|U_{i - 1}|$ and $|Y_i| = (cn)^{\delta}$, such that for each $y \in Y_i$ we have $|N_{G_{i - 1}}(y) \cap W_i| < \eps|W_i|$ or $|\overline{N_{G_{i - 1}}(y)} \cap W_i| < \eps|W_i|$. We consider two cases.
 
-  Suppose $|N_{G_{i - 1}}(y) \cap W_i| < \eps|W_i|$ for half the vertices $y \in Y_i$, and let $S_i$ be the corresponding subset of $Y_i$, so $|S_i| = (cn)^{\delta}/2$. Put $T_i = W_i \setminus S_i$. Since $|S_i| \leq |W_i|/2$ for large enough $n$, we have $|T_i| \geq |W_i|/2$. Thus for $y \in S_i$,
+  Suppose $|N_{G_{i - 1}}(y) \cap W_i| < \eps|W_i|$ for half the vertices $y \in Y_i$, and let $S_i$ be the corresponding subset of $Y_i$, so $|S_i| = (cn)^{\delta}/2$. Put $T_i \coloneqq W_i \setminus S_i$. Since $|S_i| \leq |W_i|/2$ for large enough $n$, we have $|T_i| \geq |W_i|/2$. Thus for $y \in S_i$,
   \[
     d(y, T_i) = \frac{|N_{G_{i - 1}}(y) \cap T_i|}{|T_i|} \leq \frac{|N_{G_{i - 1}}(y) \cap W_i|}{|T_i|} < \frac{\eps |W_i|}{|W_i|/2} = 2\eps.
   \]
-  Partition $T_i$ into $U_i \sqcup Z_i$ where $U_i = \{v \in T_i : d(v, S_i) < 4 \eps\}$. We show that $|U_i| \geq (\delta/4)|U_{i - 1}|$ by double counting $e(T_i, S_i)/|S_i|$. Since $d(v, S_i) \geq 4\eps$ for $v \in Z_i$,
+  Partition $T_i$ into $U_i \sqcup Z_i$ where $U_i \coloneqq \{v \in T_i : d(v, S_i) < 4 \eps\}$. We show that $|U_i| \geq (\delta/4)|U_{i - 1}|$ by double counting $e(T_i, S_i)/|S_i|$. Since $d(v, S_i) \geq 4\eps$ for $v \in Z_i$,
   \[
     \frac{e(T_i, S_i)}{|S_i|} = \sum_{v \in T_i} d(v, S_i) \geq \sum_{v \in Z_i} d(v, S_i) \geq 4\eps|Z_i|.
   \]
@@ -158,11 +158,11 @@ We now show that every Ramsey graph contains a rich subgraph of linear size. Spe
   \]
   For $j > i$, since $S_j \subseteq U_{j - 1} \subseteq U_i$, we have $d(v, S_i) < 4\eps$ for every $v \in S_j$, and averaging gives $d(S_i, S_j) < 4\eps$. Thus $S_i$ satisfies condition~(i).
 
-  Otherwise, $|\overline{N_{G_{i - 1}}(y)} \cap W_i| < \eps|W_i|$ for half the vertices $y \in Y_i$. Let $S_i$ be the corresponding subset of $Y_i$ and put $T_i = W_i \setminus S_i$, so again $|T_i| \geq |W_i|/2$ and $|S_i| = (cn)^{\delta}/2$. For $y \in S_i$,
+  Otherwise, $|\overline{N_{G_{i - 1}}(y)} \cap W_i| < \eps|W_i|$ for half the vertices $y \in Y_i$. Let $S_i$ be the corresponding subset of $Y_i$ and put $T_i \coloneqq W_i \setminus S_i$, so again $|T_i| \geq |W_i|/2$ and $|S_i| = (cn)^{\delta}/2$. For $y \in S_i$,
   \[
     1 - d(y, T_i) = \frac{|\overline{N_{G_{i - 1}}(y)} \cap T_i|}{|T_i|} \leq \frac{|\overline{N_{G_{i - 1}}(y)} \cap W_i|}{|T_i|} < \frac{\eps |W_i|}{|W_i|/2} = 2\eps,
   \]
-  so $d(y, T_i) > 1 - 2\eps$ for every $y \in S_i$. Partition $T_i$ into $U_i \sqcup Z_i$ where $U_i = \{v \in T_i : d(v, S_i) > 1 - 4\eps\}$. We double count $|T_i| - e(T_i, S_i)/|S_i| = \sum_{v \in T_i}(1 - d(v, S_i))$. Since $1 - d(v, S_i) \geq 4\eps$ for $v \in Z_i$,
+  so $d(y, T_i) > 1 - 2\eps$ for every $y \in S_i$. Partition $T_i$ into $U_i \sqcup Z_i$ where $U_i \coloneqq \{v \in T_i : d(v, S_i) > 1 - 4\eps\}$. We double count $|T_i| - e(T_i, S_i)/|S_i| = \sum_{v \in T_i}(1 - d(v, S_i))$. Since $1 - d(v, S_i) \geq 4\eps$ for $v \in Z_i$,
   \[
     |T_i| - \frac{e(T_i, S_i)}{|S_i|} = \sum_{v \in T_i}\bigl(1 - d(v, S_i)\bigr) \geq \sum_{v \in Z_i}\bigl(1 - d(v, S_i)\bigr) \geq 4\eps|Z_i|.
   \]

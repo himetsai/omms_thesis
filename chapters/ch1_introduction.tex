@@ -35,7 +35,7 @@ Since $\binom{2t-2}{t-1} < 2^{2t}$, we get $R(t,t) < 4^t$. This bound resisted i
 \end{theorem}
 
 \begin{proof}
-  The upper bound follows from Theorem~\ref{thm:erdos-szekeres}. For the lower bound, set $N = \lfloor \sqrt{2}^t \rfloor$ and consider the random graph $G_{N, 1/2}$. The expected number of cliques of size $t$ is
+  The upper bound follows from Theorem~\ref{thm:erdos-szekeres}. For the lower bound, set $N \coloneqq \lfloor \sqrt{2}^t \rfloor$ and consider the random graph $G_{N, 1/2}$. The expected number of cliques of size $t$ is
   \[
     \binom{N}{t} \cdot 2^{-\binom{t}{2}} < \frac{N^t}{t!}2^{-\binom{t}{2}} \leq \frac{\sqrt{2}^{t^2}}{t!}2^{-\binom{t}{2}} = \frac{\sqrt{2}^t}{t!} = \frac{\sqrt{2}^{t - 3}}{t(t - 1)\cdots 4} \cdot \frac{\sqrt{2}^3}{3!} \leq \frac{\sqrt{2}^3}{3!} < \frac{1}{2}.
   \]
@@ -71,13 +71,13 @@ Despite decades of intensive research, all known constructions of Ramsey graphs 
 \begin{theorem}[Erd\H{o}s--Szemer\'{e}di~\cite{erdos1972ramsey}]
   \label{thm:ramsey-density}
 
-  Let $G$ be a graph on $n$ vertices with edge density $d \in (0, 1/2]$. Then $G$ contains a homogeneous set of size greater than $K = \frac{c}{d\log(1/d)} \log n$, for some constant $c > 0$ and sufficiently large $n$.
+  Let $G$ be a graph on $n$ vertices with edge density $d \in (0, 1/2]$. Then $G$ contains a homogeneous set of size greater than $K \coloneqq \frac{c}{d\log(1/d)} \log n$, for some constant $c > 0$ and sufficiently large $n$.
 \end{theorem}
 
 \begin{proof}
-  Fix $c < 1/32$ and suppose for contradiction that $\hom(G) \leq K$. Since $G$ has $d\binom{n}{2}$ edges, by pigeonhole at least $m \geq n/2$ vertices have degree $\leq 2dn$. Let $G'$ be the graph induced by these $m$ vertices and let $I$ be a largest independent set in $G'$, so $k \coloneqq |I| \leq K$. Define
+  Fix $c < 1/32$ and suppose for contradiction that $\hom(G) \leq K$. Since $G$ has $d\binom{n}{2}$ edges, by pigeonhole at least $m \geq n/2$ vertices have degree $\leq 2dn$. Let $G'$ be the graph induced by these $m$ vertices and let $I$ be a largest independent set in $G'$, so $k \coloneqq |I| \leq K$. Set $s \coloneqq 8dk$ and
   \[
-    s \coloneqq 8dk, \quad S \coloneqq 8dK = \frac{8c\log n}{\log(1/d)},
+    S \coloneqq 8dK = \frac{8c\log n}{\log(1/d)},
   \]
   so that $s \leq S = O(\log n)$.
 
@@ -133,8 +133,8 @@ The core probabilistic mechanism in this dissertation is \textit{anticoncentrati
 
 For example, a question to ask in this setting is \textit{how likely is it that two vertices $x, y \in V(G)$ have the same degree in $G[U]$?}
 
-Observe that $\deg_U(x)-\deg_U(y)$ counts only vertices in $D = N_G(x)\triangle N_G(y)$. Write
-$A = N(x)\setminus N(y), B = N(y)\setminus N(x)$. Then
+Observe that $\deg_U(x)-\deg_U(y)$ counts only vertices in $D \coloneqq N_G(x)\triangle N_G(y)$. Write
+$A \coloneqq N(x)\setminus N(y), B \coloneqq N(y)\setminus N(x)$. Then
 \begin{equation}\label{eq:deg-diff}
   \deg_U(x) - \deg_U(y) = |U \cap A| - |U \cap B|,
 \end{equation}
@@ -164,8 +164,8 @@ as the edge count and density between $A$ and $B$, respectively.
 
 For functions $f, g: \R \to \R$, we use the standard asymptotic notations:
 \begin{itemize}
-\item $f = O(g)$ and $f \ll g$ mean there exists constant $C > 0$ such that $f \leq C \cdot g$.
-\item $f = \Omega(g)$ and $f \gg g$ mean there exists constant $c > 0$ such that $f \geq c \cdot g$.
+\item $f = O(g)$ and $f \lesssim g$ mean there exists constant $C > 0$ such that $f \leq C \cdot g$.
+\item $f = \Omega(g)$ and $f \gtrsim g$ mean there exists constant $c > 0$ such that $f \geq c \cdot g$.
 \item $f = \Theta(g)$ means $f = O(g)$ and $f = \Omega(g)$.
 \item $f = o(g)$ means $f/g \to 0$.
 \item $f = \omega(g)$ means $f/g \to \infty$.
@@ -214,7 +214,7 @@ We will use the following probability bounds throughout the dissertation.
 %   \]
 % \end{proof}
 
-For $X = \mathbbm{1}_{A_1} + \cdots + \mathbbm{1}_{A_k}$, we often use the following inequality to bound the variance:
+For $X \coloneqq \mathbbm{1}_{A_1} + \cdots + \mathbbm{1}_{A_k}$, we often use the following inequality to bound the variance:
 \begin{align*}
   \Var(X) 
   &= \E[X^2] - \E[X]^2 \\
@@ -236,7 +236,7 @@ where we write $i \sim j$ if $i \neq j$ and $A_i, A_j$ are dependent.
 \begin{proposition}[Hoeffding's inequality]
   \label{prop:azuma-hoeffding}
   
-  Let $X_1, X_2, \ldots, X_n$ be independent random variables with $0 \leq X_i \leq 1$ for each $i$, and write $X = \sum_{i = 1}^n X_i$. Then for $t \geq 0$, 
+  Let $X_1, X_2, \ldots, X_n$ be independent random variables with $0 \leq X_i \leq 1$ for each $i$, and write $X \coloneqq \sum_{i = 1}^n X_i$. Then for $t \geq 0$, 
   \[
     \prob\bigl[|X - \E[X]| \geq t\bigr] \leq 2e^{-2t^2/n}.
   \]
@@ -263,7 +263,7 @@ Many random variables turn out to be linear polynomials of independent Bernoulli
   \[
     \mathcal{A}_t \coloneqq \left\{A : \sum_{i \in A} a_i = t\right\} \subseteq [n].
   \]
-  Since $a_i \geq 1$ for all $i$, we have $1 + \sum_{i \in A} a_i \leq \sum_{i \in B} a_i$ whenever $A \subset B$. Thus, no elements of $\mathcal{A}_t$ are contained in another. Consider the chain $C = (S_0, S_1, \ldots, S_n)$ of $n$ subsets of $[n]$ such that $\emptyset = S_0 \subset S_1 \subset \cdots \subset S_n = [n]$. There are $n!$ such chains $C$ in $[n]$, and for $A \subseteq [n]$, there are $|A|!(n - |A|)!$ of them containing $A$. Since no chain can contain multiple elements of $\mathcal{A}_t$,
+  Since $a_i \geq 1$ for all $i$, we have $1 + \sum_{i \in A} a_i \leq \sum_{i \in B} a_i$ whenever $A \subset B$. Thus, no elements of $\mathcal{A}_t$ are contained in another. Consider the chain $C \coloneqq (S_0, S_1, \ldots, S_n)$ of $n$ subsets of $[n]$ such that $\emptyset = S_0 \subset S_1 \subset \cdots \subset S_n = [n]$. There are $n!$ such chains $C$ in $[n]$, and for $A \subseteq [n]$, there are $|A|!(n - |A|)!$ of them containing $A$. Since no chain can contain multiple elements of $\mathcal{A}_t$,
   \[
     \sum_{A \in \mathcal{A}_t} |A|!(n - |A|)! \leq n! \implies \sum_{A \in \mathcal{A}_t} \frac{1}{\binom{n}{|A|}} \leq 1.
   \] 
@@ -303,7 +303,7 @@ We also use the following version of Tur\'{a}n's theorem.
   \[
     \E\bigl[|I|\bigr] = \sum_{v \in V} \prob\bigl[v \in I\bigr] = \sum_{v \in V} \frac{1}{1 + \deg(v)}.
   \]
-  The function $f(x) = 1/(x + 1)$ is convex on $[0, \infty)$, so by Jensen's inequality, $G$ contains an independent set $I$ of size 
+  The function $f(x) \coloneqq 1/(x + 1)$ is convex on $[0, \infty)$, so by Jensen's inequality, $G$ contains an independent set $I$ of size 
   \[
     |I| \geq \sum_{v \in V} \frac{1}{1 + \deg(v)} \geq \frac{n}{1 + \frac{1}{n}\sum_{v \in V} \deg(v)} = \frac{n^2}{2m + n}.
   \]
