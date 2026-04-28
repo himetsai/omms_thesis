@@ -224,15 +224,6 @@ For $X \coloneqq \mathbbm{1}_{A_1} + \cdots + \mathbbm{1}_{A_k}$, we often use t
 \end{align*}
 where we write $i \sim j$ if $i \neq j$ and $A_i, A_j$ are dependent.
 
-\begin{proposition}[Chernoff bound]
-  \label{prop:chernoff}
-  Let $X$ be a binomial random variable with parameters $n$ and $p$. Then for $t \geq 0$,
-  \[
-    \prob\bigl[X \leq \E[X] - t\bigr], \, \prob\bigl[X \geq \E[X] + t\bigr] \leq \exp\bigl(-2t^2/n\bigr).
-  \]
-  \qed
-\end{proposition}
-
 \begin{proposition}[Hoeffding's inequality]
   \label{prop:azuma-hoeffding}
   
