@@ -45,7 +45,7 @@ Diversity matches our assumption $|N(x) \triangle N(y)| = D \geq \eps n$ from Se
   \[
     \E[e(H)] = \sum_{\{x, y\} \in \binom{V(G)}{2}} \E[\mathbbm{1}_{xy}] \leq n^{1 + \delta} + n^2 \cdot O\bigl(1/\sqrt{n}\bigr) = O\bigl(n^{3/2}\bigr)
   \] 
-  and Markov's inequality yields $\prob[e(H) = O(n^{3/2})] \geq 1/2$. Since $|U| < n/4$ with probability $o(1)$ by Hoeffding's inequality, the union bound yields a positive probability that $|U| \geq n/4$ and $e(H) \leq O(n^{3/2})$ occur simultaneously, in which case Tur\'{a}n's theorem (Proposition~\ref{prop:turan}) gives an independent set $I$ in $H$ of size at least 
+  and Markov's inequality yields $\prob[e(H) = O(n^{3/2})] \geq 1/2$. Since $|U| < n/4$ with probability $o(1)$ by the Chernoff bound, the union bound yields a positive probability that $|U| \geq n/4$ and $e(H) \leq O(n^{3/2})$ occur simultaneously, in which case Tur\'{a}n's theorem (Proposition~\ref{prop:turan}) gives an independent set $I$ in $H$ of size at least 
   \[
     |I| \geq \frac{|U|^2}{2e(H) + |U|} = \frac{(n/4)^2}{O(n^{3/2}) + n/4} = \Omega\bigl(\sqrt{n}\bigr).
   \]
@@ -67,7 +67,7 @@ That is, almost every vertex $v \in V(G)$ satisfies
 \[
   \eps |W| \leq |N(v) \cap W| \leq (1 - \eps) |W|,
 \]
-whenever $|W|$ is large. Thus, richness ensures neighbourhoods are not unusually concentrated in nor absent from large sets, which mirrors the density control in random graphs like $G_{n, 1/2}$, where $|N(v) \cap W| \approx |W|/2$ by Hoeffding's inequality. When $W$ is the neighbourhood of another vertex, richness ensures one side of the symmetric difference $|N(x) \triangle N(y)| = |N(x) \cap \overline{N(y)}| + |\overline{N(x)} \cap N(y)|$ is large, implying diversity.
+whenever $|W|$ is large. Thus, richness ensures neighbourhoods are not unusually concentrated in nor absent from large sets, which mirrors the density control in random graphs like $G_{n, 1/2}$, where $|N(v) \cap W| \approx |W|/2$ by the Chernoff bound. When $W$ is the neighbourhood of another vertex, richness ensures one side of the symmetric difference $|N(x) \triangle N(y)| = |N(x) \cap \overline{N(y)}| + |\overline{N(x)} \cap N(y)|$ is large, implying diversity.
 
 \begin{lemma}
   \label{lem:richness-implies-diversity}

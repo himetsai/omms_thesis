@@ -243,11 +243,11 @@ It remains to show \eqref{eq:robust-rank-2} for the matrix $F$ arising from the 
 
 The lemma says that the adjacency matrix of a Ramsey graph is at Frobenius distance $\Omega(n)$ from every matrix whose restriction to each bucket block has low rank. When $M$ is binary, $\|A - M\|_{\mathrm{F}}^2$ counts the number of entries on which $A, M$ disagree, so the lemma says no binary matrix with low-rank blocks can agree with $A$ on almost all entries.
 
-In the application of Theorem~\ref{thm:sharp-CW}, the parts $B_j$ are the buckets from~\eqref{eq:partition} of size $\lceil n^{1-2\gamma} \rceil$. Write $\vec x \coloneqq (x_v)_{v \in V}$. The matrix $F$ from Ingredient~1 has the property that, after conditional on $\vec \Delta$, the quadratic form $\vec x^{\top} F \vec x$ only concerns the deviation of $\vec x$ from its bucket averages. Specifically, the adjacency matrix $A$ of $G[V \setminus R]$ may be written as
+In the application of Theorem~\ref{thm:sharp-CW}, the parts $B_j$ are the buckets from~\eqref{eq:partition} of size $\lceil n^{1-2\gamma} \rceil$. Write $\vec x \coloneqq (x_v)_{v \in V}$. The matrix $F$ from Ingredient~1 has the property that, conditional on $\vec \Delta$, the quadratic form $\vec x^{\top} F \vec x$ only concerns the deviation of $\vec x$ from its bucket averages. Specifically, the adjacency matrix $A$ of $G[V \setminus R]$ may be written as
 \[
   A = \alpha F + B
 \]
-for some fixed $\alpha$ and a correction matrix $B$ satisfying $\mathrm{rank}(B[B_j \times B_k]) \leq b$ for any block $B_j \times B_k$ and some constant $b$. Suppose for contradiction that some $\tilde{F}$ with rank $\leq 2$ violates~\eqref{eq:robust-rank-2}. Set $\tilde{A} \coloneqq \alpha \tilde{F} + B$. Then for $\eta > 0$, since $\|F\|_{\mathrm{F}}^2 = O(n^2)$,
+for some fixed $\alpha$ and correction matrix $B$ satisfying $\mathrm{rank}(B[B_j \times B_k]) \leq b$ for any block $B_j \times B_k$ and some constant $b$. Suppose for contradiction that some $\tilde{F}$ with rank $\leq 2$ violates~\eqref{eq:robust-rank-2}. Set $\tilde{A} \coloneqq \alpha \tilde{F} + B$. Then for $\eta > 0$, since $\|F\|_{\mathrm{F}}^2 = O(n^2)$,
 \[
   \|A - \tilde A\|_{\mathrm{F}}^2 = |\alpha|^2 \cdot \|F - \tilde F\|_{\mathrm{F}}^2 < \eta \cdot |\alpha|^2 \cdot \|F\|_{\mathrm{F}}^2 = O(\eta n^2).
 \] 
@@ -322,7 +322,7 @@ for some $\ell^* \in \{-B, \ldots, B\}$. Thus, \eqref{eq:num-bound} and \eqref{e
   \prob[X = x] \gtrsim \frac{\bigl((|T| / \sqrt{n}) \cdot n^{-3/2}\bigr)^2}{\bigl(|T| / \sqrt{n}\bigr)^{2} \cdot n^{-3/2}} = n^{-3/2}.
 \]
 
-It remains to find the suitable set $T$ that enables \eqref{eq:moment-estimates}. The two factors in \eqref{eq:moment-estimates} have concrete meanings: $n^{-3/2}$ is the interval estimate \eqref{eq:interval-estimate}, whereas $\E[Y_\ell] = \Theta(|T|/\sqrt n)$, as follows.
+It remains to find the suitable set $T$ that enables~\eqref{eq:moment-estimates}. The two factors in~\eqref{eq:moment-estimates} have concrete meanings: $n^{-3/2}$ is the interval estimate~\eqref{eq:interval-estimate}, whereas $\E[Y_\ell] = \Theta(|T|/\sqrt n)$, as follows.
 
 For $(y, z) \in T$, we have $\prob[y \in U, z \notin U] = 1/4$. Conditional on this event, set $R_w \coloneqq 2\mathbbm{1}_{w \in U} - 1$ and 
 \[
@@ -352,4 +352,4 @@ for $\ell$ around the mean. Hence, $\prob[s(y, z; U) = \ell \mid y \in U, z \not
 \[
   \E[Y_\ell] = \frac{1}{4}\sum_{(y, z) \in T} \prob\bigl[s(y, z; U) = \ell \mid y \in U, z \notin U\bigr] = \Theta\bigl(|T|/\sqrt n\bigr).
 \]
-It remains to construct such a set $T$ and to prove \eqref{eq:moment-estimates}. Both are carried out inside a linear-sized $(\eps, \delta)$-rich induced subgraph $S_0 \subseteq V(G)$. Condition 1 follows from two applications of richness inside $S_0$, condition 2 follows from pigeonholing. The proof of \eqref{eq:moment-estimates} further relies on a \textit{dependent random choice} technique which supplies $S_0$ with a strong common-neighborhood property needed to control correlations between switches of multiple pairs in $T$ -- see \cite[Lemmas~13.1, 13.3, 13.4]{Kwan_2023} for details.
+It remains to construct such a set $T$ and to prove~\eqref{eq:moment-estimates}. Both are carried out inside a linear-sized $(\eps, \delta)$-rich induced subgraph $S_0 \subseteq V(G)$. Condition~1 follows from two applications of richness inside $S_0$, condition~2 follows from pigeonholing. The proof of~\eqref{eq:moment-estimates} further relies on a \textit{dependent random choice} technique which supplies $S_0$ with a strong common-neighborhood property needed to control correlations between switches of multiple pairs in $T$ -- see \cite[Lemmas~13.1, 13.3, 13.4]{Kwan_2023} for details.

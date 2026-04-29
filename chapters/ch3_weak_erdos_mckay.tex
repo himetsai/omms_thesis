@@ -210,7 +210,7 @@ By the Erd\H{o}s--Szemer\'{e}di bound (Corollary~\ref{cor:ramsey-density}), $e(G
     \[
       \prob\left[|\mathbf{R}| \geq \frac{2}{3}|\mathbf{A}|\right] = 1 - \prob\left[|\mathbf{A} \setminus \mathbf{R}| \geq \frac{1}{3}|\mathbf{A}|\right] \geq 1 - \frac{\E\bigl[|\mathbf{A} \setminus \mathbf{R}|\bigr]}{\frac{1}{3}|\mathbf{A}|} \geq 0.8.
     \]
-    \item[(iv)] Fix $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$. Recall that $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$. Since $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = |(N(\mathbf{x}) \triangle N(\mathbf{y})) \cap U_0|$ has binomial distribution with parameters $|N(\mathbf{x}) \triangle N(\mathbf{y})|$ and $p$, Hoeffding's inequality gives
+    \item[(iv)] Fix $\{\mathbf{x}, \mathbf{y}\} \in \binom{\mathbf{A}}{2}$. Recall that $|N(\mathbf{x}) \triangle N(\mathbf{y})| = \Omega(n)$. Since $|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| = |(N(\mathbf{x}) \triangle N(\mathbf{y})) \cap U_0|$ has binomial distribution with parameters $|N(\mathbf{x}) \triangle N(\mathbf{y})|$ and $p$, Chernoff bound gives
     \[
       \prob\left[|N_{U_0}(\mathbf{x}) \triangle N_{U_0}(\mathbf{y})| < \frac{p}{2}|N(\mathbf{x}) \triangle N(\mathbf{y})|\right] = e^{-\Omega(n)} = o(n^{-1}).
     \]
